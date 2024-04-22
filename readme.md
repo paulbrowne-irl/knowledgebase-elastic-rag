@@ -22,7 +22,7 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
     * open the app folder _cd app_
     * run Streamlit app to interact with documents local llm _streamlit run poc.py_
 
-* Open the application in Web Browser
+* Open the application in a Web Browser
     *  The are several web pages to interact with the application. Assuming of course you have already ingested documents (see notes below)
     * Staring with most used page:
         * App available on http://localhost:8501 - screenshot below, this has several business use cases.
@@ -54,5 +54,5 @@ The application draws on many concepts and articles - for example
     * https://colab.research.google.com/drive/11N01ssHqAXjW5NKJYkwT06V7RXLG4Yin#scrollTo=Sax1r_wW8kec
     * https://colab.research.google.com/github/elastic/blog-langchain-elasticsearch/blob/main/Notebooks/Privacy_first_AI_search_using_LangChain_and_Elasticsearch.ipynb?utm_source=pocket_saves
 
-* elastic search blog article : https://www.elastic.co/search-labs/blog/articles/privacy-first-ai-search-langchain-elasticsearch
+* Elastic search blog article : https://www.elastic.co/search-labs/blog/articles/privacy-first-ai-search-langchain-elasticsearch
 * More info (On Langchain) https://python.langchain.com/docs/integrations/vectorstores/elasticsearch
