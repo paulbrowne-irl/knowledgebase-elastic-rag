@@ -1,3 +1,26 @@
+# Ignore specific files to this app
+
+cache
+
+/.vscode
+/data_no_share
+
+app.log
+email-report.xlsx
+__pycache__/
+ear.log
+output*.*
+data*.*
+__pycache__/
+__pycache__/*.*
+*.pyc
+app/*.pyc
+app/__pycache__/rag.cpython-310.pyc
+app/__pycache__/settings.cpython-310.pyc
+app/token.pickle
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
