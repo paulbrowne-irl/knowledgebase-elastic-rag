@@ -3,7 +3,7 @@ import streamlit as st
 import util.rag_controller as rag_controller
 import poc
 import sidebar
-import settings
+import templates.prompts
 
 from importlib import reload
 
@@ -20,7 +20,7 @@ rag_controller.setup()
 
 # reload previous prompot
 if 'prompt' not in st.session_state:
-    st.session_state['prompt'] = settings.TEMPLATE_EMAIL_PROMPT
+    st.session_state['prompt'] = templates.prompts.TEMPLATE_EMAIL_PROMPT
 
 
 #############

@@ -1,12 +1,12 @@
 import streamlit as st
 
 import util.rag_controller as rag_controller
-import settings
+import templates.prompts
 import sidebar
 from importlib import reload
 
 if 'prompt' not in st.session_state:
-    st.session_state['prompt'] = settings.TEMPLATE_QA_PROMPT
+    st.session_state['prompt'] = templates.prompts.TEMPLATE_QA_PROMPT
 
 
 #Window setup
