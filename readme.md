@@ -11,6 +11,10 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
         * Activate environment _source venv/bin/activate_
         * Install Python dependencies for this environment using the list provided _pip install -r requirements.txt_
 
+# Integrate notes
+* running bot.py
+* templates
+
 
 # Running the application
 
@@ -20,7 +24,7 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 
 * Run the Web application
     * open the app folder _cd app_
-    * run Streamlit app to interact with documents local llm _streamlit run poc.py_
+    * run Streamlit app to interact with documents local llm _streamlit run app.py_
 
 * Open the application in a Web Browser
     *  The are several web pages to interact with the application. Assuming of course you have already ingested documents (see notes below)

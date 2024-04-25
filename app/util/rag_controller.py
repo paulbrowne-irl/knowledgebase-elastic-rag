@@ -49,12 +49,12 @@ def _setup_copilot_token():
     global token
  
     try:
-        token = pickle.load(open("token.pickle", "rb"))
+        token = pickle.load(open("token-copilot.pickle", "rb"))
         print ("Loaded copilot token from pickle file")
 
     except Exception:
-        token = input("Please enter the Copilot token. This will be saved in token.pickle. For details on how to find the token - https://github.com/vsakkas/sydney.py :  ")
-        pickle.dump(token, open("token.pickle", "wb"))
+        token = input("Please enter the Copilot token. This will be saved in token-copilot.pickle. For details on how to find the token - https://github.com/vsakkas/sydney.py :  ")
+        pickle.dump(token, open("token-copilot.pickle", "wb"))
     
 
 def _setup_embeddings(): 

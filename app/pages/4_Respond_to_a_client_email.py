@@ -1,7 +1,7 @@
 import streamlit as st
 
 import util.rag_controller as rag_controller
-import poc
+import app as app
 import sidebar
 import templates.prompts
 

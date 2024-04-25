@@ -20,3 +20,5 @@ langchain
 langchain_community
 langchain-elasticsearch
 sydney-py
+
+shareplum
