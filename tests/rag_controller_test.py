@@ -4,7 +4,7 @@ import os
 
 # allow imports from parent directory
 import sys
-sys.path.append('../util')
+#sys.path.append('../util')
 
 
 class Test_Rag_Controller(unittest.TestCase):

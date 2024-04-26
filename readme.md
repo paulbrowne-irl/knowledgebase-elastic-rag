@@ -12,7 +12,8 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
         * Install Python dependencies for this environment using the list provided _pip install -r requirements.txt_
 
 # Integrate notes
-* running bot.py
+* running bot.py (and note differenct from app.py)
+* running ingest.py
 * templates
 * new folders  settings, data sample and output sample
 

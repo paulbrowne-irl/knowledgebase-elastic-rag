@@ -1,14 +1,21 @@
-# Setup 
-* EI only settings - Aims
-    * can still run standalone on black laptop using test data 
-    * all specific info is in pickle
 
-Google how to overwrite default settings
+# NEXT PICKLE 
+* Refactor pickle into something more generic
+* test pickle working or not
+* all tests running
 
-# Next settings
+# NEXT
+* Google how to overwrite default settings
+* simple workding example using config.py, driven by test config_test.py
+* refactor existing config to it
+* allow for EI sepecif overwrite
+
+
+# Next After this
 * create pickle folder
 * refactor out pickle (for copilot token)
 * unit tests
+* better ingestion app
 
 # Next sample data
 * pull together sample data from public - for use on blacktlaop

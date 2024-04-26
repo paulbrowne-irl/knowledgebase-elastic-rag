@@ -19,9 +19,10 @@ from langchain_elasticsearch import ApproxRetrievalStrategy
 
 
 import logging
-import pickle
+
 
 import settings.default
+import settings.pickle_loader
 
 import util.llm_copilot as llm_copilot
 
@@ -48,14 +49,8 @@ def _setup_copilot_token():
    
     global token
  
-    try:
-        token = pickle.load(open("token-copilot.pickle", "rb"))
-        print ("Loaded copilot token from pickle file")
+    token = settings.pickle_loader.setup_sharepilot_token()
 
-    except Exception:
-        token = input("Please enter the Copilot token. This will be saved in token-copilot.pickle. For details on how to find the token - https://github.com/vsakkas/sydney.py :  ")
-        pickle.dump(token, open("token-copilot.pickle", "wb"))
-    
 
 def _setup_embeddings(): 
     '''

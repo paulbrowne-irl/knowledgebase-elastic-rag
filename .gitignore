@@ -19,7 +19,7 @@ app/__pycache__/rag.cpython-310.pyc
 app/__pycache__/settings.cpython-310.pyc
 app/token-copilot.pickle
 app/token-sharepoint.pickle
-
+*.pickle
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
