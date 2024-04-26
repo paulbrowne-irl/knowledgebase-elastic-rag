@@ -6,7 +6,7 @@ import eland as ed
 from importlib import reload
 
 import settings
-import sidebar
+import app_sidebar as app_sidebar
 import util.rag_controller
 
 
@@ -180,7 +180,7 @@ base_colours= ["#fd0", "#f0f", "#04f"]
 st.title('Show me the numbers')
 
 #Fields on Sidebar
-reload(sidebar)
+reload(app_sidebar)
 
 #make sure setup gets run at start
 util.rag_controller.setup()

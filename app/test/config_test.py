@@ -7,7 +7,7 @@ import sys
 sys.path.append('../util')
 
 
-class Test_Rag_Controller(unittest.TestCase):
+class Test_Config(unittest.TestCase):
    
     @classmethod
     def setUpClass(self):
@@ -16,8 +16,8 @@ class Test_Rag_Controller(unittest.TestCase):
         logger = logging.getLogger("..")
         logger.setLevel(logging.DEBUG)
 
-        #setup rag controller
+        #setup test class
     
-    def test_dummy(self):
-        self.fail("Tests not yet implemented")
+    def test_picklet(self):
+        self.fail("testing of pickle values not yet implemented")
         print("test completed")

@@ -8,6 +8,7 @@ Google how to overwrite default settings
 # Next settings
 * create pickle folder
 * refactor out pickle (for copilot token)
+* unit tests
 
 # Next sample data
 * pull together sample data from public - for use on blacktlaop

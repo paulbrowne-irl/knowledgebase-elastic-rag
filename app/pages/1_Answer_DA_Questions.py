@@ -2,7 +2,7 @@ import streamlit as st
 
 import util.rag_controller as rag_controller
 import templates.prompts
-import sidebar
+import app_sidebar as app_sidebar
 from importlib import reload
 
 if 'prompt' not in st.session_state:
@@ -13,7 +13,7 @@ if 'prompt' not in st.session_state:
 st.title('Hello DA! How can I help you?')
 
 #Fields on Sidebar
-reload(sidebar)
+reload(app_sidebar)
 
 #make sure setup gets run at start
 rag_controller.setup()
@@ -39,14 +39,14 @@ with st.form('my_form'):
         
         with st.status ("Checking to see if I understand your question ...") as status:
 
-            similar_docs = rag_controller.get_nearest_match_documents(sidebar.document_search, input_text)
+            similar_docs = rag_controller.get_nearest_match_documents(app_sidebar.document_search, input_text)
     
             # Update prompt
             status.update(label="Searching through the information I have been told about..",state="running", expanded=False)
             informed_context= similar_docs[0].page_content
 
             #get the llm chain to handle this
-            llm_chain = rag_controller.get_llm_chain(sidebar.llm_to_use, st.session_state['prompt'])
+            llm_chain = rag_controller.get_llm_chain(app_sidebar.llm_to_use, st.session_state['prompt'])
 
             status.update(label="Getting you an answer",state="running", expanded=False)
             #informed_response = llm_chain.invoke(input={},context=informed_context,question=input_text)

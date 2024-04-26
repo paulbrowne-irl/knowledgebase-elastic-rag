@@ -3,14 +3,14 @@ import pandas as pd
 
 import util.rag_controller as rag_controller
 
-import sidebar
+import app_sidebar as app_sidebar
 from importlib import reload
 
 #Window setup
 st.title('Find Similar Clients')
 
 #Fields on Sidebar
-reload(sidebar)
+reload(app_sidebar)
 
 #make sure setup gets run at start
 rag_controller.setup()
@@ -38,7 +38,7 @@ with st.form('my_form'):
     if submitted:
             
         # Find nearest match documents
-        similar_docs = rag_controller.get_nearest_match_documents(sidebar.document_search, input_text)
+        similar_docs = rag_controller.get_nearest_match_documents(app_sidebar.document_search, input_text)
 
         #setup empty dataframe for display
         nf= pd.DataFrame.from_dict({})
