@@ -14,6 +14,7 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 # Integrate notes
 * running bot.py
 * templates
+* new folders  settings, data sample and output sample
 
 
 # Running the application
