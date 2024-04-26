@@ -10,7 +10,7 @@ import os.path
 from openpyxl import Workbook
 from openpyxl import load_workbook
 
-import settings
+import settings.default
 
 counter=0
 
@@ -29,7 +29,7 @@ def _save_summary_info(data_frame):
 
     logging.info("Saving Dataframe size:"+str(data_frame.size))
     try:
-        with pd.ExcelWriter(settings.EMAIL_SUMMARY,mode='a',if_sheet_exists="replace") as writer:  
+        with pd.ExcelWriter(settings.default.EMAIL_SUMMARY,mode='a',if_sheet_exists="replace") as writer:  
             data_frame.to_excel(writer, sheet_name='snapshot',index=False)
             logging.info("Flushed Cache to disk")
         
@@ -39,7 +39,7 @@ def _save_summary_info(data_frame):
         logging.error ("Error when saving data")
         logging.error(traceback.format_exc())
         logging.error ("\n Was attempting to save")
-        logging.error(data_frame.tail(settings.FLUSH_AFTER_X_MAILS))
+        logging.error(data_frame.tail(settings.default.FLUSH_AFTER_X_MAILS))
 
     return data_frame
 
@@ -69,7 +69,7 @@ def _walk_folder(data_frame,parent_folder,this_folder):
             counter+=1
 
             logging.info("Counter:"+str(counter))
-            if(settings.BREAK_AFTER_X_MAILS>0 and counter>settings.BREAK_AFTER_X_MAILS):
+            if(settings.BREAK_AFTER_X_MAILS>0 and counter>settings.default.BREAK_AFTER_X_MAILS):
                 logging.info("Breaking ...")
                 return data_frame
             
@@ -120,11 +120,11 @@ def capture_email_count_complexity(OUTLOOK):
     #debugging
     #root_folder = .Folders.Item(1)
     logging.info("Getting handle to outlook");
-    root_folder = OUTLOOK.Folders.Item(settings.INBOX_NAME)
+    root_folder = OUTLOOK.Folders.Item(settings.default.INBOX_NAME)
 
     #Create data frame and save to disk to wipe any previous values
     df = pd.DataFrame()
-    df.to_excel(settings.EMAIL_SUMMARY,sheet_name='snapshot',index=False)
+    df.to_excel(settings.default.EMAIL_SUMMARY,sheet_name='snapshot',index=False)
 
 
     #Walk folders

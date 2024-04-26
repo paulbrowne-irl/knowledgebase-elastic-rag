@@ -16,7 +16,7 @@ from pathlib import Path
 import os
 import fnmatch
 
-import settings
+import settings.default
 
 
 # Index pdf data into elastic index
@@ -25,21 +25,21 @@ import settings
 # If we can to allow for username and password we can update to something like:
 # es_url =  f"https://{username}:{password}@{endpoint}:9200"
 # noting that the username, assword and endpoint should valid
-es_url =  settings.ES_URL
-print ("Using URL "+settings.ES_URL)
+es_url =  settings.default.ES_URL
+print ("Using URL "+settings.default.ES_URL)
 
 # get the model we need to encode the text as vectors (in Elastic)
 print("Prep. Huggingface embedding setup")
-hf= HuggingFaceEmbeddings(model_name=settings.MODEL_TRANSFORMERS)
+hf= HuggingFaceEmbeddings(model_name=settings.default.MODEL_TRANSFORMERS)
 
 # Next we'll create our elasticsearch vectorstore in the langchain style:
-db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=settings.ES_INDEX_DOCUMENTS)
-#db = ElasticsearchStore(es_url,hf,index_name=settings.ES_INDEX)
+db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=settings.default.ES_INDEX_DOCUMENTS)
+#db = ElasticsearchStore(es_url,hf,index_name=settings.default.ES_INDEX)
 
 
 
 ## get list of files in directory
-listFiles = os.listdir(settings.SOURCE_PDF_DIR)
+listFiles = os.listdir(settings.default.SOURCE_PDF_DIR)
 
 #filter to pdf
 listFiles=fnmatch.filter(listFiles, '*.pdf')
@@ -47,7 +47,7 @@ listFiles=fnmatch.filter(listFiles, '*.pdf')
 
 
 for file in listFiles :
-    path = settings.SOURCE_PDF_DIR + "/" + file
+    path = settings.default.SOURCE_PDF_DIR + "/" + file
     print("====== \n")
     print(path)
 
@@ -74,7 +74,7 @@ for file in listFiles :
     '''	
     print("Name : " + str(eModel))
 
-    url = "http://localhost:9200/" + settings.ES_INDEX +"/_doc?pretty"
+    url = "http://localhost:9200/" + settings.default.ES_INDEX +"/_doc?pretty"
     data = eModel.toJSON()
     
     response = requests.post(url, data=data,headers={
@@ -93,4 +93,4 @@ for file in listFiles :
     # was from text
     #   db.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
 
-    db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX_DOCUMENTS)
+    db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=settings.default.ES_INDEX_DOCUMENTS)

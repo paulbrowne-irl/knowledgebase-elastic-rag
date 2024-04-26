@@ -21,7 +21,7 @@ from langchain_elasticsearch import ApproxRetrievalStrategy
 import logging
 import pickle
 
-import settings as settings
+import settings.default
 
 import util.llm_copilot as llm_copilot
 
@@ -33,7 +33,7 @@ _llm=None
 token=None
 
 #Set the Logging level. Change it to logging.INFO is you want just the important info
-#logging.basicConfig(filename=settings.LOG_FILE, encoding='utf-8', level=logging.DEBUG)
+#logging.basicConfig(filename=settings.default.LOG_FILE, encoding='utf-8', level=logging.DEBUG)
 
 def setup():
     '''
@@ -66,7 +66,7 @@ def _setup_embeddings():
     if(_embeddings==None):
         print("Setting up Embeddings")
 
-        _embeddings = HuggingFaceEmbeddings(model_name=settings.MODEL_TRANSFORMERS)
+        _embeddings = HuggingFaceEmbeddings(model_name=settings.default.MODEL_TRANSFORMERS)
     else:
         print("Embeddings already setup")
 
@@ -83,9 +83,9 @@ def _setup_llm():
 
         # setup the LLM
         print(f"Setting up model {settings.MODEL_LLM} ready to go")
-        tokenizer = AutoTokenizer.from_pretrained(settings.MODEL_LLM)
+        tokenizer = AutoTokenizer.from_pretrained(settings.default.MODEL_LLM)
         model = AutoModelForSeq2SeqLM.from_pretrained(
-            settings.MODEL_LLM, cache_dir=settings.CACHE_DIR)
+            settings.default.MODEL_LLM, cache_dir=settings.default.CACHE_DIR)
 
         pipe = pipeline(
             "text2text-generation",
@@ -117,12 +117,12 @@ def _get_datastore(index_name):
 
         
         if(index_name=='UECS Emails'):
-            index_to_use=settings.ES_INDEX_EMAILS
+            index_to_use=settings.default.ES_INDEX_EMAILS
         else:
-            index_to_use= settings.ES_INDEX_DOCUMENTS
+            index_to_use= settings.default.ES_INDEX_DOCUMENTS
 
 
-        _db [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=settings.ES_URL, index_name=index_to_use,strategy=ApproxRetrievalStrategy())
+        _db [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=settings.default.ES_URL, index_name=index_to_use,strategy=ApproxRetrievalStrategy())
         
 
     else:

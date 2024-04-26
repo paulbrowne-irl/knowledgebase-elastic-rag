@@ -3,13 +3,15 @@
     * can still run standalone on black laptop using test data 
     * all specific info is in pickle
 
+Google how to overwrite default settings
+
 # Next settings
 * create pickle folder
 * refactor out pickle (for copilot token)
 
 # Next sample data
 * pull together sample data from public - for use on blacktlaop
-
+* tests of different scenarios
 
 # add todo
 * update notes below on what script does

@@ -143,11 +143,11 @@ def get_data(filter,max_docs):
     print("Running Data Query filter = "+str(filter))
 
     # Make the connection
-    es = Elasticsearch(settings.ES_URL)
+    es = Elasticsearch(settings.default.ES_URL)
     #es_info = es.info()
 
     #Get  main table    
-    sef_financials = ed.DataFrame(es, settings.ES_INDEX_FINANCIALS)
+    sef_financials = ed.DataFrame(es, settings.default.ES_INDEX_FINANCIALS)
     sef_financials = sef_financials[['Source','Row','Col',"Table","Value"]]
 
     #filter main table

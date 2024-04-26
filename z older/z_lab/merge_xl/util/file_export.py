@@ -9,7 +9,7 @@ import pandas as pd
 from pandas.core.frame import DataFrame
 
 import company_data
-import settings
+import settings.default
 
 import os.path
 import os
@@ -28,7 +28,7 @@ def get_export_file_name(original_file_name:str)->str:
         export_file_name = original_file_name[:-4]
     
     #Add default extension
-    export_file_name=export_file_name+settings.OUTPUT_APPEND
+    export_file_name=export_file_name+settings.default.OUTPUT_APPEND
 
     return export_file_name
 

@@ -5,7 +5,7 @@ from collections import OrderedDict
 import pandas as pd
 
 import company_data
-import settings
+import settings.default
 
 
 def identify_sheet_name(my_table: pd.DataFrame,counter:int)->str:
@@ -42,12 +42,12 @@ def update_sheet_names(my_company:company_data)->company_data:
         found_flag=False
 
         #loop through our find replace
-        for match in settings.TAB_FIND_REPLACE.keys():
+        for match in settings.default.TAB_FIND_REPLACE.keys():
 
             if (table_name.lower() == match.lower()) or (match.lower() in table_name.lower() ):
 
                 #Add the existing sheet under the new name associated with the match
-                output_dict[settings.TAB_FIND_REPLACE.get(match)]=table_dict.get(table_name)
+                output_dict[settings.default.TAB_FIND_REPLACE.get(match)]=table_dict.get(table_name)
                 
                 #print("matched:"+table_name.lower()+" to:"+match.lower()+" replacing with:"+settings.TAB_FIND_REPLACE.get(match))
 

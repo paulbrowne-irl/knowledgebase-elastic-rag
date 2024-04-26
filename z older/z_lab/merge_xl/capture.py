@@ -7,7 +7,7 @@ import pandas as pd
 import os.path
 import os
 
-import settings
+import settings.default
 
 import util.file_import as file_import
 import util.file_export as file_export
@@ -38,7 +38,7 @@ def _loop_extract_key_info(my_company:company_data)->company_data:
             my_company.table_names.append(sheetname)
 
             #Extract key info
-            line_extract.add_key_info_if_not_exists(my_company,my_company.tables[x],settings.KEY_INFO_SEARCH)
+            line_extract.add_key_info_if_not_exists(my_company,my_company.tables[x],settings.default.KEY_INFO_SEARCH)
 
         # Now that we have all table names, check if we need to modify them
         my_company= table_names.update_sheet_names(my_company)
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     counter=0
   
     # iterate over files in directory
-    for filename in os.listdir(settings.WORKING_FOLDER):
+    for filename in os.listdir(settings.default.WORKING_FOLDER):
         
         try:
 
@@ -69,7 +69,7 @@ if __name__ == '__main__':
                 logging.info("\nReading pdf:"+filename)
                 
                 #Get the next file in this directory
-                f = os.path.join(settings.WORKING_FOLDER, filename)
+                f = os.path.join(settings.default.WORKING_FOLDER, filename)
 
                 #Read the tables into the data structure
                 my_company=file_import.capture_information_from_pdf(f)
@@ -86,7 +86,7 @@ if __name__ == '__main__':
                 #break if this is set
                 counter+=1
                 if counter>=settings.MAX_NUMBER_OF_FILES:
-                    logger.warning("ENDING AFTER CYCLE:"+str(settings.MAX_NUMBER_OF_FILES))
+                    logger.warning("ENDING AFTER CYCLE:"+str(settings.default.MAX_NUMBER_OF_FILES))
                     break
 
 
@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
 
             #decide how to handle it
-            if(settings.CONTIUE_LOOP_AFTER_ERROR):
+            if(settings.default.CONTIUE_LOOP_AFTER_ERROR):
                  #Log the error and continue loop
                 logging.error(problem)
                 

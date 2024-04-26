@@ -29,7 +29,7 @@ Safety first, we treat Outlook as the 'gold' copy.
 
 ## Modifying the Script
 
-The main configuration is in settings.py with comments to allow you to easily edit.
+The main configuration is in settings.default.py with comments to allow you to easily edit.
 
 The comments in the ``capture.py`` script should make it pretty clear what is going on. The Excel file names, the log file names and backups are all set as constants at the top of the file (e.g. if you want change the Excel task file location).
 
