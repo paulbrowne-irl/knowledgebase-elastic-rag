@@ -5,6 +5,9 @@ from shareplum import Site
 from shareplum import Office365
 from shareplum.site import Version
 
+from office365.sharepoint.client_context import ClientContext
+from office365.sharepoint.client_context import ClientContext
+from office365.runtime.auth.user_credential import UserCredential
 
 '''
 Bot that uses Rag to respond to emails.
@@ -38,6 +41,3 @@ if __name__ == '__main__':
 
        _setup_sharepilot_token() 
 
-
-authcookie = Office365('https://entirl.sharepoint.com/', username='pbrowne@enterprise-ireland.com', password=token).GetCookies()
-site = Site('https://entirl.sharepoint.com/sites/ECS', version=Version.v2016, authcookie=authcookie)
