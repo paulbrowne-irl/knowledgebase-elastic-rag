@@ -18,6 +18,6 @@ class Test_Config(unittest.TestCase):
 
         #setup test class
     
-    def test_picklet(self):
+    def test_config(self):
         self.fail("testing of pickle values not yet implemented")
         print("test completed")

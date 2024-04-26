@@ -1,6 +1,6 @@
 import unittest
 import logging
-import os
+import app.settings.pickle_loader as pickle_loader
 
 # allow imports from parent directory
 import sys
@@ -17,6 +17,6 @@ class Test_PickleLoader(unittest.TestCase):
 
         #setup test class
     
-    def test_picklet(self):
-        self.fail("testing of pickle values not yet implemented")
-        print("test completed")
+    def test_pickle_loader(self):
+        token = pickle_loader.setup_copilot_token()
+        self.assertIsNotNone(token)

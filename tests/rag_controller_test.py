@@ -18,6 +18,6 @@ class Test_Rag_Controller(unittest.TestCase):
 
         #setup rag controller
     
-    def test_dummy(self):
+    def test_rag(self):
         self.fail("Tests not yet implemented")
         print("test completed")

@@ -49,7 +49,7 @@ def _setup_copilot_token():
    
     global token
  
-    token = settings.pickle_loader.setup_sharepilot_token()
+    token = settings.pickle_loader.setup_copilot_token()
 
 
 def _setup_embeddings(): 
