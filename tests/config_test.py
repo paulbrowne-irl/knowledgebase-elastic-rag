@@ -1,11 +1,7 @@
 import unittest
 import logging
-import os
 
-# allow imports from parent directory
-import sys
-#sys.path.append('../util')
-
+import app.settings.config as config
 
 class Test_Config(unittest.TestCase):
    
@@ -19,5 +15,7 @@ class Test_Config(unittest.TestCase):
         #setup test class
     
     def test_config(self):
-        self.fail("testing of pickle values not yet implemented")
-        print("test completed")
+        
+        self.assertEqual('"."',config.read("WORKING_DIRECTORY"))
+        
+        
