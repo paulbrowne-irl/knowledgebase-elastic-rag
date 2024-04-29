@@ -17,5 +17,13 @@ class Test_Config(unittest.TestCase):
     def test_config(self):
         
         self.assertEqual('"."',config.read("WORKING_DIRECTORY"))
+
+    def test_config_int(self):
+        self.assertTrue(0!=config.read_int("BREAK_AFTER_X_MAILS"))
+
+    def test_config_boolean(self):
+        flag = config.read_boolean("CONTINUE_LOOP_AFTER_ERROR")
+        self.assertTrue(flag or not(flag))
+
         
         

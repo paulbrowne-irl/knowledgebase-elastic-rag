@@ -177,8 +177,8 @@ if __name__ == '__main__':
 
             #break if this is set
             counter+=1
-            if counter>=config.read("MAX_NUMBER_OF_FILES"):
-                logging.info("Stopping after max number of files:"+str(config.read("MAX_NUMBER_OF_FILES")))
+            if counter>=config.read_int("MAX_NUMBER_OF_FILES"):
+                logging.info("Stopping after max number of files:"+str(config.read_int("MAX_NUMBER_OF_FILES")))
                 break
                 
         else:

@@ -61,7 +61,7 @@ def _walk_folder(parent_folder,this_folder):
             counter+=1
 
             print("Counter:"+str(counter))
-            if(config.read("BREAK_AFTER_X_MAILS")>0 and counter>config.read("BREAK_AFTER_X_MAILS")):
+            if(config.read_int("BREAK_AFTER_X_MAILS")>0 and counter>config.read_int("BREAK_AFTER_X_MAILS")):
                 print("Breaking ...")
                 return data_frame
             

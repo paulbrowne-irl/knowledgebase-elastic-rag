@@ -14,9 +14,26 @@ print (config.sections())
 def read (ConfigKey):
 
     ''''
-    Find the relevant value in settings matching the config key
+    Find the relevant value in settings matching the config key - return a string
     '''
 
     settings=config['SETTINGS']
     return settings[ConfigKey]
-    pass
+
+def read_int (ConfigKey):
+
+    ''''
+    Find the relevant value in settings matching the config key - return an int
+    '''
+
+    settings=config['SETTINGS']
+    return settings.getint(ConfigKey)
+
+def read_boolean (ConfigKey):
+
+    ''''
+    Find the relevant value in settings matching the config key - return a boolean
+    '''
+
+    settings=config['SETTINGS']
+    return settings.getboolean(ConfigKey)

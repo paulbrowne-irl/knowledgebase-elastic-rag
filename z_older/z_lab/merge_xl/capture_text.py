@@ -128,8 +128,8 @@ if __name__ == '__main__':
  
                 #break if this is set
                 counter+=1
-                if counter>=config.read("MAX_NUMBER_OF_FILES"):
-                    logger.warning("ENDING AFTER CYCLE:"+str(config.read("MAX_NUMBER_OF_FILES")))
+                if counter>=config.read_int("MAX_NUMBER_OF_FILES"):
+                    logger.warning("ENDING AFTER CYCLE:"+str(config.read_int("MAX_NUMBER_OF_FILES")))
                     break
             
 
@@ -137,7 +137,7 @@ if __name__ == '__main__':
 
 
             #decide how to handle it
-            if(config.read("CONTIUE_LOOP_AFTER_ERROR")):
+            if(config.read_boolean("CONTINUE_LOOP_AFTER_ERROR")):
                  #Log the error and continue loop
                 logging.error(problem)
                 

@@ -39,7 +39,7 @@ def _save_summary_info(data_frame):
         logging.error ("Error when saving data")
         logging.error(traceback.format_exc())
         logging.error ("\n Was attempting to save")
-        logging.error(data_frame.tail(config.read("FLUSH_AFTER_X_MAILS")))
+        logging.error(data_frame.tail(config.read_int("FLUSH_AFTER_X_MAILS")))
 
     return data_frame
 
@@ -69,12 +69,12 @@ def _walk_folder(data_frame,parent_folder,this_folder):
             counter+=1
 
             logging.info("Counter:"+str(counter))
-            if(config.read("BREAK_AFTER_X_MAILS")>0 and counter>config.read("BREAK_AFTER_X_MAILS")):
+            if(config.read_int("BREAK_AFTER_X_MAILS")>0 and counter>config.read_int("BREAK_AFTER_X_MAILS")):
                 logging.info("Breaking ...")
                 return data_frame
             
             #do we need to flush cache to disk?
-            if(config.read("FLUSH_AFTER_X_MAILS")==0):
+            if(config.read_int("FLUSH_AFTER_X_MAILS")==0):
                 data_frame = _save_summary_info(data_frame)
 
             #Filter on mail items only

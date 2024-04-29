@@ -3,11 +3,12 @@
 
 # NEXT
 * get basic config working
-	* BREAK_AFTER_X_MAILS
 	CONTIUE_LOOP_AFTER_ERROR
-	MAX_NUMBER
+	#BREAK_AFTER_X_MAILS
+	
 * test read config numbers
 
+* tidy config file
 
 # NEXT
 
