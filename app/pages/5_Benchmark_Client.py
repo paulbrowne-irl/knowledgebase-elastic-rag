@@ -4,7 +4,7 @@ import app_sidebar as app_sidebar
 
 from importlib import reload
 
-import util.rag_controller as rag_controller
+import util_rag.rag_controller as rag_controller
 
 
 #Window setup

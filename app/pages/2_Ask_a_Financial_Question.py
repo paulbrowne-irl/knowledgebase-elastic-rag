@@ -7,7 +7,7 @@ from importlib import reload
 
 import app.settings.config as config
 import app_sidebar as app_sidebar
-import util.rag_controller
+import util_rag.rag_controller
 
 
 @st.cache_data(show_spinner=True)
@@ -183,7 +183,7 @@ st.title('Show me the numbers')
 reload(app_sidebar)
 
 #make sure setup gets run at start
-util.rag_controller.setup()
+util_rag.rag_controller.setup()
 
 
 with st.form('my_form'):
