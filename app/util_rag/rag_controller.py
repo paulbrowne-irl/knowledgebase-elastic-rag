@@ -24,7 +24,7 @@ import logging
 import app.settings.config as config
 import settings.pickle_loader
 
-import util.llm_copilot as llm_copilot
+import util_rag.llm_copilot as llm_copilot
 
 
 #Module level constants
