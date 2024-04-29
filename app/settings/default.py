@@ -28,41 +28,12 @@ MODEL_TRANSFORMERS = "sentence-transformers/all-mpnet-base-v2"
 MODEL_LLM = 'google/flan-t5-large'
 
 
-# Prompt
-TEMPLATE_QA_PROMPT = """
-I am a helpful AI that answers questions. When I don't know the answer I say I don't know.
-I know context: {context}
-when asked: {question}
-my response using only information in the context is: """
-
-TEMPLATE_EMAIL_PROMPT = """
-I am a helpful AI that writes 5 line emails as best I can in a professional tone.
-I know context: {context}
-when asked: {question}
-my response is 5 lines long and begins with 'Dear Sir' and ends with 'regards, Bot'
-"""
-
 
 ######
 # System level properties
 
 # Most of the time you will not need to edit these settings
 LOG_FILE="app.log"
-
-#####
-# possible to remove these
-
-#Constants - SW Sample
-#index_name = "book_wookieepedia_small"
-#topic = "Star Wars"
-
-
-###=====
-### EMAIL settings - remove
-#####
-
-# Settings that configure how the script behaves
-# The most common ones to edit are below
 
 # Where we will output the results
 # "." is the project home directory

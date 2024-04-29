@@ -21,4 +21,4 @@ langchain_community
 langchain-elasticsearch
 sydney-py
 
-Office365-REST-Python-Client
+configargparse

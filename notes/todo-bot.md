@@ -1,8 +1,8 @@
 
-# NEXT PICKLE 
-* Refactor pickle into something more generic
-* test pickle working or not
-* all tests running
+
+
+# NEXT
+* get basic config working
 
 # NEXT
 * Google how to overwrite default settings
