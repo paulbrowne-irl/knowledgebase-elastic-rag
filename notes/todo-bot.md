@@ -2,11 +2,6 @@
 
 
 # NEXT
-* get basic config working
-	CONTIUE_LOOP_AFTER_ERROR
-	#BREAK_AFTER_X_MAILS
-	
-* test read config numbers
 
 * tidy config file
 
