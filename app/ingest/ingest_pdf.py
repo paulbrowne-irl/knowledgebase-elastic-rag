@@ -16,30 +16,29 @@ from pathlib import Path
 import os
 import fnmatch
 
-import settings
+import app.settings.config as config
 
-
-# Index pdf data into elastic index
+# Index pdf data into elastic index_url =  config.read("ES_URL
 
 # Get the elastic URL from settings
 # If we can to allow for username and password we can update to something like:
 # es_url =  f"https://{username}:{password}@{endpoint}:9200"
 # noting that the username, assword and endpoint should valid
-es_url =  settings.default.ES_URL
-print ("Using URL "+settings.default.ES_URL)
+es_url =  config.read("ES_URL")
+print ("Using URL "+config.read("ES_URL"))
 
 # get the model we need to encode the text as vectors (in Elastic)
 print("Prep. Huggingface embedding setup")
-hf= HuggingFaceEmbeddings(model_name=settings.default.MODEL_TRANSFORMERS)
+hf= HuggingFaceEmbeddings(model_name=config.read("MODEL_TRANSFORMERS"))
 
 # Next we'll create our elasticsearch vectorstore in the langchain style:
-db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=settings.default.ES_INDEX_DOCUMENTS)
-#db = ElasticsearchStore(es_url,hf,index_name=settings.default.ES_INDEX)
+db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_DOCUMENTS"))
+#db = ElasticsearchStore(es_url,hf,index_name=config.read("ES_INDEX)
 
 
 
 ## get list of files in directory
-listFiles = os.listdir(settings.default.SOURCE_PDF_DIR)
+listFiles = os.listdir(config.read("SOURCE_PDF_DIR"))
 
 #filter to pdf
 listFiles=fnmatch.filter(listFiles, '*.pdf')
@@ -47,7 +46,7 @@ listFiles=fnmatch.filter(listFiles, '*.pdf')
 
 
 for file in listFiles :
-    path = settings.default.SOURCE_PDF_DIR + "/" + file
+    path = config.read("SOURCE_PDF_DIR") + "/" + file
     print("====== \n")
     print(path)
 
@@ -93,4 +92,4 @@ for file in listFiles :
     # was from text
     #   db.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
 
-    db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=settings.default.ES_INDEX_DOCUMENTS)
+    db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=config.read("ES_INDEX_DOCUMENTS"))

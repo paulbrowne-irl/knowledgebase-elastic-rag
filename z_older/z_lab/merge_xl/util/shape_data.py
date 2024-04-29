@@ -5,7 +5,7 @@ import pandas as pd
 from pandas.core.frame import DataFrame
 
 import company_data
-import settings.default
+import app.settings.config as config
 import util.table_names as table_names
 
 
@@ -25,11 +25,11 @@ def reshape_data(my_company:company_data)->company_data:
     df=pd.DataFrame(my_company.key_info,index=[0])
     df=df.transpose()
     my_company.tables.insert(0,df) 
-    my_company.table_names.insert(0,settings.default.KEY_INFO_OUTPUT_TAB_NAME)
+    my_company.table_names.insert(0,config.read("KEY_INFO_OUTPUT_TAB_NAME"))
 
     # insert the keywords as the second sheet
     my_company.tables.insert(1,my_company.keyword_info) 
-    my_company.table_names.insert(1,settings.default.KEY_WORDS_OUTPUT_TAB_NAME)
+    my_company.table_names.insert(1,config.read("KEY_WORDS_OUTPUT_TAB_NAME"))
 
     #return the info
     return my_company
@@ -43,7 +43,7 @@ def _add_key_details_to_dataframe(my_company:company_data)->company_data:
 
     #reverse the key data we add as columns
     #this means columns will be added to the spreadhseet in the order they appear in the settings
-    reverse_add_info_list=reversed(settings.default.ADD_INFO_TO_ALL_SHEETS)
+    reverse_add_info_list=reversed(config.read("ADD_INFO_TO_ALL_SHEETS"))
 
     # See if we have relevant info to add to data
     for key_data in reverse_add_info_list :

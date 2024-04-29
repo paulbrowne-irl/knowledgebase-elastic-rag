@@ -3,18 +3,20 @@
 
 # NEXT
 * get basic config working
+	* BREAK_AFTER_X_MAILS
+	CONTIUE_LOOP_AFTER_ERROR
+	MAX_NUMBER
+* test read config numbers
+
 
 # NEXT
-* Google how to overwrite default settings
-* simple workding example using config.py, driven by test config_test.py
+
 * refactor existing config to it
-* allow for EI sepecif overwrite
+* allow for EI sepecif overwrite - impl
 
 
 # Next After this
 * create pickle folder
-* refactor out pickle (for copilot token)
-* unit tests
 * better ingestion app
 
 # Next sample data

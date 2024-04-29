@@ -13,7 +13,7 @@ import pandas as pd
 from pandas.core.frame import DataFrame
 from PyPDF2 import PdfReader
 
-import settings.default
+import app.settings.config as config
 
 import util.file_export as file_export
 import util.file_util as file_util
@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
 
     # iterate over files in directory
-    for filename in os.listdir(settings.default.WORKING_FOLDER):
+    for filename in os.listdir(config.read("WORKING_FOLDER")):
         
         try:
 
@@ -119,7 +119,7 @@ if __name__ == '__main__':
                 logging.info("processing pdf file: "+filename)    
 
                 #Get the next file in this directory
-                f = os.path.join(settings.default.WORKING_FOLDER, filename)
+                f = os.path.join(config.read("WORKING_FOLDER"), filename)
 
                 #Extract _extract_text_stats information
                 document_text= _loop_extract_text_info(f)
@@ -128,8 +128,8 @@ if __name__ == '__main__':
  
                 #break if this is set
                 counter+=1
-                if counter>=settings.default.MAX_NUMBER_OF_FILES:
-                    logger.warning("ENDING AFTER CYCLE:"+str(settings.MAX_NUMBER_OF_FILES))
+                if counter>=config.read("MAX_NUMBER_OF_FILES"):
+                    logger.warning("ENDING AFTER CYCLE:"+str(config.read("MAX_NUMBER_OF_FILES")))
                     break
             
 
@@ -137,7 +137,7 @@ if __name__ == '__main__':
 
 
             #decide how to handle it
-            if(settings.default.CONTIUE_LOOP_AFTER_ERROR):
+            if(config.read("CONTIUE_LOOP_AFTER_ERROR")):
                  #Log the error and continue loop
                 logging.error(problem)
                 
@@ -146,5 +146,5 @@ if __name__ == '__main__':
                 raise problem
             
     #export information into the folder as Excel
-    logging.info("Exporting to file:"+settings.default.OUTPUT_TEXT_ANALSYIS)
-    output_df.to_excel(settings.default.OUTPUT_TEXT_ANALSYIS,index=False)
+    logging.info("Exporting to file:"+config.read("OUTPUT_TEXT_ANALSYIS"))
+    output_df.to_excel(config.read("OUTPUT_TEXT_ANALSYIS"),index=False)

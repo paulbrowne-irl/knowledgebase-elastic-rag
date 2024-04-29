@@ -5,7 +5,7 @@ import logging
 
 import util.file_export as file_export
 
-import settings.default
+import app.settings.config as config
 
 def should_we_process_this_file(original_file_name:str)->bool:
     ''' 
@@ -23,7 +23,7 @@ def should_we_process_this_file(original_file_name:str)->bool:
     
     # check that file already exists
     output_file_name=file_export.get_export_file_name(original_file_name)
-    f = os.path.join(settings.default.WORKING_FOLDER, output_file_name)
+    f = os.path.join(config.read("WORKING_FOLDER"), output_file_name)
     if os.path.isfile(f):
         logging.info("Ignoring file: "+original_file_name + " as output already generated in "+output_file_name)
         return False

@@ -7,7 +7,7 @@ import pandas as pd
 import os.path
 import os
 
-import settings.default
+import app.settings.config as config
 
 
 '''
@@ -93,7 +93,7 @@ def _get_skip_list()->list:
     Get a list of already processed files that we will skip later
     '''
 
-    df = pd.read_excel(settings.default.PROCESSED_FILE_LIST) 
+    df = pd.read_excel(config.read("PROCESSED_FILE_LIST")) 
     return  list(df.iloc[:,0])
 
 
@@ -111,13 +111,13 @@ if __name__ == '__main__':
     skip_list = _get_skip_list()
   
     # iterate over files in directory
-    for thisFile in os.listdir(settings.default.WORKING_FOLDER):
+    for thisFile in os.listdir(config.read("WORKING_FOLDER")):
         
         #Get the next file in this directory
-        f = os.path.join(settings.default.WORKING_FOLDER, thisFile)
+        f = os.path.join(config.read("WORKING_FOLDER"), thisFile)
 
         # checking if it is an xlsx Output file
-        if os.path.isfile(f) and thisFile.lower().endswith(settings.default.OUTPUT_APPEND):
+        if os.path.isfile(f) and thisFile.lower().endswith(config.read("OUTPUT_APPEND")):
 
        
             # check if we have already processed this file
@@ -151,8 +151,8 @@ if __name__ == '__main__':
                     sheetToMerge["FileName"]=str(thisFile)
 
                 #Generate the file name associated with this
-                Outputfile=settings.default.OUTPUT_COLLATE+thisTab+".xlsx"
-                OutputfileFull= os.path.join(settings.default.WORKING_FOLDER, Outputfile)
+                Outputfile=config.read("OUTPUT_COLLATE")+thisTab+".xlsx"
+                OutputfileFull= os.path.join(config.read("WORKING_FOLDER"), Outputfile)
                 
                 #(if not exists) create an empty file associated with this outputfile
                 if not os.path.isfile(OutputfileFull):
@@ -177,8 +177,8 @@ if __name__ == '__main__':
 
             #break if this is set
             counter+=1
-            if counter>=settings.MAX_NUMBER_OF_FILES:
-                logging.info("Stopping after max number of files:"+str(settings.default.MAX_NUMBER_OF_FILES))
+            if counter>=config.read("MAX_NUMBER_OF_FILES"):
+                logging.info("Stopping after max number of files:"+str(config.read("MAX_NUMBER_OF_FILES")))
                 break
                 
         else:

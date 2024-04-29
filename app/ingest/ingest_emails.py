@@ -6,7 +6,7 @@ from pandas.core.frame import DataFrame
 import win32com.client
 
 
-import settings.default
+import app.settings.config as config
 
 
 from tqdm import tqdm
@@ -61,7 +61,7 @@ def _walk_folder(parent_folder,this_folder):
             counter+=1
 
             print("Counter:"+str(counter))
-            if(settings.default.BREAK_AFTER_X_MAILS>0 and counter>settings.default.BREAK_AFTER_X_MAILS):
+            if(config.read("BREAK_AFTER_X_MAILS")>0 and counter>config.read("BREAK_AFTER_X_MAILS")):
                 print("Breaking ...")
                 return data_frame
             
@@ -106,7 +106,7 @@ def _walk_folder(parent_folder,this_folder):
                     doc.metadata["format"] = "Mail"
                     doc.metadata["type"] = "Inquiry"
 
-                db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX_EMAILS)
+                db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=config.read("ES_INDEX_EMAILS"))
 
                 print (f'processed message {counter}')
 
@@ -134,28 +134,28 @@ if __name__ == '__main__':
     # If we can to allow for username and password we can update to something like:
     # es_url =  f"https://{username}:{password}@{endpoint}:9200"
     # noting that the username, assword and endpoint should valid
-    es_url =  settings.default.ES_URL
-    print ("Using URL "+settings.default.ES_URL)
+    es_url =  config.read("ES_URL")
+    print ("Using URL "+config.read("ES_URL"))
 
     # get the model we need to encode the text as vectors (in Elastic)
     print("Prep. Huggingface embedding setup")
-    hf= HuggingFaceEmbeddings(model_name=settings.default.MODEL_TRANSFORMERS)
+    hf= HuggingFaceEmbeddings(model_name=config.read("MODEL_TRANSFORMERS"))
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
-    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=settings.default.ES_INDEX_DOCUMENTS)
+    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_DOCUMENTS"))
 
     #Handle TO Outlook, Logs and other objects we will need later
     OUTLOOK = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
 
     #Set the Logging level. Change it to logging.INFO is you want just the important info
-    logging.basicConfig(filename=settings.default.LOG_FILE, encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
 
     #root_folder = .Folders.Item(1)
     print("Getting handle to outlook");
-    root_folder = OUTLOOK.Folders.Item(settings.default.INBOX_NAME)
+    root_folder = OUTLOOK.Folders.Item(config.read("INBOX_NAME"))
 
     #Walk folders
-    print("About to walk folder");
+    print("About to walk folder")
     _walk_folder("",root_folder)
 
     

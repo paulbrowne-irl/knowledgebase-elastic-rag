@@ -10,7 +10,7 @@ import tabula
 from pandas.core.frame import DataFrame
 
 import company_data
-import settings.default
+import app.settings.config as config
 
 
 def capture_information_from_pdf(filename:str)->company_data:
@@ -29,9 +29,9 @@ def capture_information_from_pdf(filename:str)->company_data:
     #Attempt two methods to read pdfs
     my_company.tables = tabula.read_pdf(filename,  multiple_tables=True,pages='all',lattice=False)
 
-    if len(my_company.tables)<settings.default.LATTICE_THRESHOLD:
+    if len(my_company.tables)<config.read("LATTICE_THRESHOLD"):
 
-        logging.info("Number of tables less than "+str(settings.default.LATTICE_THRESHOLD)+" trying again using graphic lattice mode")
+        logging.info("Number of tables less than "+str(config.read("LATTICE_THRESHOLD"))+" trying again using graphic lattice mode")
 
         # probably graphic tables embedded - try again using Lattice mode
         my_company.tables = tabula.read_pdf(filename,  multiple_tables=True,pages='all',lattice=False)
