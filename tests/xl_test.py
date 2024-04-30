@@ -17,9 +17,9 @@ class Test_XL(unittest.TestCase):
         logger = logging.getLogger("..")
         logger.setLevel(logging.DEBUG)
     
-    def test_read_xl(self):
+    def test_read_filtered_xl(self):
 
-        xl_file = xl.read_xl("../data-sample/question_and_answer/q_and_a_sample.xlsx")
+        xl_file = xl.read_filtered_xl("data-sample/question_and_answer/q_and_a_sample.xlsx")
         print(xl_file)
         
         self.fail("Test not implented yet")
