@@ -1,8 +1,0 @@
-* Solve issue multiple indexes (via testsing)
-
-Test and drop duplicate index
-
-
-
-
-* Update Reamdme.md
