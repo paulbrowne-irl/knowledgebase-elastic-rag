@@ -1,1 +1,3 @@
-note that a file settings-overwrite.conf will overwrite the standard settings
+# note that a file settings-overwrite.conf will overwrite the standard settings
+# there is in entry in .gitignore that excludes settings-overwrite.conf from source control
+# this allows you to put more sensitive settings in here

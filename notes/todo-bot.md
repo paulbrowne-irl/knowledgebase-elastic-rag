@@ -5,7 +5,6 @@
 * allow for EI sepecif overwrite - impl 
 * work throiugh comments in bot.py
 
-
 # Next After this
 * create pickle folder
 * better ingestion app
