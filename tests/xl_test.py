@@ -16,4 +16,4 @@ class Test_XL(unittest.TestCase):
     
     def test_read_xl(self):
         
-        self.fail("Test not implented yet"))
+        self.fail("Test not implented yet")
