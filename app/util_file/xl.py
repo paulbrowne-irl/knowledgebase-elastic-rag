@@ -7,21 +7,10 @@ import pandas as pd
 
 
 import app.settings.config as config
-import util_file.xl as xl
-
-
 
 '''
 Util file to read and write excel file
 '''
-
-
-
-
-# ################
-
-
-
 
 def read_xl(xl_file_name):
 

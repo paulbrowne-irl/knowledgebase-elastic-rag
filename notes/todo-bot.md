@@ -20,6 +20,12 @@
 * update notes below on what script does
 * NTH - iden
 
+# Improvements
+* Prompts
+* email templates
+* links in email templates
+* langchain
+
 
 
 =
