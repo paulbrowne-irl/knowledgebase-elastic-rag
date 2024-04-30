@@ -1,12 +1,3 @@
-'''
-Util file to read and write excel file
-'''
-
-
-
-
-# ################
-
 import logging
 import traceback
 from pandas.core.frame import DataFrame
@@ -16,26 +7,25 @@ import pandas as pd
 
 
 import app.settings.config as config
+import util_file.xl as xl
 
-
-from tqdm import tqdm
-from langchain.embeddings import HuggingFaceEmbeddings
-
-
-from langchain.vectorstores import ElasticVectorSearch
-from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
-from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import CharacterTextSplitter
-
-import fnmatch
 
 
 '''
-Index Mails (stored in Excel Sheet) to Elastic stack
+Util file to read and write excel file
 '''
+
+
+
+
+# ################
+
+
 
 
 def read_xl(xl_file_name):
+
+    '''read values from xl file'''
     
     #root_folder = .Folders.Item(1)
     print("Getting handle to Excel with Emails");
