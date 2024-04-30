@@ -1,14 +1,9 @@
 
 
-
 # NEXT
 
-* tidy config file
-
-# NEXT
-
-* refactor existing config to it
-* allow for EI sepecif overwrite - impl
+* allow for EI sepecif overwrite - impl 
+* work throiugh comments in bot.py
 
 
 # Next After this
