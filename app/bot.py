@@ -19,13 +19,16 @@ So it relies on the following ...
 
 '''
 
+# read excel file
+
 # read email and prompt templates
 
-# read excel file
+
 
 # identify unprcessed email
 
 # Loop
+
 
     # call via chain
 
