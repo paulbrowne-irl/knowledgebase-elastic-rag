@@ -6,8 +6,6 @@ from pandas.core.frame import DataFrame
 import pandas as pd
 
 
-import app.settings.config as config
-
 '''
 Util file to read and write excel file
 '''

@@ -122,11 +122,11 @@ if __name__ == '__main__':
     logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
 
     #root_folder = .Folders.Item(1)
-    print("Getting handle to Excel with Emails");
+    logging.debug("Getting handle to Excel with Emails");
     email_table = pd.read_excel(config.read("SOURCE_MAILS_IN_XL"), index_col=0) 
 
     #Walk folders
-    print("About to loop through emails ");
+    logging.debug("About to loop through emails ");
     _loop_over_file(email_table)
 
     

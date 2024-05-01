@@ -21,7 +21,7 @@ from langchain_elasticsearch import ApproxRetrievalStrategy
 import logging
 
 
-import app.settings.config as config
+import settings.config as config
 import settings.pickle_loader
 
 import util_rag.llm_copilot as llm_copilot

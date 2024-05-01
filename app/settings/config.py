@@ -6,7 +6,7 @@ see settings-overwrite.note
 '''
 
 config = configparser.ConfigParser()
-config.read(['app/settings/settings.conf', 'app/settings/settings-overwrite.conf'])
+config.read(['app/settings/config.conf', 'app/settings/config-overwrite.conf'])
 
 
 def read (ConfigKey):
@@ -16,7 +16,14 @@ def read (ConfigKey):
     '''
 
     settings=config['SETTINGS']
-    return settings[ConfigKey]
+    returnObj= settings.read(ConfigKey)
+
+    print("#######")
+    print(type(returnObj))
+    print(returnObj)
+    print("#######")
+
+    return returnObj
 
 def read_int (ConfigKey):
 
