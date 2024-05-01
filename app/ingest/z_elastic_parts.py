@@ -15,6 +15,7 @@ from pathlib import Path
 
 import os
 import fnmatch
+import logging
 
 import app.settings.config as config
 
@@ -29,7 +30,7 @@ es_url =  config.read("ES_URL")
 print ("Using URL "+config.read("ES_URL"))
 
 # get the model we need to encode the text as vectors (in Elastic)
-print("Prep. Huggingface embedding setup")
+logging.debug("Prep. Huggingface embedding setup")
 hf= HuggingFaceEmbeddings(model_name=config.read("MODEL_TRANSFORMERS"))
 
 # Next we'll create our elasticsearch vectorstore in the langchain style:
@@ -48,8 +49,8 @@ listFiles=fnmatch.filter(listFiles, '*.pdf')
 
 for file in listFiles :
     path = config.read("SOURCE_PDF_DIR") + "/" + file
-    print("====== \n")
-    print(path)
+    logging.debug("====== \n")
+    logging.debug(path)
 
     ## OLDER
     #line = util.extract_pdf.readPDF(path)
@@ -72,7 +73,7 @@ for file in listFiles :
 
     ## json method
     '''	
-    print("Name : " + str(eModel))
+    logging.debug("Name : " + str(eModel))
 
     url = "http://localhost:9200/" + config.read("ES_INDEX +"/_doc?pretty"
     data = eModel.toJSON()
@@ -82,14 +83,14 @@ for file in listFiles :
                     'Accept-Language':'en'
 
                 })
-    print("Url : " + url)
-    print("Data : " + str(data))
+    logging.debug("Url : " + url)
+    logging.debug("Data : " + str(data))
 
-    print("Request : " + str(requests))
-    print("Response : " + str(response))
+    logging.debug("Request : " + str(requests))
+    logging.debug("Response : " + str(response))
     '''
 
-    #print("ES Indexing:"+str(len(eModel.text)))
+    #logging.debug("ES Indexing:"+str(len(eModel.text)))
     # was from text
     #   db.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
 

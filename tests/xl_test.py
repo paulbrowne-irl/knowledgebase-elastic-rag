@@ -20,7 +20,7 @@ class Test_XL(unittest.TestCase):
     def test_read_filtered_xl(self):
 
         xl_file = xl.read_next_unanswered_question("data-sample/question_and_answer/q_and_a_sample.xlsx")
-        print(xl_file)
+        logging.debug(xl_file)
 
         #check that we have a pandas dataframe, with one row plus header
         self.assertEqual(2,len(xl_file.index))

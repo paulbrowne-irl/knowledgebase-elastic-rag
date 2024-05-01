@@ -15,7 +15,7 @@ def read_next_unanswered_question(xl_file_name):
     '''read values from xl file'''
     
     #root_folder = .Folders.Item(1)
-    print("Getting handle to Excel with Emails");
+    logging.debug("Getting handle to Excel with Emails");
     question_table = pd.read_excel(xl_file_name, index_col=0) 
 
     # filter based on answered question

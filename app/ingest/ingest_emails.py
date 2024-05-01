@@ -60,16 +60,16 @@ def _walk_folder(parent_folder,this_folder):
             #Increment the counter and test if we need to break
             counter+=1
 
-            print("Counter:"+str(counter))
+            logging.debug("Counter:"+str(counter))
             if(config.read_int("BREAK_AFTER_X_MAILS")>0 and counter>config.read_int("BREAK_AFTER_X_MAILS")):
-                print("Breaking ...")
+                logging.debug("Breaking ...")
                 return data_frame
             
 
 
             #Filter on mail items only
             if(mail.Class!=43):
-                print("Skipping item type:"+str(mail.Class))
+                logging.debug("Skipping item type:"+str(mail.Class))
 
             else:
 
@@ -112,8 +112,8 @@ def _walk_folder(parent_folder,this_folder):
 
 
         except Exception as e:
-            print("error when processing item - will continue")
-            print(e)
+            logging.debug("error when processing item - will continue")
+            logging.debug(e)
 
             
             #HTMLBody
@@ -138,7 +138,7 @@ if __name__ == '__main__':
     print ("Using URL "+config.read("ES_URL"))
 
     # get the model we need to encode the text as vectors (in Elastic)
-    print("Prep. Huggingface embedding setup")
+    logging.debug("Prep. Huggingface embedding setup")
     hf= HuggingFaceEmbeddings(model_name=config.read("MODEL_TRANSFORMERS"))
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
@@ -151,11 +151,11 @@ if __name__ == '__main__':
     logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
 
     #root_folder = .Folders.Item(1)
-    print("Getting handle to outlook");
+    logging.debug("Getting handle to outlook");
     root_folder = OUTLOOK.Folders.Item(config.read("INBOX_NAME"))
 
     #Walk folders
-    print("About to walk folder")
+    logging.debug("About to walk folder")
     _walk_folder("",root_folder)
 
     

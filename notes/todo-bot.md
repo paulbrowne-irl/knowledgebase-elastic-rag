@@ -1,7 +1,6 @@
 
 
 # NEXT - bot.py
-* is bot.py acutally being called (and read first line)
 * Get prompt template
 * wire in RAG to ask quesoin
 * rememver bits form emails send
@@ -60,7 +59,46 @@
 		# RAG 2 Pass to AI to generate email
 		# Generate Email , save to draft
 
-'''
+
+## play
+
+* named entities
+* Topic analysis
+
+## Now problems I want to solve
+
+* Misfiled emails
+* unanswered emails
+* POS tagging (counties)
+
+## Tidy
+
+* failing when trying to output non email tasks
+
+
+## next Problems I want to solve
+* get list of attached filenames
+* Emails without a response
+* Emails filed in the wrong folder
+* link email in chain (and recognize text)
+* suggest best email response (to draft?)
+* tag based on last person to answer client
+* Postive or negative sentiment
+* LEO / County
+* identify DA
+* Save attachments / call rules?
+* identify topics / keywords
+
+## Open Questions and Features
+
+* Anywhere to run other than laptop
+* Incremental v full run tasks
+* Configure filter out of email
+* remove boiler plate email
+
+## Notes
+
+* Possible use Graph Library instead: https://github.com/O365/python-o365#mailbox
 
 
 

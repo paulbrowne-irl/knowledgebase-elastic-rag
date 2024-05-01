@@ -20,4 +20,4 @@ class Test_Rag_Controller(unittest.TestCase):
     
     def test_rag(self):
         #self.fail("Tests not yet implemented")
-        print("test completed")
+        logging.debug("test completed")

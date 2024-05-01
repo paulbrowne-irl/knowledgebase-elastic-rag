@@ -44,7 +44,7 @@ def _loop_over_file(mail_df):
     )
 
     for index, row in mail_df.iterrows():
-        print(index,row)
+        logging.debug(index,row)
 
         try:
             #Increment the counter and test if we need to break
@@ -88,8 +88,8 @@ def _loop_over_file(mail_df):
 
 
         except Exception as e:
-            print("error when processing item - will continue")
-            print(e)
+            logging.debug("error when processing item - will continue")
+            logging.debug(e)
 
     
 
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     print ("Using URL "+config.read("ES_URL"))
 
     # get the model we need to encode the text as vectors (in Elastic)
-    print("Prep. Huggingface embedding setup")
+    logging.debug("Prep. Huggingface embedding setup")
     hf= HuggingFaceEmbeddings(model_name=config.read("MODEL_TRANSFORMERS"))
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:

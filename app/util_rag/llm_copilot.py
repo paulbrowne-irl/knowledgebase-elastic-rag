@@ -6,6 +6,13 @@ import os
 from langchain_core.callbacks.manager import CallbackManagerForLLMRun
 from langchain_core.language_models.llms import LLM
 
+from typing import Any
+from typing import Mapping
+from typing import List
+from typing import Optional
+
+import logging
+
 from sydney import SydneyClient
 
 
@@ -65,11 +72,11 @@ class CustomLLM(LLM):
     async def call_copilot(self,prompt) -> str:
         async with SydneyClient() as sydney:
             
-            print("Awaiting response from Sydney.", end="", flush=True)
+            logging.debug("Awaiting response from Sydney.", end="", flush=True)
 
             resp = await(sydney.ask(prompt))
 
-            print("response recieved")
+            logging.debug("response recieved")
             
             return resp
         

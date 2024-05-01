@@ -59,11 +59,11 @@ def _setup_embeddings():
     global _embeddings
     
     if(_embeddings==None):
-        print("Setting up Embeddings")
+        logging.debug("Setting up Embeddings")
 
         _embeddings = HuggingFaceEmbeddings(model_name=config.read("MODEL_TRANSFORMERS"))
     else:
-        print("Embeddings already setup")
+        logging.debug("Embeddings already setup")
 
 
 def _setup_llm():
@@ -73,11 +73,11 @@ def _setup_llm():
 
     if(_llm==None):
         
-        print("Setting up LLMs - local")
+        logging.debug("Setting up LLMs - local")
         _llm={}
 
         # setup the LLM
-        print(f"Setting up model {settings.MODEL_LLM} ready to go")
+        logging.debug(f"Setting up model {settings.MODEL_LLM} ready to go")
         tokenizer = AutoTokenizer.from_pretrained(config.read("MODEL_LLM"))
         model = AutoModelForSeq2SeqLM.from_pretrained(
             config.read("MODEL_LLM"), cache_dir=config.read("CACHE_DIR"))
@@ -91,13 +91,13 @@ def _setup_llm():
         _llm['Local LLM'] = HuggingFacePipeline(pipeline=pipe)
 
 
-        print("Setting up LLMs - copilot")
+        logging.debug("Setting up LLMs - copilot")
         _llm ['Copilot']= llm_copilot.CustomLLM(copilot_token=token)
 
 
     else:
 
-        print("LLM list already setup")
+        logging.debug("LLM list already setup")
 
 
 def _get_datastore(index_name):
@@ -108,7 +108,7 @@ def _get_datastore(index_name):
 
     if(index_name not in _db):
         
-        print("Setting up Datastore:"+index_name +" using embeddings:"+str(_embeddings))
+        logging.debug("Setting up Datastore:"+index_name +" using embeddings:"+str(_embeddings))
 
         
         if(index_name=='UECS Emails'):
@@ -121,7 +121,7 @@ def _get_datastore(index_name):
         
 
     else:
-        print("Using cached Datastore ")
+        logging.debug("Using cached Datastore ")
 
     return  _db [index_name]
 
@@ -130,7 +130,7 @@ def get_nearest_match_documents(index_name:str,vector_search_text:str):
     '''
     Get the nearest match documents using vector search
     '''
-    print(f"Nearest Search index {index_name} matching against {vector_search_text}")
+    logging.debug(f"Nearest Search index {index_name} matching against {vector_search_text}")
 
     vector_search= _get_datastore(index_name)
 

@@ -9,6 +9,8 @@ import app.settings.config as config
 import app_sidebar as app_sidebar
 import util_rag.rag_controller
 
+import logging
+
 
 @st.cache_data(show_spinner=True)
 def get_unique_cols():
@@ -140,7 +142,7 @@ def get_unique_cols():
 #@st.cache_data(show_spinner=True)
 def get_data(filter,max_docs):
 
-    print("Running Data Query filter = "+str(filter))
+    logging.debug("Running Data Query filter = "+str(filter))
 
     # Make the connection
     es = Elasticsearch(config.read("ES_URL"))
