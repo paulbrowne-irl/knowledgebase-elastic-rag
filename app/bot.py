@@ -19,7 +19,7 @@ So it relies on the following ...
 
 '''
 
-# read excel file
+# read excel file (filtered)
 
 # read email and prompt templates
 
