@@ -1,8 +1,7 @@
 
 
-# NEXT
-* noext on bot.py
-	* read xl (filtered) - first line
+# NEXT - bot.py
+* is bot.py acutally being called (and read first line)
 * Get prompt template
 * wire in RAG to ask quesoin
 * rememver bits form emails send
@@ -22,29 +21,21 @@
 * update notes below on what script does
 * NTH - iden
 
-# Improvements
+# Improvements - later
 * Prompts
 * email templates
 * links in email templates
 * langchain
-
-
-# TIDY INTO ABOVE
-
-
-[later]
-* identify topics
-* idetnify best person to answe
+* more filtering based on updated xl
+* categorisation of emails (to person best able to answer them)
 * loop and see if we can improve (langchain)
 
-[indexing]
-* grab 
 
-==.
 
-# ingestion scripts
+# Next - ingestion scripts
 	# name of root folder to ingest from
-# Infrastructure
+
+# Next - Infrastructure
 	# link to improvement form
 	# how part of power automate flow
 ==
