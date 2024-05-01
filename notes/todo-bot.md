@@ -2,7 +2,7 @@
 
 # NEXT
 * noext on bot.py
-	* read xl (filtered)
+	* read xl (filtered) - first line
 * Get prompt template
 * wire in RAG to ask quesoin
 * rememver bits form emails send
