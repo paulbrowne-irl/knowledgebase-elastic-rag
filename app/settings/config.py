@@ -16,7 +16,7 @@ def read (ConfigKey):
     '''
 
     settings=config['SETTINGS']
-    returnObj= settings.read(ConfigKey)
+    returnObj= settings.get(ConfigKey)
 
     print("#######")
     print(type(returnObj))

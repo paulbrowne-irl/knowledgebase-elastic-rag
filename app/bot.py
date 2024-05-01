@@ -17,7 +17,7 @@ So it relies on the following ...
 #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
 
 # read excel file (filtered)
-question_file_name="../"+config.read("QUESTION_FILE_XLS")
+question_file_name=config.read("QUESTION_FILE_XLS")
 
 logging.debug("Reading next question needing answered from "+question_file_name)
 next_question = xl.read_next_unanswered_question(question_file_name)
