@@ -1,23 +1,9 @@
 
-# NEXT - bot.py
-
-* move to unit testable 
-	* define method
-
-* prepare for save back into excel
-	* data gather (response, links, question used)
-	* unit test prope
-
-* create excel loop
-	* 
-	* put in random timer
-
-* CYA on copilot
-	*  Get multple copilot keys
-	* save to pickle
-	* randomly
 
 # Next - injust.py
+
+* setup /mnt
+
 * stub out main class - walker
 	* link in with pdf
 	* updgrade / repeat for other types of files
@@ -36,6 +22,24 @@
 * current data examine
 
 
+
+
+# NEXT - bot.py
+
+* move to unit testable 
+	* define method
+
+* prepare for save back into excel
+	* data gather (response, links, question used)
+	* unit test prope
+
+* create excel loop
+	* put in random timer
+
+# NEXT CYA on copilot
+	*  Get multple copilot keys
+	* save to pickle
+	* randomly
 
 
 # Gather data
