@@ -1,15 +1,33 @@
 
+# Next - injust.py
+* stub out main class - walker
+	* link in with pdf
+	* updgrade / repeat for other types of files
+		* core file and unit test
+* stub out data folderstruture
+
+* current data examine
 
 # NEXT - bot.py
-* Get prompt template
-* wire in RAG to ask quesoin
-* rememver bits form emails send
+* run and depug bot
+	* try print keys
+* move to unit testable 
+	* define method
+	* 
+* save back into excel
+* create excel loop
+	* put in random timer
+
+* Get multple copilot keys
+* save to pickle
+* randomly
+
 
 # Gather data
 * GS
 * Sharepoint
 * SMR
-* 
+* rememver bits form emails send
 
 # Next index data
 * better ingestion app - using existing pdf and other readers

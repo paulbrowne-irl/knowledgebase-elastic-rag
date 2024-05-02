@@ -61,7 +61,7 @@ def _setup_embeddings():
     if(_embeddings==None):
         logging.debug("Setting up Embeddings")
 
-        _embeddings = HuggingFaceEmbeddings(model_name=config.read("MODEL_TRANSFORMERS"))
+        _embeddings = HuggingFaceEmbeddings(model_name=config.read("LOCAL_MODEL_TRANSFORMERS"))
     else:
         logging.debug("Embeddings already setup")
 
@@ -77,10 +77,11 @@ def _setup_llm():
         _llm={}
 
         # setup the LLM
-        logging.debug(f"Setting up model {settings.MODEL_LLM} ready to go")
-        tokenizer = AutoTokenizer.from_pretrained(config.read("MODEL_LLM"))
+        LOCAL_MODEL_LLM=config.read("LOCAL_MODEL_LLM")
+        logging.debug(f"Setting up model {LOCAL_MODEL_LLM}")
+        tokenizer = AutoTokenizer.from_pretrained(config.read("LOCAL_MODEL_LLM"))
         model = AutoModelForSeq2SeqLM.from_pretrained(
-            config.read("MODEL_LLM"), cache_dir=config.read("CACHE_DIR"))
+            config.read("LOCAL_MODEL_LLM"), cache_dir=config.read("CACHE_DIR"))
 
         pipe = pipeline(
             "text2text-generation",
@@ -144,6 +145,9 @@ def get_llm_chain(llm_choice,prompt_template):
     '''
 
     global _llm
+
+    print("=======")
+    print(list(_llm.keys()))
 
     prompt_informed = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
 

@@ -30,7 +30,7 @@ print ("Using URL "+config.read("ES_URL"))
 
 # get the model we need to encode the text as vectors (in Elastic)
 logging.debug("Prep. Huggingface embedding setup")
-hf= HuggingFaceEmbeddings(model_name=config.read("MODEL_TRANSFORMERS"))
+hf= HuggingFaceEmbeddings(model_name=config.read("LOCAL_MODEL_TRANSFORMERS"))
 
 # Next we'll create our elasticsearch vectorstore in the langchain style:
 db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_DOCUMENTS"))
@@ -39,7 +39,7 @@ db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=confi
 
 
 ## get list of files in directory
-listFiles = os.listdir(config.read("SOURCE_PDF_DIR"))
+listFiles = os.listdir(config.read("SOURCE_DIR_FILES"))
 
 #filter to pdf
 listFiles=fnmatch.filter(listFiles, '*.pdf')
@@ -47,7 +47,7 @@ listFiles=fnmatch.filter(listFiles, '*.pdf')
 
 
 for file in listFiles :
-    path = config.read("SOURCE_PDF_DIR") + "/" + file
+    path = config.read("SOURCE_DIR_FILES") + "/" + file
     logging.debug("====== \n")
     logging.debug(path)
 
