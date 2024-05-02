@@ -10,10 +10,11 @@ def setup_copilot_token():
  
     try:
         token = pickle.load(open(PICKLE_STORAGE_DIR+"token-copilot.pickle", "rb"))
-        print ("Loaded sharepoint token from pickle file")
+        print ("Loaded copilot token from pickle file")
 
     except Exception:
-        token = input("Please enter the Sharepoint token. This will be saved in token-sharepoint.pickle.   ")
+        print("Details on how to find your Copilot token are at this page https://github.com/vsakkas/sydney.py")
+        token = input("Please enter the Copilot token. This will be saved in token-copilot.pickle")
         pickle.dump(token, open(PICKLE_STORAGE_DIR+"token-copilot.pickle", "wb"))
 
     return token

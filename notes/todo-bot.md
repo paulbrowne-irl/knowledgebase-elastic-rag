@@ -1,26 +1,41 @@
 
+# NEXT - bot.py
+
+* move to unit testable 
+	* define method
+
+* prepare for save back into excel
+	* data gather (response, links, question used)
+	* unit test prope
+
+* create excel loop
+	* 
+	* put in random timer
+
+* CYA on copilot
+	*  Get multple copilot keys
+	* save to pickle
+	* randomly
+
 # Next - injust.py
 * stub out main class - walker
 	* link in with pdf
 	* updgrade / repeat for other types of files
-		* core file and unit test
+		* word - using last weeks project
+		* pdf
+		* text
+		* email	
+	* core file and unit test
+
 * stub out data folderstruture
+	* some sort of .ini file
+		* keywords / topics
+		* name of owner ?? or keep that in 
+		[later] do I index emails?
 
 * current data examine
 
-# NEXT - bot.py
-* run and depug bot
-	* try print keys
-* move to unit testable 
-	* define method
-	* 
-* save back into excel
-* create excel loop
-	* put in random timer
 
-* Get multple copilot keys
-* save to pickle
-* randomly
 
 
 # Gather data

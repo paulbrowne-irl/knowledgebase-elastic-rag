@@ -36,7 +36,6 @@ def answer_questions_in_excel():
     qa_prompt=prompts.TEMPLATE_EMAIL_PROMPT
 
 
-
     # Find nearest match documents
     name_of_index_to_search= config.read("ES_INDEX_DOCUMENTS")
     similar_docs = rag_controller.get_nearest_match_documents(name_of_index_to_search, str(next_question.get("Question")))
@@ -52,9 +51,12 @@ def answer_questions_in_excel():
     llm_chain = rag_controller.get_llm_chain(name_of_llm_to_use, qa_prompt)
     informed_response = llm_chain.run(context=informed_context,question=str(next_question.get("Question")))
 
-
     logging.info("Response:"+informed_response)
 
+    # save into excel
+        # response
+        # themes
+        # relevant docs
 
 
 
