@@ -7,13 +7,14 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
     * Docker - standard install (either Docker Desktop, or via WSL-Ubunto)
     * Python (3.10 or higher) install in the usual way.
     * Install dependencies - in a terminal window
-        * Create environment _virtualenv venv_
-        * Activate environment _source venv/bin/activate_
-        * Install Python dependencies for this environment using the list provided _pip install -r requirements.txt_
+        * Create environment: _virtualenv venv_
+        * Activate environment: _source venv/bin/activate_
+        * Install Python dependencies for this environment: _pip install -r requirements.txt_
 
 # Integrate notes
 * running bot.py (and note differenct from app.py)
 * running ingest.py
+    * probably need to clear beforehand
 * templates
 * new folders  settings, data sample and output sample
 

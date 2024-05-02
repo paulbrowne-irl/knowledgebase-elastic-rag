@@ -37,7 +37,7 @@ def answer_questions_in_excel():
 
 
     # Find nearest match documents
-    name_of_index_to_search= config.read("ES_INDEX_DOCUMENTS")
+    name_of_index_to_search= config.read("ES_INDEX_KB")
     similar_docs = rag_controller.get_nearest_match_documents(name_of_index_to_search, str(next_question.get("Question")))
     logging.info("relevant docs:"+str(similar_docs))
 

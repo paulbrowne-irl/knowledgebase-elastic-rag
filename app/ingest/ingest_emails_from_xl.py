@@ -116,7 +116,7 @@ if __name__ == '__main__':
     hf= HuggingFaceEmbeddings(model_name=config.read("LOCAL_MODEL_TRANSFORMERS"))
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
-    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_DOCUMENTS"))
+    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
 
     #Set the Logging level. Change it to logging.INFO is you want just the important info
     logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)

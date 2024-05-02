@@ -115,7 +115,7 @@ def _get_datastore(index_name):
         if(index_name=='UECS Emails'):
             index_to_use=config.read("ES_INDEX_EMAILS")
         else:
-            index_to_use= config.read("ES_INDEX_DOCUMENTS")
+            index_to_use= config.read("ES_INDEX_KB")
 
 
         _db [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=config.read("ES_URL"), index_name=index_to_use,strategy=ApproxRetrievalStrategy())

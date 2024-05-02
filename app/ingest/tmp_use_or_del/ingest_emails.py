@@ -142,7 +142,7 @@ if __name__ == '__main__':
     hf= HuggingFaceEmbeddings(model_name=config.read("LOCAL_MODEL_TRANSFORMERS"))
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
-    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_DOCUMENTS"))
+    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
 
     #Handle TO Outlook, Logs and other objects we will need later
     OUTLOOK = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")

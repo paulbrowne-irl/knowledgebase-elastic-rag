@@ -33,7 +33,7 @@ logging.debug("Prep. Huggingface embedding setup")
 hf= HuggingFaceEmbeddings(model_name=config.read("LOCAL_MODEL_TRANSFORMERS"))
 
 # Next we'll create our elasticsearch vectorstore in the langchain style:
-db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_DOCUMENTS"))
+db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
 #db = ElasticsearchStore(es_url,hf,index_name=config.read("ES_INDEX)
 
 
@@ -93,4 +93,4 @@ for file in listFiles :
     # was from text
     #   db.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
 
-    db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=config.read("ES_INDEX_DOCUMENTS"))
+    db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
