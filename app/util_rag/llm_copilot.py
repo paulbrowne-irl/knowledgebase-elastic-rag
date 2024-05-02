@@ -72,7 +72,9 @@ class CustomLLM(LLM):
     async def call_copilot(self,prompt) -> str:
         async with SydneyClient() as sydney:
             
-            logging.debug("Awaiting response from Sydney.", end="", flush=True)
+            #logging.debug("Awaiting response from Sydney / Copilot", end="", flush=True)
+            logging.debug("Awaiting response from Sydney / Copilot")
+
 
             resp = await(sydney.ask(prompt))
 
