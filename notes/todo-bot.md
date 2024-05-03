@@ -1,6 +1,6 @@
 
 
-# Next - injust.py
+# Next - ingest.py
 
 * setup /mnt
 
@@ -11,7 +11,10 @@
 		* pdf
 		* text
 		* email	
+		* xls (special type or ignore)
 	* core file and unit test
+		* tests of different scenarios
+	* skip list
 
 * stub out data folderstruture
 	* some sort of .ini file
@@ -20,6 +23,10 @@
 		[later] do I index emails?
 
 * current data examine
+
+* extract topics (using ) and index topics 
+
+
 
 
 
@@ -33,25 +40,16 @@
 	* data gather (response, links, question used)
 	* unit test prope
 
+* get topics from emails
+
 * create excel loop
 	* put in random timer
 
 # NEXT CYA on copilot
-	*  Get multple copilot keys
+	* Get multple copilot keys
 	* save to pickle
-	* randomly
+	* randomly use
 
-
-# Gather data
-* GS
-* Sharepoint
-* SMR
-* rememver bits form emails send
-
-# Next index data
-* better ingestion app - using existing pdf and other readers
-* pull together sample data from public - for use on blacktlaop
-* tests of different scenarios
 
 # add todo
 * update notes below on what script does

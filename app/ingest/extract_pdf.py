@@ -1,7 +1,7 @@
 
 
 '''
-Simple script to extract targetted information from PDF
+Extract targetted information from PDF
 
 '''
 from tempfile import TemporaryDirectory
@@ -11,32 +11,21 @@ import pytesseract
 from pdf2image import convert_from_path
 from PIL import Image
 
-import docx2txt
 
 import logging
-import os
 import os.path
 
 import re
 from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
 
-import pandas as pd
-from pandas.core.frame import DataFrame
+
 from PyPDF2 import PdfReader
 
-import settings
 
 
-INPUT_DIR = "confidential-data"
-OUTPUT_DIR = "confidential-output"
 
 
-def _loop_extract_text_info_word(filename: str) -> str:
-    text = docx2txt.process(filename)
-
-    return text
-
-def _loop_extract_text_info_with_ocr(filename: str) -> str:
+def loop_extract_text_info_with_ocr(filename: str) -> str:
     '''
     Loop through and extract key information from the document as text - assumes not image
     Based on - https://www.geeksforgeeks.org/python-reading-contents-of-pdf-using-ocr-optical-character-recognition/
@@ -125,7 +114,7 @@ def _loop_extract_text_info_with_ocr(filename: str) -> str:
 
 
 
-def _loop_extract_text_info_no_ocr(filename: str) -> str:
+def loop_extract_text_info_no_ocr(filename: str) -> str:
     '''
     Loop through and extract key information from the document as text - assumes not image
     '''
@@ -149,83 +138,3 @@ def _loop_extract_text_info_no_ocr(filename: str) -> str:
 
     return pdf_text
 
-
-# Loop code to run from command line
-if __name__ == '__main__':
-
-    # setup logging
-    logger = logging.getLogger("")
-    logger.setLevel(logging.DEBUG)
-
-    # for testing - break after x goes
-    counter = 0
-
-    # create output dataframe
-    output_df = pd.DataFrame([], columns=[
-                             'Case', 'Size','Text'])
-
-    # iterate over files in directory
-    for filename in os.listdir(INPUT_DIR):
-
-        #reset document text
-        document_text=""
-
-        try:
-
-            if filename.lower().endswith(".pdf"):
-
-                logging.info("processing pdf file: "+filename)
-
-                # Get the next file in this directory
-                f = os.path.join(INPUT_DIR, filename)
-
-                # Extract information using two methodologies
-                document_text = _loop_extract_text_info_no_ocr(f)
-                document_text= document_text+_loop_extract_text_info_with_ocr(f)
-
-                #logging.info("Extracted Text:"+document_text)
-
-            elif filename.lower().endswith(".docx"):
-                logging.info("processing word file: "+filename)
-
-                # Get the next file in this directory
-                f = os.path.join(INPUT_DIR, filename)
-
-                # Extract _extract_text_stats information
-                document_text = _loop_extract_text_info_word(f)
-            else:
-                logging.info("non recognized format: "+filename)
-                document_text = "unable to extract transfer reason"
-
-
-            # break if this is set
-            counter += 1
-            if counter >= settings.MAX_NUMBER_OF_FILES:
-                logger.warning("ENDING AFTER MAX 7CYCLE:")
-                break
-
-        except Exception as problem:
-
-            # decide how to handle it
-            if (settings.CONTIUE_LOOP_AFTER_ERROR):
-                # Log the error and continue loop
-                logging.error(problem)
-
-            else:
-                # rethrow the error and end
-                raise problem
-        
-        finally:
-            # add this as new row to output
-            new_record = pd.DataFrame([{'Case':filename, 'Size':len(document_text), 'Text':document_text}])
-            output_df = pd.concat([output_df, new_record], ignore_index=True)
-            logger.info("Added:"+str(counter)+" :"+filename+" :length "+str(len(document_text)))
-            logger.info("=================================================/n")
-
-            output_df.to_excel(settings.OUTPUT_TEXT_ANALSYIS, index=False)
-
-        
-
-    # export information into the folder as Excel
-    logging.info("Exporting to file:"+settings.OUTPUT_TEXT_ANALSYIS)
-    output_df.to_excel(settings.OUTPUT_TEXT_ANALSYIS, index=False)
