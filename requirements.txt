@@ -5,10 +5,14 @@ requests
 
 accelerate
 
+pillow
+pytesseract 
+pdf2image
 pypdf2
 pypdf
 pycryptodome
 openpyxl
+docx2txt
 
 torch
 
@@ -22,3 +26,5 @@ langchain-elasticsearch
 sydney-py
 
 configargparse
+
+

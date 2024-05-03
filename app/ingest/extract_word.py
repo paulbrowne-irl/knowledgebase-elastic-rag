@@ -2,8 +2,8 @@
 from tempfile import TemporaryDirectory
 from pathlib import Path
 
-import pytesseract
-from pdf2image import convert_from_path
+#import pytesseract
+#from pdf2image import convert_from_path
 from PIL import Image
 
 import docx2txt
@@ -26,7 +26,7 @@ INPUT_DIR = "confidential-data"
 OUTPUT_DIR = "confidential-output"
 
 
-def _loop_extract_text_info_word(filename: str) -> str:
+def loop_extract_text_info_word(filename: str) -> str:
     text = docx2txt.process(filename)
 
     return text

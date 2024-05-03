@@ -24,13 +24,11 @@ from PyPDF2 import PdfReader
 
 
 
-
 def loop_extract_text_info_with_ocr(filename: str) -> str:
     '''
     Loop through and extract key information from the document as text - assumes not image
     Based on - https://www.geeksforgeeks.org/python-reading-contents-of-pdf-using-ocr-optical-character-recognition/
     '''
-
     # Path of the Input pdf
     PDF_file = Path(filename)
 
@@ -56,7 +54,7 @@ def loop_extract_text_info_with_ocr(filename: str) -> str:
 
 			# Create a file name to store the image
             filename = f"{tempdir}\page_{page_enumeration:03}.jpg"
-            logger.info("Storing tmp image:"+filename)
+            logging.info("Storing tmp image:"+filename)
 
 			# Declaring filename for each page of PDF as JPG
 			# For each page, filename will be:

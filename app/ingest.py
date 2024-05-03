@@ -32,11 +32,15 @@ def walk_directory_ingest_files(starting_dir,es_index):
 
         try:
 
-            # Check if this is a sub directory
-            TODO
-
+           
             # Get the next file in this directory
             f = os.path.join(starting_dir, filename)
+
+             # Check if this is a sub directory
+            if(os.path.isdir(f)):
+                logging.info("Recursive call to handle directory:"+f)
+                walk_directory_ingest_files(f,es_index)
+
 
             if filename.lower().endswith(".pdf"):
 
@@ -44,8 +48,8 @@ def walk_directory_ingest_files(starting_dir,es_index):
 
 
                 # Extract information using two methodologies
-                document_text = extract_pdf.loop_extract_text_info_no_ocr(f)
-                document_text= document_text+extract_pdf.loop_extract_text_info_with_ocr(f)
+                #document_text = extract_pdf.loop_extract_text_info_no_ocr(f)
+                #document_text= document_text+extract_pdf.loop_extract_text_info_with_ocr(f)
 
                 #logging.info("Extracted Text:"+document_text)
 
@@ -56,23 +60,17 @@ def walk_directory_ingest_files(starting_dir,es_index):
                 f = os.path.join(starting_dir, filename)
 
                 # Extract _extract_text_stats information
-                document_text = extract_word.loop_extract_text_info_word(f)
+                #document_text = extract_word.loop_extract_text_info_word(f)
 
             else:
                 logging.info("non recognized format: "+filename)
-                document_text = "unable to extract transfer reason"
+                #document_text = "unable to extract transfer reason"
 
-
-            # break if this is set
-            counter += 1
-            if counter >= settings.MAX_NUMBER_OF_FILES:
-                logger.warning("ENDING AFTER MAX 7CYCLE:")
-                break
 
         except Exception as problem:
 
             # decide how to handle it
-            if (settings.CONTIUE_LOOP_AFTER_ERROR):
+            if config.read_boolean("CONTIUE_LOOP_AFTER_ERROR"):
                 # Log the error and continue loop
                 logging.error(problem)
 
@@ -91,8 +89,8 @@ def walk_directory_ingest_files(starting_dir,es_index):
             #output_df.to_excel(settings.OUTPUT_TEXT_ANALSYIS, index=False)
 
         # add to index
-        TODO - extract meta data
-        TODO - add to index
+        #TODO - extract meta data
+        #TODO - add to index
         
 
 

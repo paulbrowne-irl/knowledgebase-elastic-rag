@@ -2,33 +2,37 @@
 
 # Next - ingest.py
 
-* setup /mnt
+* pull in more from scripts (note specific)
+	* 
 
-* stub out main class - walker
-	* link in with pdf
-	* updgrade / repeat for other types of files
-		* word - using last weeks project
-		* pdf
-		* text
-		* email	
-		* xls (special type or ignore)
-	* core file and unit test
-		* tests of different scenarios
-	* skip list
+* upgrade -? Meta data
+	* word
+	* pdf
 
-* stub out data folderstruture
+	* pdf ocr (config)
+* add file processing for
+	* msg (email)
+	* text
+	* xls (skip)
+	* see if generic python test
+* core file and unit test
+* add python types
+
+* Add
+	* read skip list for confi.ini
+	* TODO - extract meta data
+	* TODO - add to index
+	* extract topics (using ) and index topics 
+
+* Decide folderstruture
 	* some sort of .ini file
 		* keywords / topics
 		* name of owner ?? or keep that in 
-		[later] do I index emails?
 
-* current data examine
+* Pull overwrite example back into normal example\\
 
-* extract topics (using ) and index topics 
-
-
-
-
+# Later
+	* [later] map topics to emails / areas of interest
 
 
 # NEXT - bot.py
@@ -63,36 +67,13 @@
 * more filtering based on updated xl
 * categorisation of emails (to person best able to answer them)
 * loop and see if we can improve (langchain)
+* Llama 3
 
-
-
-# Next - ingestion scripts
-	# name of root folder to ingest from
 
 # Next - Infrastructure
 	# link to improvement form
 	# how part of power automate flow
 ==
-
-# constants
-	# name of inbox / sharepoint list
-	# name of follow up person
-	# name of folder to move completed emails to
-	# standard email template(s)
-		# in process
-		# “things that I know about”
-		# we monitor the email inbox – keep it professional 
-	# name of knowledgebase
-
-# Open Sharepoint list
-
-	# loop through all messages
-
-		# filter based on internal emails only
-		# filter based if there is an “auto response” text (i.e. don’t get stuck in loop)
-		# RAG 1 Find x amount of relevant documents
-		# RAG 2 Pass to AI to generate email
-		# Generate Email , save to draft
 
 
 ## play
