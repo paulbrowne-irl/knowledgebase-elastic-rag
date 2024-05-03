@@ -2,19 +2,19 @@
 
 # Next - ingest.py
 
-* pull in more from scripts (note specific)
-	* 
-
-* upgrade -? Meta data
-	* word
-	* pdf
-
-	* pdf ocr (config)
 * add file processing for
 	* msg (email)
-	* text
+	* text and generic - https://textract.readthedocs.io/en/stable/
 	* xls (skip)
 	* see if generic python test
+
+
+* upgrade -? Meta data
+	* pdf meta data from es_pdf_meta data
+		* word
+		* pdf
+		* pdf ocr (config)
+
 * core file and unit test
 * add python types
 
@@ -22,14 +22,15 @@
 	* read skip list for confi.ini
 	* TODO - extract meta data
 	* TODO - add to index
-	* extract topics (using ) and index topics 
+	* extract topics (using ) and index topics `
+		* * sentiment etc from calc_sentiment.py
 
 * Decide folderstruture
 	* some sort of .ini file
 		* keywords / topics
 		* name of owner ?? or keep that in 
 
-* Pull overwrite example back into normal example\\
+* Pull overwrite example back into normal example (for config files and sample data)
 
 # Later
 	* [later] map topics to emails / areas of interest
