@@ -24,7 +24,7 @@ from PyPDF2 import PdfReader
 
 
 
-def loop_extract_text_info_with_ocr(filename: str) -> str:
+def extract_text_info_with_ocr(filename: str) -> str:
     '''
     Loop through and extract key information from the document as text - assumes not image
     Based on - https://www.geeksforgeeks.org/python-reading-contents-of-pdf-using-ocr-optical-character-recognition/
@@ -112,7 +112,7 @@ def loop_extract_text_info_with_ocr(filename: str) -> str:
 
 
 
-def loop_extract_text_info_no_ocr(filename: str) -> str:
+def extract_text_info_no_ocr(filename: str) -> str:
     '''
     Loop through and extract key information from the document as text - assumes not image
     '''

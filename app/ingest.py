@@ -1,6 +1,7 @@
 import logging
 import os
 
+import ingest.extract_general as extract_general
 import ingest.extract_pdf as extract_pdf
 import ingest.extract_word as extract_word
 import settings.config as config
@@ -17,8 +18,6 @@ def walk_directory_ingest_files(starting_dir,es_index):
     '''
     logging.debug("directory:"+starting_dir)
     logging.debug("Will ingest to elastic index:"+es_index)
-
-
 
 
     # for testing - break after x goes
@@ -56,15 +55,12 @@ def walk_directory_ingest_files(starting_dir,es_index):
             elif filename.lower().endswith(".docx"):
                 logging.info("processing word file: "+filename)
 
-                # Get the next file in this directory
-                f = os.path.join(starting_dir, filename)
-
                 # Extract _extract_text_stats information
                 #document_text = extract_word.loop_extract_text_info_word(f)
 
             else:
-                logging.info("non recognized format: "+filename)
-                #document_text = "unable to extract transfer reason"
+                logging.info("using generic format: "+filename)
+                document_text = extract_general.extract_text_info_general(f)
 
 
         except Exception as problem:

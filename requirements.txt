@@ -1,3 +1,6 @@
+# Additional Textract install info : https://textract.readthedocs.io/en/stable/
+
+# pip install -r requirements.txt
 streamlit
 beautifulsoup4 
 tqdm 
@@ -13,6 +16,7 @@ pypdf
 pycryptodome
 openpyxl
 docx2txt
+textract
 
 torch
 
@@ -26,5 +30,7 @@ langchain-elasticsearch
 sydney-py
 
 configargparse
+
+
 
 
