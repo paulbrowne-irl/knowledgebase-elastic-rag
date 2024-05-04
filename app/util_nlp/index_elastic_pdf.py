@@ -19,14 +19,14 @@ import logging
 
 import app.settings.config as config
 
-# Index pdf data into elastic index_url =  config.read("ES_URL
+# Module level setup - should be run only once
 
 # Get the elastic URL from settings
 # If we can to allow for username and password we can update to something like:
 # es_url =  f"https://{username}:{password}@{endpoint}:9200"
 # noting that the username, assword and endpoint should valid
 es_url =  config.read("ES_URL")
-print ("Using URL "+config.read("ES_URL"))
+logging.info ("Using URL "+config.read("ES_URL"))
 
 # get the model we need to encode the text as vectors (in Elastic)
 logging.debug("Prep. Huggingface embedding setup")
@@ -37,26 +37,10 @@ db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=confi
 #db = ElasticsearchStore(es_url,hf,index_name=config.read("ES_INDEX)
 
 
-
-## get list of files in directory
-listFiles = os.listdir(config.read("SOURCE_DIR_FILES"))
-
-#filter to pdf
-listFiles=fnmatch.filter(listFiles, '*.pdf')
-
-
-
-for file in listFiles :
-    path = config.read("SOURCE_DIR_FILES") + "/" + file
-    logging.debug("====== \n")
-    logging.debug(path)
-
-    ## OLDER
-    #line = util.extract_pdf.readPDF(path)
-    #eModel = util.extract_pdf.prepareElasticModel(line, file)
-    
+def index_text_and_meta_data(index_name: str,filename: str,filecontents: str) -> None:
+        
     ## LANGCHAIN
-    loader = PyPDFLoader(path)
+    loader = PyPDFLoader(filename)
     pages = loader.load_and_split()
 
     # Adding metadata to documents
@@ -66,31 +50,31 @@ for file in listFiles :
         doc.metadata["product"] = "SEF"
         doc.metadata["format"] = "PDF"
         doc.metadata["type"] = "Application"
-        
+
+        logging.debug("ES Indexing:"+str(len(eModel.text)))
+        # was from text
+        #   db.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
+
+        db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
 
 
+#########
 
-    ## json method
-    '''	
-    logging.debug("Name : " + str(eModel))
+## json method
+'''	
+logging.debug("Name : " + str(eModel))
 
-    url = "http://localhost:9200/" + settings.ES_INDEX +"/_doc?pretty"
-    data = eModel.toJSON()
-    
-    response = requests.post(url, data=data,headers={
-                    'Content-Type':'application/json',
-                    'Accept-Language':'en'
+url = "http://localhost:9200/" + settings.ES_INDEX +"/_doc?pretty"
+data = eModel.toJSON()
 
-                })
-    logging.debug("Url : " + url)
-    logging.debug("Data : " + str(data))
+response = requests.post(url, data=data,headers={
+                'Content-Type':'application/json',
+                'Accept-Language':'en'
 
-    logging.debug("Request : " + str(requests))
-    logging.debug("Response : " + str(response))
-    '''
+            })
+logging.debug("Url : " + url)
+logging.debug("Data : " + str(data))
 
-    #logging.debug("ES Indexing:"+str(len(eModel.text)))
-    # was from text
-    #   db.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
-
-    db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
+logging.debug("Request : " + str(requests))
+logging.debug("Response : " + str(response))
+'''

@@ -2,15 +2,15 @@ import logging
 import sys
 import unittest
 
-import util_file.extract_general as extract_general
-import util_file.extract_pdf as extract_pdf
-import util_file.extract_word as extract_word
+import app.util_file.extract_general as extract_general
+import app.util_file.extract_pdf as extract_pdf
+import app.util_file.extract_word as extract_word
 
 sys.path.append('..')
 import app.settings.config as config
 
 
-class Test_XL(unittest.TestCase):
+class Test_File(unittest.TestCase):
    
     @classmethod
     def setUpClass(self):

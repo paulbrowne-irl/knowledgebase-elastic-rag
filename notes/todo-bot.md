@@ -1,14 +1,29 @@
 
 
+* NEXT - get text working again
+
 # Next - ingest.py
 
 * add file processing for
 
-	* pdf multiple pages (based on es_pdf_meta_data)
-	* meta data all files
+	* pdf and for txt (or just text)
+		* first pass tidy at both
+		* unit tests calling AND/ OR main method test
+
+	* write up both
+		* text - add file meta data
+		* pdf - add ?? from tex
+	* unit test both (Ccomplete)
+	* link in both to indjext
+
+
+	* meta data all files -> index
 		* based on  from es_pdf_meta_data
 		* anything we can add for msg/text/generic, word, pdf ?
-	* TODO - sentiment etc from calc_sentiment.py
+		
+	* TODO - from calc_sentiment.py
+		* get topics from emails using injest method
+		* sentiment etc f
 	* TODO - add to index
 		* main
 		* sentiment etc
@@ -24,7 +39,7 @@
 	* define method
 	* add (more) python types / safety (like on injest)
 
-* get topics from emails using injest method
+
 
 * write better questions
 	* sample
