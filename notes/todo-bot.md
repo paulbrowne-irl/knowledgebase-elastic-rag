@@ -3,25 +3,25 @@
 # Next - ingest.py
 
 * add file processing for
-	* msg (email)
-	* text and generic - https://textract.readthedocs.io/en/stable/
+
 	* xls (skip)
-	* see if generic python test
-
-
-* upgrade -? Meta data
+	* plug back in (pdf ext)
+		* refactor to test?
+		* refactor to types?
+	* filter to text
 	* pdf meta data from es_pdf_meta data
+		* msg /text and generic - 
 		* word
 		* pdf
 		* pdf ocr (config)
+	* TODO - extract other meta data
+	* TODO - add to index
 
 * core file and unit test
-* add python types
+* add python types / safety
 
 * Add
-	* read skip list for confi.ini
-	* TODO - extract meta data
-	* TODO - add to index
+	* read skip list for confi.ini´
 	* extract topics (using ) and index topics `
 		* * sentiment etc from calc_sentiment.py
 
@@ -34,6 +34,7 @@
 
 # Later
 	* [later] map topics to emails / areas of interest
+	* read info from key excel files (like questions or topics)
 
 
 # NEXT - bot.py
@@ -57,7 +58,7 @@
 
 
 # add todo
-* update notes below on what script does
+* move Textract to appraoch that will work on windows
 * NTH - iden
 
 # Improvements - later

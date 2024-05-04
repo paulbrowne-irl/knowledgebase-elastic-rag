@@ -41,7 +41,7 @@ def walk_directory_ingest_files(starting_dir,es_index):
                 walk_directory_ingest_files(f,es_index)
 
 
-            if filename.lower().endswith(".pdf"):
+            elif filename.lower().endswith(".pdf"):
 
                 logging.info("processing pdf file: "+filename)
 
@@ -58,9 +58,13 @@ def walk_directory_ingest_files(starting_dir,es_index):
                 # Extract _extract_text_stats information
                 #document_text = extract_word.loop_extract_text_info_word(f)
 
+            elif filename.lower().endswith(".xlsx"):
+                logging.info("skipping excel file: "+filename)
+
             else:
                 logging.info("using generic format: "+filename)
                 document_text = extract_general.extract_text_info_general(f)
+                logging.info("found text:"+str(document_text))
 
 
         except Exception as problem:
@@ -96,7 +100,7 @@ if __name__ == '__main__':
 
     #Set the Logging level. Change it to logging.INFO is you want just the important info
     #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
 
 
     # get config

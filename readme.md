@@ -17,6 +17,7 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
     * probably need to clear beforehand
 * templates
 * new folders  settings, data sample and output sample
+* install textract - https://textract.readthedocs.io/en/stable/
 
 
 # Running the application
