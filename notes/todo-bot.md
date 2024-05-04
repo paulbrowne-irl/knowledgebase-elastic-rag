@@ -1,6 +1,7 @@
 
 
 # Next - ingest.py
+* stub out extract unit tests
 
 * add file processing for
 
@@ -25,16 +26,22 @@
 	* extract topics (using ) and index topics `
 		* * sentiment etc from calc_sentiment.py
 
-* Decide folderstruture
-	* some sort of .ini file
-		* keywords / topics
-		* name of owner ?? or keep that in 
+
 
 * Pull overwrite example back into normal example (for config files and sample data)
 
 # Later
+	* update promot
+		* add topics
+		* remove dear sir / signed bot
 	* [later] map topics to emails / areas of interest
+		* decide how to list topics
 	* read info from key excel files (like questions or topics)
+
+* Final Decide folderstruture
+	* some sort of .ini file
+		* keywords / topics
+		* name of owner ?? or keep that in 
 
 
 # NEXT - bot.py
@@ -57,11 +64,14 @@
 	* randomly use
 
 
-# add todo
-* move Textract to appraoch that will work on windows
-* NTH - iden
+# Next - Infrastructure
+	# link to improvement form
+	# how part of power automate flow
 
-# Improvements - later
+
+# Improvements - later priority
+* move Textract to appraoch that will work on windows
+* NTH - identify topci
 * Prompts
 * email templates
 * links in email templates
@@ -69,29 +79,16 @@
 * more filtering based on updated xl
 * categorisation of emails (to person best able to answer them)
 * loop and see if we can improve (langchain)
+
+# Improvements - later NTH
 * Llama 3
-
-
-# Next - Infrastructure
-	# link to improvement form
-	# how part of power automate flow
-==
-
-
-## play
-
 * named entities
 * Topic analysis
-
-## Now problems I want to solve
-
-* Misfiled emails
-* unanswered emails
-* POS tagging (counties)
-
-## Tidy
-
-* failing when trying to output non email tasks
+* ?? Misfiled emails
+* ?? unanswered emails
+* POS tagging (counties but other keywords)
+* Postive or negative sentiment
+* LEO / County
 
 
 ## next Problems I want to solve
@@ -101,22 +98,12 @@
 * link email in chain (and recognize text)
 * suggest best email response (to draft?)
 * tag based on last person to answer client
-* Postive or negative sentiment
-* LEO / County
-* identify DA
+
+* identify most relevant colleauges
 * Save attachments / call rules?
 * identify topics / keywords
 
-## Open Questions and Features
 
-* Anywhere to run other than laptop
-* Incremental v full run tasks
-* Configure filter out of email
-* remove boiler plate email
-
-## Notes
-
-* Possible use Graph Library instead: https://github.com/O365/python-o365#mailbox
 
 
 
