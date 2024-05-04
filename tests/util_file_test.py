@@ -1,7 +1,9 @@
 import unittest
 import logging
 
-#import settings.config as config
+import app.util_file.extract_general as extract_general
+import app.util_file.extract_pdf as extract_pdf
+import app.util_file.extract_word as extract_word
 
 import sys
 sys.path.append('..')
@@ -20,14 +22,26 @@ class Test_XL(unittest.TestCase):
     def test_read_pdf(self):
 
         #check that we have a pandas dataframe, with one row plus header
-        self.fail("Not implemented yet")
+        document_text_1 = extract_pdf.loop_extract_text_info_no_ocr("data-sample/ingest/ie-a-brief-guide-to-forming-a-company.pdf")
+        self.assertIsNotNone(document_text_1)
+        print(document_text_1)
+
+        document_text_2= extract_pdf.loop_extract_text_info_with_ocr("data-sample/ingest/companyprofile.pdf")
+        self.assertIsNotNone(document_text_2)
+        print(document_text_2)
 
     def test_read_word(self):
 
-        #check that we have a pandas dataframe, with one row plus header
-        self.fail("Not implemented yet")
-    
+        # Extract _extract_text_stats information
+        document_text = extract_word.loop_extract_text_info_word("data-sample/ingest/word_file_sample.docx")
+        self.assertIsNotNone(document_text)
+        print(document_text)
+
+
     def test_read_email(self):
+
+        document_text = extract_general.extract_text_info_general("data-sample/ingest/sample_test_outlook_file.msg")
+        self.assertIsNotNone(document_text)
 
         #check that we have a pandas dataframe, with one row plus header
         self.fail("Not implemented yet")

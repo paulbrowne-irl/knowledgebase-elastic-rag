@@ -3,27 +3,22 @@
 # Next - ingest.py
 
 * unit tests
-	* get sample data (pdf, word, emails)
-	* stub out simple tests for each
+	* stub out simple tests for each (call main convertor, test text, print text)
 
 * add file processing for
 
 	* pdf multiple pages (based on es_pdf_meta_data)
 	* meta data all files
 		* based on  from es_pdf_meta_data
-		* msg /text and generic - 
-		* word
-		* pdf
-		* pdf ocr (config)
-	* TODO - extract other meta data
+		* anything we can add for msg/text/generic, word, pdf ?
 	* TODO - sentiment etc from calc_sentiment.py
 	* TODO - add to index
 		* main
 		* sentiment etc
 
 
-* Pull overwrite example back into normal example (for config files and sample data)
-
+* Comopare work and normal example (for config files and sample data)
+* run and review index
 
 # NEXT - bot.py
 

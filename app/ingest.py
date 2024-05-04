@@ -64,7 +64,7 @@ def walk_directory_ingest_files(starting_dir,es_index):
                 logging.info("processing word file: "+filename)
 
                 # Extract _extract_text_stats information
-                #document_text = extract_word.loop_extract_text_info_word(f)
+                document_text = extract_word.loop_extract_text_info_word(f)
             
             #########
             # Excel
