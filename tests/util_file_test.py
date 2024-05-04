@@ -6,7 +6,7 @@ import logging
 import sys
 sys.path.append('..')
 import app.settings.config as config
-import app.util_file.xl  as xl
+
 
 class Test_XL(unittest.TestCase):
    
@@ -17,13 +17,20 @@ class Test_XL(unittest.TestCase):
         logger = logging.getLogger("..")
         logger.setLevel(logging.DEBUG)
     
-    def test_read_filtered_xl(self):
-
-        xl_file = xl.read_next_unanswered_question("data-sample/question_and_answer/q_and_a_sample.xlsx")
-        logging.debug(xl_file)
+    def test_read_pdf(self):
 
         #check that we have a pandas dataframe, with one row plus header
-        self.assertEqual(2,len(xl_file.index))
+        self.fail("Not implemented yet")
+
+    def test_read_word(self):
+
+        #check that we have a pandas dataframe, with one row plus header
+        self.fail("Not implemented yet")
+    
+    def test_read_email(self):
+
+        #check that we have a pandas dataframe, with one row plus header
+        self.fail("Not implemented yet")
 
 if __name__ == '__main__':
     unittest.main()

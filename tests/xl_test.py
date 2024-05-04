@@ -5,8 +5,7 @@ import logging
 
 import sys
 sys.path.append('..')
-import app.settings.config as config
-import app.util_file.xl  as xl
+import util_file.xl_rw  as xl_rw
 
 class Test_XL(unittest.TestCase):
    
@@ -19,7 +18,7 @@ class Test_XL(unittest.TestCase):
     
     def test_read_filtered_xl(self):
 
-        xl_file = xl.read_next_unanswered_question("data-sample/question_and_answer/q_and_a_sample.xlsx")
+        xl_file = xl_rw.read_next_unanswered_question("data-sample/question_and_answer/q_and_a_sample.xlsx")
         logging.debug(xl_file)
 
         #check that we have a pandas dataframe, with one row plus header

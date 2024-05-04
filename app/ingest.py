@@ -1,11 +1,10 @@
 import logging
 import os
 
-import ingest.extract_general as extract_general
-import ingest.extract_pdf as extract_pdf
-import ingest.extract_word as extract_word
+import app.util_file.extract_general as extract_general
+import app.util_file.extract_pdf as extract_pdf
+import app.util_file.extract_word as extract_word
 import settings.config as config
-import util_file.xl  as xl
 
 
 '''
@@ -23,7 +22,13 @@ def walk_directory_ingest_files(starting_dir,es_index):
     # for testing - break after x goes
     counter = 0
 
+    # read config once
+    do_pdf_ocr= config.read_boolean("READ_PDF_USING_OCR")
+
+    #########
     # iterate over files in directory
+    # including sub directories
+    #########
     for filename in os.listdir(starting_dir):
 
         #reset document text
@@ -31,35 +36,50 @@ def walk_directory_ingest_files(starting_dir,es_index):
 
         try:
 
-           
             # Get the next file in this directory
             f = os.path.join(starting_dir, filename)
 
-             # Check if this is a sub directory
+            #########
+            # Check if this is a sub directory
+            #########
             if(os.path.isdir(f)):
                 logging.info("Recursive call to handle directory:"+f)
                 walk_directory_ingest_files(f,es_index)
 
-
+            #########
+            # pdf
+            #########
             elif filename.lower().endswith(".pdf"):
 
                 logging.info("processing pdf file: "+filename)
 
-
                 # Extract information using two methodologies
-                #document_text = extract_pdf.loop_extract_text_info_no_ocr(f)
-                #document_text= document_text+extract_pdf.loop_extract_text_info_with_ocr(f)
+                document_text = extract_pdf.loop_extract_text_info_no_ocr(f)
+
+                if(do_pdf_ocr):
+                    document_text= document_text+extract_pdf.loop_extract_text_info_with_ocr(f)
 
                 #logging.info("Extracted Text:"+document_text)
 
+            #########
+            # Word
+            #########
             elif filename.lower().endswith(".docx"):
                 logging.info("processing word file: "+filename)
 
                 # Extract _extract_text_stats information
                 #document_text = extract_word.loop_extract_text_info_word(f)
+            
+            #########
+            # Excel
+            #########
 
             elif filename.lower().endswith(".xlsx"):
                 logging.info("skipping excel file: "+filename)
+
+            #########
+            # General including emails
+            #########
 
             else:
                 logging.info("using generic format: "+filename)
