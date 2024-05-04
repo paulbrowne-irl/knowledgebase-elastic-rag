@@ -1,5 +1,5 @@
 import logging
-import util_file.xl  as xl
+import util_file.xl  as xl_rw
 import settings.config as config
 
 from templates import prompts as prompts
@@ -23,7 +23,7 @@ def answer_questions_in_excel():
     question_file_name=config.read("QUESTION_FILE_XLS")
 
     logging.debug("Reading next question needing answered from "+question_file_name)
-    next_question_df = xl.read_next_unanswered_question(question_file_name)
+    next_question_df = xl_rw.read_next_unanswered_question(question_file_name)
     next_question = next_question_df.to_dict()
 
     logging.debug("Question we are trying to answer:"+str(next_question.get("Question")))
