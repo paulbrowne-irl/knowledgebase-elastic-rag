@@ -4,23 +4,15 @@
 Extract targetted information from PDF
 
 '''
-from tempfile import TemporaryDirectory
+import logging
+import re
 from pathlib import Path
 
 import pytesseract
+from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
 from pdf2image import convert_from_path
 from PIL import Image
-
-
-import logging
-
-import re
-from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
-
-
 from PyPDF2 import PdfReader
-
-
 
 
 def extract_text_info_with_ocr(filename: str) -> str:

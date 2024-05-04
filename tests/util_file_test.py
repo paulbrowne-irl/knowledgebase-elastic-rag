@@ -1,11 +1,11 @@
-import unittest
 import logging
+import sys
+import unittest
 
 import app.util_file.extract_general as extract_general
 import app.util_file.extract_pdf as extract_pdf
 import app.util_file.extract_word as extract_word
 
-import sys
 sys.path.append('..')
 import app.settings.config as config
 

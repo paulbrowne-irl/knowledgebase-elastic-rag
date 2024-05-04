@@ -1,11 +1,11 @@
 import logging
 import os
 
+import settings.config as config
+
 import app.util_file.extract_general as extract_general
 import app.util_file.extract_pdf as extract_pdf
 import app.util_file.extract_word as extract_word
-import settings.config as config
-
 
 '''
 Simple gateway to the ingestion app

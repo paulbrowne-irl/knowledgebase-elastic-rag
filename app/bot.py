@@ -1,10 +1,10 @@
 import logging
-import util_file.xl  as xl_rw
-import settings.config as config
 
+import settings.config as config
 from templates import prompts as prompts
 from util_rag import rag_controller as rag_controller
 
+import app.util_file.xl as xl_rw
 
 '''
 Bot that uses Rag to respond to emails. It uses a Sharepoint / excel list to mediate emails (i.e. does not read and write them directly)

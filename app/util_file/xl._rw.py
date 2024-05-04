@@ -1,9 +1,6 @@
 import logging
-from pandas.core.frame import DataFrame
-
 
 import pandas as pd
-
 
 '''
 Util file to read and write excel file
