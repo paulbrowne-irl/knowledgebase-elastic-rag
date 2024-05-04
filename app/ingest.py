@@ -3,9 +3,9 @@ import os
 
 import settings.config as config
 
-import util_file.extract_general as extract_general
-import util_file.extract_pdf as extract_pdf
-import util_file.extract_word as extract_word
+import util.extract.extract_general as extract_general
+import util.extract.extract_pdf as extract_pdf
+import util.extract.extract_word as extract_word
 
 '''
 Simple gateway to the ingestion app

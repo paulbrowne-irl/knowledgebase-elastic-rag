@@ -2,11 +2,11 @@ import logging
 import sys
 import unittest
 
-import app.util_file.extract_general as extract_general
-import app.util_file.extract_pdf as extract_pdf
-import app.util_file.extract_word as extract_word
-import app.util_nlp.index_elastic_pdf as index_elastic_pdf
-import app.util_nlp.index_elastic_text as index_elastic_text
+import app.util.extract.extract_general as extract_general
+import app.util.extract.extract_pdf as extract_pdf
+import app.util.extract.extract_word as extract_word
+import app.util.index.index_elastic_pdf as index_elastic_pdf
+import app.util.index.index_elastic_text as index_elastic_text
 
 sys.path.append('..')
 import app.settings.config as config

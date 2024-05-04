@@ -1,19 +1,15 @@
+import fnmatch
 import logging
 import traceback
-from pandas.core.frame import DataFrame
 
-import config
-
-from tqdm import tqdm
+import settings.config as config
 from langchain.embeddings import HuggingFaceEmbeddings
-
-
-from langchain.vectorstores import ElasticVectorSearch
-from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
-from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
-
-import fnmatch
+from langchain.vectorstores import ElasticVectorSearch
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
+from pandas.core.frame import DataFrame
+from tqdm import tqdm
 
 '''
 Module level setup - should be called only once

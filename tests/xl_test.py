@@ -5,7 +5,7 @@ import logging
 
 import sys
 sys.path.append('..')
-import util_file.xl_rw  as xl_rw
+import util.office.xl_rw  as xl_rw
 
 class Test_XL(unittest.TestCase):
    

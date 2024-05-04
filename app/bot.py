@@ -2,8 +2,8 @@ import logging
 
 import settings.config as config
 from templates import prompts as prompts
-from util_file import xl_rw as xl_rw
-from util_rag import rag_controller as rag_controller
+from util.office import xl_rw as xl_rw
+from util.rag import rag_controller as rag_controller
 
 '''
 Bot that uses Rag to respond to emails. It uses a Sharepoint / excel list to mediate emails (i.e. does not read and write them directly)
