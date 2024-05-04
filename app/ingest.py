@@ -3,9 +3,9 @@ import os
 
 import settings.config as config
 
-import app.util_file.extract_general as extract_general
-import app.util_file.extract_pdf as extract_pdf
-import app.util_file.extract_word as extract_word
+import util_file.extract_general as extract_general
+import util_file.extract_pdf as extract_pdf
+import util_file.extract_word as extract_word
 
 '''
 Simple gateway to the ingestion app
@@ -50,10 +50,10 @@ def walk_directory_ingest_files(starting_dir,es_index):
                 logging.info("processing pdf file: "+filename)
 
                 # Extract information using two methodologies
-                document_text = extract_pdf.loop_extract_text_info_no_ocr(f)
+                document_text = extract_pdf.extract_text_info_no_ocr(f)
 
                 if(do_pdf_ocr):
-                    document_text= document_text+extract_pdf.loop_extract_text_info_with_ocr(f)
+                    document_text= document_text+extract_pdf.extract_text_info_with_ocr(f)
 
                 #logging.info("Extracted Text:"+document_text)
 
@@ -80,7 +80,7 @@ def walk_directory_ingest_files(starting_dir,es_index):
             else:
                 logging.info("using generic format: "+filename)
                 document_text = extract_general.extract_text_info_general(f)
-                logging.info("found text:"+str(document_text))
+                #logging.info("found text:"+str(document_text))
 
 
         except Exception as problem:

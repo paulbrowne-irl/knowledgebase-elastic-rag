@@ -2,9 +2,6 @@
 
 # Next - ingest.py
 
-* unit tests
-	* stub out simple tests for each (call main convertor, test text, print text)
-
 * add file processing for
 
 	* pdf multiple pages (based on es_pdf_meta_data)
@@ -58,6 +55,8 @@
 	* [later] map topics to emails / areas of interest
 		* decide how to list topics
 	* read info from key excel files (like questions or topics)
+
+* Get unit tests working agiain
 
 * Final Decide folderstruture
 	* some sort of .ini file
