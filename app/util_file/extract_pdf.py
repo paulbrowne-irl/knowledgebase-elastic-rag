@@ -13,7 +13,6 @@ from PIL import Image
 
 
 import logging
-import os.path
 
 import re
 from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE

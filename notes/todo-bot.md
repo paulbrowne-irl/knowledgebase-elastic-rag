@@ -1,62 +1,49 @@
 
 
 # Next - ingest.py
-* stub out extract unit tests
+
+* unit tests
+	* get sample data (pdf, word, emails)
+	* stub out simple tests for each
 
 * add file processing for
 
-	* xls (skip)
-	* plug back in (pdf ext)
-		* refactor to test?
-		* refactor to types?
-	* filter to text
-	* pdf meta data from es_pdf_meta data
+	* pdf multiple pages (based on es_pdf_meta_data)
+	* meta data all files
+		* based on  from es_pdf_meta_data
 		* msg /text and generic - 
 		* word
 		* pdf
 		* pdf ocr (config)
 	* TODO - extract other meta data
+	* TODO - sentiment etc from calc_sentiment.py
 	* TODO - add to index
-
-* core file and unit test
-* add python types / safety
-
-* Add
-	* read skip list for confi.ini´
-	* extract topics (using ) and index topics `
-		* * sentiment etc from calc_sentiment.py
-
+		* main
+		* sentiment etc
 
 
 * Pull overwrite example back into normal example (for config files and sample data)
 
-# Later
-	* update promot
-		* add topics
-		* remove dear sir / signed bot
-	* [later] map topics to emails / areas of interest
-		* decide how to list topics
-	* read info from key excel files (like questions or topics)
-
-* Final Decide folderstruture
-	* some sort of .ini file
-		* keywords / topics
-		* name of owner ?? or keep that in 
-
 
 # NEXT - bot.py
 
-* move to unit testable 
+* upgrade and tidy
+* 	* move to unit testable 
 	* define method
+	* add (more) python types / safety (like on injest)
+
+* get topics from emails using injest method
+
+* write better questions
+	* sample
+	* real folder (mounted onedrive)
+
+* create excel loop
+	* put in random timer
 
 * prepare for save back into excel
 	* data gather (response, links, question used)
 	* unit test prope
-
-* get topics from emails
-
-* create excel loop
-	* put in random timer
 
 # NEXT CYA on copilot
 	* Get multple copilot keys
@@ -68,6 +55,19 @@
 	# link to improvement form
 	# how part of power automate flow
 
+
+# Later - Iterate
+	* update promot
+		* add topics
+		* remove dear sir / signed bot
+	* [later] map topics to emails / areas of interest
+		* decide how to list topics
+	* read info from key excel files (like questions or topics)
+
+* Final Decide folderstruture
+	* some sort of .ini file
+		* keywords / topics
+		* name of owner ?? or keep that in 
 
 # Improvements - later priority
 * move Textract to appraoch that will work on windows

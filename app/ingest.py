@@ -18,10 +18,6 @@ def walk_directory_ingest_files(starting_dir,es_index):
     logging.debug("directory:"+starting_dir)
     logging.debug("Will ingest to elastic index:"+es_index)
 
-
-    # for testing - break after x goes
-    counter = 0
-
     # read config once
     do_pdf_ocr= config.read_boolean("READ_PDF_USING_OCR")
 
