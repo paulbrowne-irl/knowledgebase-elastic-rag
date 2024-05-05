@@ -8,15 +8,16 @@ requests
 
 accelerate
 
-pillow
-pytesseract 
+#pillow
+#pytesseract 
 pdf2image
 pypdf2
 pypdf
 pycryptodome
 openpyxl
 docx2txt
-textract
+# textract==1.6.1 # removed due to conflicts and will not work on windwos
+extract-msg
 
 torch
 
@@ -29,8 +30,10 @@ langchain_community
 langchain-elasticsearch
 sydney-py
 
-configargparse
-pandas
+tensorflow==2.16
+
+#configargparse
+pandas==2.2.2
 
 
 

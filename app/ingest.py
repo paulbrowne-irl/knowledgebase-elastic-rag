@@ -3,7 +3,7 @@ import os
 
 import settings.config as config
 
-import util.extract.extract_general as extract_general
+import app.util.extract.extract_email as extract_email
 import util.extract.extract_pdf as extract_pdf
 import util.extract.extract_word as extract_word
 
@@ -65,7 +65,15 @@ def walk_directory_ingest_files(starting_dir,es_index):
 
                 # Extract _extract_text_stats information
                 document_text = extract_word.loop_extract_text_info_word(f)
-            
+                
+           #########
+            # Outlook MSG
+            #########
+
+            elif filename.lower().endswith(".msg"):
+                logging.info("processing email format: "+filename)
+                document_text = extract_email.extract_text_info_general(f)
+        
             #########
             # Excel
             #########
@@ -73,14 +81,13 @@ def walk_directory_ingest_files(starting_dir,es_index):
             elif filename.lower().endswith(".xlsx"):
                 logging.info("skipping excel file: "+filename)
 
+ 
             #########
-            # General including emails
+            # Other files
             #########
 
             else:
-                logging.info("using generic format: "+filename)
-                document_text = extract_general.extract_text_info_general(f)
-                #logging.info("found text:"+str(document_text))
+                logging.info("Ignoring unknown format  format: "+filename)
 
 
         except Exception as problem:

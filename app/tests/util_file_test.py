@@ -2,7 +2,7 @@ import logging
 import sys
 import unittest
 
-import util.extract.extract_general as extract_general
+import app.util.extract.extract_email as extract_email
 import util.extract.extract_pdf as extract_pdf
 import util.extract.extract_word as extract_word
 
@@ -40,7 +40,7 @@ class Test_File(unittest.TestCase):
 
     def test_read_email(self):
 
-        document_text = extract_general.extract_text_info_general("data-sample/ingest/sample_test_outlook_file.msg")
+        document_text = extract_email.extract_text_info_general("data-sample/ingest/sample_test_outlook_file.msg")
         self.assertIsNotNone(document_text)
 
         #check that we have a pandas dataframe, with one row plus header

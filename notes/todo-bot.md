@@ -1,11 +1,14 @@
 
 
 * NEXT 
-* work through setup (textract and make notes)
+* work through setup
+* remove textract and get extract-msg working
+ (textract and make notes)
 
 * get tests working again
 	* first pass tidy at both
 	* unit tests calling AND/ OR main method test
+	* restore xl_test
 
 
 # Next - DATA CAPTURE INTO INDEX
