@@ -2,14 +2,13 @@ import logging
 import sys
 import unittest
 
-import app.util.extract.extract_general as extract_general
-import app.util.extract.extract_pdf as extract_pdf
-import app.util.extract.extract_word as extract_word
-import app.util.index.index_elastic_pdf as index_elastic_pdf
-import app.util.index.index_elastic_text as index_elastic_text
+import util.extract.extract_general as extract_general
+import util.extract.extract_pdf as extract_pdf
+import util.extract.extract_word as extract_word
+import util.index.index_elastic as index_elastic
 
 sys.path.append('..')
-import app.settings.config as config
+import settings.config as config
 
 
 class Test_Index(unittest.TestCase):
@@ -23,12 +22,12 @@ class Test_Index(unittest.TestCase):
     
     def test_index_text(self):
 
-        index_elastic_text.index_text_and_meta_data()
+        index_elastic.index_text_and_meta_data()
         self.fail("full test not implemented")
     
     def test_index_pdf(self):
 
-        index_elastic_text.index_text_and_meta_data()
+        index_elastic.index_pdf_and_meta_data()
         self.fail("full test not implemented")
 
 if __name__ == '__main__':

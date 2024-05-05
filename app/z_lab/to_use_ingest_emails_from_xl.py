@@ -6,7 +6,7 @@ from pandas.core.frame import DataFrame
 import pandas as pd
 
 
-import app.settings.config as config
+import settings.config as config
 
 
 from tqdm import tqdm

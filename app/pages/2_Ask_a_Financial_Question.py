@@ -5,7 +5,7 @@ import eland as ed
 
 from importlib import reload
 
-import app.settings.config as config
+import settings.config as config
 import app_sidebar as app_sidebar
 import util_rag.rag_controller
 

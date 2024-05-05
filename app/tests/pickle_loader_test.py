@@ -1,12 +1,12 @@
 import unittest
 import logging
-import app.settings.pickle_loader as pickle_loader
+import settings.pickle_loader as pickle_loader
 
 # allow imports from parent directory
 import sys
 
 
-class Test_PickleLoader(unittest.TestCase):
+class Test_Pickle_Loader(unittest.TestCase):
    
     @classmethod
     def setUpClass(self):

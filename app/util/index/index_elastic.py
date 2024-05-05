@@ -1,4 +1,5 @@
 import logging
+import os
 
 import settings.config as config
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -28,7 +29,8 @@ hf= HuggingFaceEmbeddings(model_name=model_transformers)
 # es_url =  f"https://{username}:{password}@{endpoint}:9200"
 # noting that the username, assword and endpoint should valid
 es_url =  config.read("ES_URL")
-print ("Using URL "+es_url)
+logging.debug ("Using Elastic URL "+es_url)
+
 
 
 
@@ -77,7 +79,55 @@ def index_text_and_meta_data(index_name: str,filename: str,filecontents: str,doc
 
     db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=index_name)
 
-        
+def index_pdf_and_meta_data(index_name: str,filename: str,filecontents: str) -> None:
+    '''
+    Index the specificed pdf (and document meta data) into the elastic index
+    '''
+ 
+
+    # Next we'll create our elasticsearch vectorstore in the langchain style:
+    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name)
+    #db = ElasticsearchStore(es_url,hf,index_name=config.read("ES_INDEX)
+    
+    ## LANGCHAIN
+    loader = PyPDFLoader(filename)
+    pages = loader.load_and_split()
+
+    # Adding metadata to documents
+    for i, doc in enumerate(pages):
+        doc.metadata["modified"] = os.path.getmtime(filename) 
+        doc.metadata["name"] = filename
+        doc.metadata["product"] = "SEF"
+        doc.metadata["format"] = "PDF"
+        doc.metadata["type"] = "Application"
+
+        logging.debug("ES Indexing:"+str(len(doc.text)))
+        # was from text
+        #   db.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
+
+        db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
+
+
+#########
+
+## json method
+'''	
+logging.debug("Name : " + str(eModel))
+
+url = "http://localhost:9200/" + settings.ES_INDEX +"/_doc?pretty"
+data = eModel.toJSON()
+
+response = requests.post(url, data=data,headers={
+                'Content-Type':'application/json',
+                'Accept-Language':'en'
+
+            })
+logging.debug("Url : " + url)
+logging.debug("Data : " + str(data))
+
+logging.debug("Request : " + str(requests))
+logging.debug("Response : " + str(response))
+'''       
 
 
 # simple code to test from command line
@@ -88,10 +138,14 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
 
 
-    #Walk folders
-    print("About to walk folder");
-    index_text_and_meta_data()
+    #try call
+    logging.info("About to test index pdf")
+    index_pdf_and_meta_data(index_name= "test",filename="file.pdf" ,filecontents="XYZ",doc_format="pdf")
 
+    #try call
+    logging.info("About to test index text")
+    index_text_and_meta_data(index_name= "test",filename="file.msg" ,filecontents="XYZ",doc_format="mail")
+    
     
 
 

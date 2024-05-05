@@ -1,8 +1,6 @@
 import unittest
 import logging
 
-#import settings.config as config
-
 import sys
 sys.path.append('..')
 import util.office.xl_rw  as xl_rw

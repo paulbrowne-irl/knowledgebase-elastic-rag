@@ -6,7 +6,7 @@ from pandas.core.frame import DataFrame
 import win32com.client
 
 
-import app.settings.config as config
+import settings.config as config
 
 
 from tqdm import tqdm
