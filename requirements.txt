@@ -20,7 +20,7 @@ textract
 
 torch
 
-eland 
+#eland 
 elasticsearch
 sentence_transformers 
 huggingface-hub 
@@ -30,6 +30,7 @@ langchain-elasticsearch
 sydney-py
 
 configargparse
+pandas
 
 
 

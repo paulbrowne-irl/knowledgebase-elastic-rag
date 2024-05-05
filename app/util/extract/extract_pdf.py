@@ -7,6 +7,7 @@ Extract targetted information from PDF
 import logging
 import re
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import pytesseract
 from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE

@@ -12,6 +12,9 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
         * Create environment: _virtualenv venv_
         * Activate environment: _source venv/bin/activate_
         * Install Python dependencies for this environment: _pip install -r requirements.txt_
+        * Note special care may be needed for textract
+            * see textract docs for installing on windows
+            * ## in terminal ## sudo apt install python-dev-is-python3 libxml2-dev libxslt1-dev antiword unrtf poppler-utils pstotext tesseract-ocr flac ffmpeg lame libmad0 libsox-fmt-mp3 sox libjpeg-dev swig
     * Setup index in Elastic (first time only)
         * start elastic (using docker compose up - see notes below)
         * open Kibana (see notes below)

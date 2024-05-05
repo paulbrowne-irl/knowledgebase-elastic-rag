@@ -1,19 +1,20 @@
 
 
-* NEXT - get tests working again
+* NEXT 
+* work through setup (textract and make notes)
+
+* get tests working again
 	* first pass tidy at both
 	* unit tests calling AND/ OR main method test
-	* merge both?
 
 
 # Next - DATA CAPTURE INTO INDEX
 
-* create dictionary of meta data to be added
+* ?? create dictionary of meta data to be added
 
 * add file processing for
 
 	* pdf and for txt (or just text)
-		* 
 
 	* write up both
 		* text - add file meta data
