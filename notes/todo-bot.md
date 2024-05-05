@@ -1,18 +1,24 @@
 
 
-* NEXT - get text working again
+* NEXT - get tests working again
+	* first pass tidy at both
+	* unit tests calling AND/ OR main method test
+	* merge both?
 
-# Next - ingest.py
+
+# Next - DATA CAPTURE INTO INDEX
+
+* create dictionary of meta data to be added
 
 * add file processing for
 
 	* pdf and for txt (or just text)
-		* first pass tidy at both
-		* unit tests calling AND/ OR main method test
+		* 
 
 	* write up both
 		* text - add file meta data
-		* pdf - add ?? from tex
+		* pdf - add ?? from text
+	* ensure we have a link back to source
 	* unit test both (Ccomplete)
 	* link in both to indjext
 
@@ -32,7 +38,12 @@
 * Comopare work and normal example (for config files and sample data)
 * run and review index
 
-# NEXT - bot.py
+# NEXT
+* Examine indexing results
+* Iterate
+
+
+# NEXT - BOT SEARCHING AGAINST INDEX
 
 * upgrade and tidy
 * 	* move to unit testable 

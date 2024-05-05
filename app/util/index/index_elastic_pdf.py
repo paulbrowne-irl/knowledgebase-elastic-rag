@@ -5,16 +5,11 @@
 from tqdm import tqdm
 from langchain.embeddings import HuggingFaceEmbeddings
 
-from getpass import getpass
-from pathlib import Path
 from langchain.vectorstores import ElasticVectorSearch
 from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
 from langchain_community.document_loaders import PyPDFLoader
 
-from pathlib import Path
-
 import os
-import fnmatch
 import logging
 
 import app.settings.config as config
@@ -32,26 +27,27 @@ logging.info ("Using URL "+config.read("ES_URL"))
 logging.debug("Prep. Huggingface embedding setup")
 hf= HuggingFaceEmbeddings(model_name=config.read("LOCAL_MODEL_TRANSFORMERS"))
 
-# Next we'll create our elasticsearch vectorstore in the langchain style:
-db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
-#db = ElasticsearchStore(es_url,hf,index_name=config.read("ES_INDEX)
-
 
 def index_text_and_meta_data(index_name: str,filename: str,filecontents: str) -> None:
         
+
+    # Next we'll create our elasticsearch vectorstore in the langchain style:
+    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name)
+    #db = ElasticsearchStore(es_url,hf,index_name=config.read("ES_INDEX)
+    
     ## LANGCHAIN
     loader = PyPDFLoader(filename)
     pages = loader.load_and_split()
 
     # Adding metadata to documents
     for i, doc in enumerate(pages):
-        doc.metadata["modified"] = os.path.getmtime(path) 
-        doc.metadata["name"] = file
+        doc.metadata["modified"] = os.path.getmtime(filename) 
+        doc.metadata["name"] = filename
         doc.metadata["product"] = "SEF"
         doc.metadata["format"] = "PDF"
         doc.metadata["type"] = "Application"
 
-        logging.debug("ES Indexing:"+str(len(eModel.text)))
+        logging.debug("ES Indexing:"+str(len(doc.text)))
         # was from text
         #   db.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
 

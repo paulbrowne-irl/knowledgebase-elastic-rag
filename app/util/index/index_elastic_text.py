@@ -1,6 +1,4 @@
-import fnmatch
 import logging
-import traceback
 
 import settings.config as config
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -8,8 +6,6 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import ElasticVectorSearch
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
-from pandas.core.frame import DataFrame
-from tqdm import tqdm
 
 '''
 Module level setup - should be called only once
@@ -23,30 +19,36 @@ text_splitter = CharacterTextSplitter(
 )
 
 # get the model we need to encode the text as vectors (in Elastic)
-print("Prep. Huggingface embedding setup")
-hf= HuggingFaceEmbeddings(model_name=settings.MODEL_TRANSFORMERS)
+model_transformers = config.read("LOCAL_MODEL_MODEL_TRANSFORMERS")
+logging.debug("Prep. Huggingface embedding setup using "+model_transformers)
+hf= HuggingFaceEmbeddings(model_name=model_transformers)
+
+# Get the elastic URL from settings
+# If we can to allow for username and password we can update to something like:
+# es_url =  f"https://{username}:{password}@{endpoint}:9200"
+# noting that the username, assword and endpoint should valid
+es_url =  config.read("ES_URL")
+print ("Using URL "+es_url)
 
 
 
-
-'''
-Walk folder recursively
-'''
-def index_text_and_meta_data(index_name: str,filename: str,filecontents: str) -> None:
+def index_text_and_meta_data(index_name: str,filename: str,filecontents: str,doc_format: str) -> None:
+    '''
+    Index the specificed text (and document meta data) into the elastic index
+    '''
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
-    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=settings.ES_INDEX_DOCUMENTS)
+    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name)
 
 
     ## Split our mail body into pages
 
-    pages = text_splitter.create_documents([str(mail.Body)])
+    pages = text_splitter.create_documents([filecontents])
 
 
     # Adding metadata to each of these document / pages
-    for i, doc in enumerate(pages):
-        doc.metadata['Parent']=parent_folder
-        doc.metadata['Subject']=str(mail.Subject)
+    for page_counter, doc in enumerate(pages):
+        '''        doc.metadata['Subject']=str(mail.Subject)
         doc.metadata['To']=str(mail.To)
         doc.metadata['CC']=str(mail.CC)
         doc.metadata['Recipients']=str(mail.Recipients)
@@ -65,42 +67,30 @@ def index_text_and_meta_data(index_name: str,filename: str,filecontents: str) ->
         doc.metadata['ReceivedTime']=str(mail.ReceivedTime)
         doc.metadata['LastModificationTime']=str(mail.LastModificationTime)
         doc.metadata['Categories']=str(mail.Categories)
+        '''
+
         
-        doc.metadata["product"] = "UECS"
-        doc.metadata["format"] = "Mail"
+        doc.metadata["product"] = "### from folder"
+        doc.metadata["format"] = doc_format
         doc.metadata["type"] = "Inquiry"
+        doc.metadata["page"] = page_counter
 
     db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=index_name)
 
-    print (f'processed message {counter}')
-
-
-
-
-           
         
 
 
 # simple code to test from command line
 if __name__ == '__main__':
     
-    ## Module level variables
-    counter=0
-
-    # Get the elastic URL from settings
-    # If we can to allow for username and password we can update to something like:
-    # es_url =  f"https://{username}:{password}@{endpoint}:9200"
-    # noting that the username, assword and endpoint should valid
-    es_url =  settings.ES_URL
-    print ("Using URL "+settings.ES_URL)
 
     #Set the Logging level. Change it to logging.INFO is you want just the important info
-    logging.basicConfig(filename=settings.LOG_FILE, encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(level=logging.DEBUG)
 
 
     #Walk folders
     print("About to walk folder");
-    _walk_folder("",root_folder)
+    index_text_and_meta_data()
 
     
 
