@@ -3,9 +3,11 @@ import os
 
 import settings.config as config
 
-import app.util.extract.extract_email as extract_email
+import util.extract.extract_email as extract_email
 import util.extract.extract_pdf as extract_pdf
 import util.extract.extract_word as extract_word
+import util.index.index_elastic as index_elastic
+
 
 '''
 Simple gateway to the ingestion app
@@ -20,6 +22,7 @@ def walk_directory_ingest_files(starting_dir,es_index):
 
     # read config once
     do_pdf_ocr= config.read_boolean("READ_PDF_USING_OCR")
+    es_index_name= config.read("ES_INDEX_KB")
 
     #########
     # iterate over files in directory
@@ -33,14 +36,14 @@ def walk_directory_ingest_files(starting_dir,es_index):
         try:
 
             # Get the next file in this directory
-            f = os.path.join(starting_dir, filename)
+            full_filepath = os.path.join(starting_dir, filename)
 
             #########
             # Check if this is a sub directory
             #########
-            if(os.path.isdir(f)):
-                logging.info("Recursive call to handle directory:"+f)
-                walk_directory_ingest_files(f,es_index)
+            if(os.path.isdir(full_filepath)):
+                logging.info("Recursive call to handle directory:"+full_filepath)
+                walk_directory_ingest_files(full_filepath,es_index)
 
             #########
             # pdf
@@ -50,10 +53,10 @@ def walk_directory_ingest_files(starting_dir,es_index):
                 logging.info("processing pdf file: "+filename)
 
                 # Extract information using two methodologies
-                document_text = extract_pdf.extract_text_info_no_ocr(f)
+                document_text = extract_pdf.extract_text_info_no_ocr(full_filepath)
 
                 if(do_pdf_ocr):
-                    document_text= document_text+extract_pdf.extract_text_info_with_ocr(f)
+                    document_text= document_text+extract_pdf.extract_text_info_with_ocr(full_filepath)
 
                 #logging.info("Extracted Text:"+document_text)
 
@@ -64,7 +67,7 @@ def walk_directory_ingest_files(starting_dir,es_index):
                 logging.info("processing word file: "+filename)
 
                 # Extract _extract_text_stats information
-                document_text = extract_word.loop_extract_text_info_word(f)
+                document_text = extract_word.loop_extract_text_info_word(full_filepath)
                 
            #########
             # Outlook MSG
@@ -72,7 +75,7 @@ def walk_directory_ingest_files(starting_dir,es_index):
 
             elif filename.lower().endswith(".msg"):
                 logging.info("processing email format: "+filename)
-                document_text = extract_email.extract_text_info_general(f)
+                document_text = extract_email.extract_text_info_general(full_filepath)
         
             #########
             # Excel
@@ -101,19 +104,14 @@ def walk_directory_ingest_files(starting_dir,es_index):
                 # rethrow the error and end
                 raise problem
         
-        finally:
-            pass
-            # add this as new row to output
-            #new_record = pd.DataFrame([{'Case':filename, 'Size':len(document_text), 'Text':document_text}])
-            #output_df = pd.concat([output_df, new_record], ignore_index=True)
-            #logger.info("Added:"+str(counter)+" :"+filename+" :length "+str(len(document_text)))
-            #logger.info("=================================================/n")
 
-            #output_df.to_excel(settings.OUTPUT_TEXT_ANALSYIS, index=False)
-
-        # add to index
-        #TODO - extract meta data
-        #TODO - add to index
+        # add to index if we have text
+        if(document_text==""):
+            logging.info("No text extracted to add to KB")
+        else:
+            logging.info("Indexing text in KB")
+            index_elastic.index(es_index_name,full_filepath,document_text)
+        
         
 
 

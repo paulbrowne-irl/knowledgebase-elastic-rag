@@ -1,15 +1,18 @@
 import logging
 import os
+from typing import List, Optional
 
 import settings.config as config
-from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.vectorstores import ElasticVectorSearch
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import ElasticVectorSearch
+from langchain_core.documents import Document
+
+#from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
 
 # Module level variables
-text_splitter = None
+character_text_splitter = None
 model_transformers = None
 hf = None
 es_url= None
@@ -19,7 +22,7 @@ def _do_setup():
         carry out initial setup if needed
     '''
 
-    global text_splitter
+    global character_text_splitter
     global model_transformers
     global hf
     global es_url
@@ -28,9 +31,10 @@ def _do_setup():
     if (hf is not None):
         return
 
+    logging.debug("carrying out setup of index module")
 
 
-    text_splitter = CharacterTextSplitter(
+    character_text_splitter = CharacterTextSplitter(
         separator="\n\n",
         chunk_size=1000,
         chunk_overlap=200,
@@ -39,7 +43,6 @@ def _do_setup():
     )
 
     # get the model we need to encode the text as vectors (in Elastic)
-    logging.info("=== trying to get key ===")
     model_transformers = config.read("LOCAL_MODEL_TRANSFORMERS")
     logging.debug("Prep. Huggingface embedding setup using "+model_transformers)
     hf= HuggingFaceEmbeddings(model_name=model_transformers)
@@ -49,85 +52,99 @@ def _do_setup():
     # es_url =  f"https://{username}:{password}@{endpoint}:9200"
     # noting that the username, assword and endpoint should valid
     es_url =  config.read("ES_URL")
-    logging.debug ("Using Elastic URL "+es_url)
+    logging.debug ("Using Elastic Service at URL "+es_url)
 
 
 
-
-def index_text_and_meta_data(index_name: str,filename: str,filecontents: str,doc_format: str) -> None:
+def _extract_pdf(filepath: str,metadatas: Optional[dict])-> List[Document]:
     '''
-    Index the specificed text (and document meta data) into the elastic index
+    Index the specificed pdf (and document meta data) into the elastic index
     '''
 
-    _do_setup()
 
-    # Next we'll create our elasticsearch vectorstore in the langchain style:
-    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name)
+    ## Langchain pdf splitting
+    logging.debug("Loading and splitting:"+filepath)
+    loader = PyPDFLoader(filepath)
+    pages = loader.load_and_split()
+
+    # Adding metadata to documents
+    for page_counter, doc in enumerate(pages):
+
+        #add known meta data
+        doc.metadata["modified"] = os.path.getmtime(filepath) 
+        doc.metadata["name"] = filepath
+        doc.metadata["format"] = "pdf"
+        doc.metadata["page"] = page_counter
+
+        # loop through optional dict and add to doc
+        for key, value in metadatas.items():
+            doc.metadata[str(key)] = value
+
+        logging.debug(f"Prep-d page {page_counter} text and meta - length"+str(len(doc.text)))
+
+    return pages
 
 
-    ## Split our mail body into pages
 
-    pages = text_splitter.create_documents([filecontents])
+
+
+def _extract_text(filepath: str,filecontents: str,metadatas: Optional[dict])-> List[Document]:
+    '''
+    Index the specificed pdf (and document meta data) into the elastic index
+    '''
+
+    ## Langchain text-char splitting
+    logging.debug("Loading and splitting:"+filepath)
+    pages = character_text_splitter.create_documents([filecontents])
 
 
     # Adding metadata to each of these document / pages
     for page_counter, doc in enumerate(pages):
-        '''        doc.metadata['Subject']=str(mail.Subject)
-        doc.metadata['To']=str(mail.To)
-        doc.metadata['CC']=str(mail.CC)
-        doc.metadata['Recipients']=str(mail.Recipients)
-        doc.metadata['RecievedByName']=str(mail.ReceivedByName)
-        doc.metadata['ConversationTopic']=str(mail.ConversationTopic)
-        doc.metadata['ConversationID']=str(mail.ConversationID)
-        doc.metadata['Sender']=str(mail.Sender)
-        doc.metadata['SenderName']=str(mail.SenderName)
-        doc.metadata['SenderEmailAddress']=str(mail.SenderEmailAddress)
-        doc.metadata['attachments.Count']=str(mail.attachments.Count)
-        doc.metadata['Size']=str(mail.Size)
-        doc.metadata['ConversationIndex']=str(mail.ConversationIndex)
-        doc.metadata['EntryID']=str(mail.EntryID)
-        doc.metadata['Parent']=str(mail.Parent)
-        doc.metadata['CreationTime']=str(mail.CreationTime)
-        doc.metadata['ReceivedTime']=str(mail.ReceivedTime)
-        doc.metadata['LastModificationTime']=str(mail.LastModificationTime)
-        doc.metadata['Categories']=str(mail.Categories)
-        '''
-
+  
+        file_extension = os.path.splitext(filepath)
+        doc.metadata["format"] = file_extension
         
-        doc.metadata["product"] = "### from folder"
-        doc.metadata["format"] = doc_format
-        doc.metadata["type"] = "Inquiry"
+        doc.metadata["modified"] = os.path.getmtime(filepath) 
+        doc.metadata["name"] = filepath
         doc.metadata["page"] = page_counter
 
-    db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=index_name)
+        # loop through optional dict and add to doc
+        for key, value in metadatas.items():
+            doc.metadata[str(key)] = value
 
-def index_pdf_and_meta_data(index_name: str,filename: str,filecontents: str) -> None:
+        logging.debug(f"Prep-d page {page_counter} text and meta - length"+str(len(doc.text)))
+
+    return pages
+
+
+
+
+
+def index(index_name: str,filepath: str,filecontents: str,meta_data = {}) -> None:
     '''
-    Index the specificed pdf (and document meta data) into the elastic index
+    Index the specified text (and document meta data) into the elastic index
     '''
- 
+    #setup if we're here first time
+    _do_setup()
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
-    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name)
-    #db = ElasticsearchStore(es_url,hf,index_name=config.read("ES_INDEX)
-    
-    ## LANGCHAIN
-    loader = PyPDFLoader(filename)
-    pages = loader.load_and_split()
+    es_index = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name)
 
-    # Adding metadata to documents
-    for i, doc in enumerate(pages):
-        doc.metadata["modified"] = os.path.getmtime(filename) 
-        doc.metadata["name"] = filename
-        doc.metadata["product"] = "SEF"
-        doc.metadata["format"] = "PDF"
-        doc.metadata["type"] = "Application"
 
-        logging.debug("ES Indexing:"+str(len(doc.text)))
-        # was from text
-        #   db.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
+    ## Split our document body into pages using specific methods
+    if filepath.lower().endswith(".pdf"):
+        
+        pages = _extract_pdf(filepath,meta_data)
+    else:
+        pages = _extract_text(filepath,filecontents,meta_data)
+      
 
-        db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
+    # save the page-text-metadata into the es index
+    es_index.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=index_name)
+
+    # was from text
+    # es_index.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
+
 
 
 #########
@@ -162,11 +179,11 @@ if __name__ == '__main__':
 
     #try call
     logging.info("About to test index pdf")
-    index_pdf_and_meta_data(index_name= "test",filename="file.pdf" ,filecontents="XYZ",doc_format="pdf")
+    index(index_name= "test",filename="file.pdf" ,filecontents="XYZ")
 
     #try call
     logging.info("About to test index text")
-    index_text_and_meta_data(index_name= "test",filename="file.msg" ,filecontents="XYZ",doc_format="mail")
+    index(index_name= "test",filename="file.msg" ,filecontents="XYZ")
     
     
 

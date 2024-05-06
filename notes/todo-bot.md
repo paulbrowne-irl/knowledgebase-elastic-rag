@@ -1,59 +1,22 @@
+# NEXT 
 
 
-* NEXT 
+* run unit tests until they pass
+	* pdf / word / msg 
 
-* run index test from command line
-	* python3 -m unittest tests.index_elastic_test
-	* #### look at how main app does it - resove community erro####
+* first run via ingest.py
 
-* then try unti test disocrver
+* run and review indexed data
+	* ensure we have a link back to source doc
 
-* TIDY
-* work through setup
-* remove textract and get extract-msg working
- (textract and make notes)
+# next session
 
-* get tests working again
-	* first pass tidy at both
-	* unit tests calling AND/ OR main method test
-	* restore xl_test
-	* restore util_file_test
-
-
-# Next - DATA CAPTURE INTO INDEX
-
-* ?? create dictionary of meta data to be added
-
-* add file processing for
-
-	* pdf and for txt (or just text)
-
-	* write up both
-		* text - add file meta data
-		* pdf - add ?? from text
-	* ensure we have a link back to source
-	* unit test both (Ccomplete)
-	* link in both to indjext
-
-
-	* meta data all files -> index
-		* based on  from es_pdf_meta_data
-		* anything we can add for msg/text/generic, word, pdf ?
 		
-	* TODO - from calc_sentiment.py
+	* Add from calc_sentiment.py
 		* get topics from emails using injest method
 		* sentiment etc f
-	* TODO - add to index
-		* main
-		* sentiment etc
-
 
 * Comopare work and normal example (for config files and sample data)
-* run and review index
-
-# NEXT
-* Examine indexing results
-* Iterate
 
 
 # NEXT - BOT SEARCHING AGAINST INDEX
@@ -62,7 +25,6 @@
 * 	* move to unit testable 
 	* define method
 	* add (more) python types / safety (like on injest)
-
 
 
 * write better questions
@@ -82,7 +44,7 @@
 	* randomly use
 
 
-# Next - Infrastructure
+# Next - Infrastructure (Silver, daytime)
 	# link to improvement form
 	# how part of power automate flow
 
@@ -94,8 +56,12 @@
 	* [later] map topics to emails / areas of interest
 		* decide how to list topics
 	* read info from key excel files (like questions or topics)
+	* any other meta data on docs
+	* any other doc types to ingst
 
 * Get unit tests working agiain
+
+* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
 
 * Final Decide folderstruture
 	* some sort of .ini file
@@ -103,14 +69,12 @@
 		* name of owner ?? or keep that in 
 
 # Improvements - later priority
-* move Textract to appraoch that will work on windows
-* NTH - identify topci
 * Prompts
 * email templates
 * links in email templates
 * langchain
 * more filtering based on updated xl
-* categorisation of emails (to person best able to answer them)
+* categorisation of emails (to person best able to answer them, based on topics
 * loop and see if we can improve (langchain)
 
 # Improvements - later NTH
