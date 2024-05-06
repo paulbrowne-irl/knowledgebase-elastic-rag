@@ -4,7 +4,7 @@ import os
 
 # allow imports from parent directory
 import sys
-sys.path.append('../util')
+#sys.path.append('../util')
 
 
 class Test_Rag_Controller(unittest.TestCase):
@@ -18,6 +18,6 @@ class Test_Rag_Controller(unittest.TestCase):
 
         #setup rag controller
     
-    def test_dummy(self):
-        self.assertGreater(1,0)
-        print("test completed")
+    def test_rag(self):
+        #self.fail("Tests not yet implemented")
+        logging.debug("test completed")

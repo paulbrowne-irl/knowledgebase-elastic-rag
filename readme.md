@@ -4,31 +4,73 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 
 * Instructions 
     * Checkout / download this project as a folder onto the host computer
-    * Docker - standard install (either Docker Desktop, or via WSL-Ubunto)
-    * Python (3.10 or higher) install in the usual way.
+
+    * Docker - standard install (either Docker Desktop, or via WSL-Ubuntu)
+        * You may also need to install the docker-compose plugin
+
+    * Python (3.12 or higher) install in the usual way.
+        * assuming pip and virtualenv is installed
+
     * Install dependencies - in a terminal window
-        * Create environment _virtualenv venv_
-        * Activate environment _source venv/bin/activate_
-        * Install Python dependencies for this environment using the list provided _pip install -r requirements.txt_
+        * Create environment: _virtualenv venv_
+        * Activate environment: _source venv/bin/activate_
+        * Install Python dependencies for this environment: _pip install -r requirements.txt_
+
+    * Setup index in Elastic (first time only)
+        * start elastic (using docker compose up - see notes below)
+        * open Kibana (see notes below)
+        * setup indices - open this page http://localhost:5601/app/management/data/index_management/indices
+            * test-can-del - used by unit tests
+            * knowledge_base - the main index used to store documents
+
+
+# Integrate notes
+
+
+* templates
+* new folders  settings, data sample and output sample
+* install textract - https://textract.readthedocs.io/en/stable/
+* creating a new index in elastic
+* quick explanation of what RAG is
+
+    # add to dev notes
+    * running tests - go to app folder in terminal
+        * single test: _python3 -m unittest tests.index_elastic_test_
+        * all tests: _python3 -m unittest tests_
+    
+    # Update section ingest
+    * running ingest.py
+        * probably need to clear beforehand
+
+    # New Section Bot
+    * running bot.py (and note differenct from app.py)
+    * dependencies (e.g. sppreashdeet)
+    * Why done this way?
+        * simple data store
+        * hosted in office 365
+
+    # add images
+    * running ES (screenshot)
+    * screenshot of portainer, kibana
 
 
 # Running the application
 
 * Start the Docker Infrastructure 
     * Open terminal window, navigate to home folder containing docker-compose.yml
-    * Start Elastic and Kibana using _docker-compose up_
+    * Start Elastic and Kibana using: _docker compose up_
 
 * Run the Web application
-    * open the app folder _cd app_
-    * run Streamlit app to interact with documents local llm _streamlit run poc.py_
+    * open the app folder: _cd app_
+    * run Streamlit app to interact with documents local llm: _streamlit run app.py_
 
 * Open the application in a Web Browser
     *  The are several web pages to interact with the application. Assuming of course you have already ingested documents (see notes below)
     * Staring with most used page:
         * App available on http://localhost:8501 - screenshot below, this has several business use cases.
-        * Elastic Search available on  http://localhost:9200 - this is useful for fine-tuning the search / similar documents being fed to the LLM.
-        * Kibana available on http://localhost:5601  - useful in managing the different "buckets" within the knowledgestore.
-        * Portainer Web Management for Docker is avaailable at https://localhost:9443 . This can safely be commented out in the docker-compose file but allows you to fine tune anything going wrong with the infrastructure.
+        * Kibana (Elastic Search Management tool) available on http://localhost:5601  - useful in managing the different "buckets" within the knowledgestore. ## admin and tweaking) ### this is useful for fine-tuning the search / similar documents being fed to the LLM.
+        * Elastic Search available on  http://localhost:9200 - end point url, useful for verifying the retieval / search service is running
+        * Portainer Web Management for Docker is available at https://localhost:9443 . This can safely be commented out in the docker-compose file but allows you to fine tune anything going wrong with the infrastructure.
 
 ![Screenshow of Streamlit Web App](images/screenshot.jpg "Screenshot of Web App")
 
@@ -36,7 +78,7 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 
 Before using a Knowledgebase you obviously need to import knowledge into it. Each dataset is different, some sample scripts that you might wish to use as a starting point are in the **app/ingest** folder.
 
-# Folders
+# Folders ## update #######
 * app - the main python web app
 * app/pages - sub pages in the webapp
 * app/ingest - python scripts to extract information and put it in the knowledgebase

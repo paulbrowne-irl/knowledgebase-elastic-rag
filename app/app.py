@@ -1,5 +1,5 @@
 import streamlit as st
-import util.rag_controller as rag_controller
+import util.rag.rag_controller as rag_controller
 
 st.set_page_config(
     page_title="Proof of concept",

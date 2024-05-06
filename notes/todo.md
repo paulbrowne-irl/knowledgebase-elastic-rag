@@ -6,6 +6,13 @@
 * Can be pushed to public
 * Multiple, clear use cases using basic architecture
 
+
+# AIM BOT
+
+* see todo-bot.md
+
+
+
 # AIM NEXT ITERATION
 
 ** Helpdesk using internal detailled info (like emails)
