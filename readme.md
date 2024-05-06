@@ -34,6 +34,11 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 * creating a new index in elastic
 * quick explanation of what RAG is
 
+    # add to dev notes
+    * running tests - go to app folder in terminal
+        * single test python3 -m unittest tests.index_elastic_test
+        * all tests python3 -m unittest tests
+
 
 # Running the application
 

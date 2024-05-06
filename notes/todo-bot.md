@@ -1,6 +1,14 @@
 
 
 * NEXT 
+
+* run index test from command line
+	* python3 -m unittest tests.index_elastic_test
+	* #### look at how main app does it - resove community erro####
+
+* then try unti test disocrver
+
+* TIDY
 * work through setup
 * remove textract and get extract-msg working
  (textract and make notes)
@@ -9,6 +17,7 @@
 	* first pass tidy at both
 	* unit tests calling AND/ OR main method test
 	* restore xl_test
+	* restore util_file_test
 
 
 # Next - DATA CAPTURE INTO INDEX
