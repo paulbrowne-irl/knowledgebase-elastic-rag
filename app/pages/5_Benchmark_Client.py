@@ -1,17 +1,17 @@
 import streamlit as st
-import sidebar
+import app_sidebar as app_sidebar
 
 
 from importlib import reload
 
-import util.rag_controller as rag_controller
+import util_rag.rag_controller as rag_controller
 
 
 #Window setup
 st.title('Benchmark my client against peers ...')
 
 #Fields on Sidebar
-reload(sidebar)
+reload(app_sidebar)
 
 #make sure setup gets run at start
 rag_controller.setup()

@@ -5,9 +5,11 @@ import eland as ed
 
 from importlib import reload
 
-import settings
-import sidebar
-import util.rag_controller
+import settings.config as config
+import app_sidebar as app_sidebar
+import util_rag.rag_controller
+
+import logging
 
 
 @st.cache_data(show_spinner=True)
@@ -140,14 +142,14 @@ def get_unique_cols():
 #@st.cache_data(show_spinner=True)
 def get_data(filter,max_docs):
 
-    print("Running Data Query filter = "+str(filter))
+    logging.debug("Running Data Query filter = "+str(filter))
 
     # Make the connection
-    es = Elasticsearch(settings.ES_URL)
+    es = Elasticsearch(config.read("ES_URL"))
     #es_info = es.info()
 
     #Get  main table    
-    sef_financials = ed.DataFrame(es, settings.ES_INDEX_FINANCIALS)
+    sef_financials = ed.DataFrame(es, config.read("ES_INDEX_FINANCIALS"))
     sef_financials = sef_financials[['Source','Row','Col',"Table","Value"]]
 
     #filter main table
@@ -180,10 +182,10 @@ base_colours= ["#fd0", "#f0f", "#04f"]
 st.title('Show me the numbers')
 
 #Fields on Sidebar
-reload(sidebar)
+reload(app_sidebar)
 
 #make sure setup gets run at start
-util.rag_controller.setup()
+util_rag.rag_controller.setup()
 
 
 with st.form('my_form'):

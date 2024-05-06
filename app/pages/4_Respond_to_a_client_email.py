@@ -1,9 +1,9 @@
 import streamlit as st
 
-import util.rag_controller as rag_controller
-import poc
-import sidebar
-import settings
+import util_rag.rag_controller as rag_controller
+import app as app
+import app_sidebar as app_sidebar
+import templates.prompts
 
 from importlib import reload
 
@@ -12,7 +12,7 @@ from importlib import reload
 st.title('Draft a client email')
 
 #Fields on Sidebar
-reload(sidebar)
+reload(app_sidebar)
 
 #make sure setup gets run at start
 rag_controller.setup()
@@ -20,7 +20,7 @@ rag_controller.setup()
 
 # reload previous prompot
 if 'prompt' not in st.session_state:
-    st.session_state['prompt'] = settings.TEMPLATE_EMAIL_PROMPT
+    st.session_state['prompt'] = templates.prompts.TEMPLATE_EMAIL_PROMPT
 
 
 #############
@@ -42,11 +42,11 @@ with st.form('my_form'):
     if submitted:
 
         # Find nearest match documents
-        similar_docs = rag_controller.get_nearest_match_documents(sidebar.document_search, input_text)
+        similar_docs = rag_controller.get_nearest_match_documents(app_sidebar.document_search, input_text)
    
         ## Ask Local LLM context informed prompt
         informed_context= similar_docs[0].page_content
-        llm_chain = rag_controller.get_llm_chain(sidebar.llm_to_use, st.session_state['prompt'])
+        llm_chain = rag_controller.get_llm_chain(app_sidebar.llm_to_use, st.session_state['prompt'])
         informed_response = llm_chain.run(context=informed_context,question=input_text)
 
         #update the UI with the answer

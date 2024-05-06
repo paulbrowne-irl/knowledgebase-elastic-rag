@@ -6,7 +6,7 @@ from pandas.core.frame import DataFrame
 import pandas as pd
 
 
-import settings
+import settings.config as config
 
 
 from tqdm import tqdm
@@ -44,7 +44,7 @@ def _loop_over_file(mail_df):
     )
 
     for index, row in mail_df.iterrows():
-        print(index,row)
+        logging.debug(index,row)
 
         try:
             #Increment the counter and test if we need to break
@@ -82,14 +82,14 @@ def _loop_over_file(mail_df):
                 doc.metadata["format"] = "Mail"
                 doc.metadata["type"] = "Inquiry"
 
-            db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX_EMAILS)
+            db.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=config.read("ES_INDEX_EMAILS"))
 
             print (f'processed message {index}')
 
 
         except Exception as e:
-            print("error when processing item - will continue")
-            print(e)
+            logging.debug("error when processing item - will continue")
+            logging.debug(e)
 
     
 
@@ -108,25 +108,25 @@ if __name__ == '__main__':
     # If we can to allow for username and password we can update to something like:
     # es_url =  f"https://{username}:{password}@{endpoint}:9200"
     # noting that the username, assword and endpoint should valid
-    es_url =  settings.ES_URL
-    print ("Using URL "+settings.ES_URL)
+    es_url =  config.read("ES_URL")
+    print ("Using URL "+config.read("ES_URL"))
 
     # get the model we need to encode the text as vectors (in Elastic)
-    print("Prep. Huggingface embedding setup")
-    hf= HuggingFaceEmbeddings(model_name=settings.MODEL_TRANSFORMERS)
+    logging.debug("Prep. Huggingface embedding setup")
+    hf= HuggingFaceEmbeddings(model_name=config.read("LOCAL_MODEL_TRANSFORMERS"))
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
-    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=settings.ES_INDEX_DOCUMENTS)
+    db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=config.read("ES_INDEX_KB"))
 
     #Set the Logging level. Change it to logging.INFO is you want just the important info
-    logging.basicConfig(filename=settings.LOG_FILE, encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
 
     #root_folder = .Folders.Item(1)
-    print("Getting handle to Excel with Emails");
-    email_table = pd.read_excel(settings.SOURCE_MAILS_IN_XL, index_col=0) 
+    logging.debug("Getting handle to Excel with Emails");
+    email_table = pd.read_excel(config.read("SOURCE_MAILS_IN_XL"), index_col=0) 
 
     #Walk folders
-    print("About to loop through emails ");
+    logging.debug("About to loop through emails ");
     _loop_over_file(email_table)
 
     

@@ -1,3 +1,6 @@
+# Additional Textract install info : https://textract.readthedocs.io/en/stable/
+
+# pip install -r requirements.txt
 streamlit
 beautifulsoup4 
 tqdm 
@@ -5,14 +8,20 @@ requests
 
 accelerate
 
+#pillow
+pytesseract 
+pdf2image
 pypdf2
 pypdf
 pycryptodome
 openpyxl
+docx2txt
+# textract==1.6.1 # removed due to conflicts and will not work on windwos
+extract-msg
 
 torch
 
-eland 
+#eland 
 elasticsearch
 sentence_transformers 
 huggingface-hub 
@@ -20,3 +29,11 @@ langchain
 langchain_community
 langchain-elasticsearch
 sydney-py
+
+tensorflow
+
+#configargparse
+pandas
+
+
+

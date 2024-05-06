@@ -19,11 +19,12 @@ from langchain_elasticsearch import ApproxRetrievalStrategy
 
 
 import logging
-import pickle
 
-import settings as settings
 
-import util.llm_copilot as llm_copilot
+import settings.config as config
+import settings.pickle_loader
+
+import util.rag.llm_copilot as llm_copilot
 
 
 #Module level constants
@@ -33,7 +34,7 @@ _llm=None
 token=None
 
 #Set the Logging level. Change it to logging.INFO is you want just the important info
-#logging.basicConfig(filename=settings.LOG_FILE, encoding='utf-8', level=logging.DEBUG)
+#logging.basicConfig(filename=config.read("LOG_FILE, encoding='utf-8', level=logging.DEBUG)
 
 def setup():
     '''
@@ -48,14 +49,8 @@ def _setup_copilot_token():
    
     global token
  
-    try:
-        token = pickle.load(open("token.pickle", "rb"))
-        print ("Loaded copilot token from pickle file")
+    token = settings.pickle_loader.setup_copilot_token()
 
-    except Exception:
-        token = input("Please enter the Copilot token. This will be saved in token.pickle. For details on how to find the token - https://github.com/vsakkas/sydney.py :  ")
-        pickle.dump(token, open("token.pickle", "wb"))
-    
 
 def _setup_embeddings(): 
     '''
@@ -64,11 +59,11 @@ def _setup_embeddings():
     global _embeddings
     
     if(_embeddings==None):
-        print("Setting up Embeddings")
+        logging.debug("Setting up Embeddings")
 
-        _embeddings = HuggingFaceEmbeddings(model_name=settings.MODEL_TRANSFORMERS)
+        _embeddings = HuggingFaceEmbeddings(model_name=config.read("LOCAL_MODEL_TRANSFORMERS"))
     else:
-        print("Embeddings already setup")
+        logging.debug("Embeddings already setup")
 
 
 def _setup_llm():
@@ -78,14 +73,15 @@ def _setup_llm():
 
     if(_llm==None):
         
-        print("Setting up LLMs - local")
+        logging.debug("Setting up LLMs - local")
         _llm={}
 
         # setup the LLM
-        print(f"Setting up model {settings.MODEL_LLM} ready to go")
-        tokenizer = AutoTokenizer.from_pretrained(settings.MODEL_LLM)
+        LOCAL_MODEL_LLM=config.read("LOCAL_MODEL_LLM")
+        logging.debug(f"Setting up model {LOCAL_MODEL_LLM}")
+        tokenizer = AutoTokenizer.from_pretrained(config.read("LOCAL_MODEL_LLM"))
         model = AutoModelForSeq2SeqLM.from_pretrained(
-            settings.MODEL_LLM, cache_dir=settings.CACHE_DIR)
+            config.read("LOCAL_MODEL_LLM"), cache_dir=config.read("CACHE_DIR"))
 
         pipe = pipeline(
             "text2text-generation",
@@ -96,13 +92,13 @@ def _setup_llm():
         _llm['Local LLM'] = HuggingFacePipeline(pipeline=pipe)
 
 
-        print("Setting up LLMs - copilot")
+        logging.debug("Setting up LLMs - copilot")
         _llm ['Copilot']= llm_copilot.CustomLLM(copilot_token=token)
 
 
     else:
 
-        print("LLM list already setup")
+        logging.debug("LLM list already setup")
 
 
 def _get_datastore(index_name):
@@ -113,20 +109,20 @@ def _get_datastore(index_name):
 
     if(index_name not in _db):
         
-        print("Setting up Datastore:"+index_name +" using embeddings:"+str(_embeddings))
+        logging.debug("Setting up Datastore:"+index_name +" using embeddings:"+str(_embeddings))
 
         
         if(index_name=='UECS Emails'):
-            index_to_use=settings.ES_INDEX_EMAILS
+            index_to_use=config.read("ES_INDEX_EMAILS")
         else:
-            index_to_use= settings.ES_INDEX_DOCUMENTS
+            index_to_use= config.read("ES_INDEX_KB")
 
 
-        _db [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=settings.ES_URL, index_name=index_to_use,strategy=ApproxRetrievalStrategy())
+        _db [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=config.read("ES_URL"), index_name=index_to_use,strategy=ApproxRetrievalStrategy())
         
 
     else:
-        print("Using cached Datastore ")
+        logging.debug("Using cached Datastore ")
 
     return  _db [index_name]
 
@@ -135,7 +131,7 @@ def get_nearest_match_documents(index_name:str,vector_search_text:str):
     '''
     Get the nearest match documents using vector search
     '''
-    print(f"Nearest Search index {index_name} matching against {vector_search_text}")
+    logging.debug(f"Nearest Search index {index_name} matching against {vector_search_text}")
 
     vector_search= _get_datastore(index_name)
 
@@ -149,6 +145,9 @@ def get_llm_chain(llm_choice,prompt_template):
     '''
 
     global _llm
+
+    print("=======")
+    print(list(_llm.keys()))
 
     prompt_informed = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
 

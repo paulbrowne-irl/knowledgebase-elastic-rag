@@ -1,0 +1,3 @@
+'''
+Helpful settings helper
+'''
