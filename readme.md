@@ -4,18 +4,18 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 
 * Instructions 
     * Checkout / download this project as a folder onto the host computer
+
     * Docker - standard install (either Docker Desktop, or via WSL-Ubuntu)
         * You may also need to install the docker-compose plugin
+
     * Python (3.12 or higher) install in the usual way.
         * assuming pip and virtualenv is installed
+
     * Install dependencies - in a terminal window
         * Create environment: _virtualenv venv_
         * Activate environment: _source venv/bin/activate_
         * Install Python dependencies for this environment: _pip install -r requirements.txt_
-        * ### REMOVE
-        * Note special care may be needed for textract
-            * see textract docs for installing on windows
-            * ## in terminal ## sudo apt install python-dev-is-python3 libxml2-dev libxslt1-dev antiword unrtf poppler-utils pstotext tesseract-ocr flac ffmpeg lame libmad0 libsox-fmt-mp3 sox libjpeg-dev swig
+
     * Setup index in Elastic (first time only)
         * start elastic (using docker compose up - see notes below)
         * open Kibana (see notes below)
@@ -25,9 +25,8 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 
 
 # Integrate notes
-* running bot.py (and note differenct from app.py)
-* running ingest.py
-    * probably need to clear beforehand
+
+
 * templates
 * new folders  settings, data sample and output sample
 * install textract - https://textract.readthedocs.io/en/stable/
@@ -38,7 +37,21 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
     * running tests - go to app folder in terminal
         * single test python3 -m unittest tests.index_elastic_test
         * all tests python3 -m unittest tests
+    
+    # Update section ingest
+    * running ingest.py
+        * probably need to clear beforehand
 
+    # New Section Bot
+    * running bot.py (and note differenct from app.py)
+    * dependencies (e.g. sppreashdeet)
+    * Why done this way?
+        * simple data store
+        * hosted in office 365
+
+    # add images
+    * running ES
+    
 
 # Running the application
 
