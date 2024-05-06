@@ -10,8 +10,6 @@
 * run and review indexed data
 	* ensure we have a link back to source doc
 
-* Compare work and normal example (for config files and sample data)
-
 
 # NEXT - BOT SEARCHING AGAINST INDEX
 

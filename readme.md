@@ -50,8 +50,9 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
         * hosted in office 365
 
     # add images
-    * running ES
-    
+    * running ES (screenshot)
+    * screenshot of portainer, kibana
+
 
 # Running the application
 
@@ -77,7 +78,7 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 
 Before using a Knowledgebase you obviously need to import knowledge into it. Each dataset is different, some sample scripts that you might wish to use as a starting point are in the **app/ingest** folder.
 
-# Folders
+# Folders ## update #######
 * app - the main python web app
 * app/pages - sub pages in the webapp
 * app/ingest - python scripts to extract information and put it in the knowledgebase
