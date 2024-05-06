@@ -1,4 +1,7 @@
-An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). Underlying technologies are choice of LLM (either local or Copilot), Elastic for Vector search, with a Streamlit UI. Also provides Notebooks and other Python Scripts to ingest data into the Knowledgebase.
+An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). Underlying technologies are choice of LLM (either local or Copilot), Elastic for Vector search, with a Streamlit UI. Also provides Python Scripts / Notebooks to ingest data into the Knowledgebase.
+
+* quick explanation of what RAG is ###
+* quick explanation of tools used and why choosen ###
 
 # Setup
 
@@ -6,12 +9,12 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
     * Checkout / download this project as a folder onto the host computer
 
     * Docker - standard install (either Docker Desktop, or via WSL-Ubuntu)
-        * You may also need to install the docker-compose plugin
+        * You may also need to install the docker-compose plugin 
 
     * Python (3.12 or higher) install in the usual way.
-        * assuming pip and virtualenv is installed
+        * assuming pip and virtualenv tools are also installed
 
-    * Install dependencies - in a terminal window
+    * Install dependencies - in a terminal window, at the project root
         * Create environment: _virtualenv venv_
         * Activate environment: _source venv/bin/activate_
         * Install Python dependencies for this environment: _pip install -r requirements.txt_
@@ -24,47 +27,44 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
             * knowledge_base - the main index used to store documents
 
 
-# Integrate notes
 
 
-* templates
-* new folders  settings, data sample and output sample
-* install textract - https://textract.readthedocs.io/en/stable/
-* creating a new index in elastic
-* quick explanation of what RAG is
-
-    # add to dev notes
-    * running tests - go to app folder in terminal
-        * single test: _python3 -m unittest tests.index_elastic_test_
-        * all tests: _python3 -m unittest tests_
-    
-    # Update section ingest
-    * running ingest.py
-        * probably need to clear beforehand
-
-    # New Section Bot
-    * running bot.py (and note differenct from app.py)
-    * dependencies (e.g. sppreashdeet)
-    * Why done this way?
-        * simple data store
-        * hosted in office 365
-
-    # add images
-    * running ES (screenshot)
-    * screenshot of portainer, kibana
-
-
-# Running the application
+# Starting the background instructure
 
 * Start the Docker Infrastructure 
     * Open terminal window, navigate to home folder containing docker-compose.yml
     * Start Elastic and Kibana using: _docker compose up_
 
+
+
+# Running the application
+
+* Run the ingest scripts
+    * Before using a Knowledgebase you obviously need to import knowledge into it. Each dataset is different, some sample scripts that you might wish to use as a starting point are in the **ingest.py** file. ### tidy
+    * ### how to run in python ###
+    * only need done once ##
+    * probably need to clear beforehand
+
+* Running the Bot
+    * What is the bot ##
+    * Update: (dependencies (e.g. sppreashdeet)
+    * Why done this way?
+        * simple data store
+        * hosted in office 365
+
+
 * Run the Web application
     * open the app folder: _cd app_
     * run Streamlit app to interact with documents local llm: _streamlit run app.py_
 
-* Open the application in a Web Browser
+![Screenshot of Streamlit Web App](images/screenshot.jpg "Screenshot of Web App")
+
+
+
+
+# Supporting Infrastructure
+
+* Open the supporting documents  in a Web Browser
     *  The are several web pages to interact with the application. Assuming of course you have already ingested documents (see notes below)
     * Staring with most used page:
         * App available on http://localhost:8501 - screenshot below, this has several business use cases.
@@ -72,13 +72,24 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
         * Elastic Search available on  http://localhost:9200 - end point url, useful for verifying the retieval / search service is running
         * Portainer Web Management for Docker is available at https://localhost:9443 . This can safely be commented out in the docker-compose file but allows you to fine tune anything going wrong with the infrastructure.
 
-![Screenshow of Streamlit Web App](images/screenshot.jpg "Screenshot of Web App")
 
-# Ingesting documents
+* add images ####
+    * running ES (screenshot from images folder link)
+    * kibana (screenshot from images folder link)
 
-Before using a Knowledgebase you obviously need to import knowledge into it. Each dataset is different, some sample scripts that you might wish to use as a starting point are in the **app/ingest** folder.
 
-# Folders ## update #######
+# Running Unit Tests
+* More info ###
+    * running tests - go to app folder in terminal
+        * single test: _python3 -m unittest tests.index_elastic_test_
+        * all tests: _python3 -m unittest tests_
+
+# Folders 
+*  update #######
+
+* templates ###
+* new folders settings, data sample and output sample ####
+
 * app - the main python web app
 * app/pages - sub pages in the webapp
 * app/ingest - python scripts to extract information and put it in the knowledgebase

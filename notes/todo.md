@@ -7,13 +7,116 @@
 * Multiple, clear use cases using basic architecture
 
 
-# AIM BOT
+# NEXT BOT TIDY
+* MAIN Branch
+	* tidy readme.md
+	* combine todo and 
 
-* see todo-bot.md
+
+* DEV Branch
+	* find except , add logging.exception() to it
+	* add type safety to bot
 
 
 
-# AIM NEXT ITERATION
+
+# NEXT - BOT SEARCHING AGAINST INDEX
+* CYA on copilot
+	* Get multple copilot keys
+	* save to pickle
+	* randomly use
+
+* run and review indexed data
+	* ensure we have a link back to source doc
+
+* upgrade and tidy
+	* 3 documents back	
+	* move to unit testable 
+	* define method
+	* add (more) python types / safety (like on injest)
+
+* write better questions
+	* read from silver (add to overwrite.conf)
+	* sample 
+	* real folder (mounted onedrive)
+
+* create excel loop
+	* put in random timer
+
+* prepare for save back into excel
+	* data gather (response, links, question used)
+	* unit test prope
+
+
+# SENTIMENT ADD
+	
+	* Add from calc_sentiment.py
+		* get topics from emails using injest method
+		* sentiment etc f
+
+
+# Next - Infrastructure (Silver, daytime)
+	# link to improvement form
+	# how part of power automate flow
+
+
+# Later - Iterate
+* update promot
+	* add topics
+	* remove dear sir / signed bot
+* [later] map topics to emails / areas of interest
+	* decide how to list topics
+	* read info from key excel files (like questions or topics)
+* Other Info
+	* any other meta data on docs
+	* any other doc types to ingst
+
+* Get unit tests working agiain
+
+* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
+
+* Final Decide folderstruture
+	* some sort of .ini file
+		* keywords / topics
+		* name of owner ?? or keep that in 
+
+# Improvements - later priority
+* Prompts
+* email templates
+* links in email templates
+* langchain
+* more filtering based on updated xl
+* categorisation of emails (to person best able to answer them, based on topics
+* loop and see if we can improve (langchain)
+* unit tests running
+
+
+# Improvements - later NTH
+* Llama 3
+* named entities
+* Topic analysis
+* ?? Misfiled emails
+* ?? unanswered emails
+* POS tagging (counties but other keywords)
+* Postive or negative sentiment
+* LEO / County
+
+
+## next Problems I want to solve
+* get list of attached filenames
+* Emails without a response
+* Emails filed in the wrong folder
+* link email in chain (and recognize text)
+* suggest best email response (to draft?)
+* tag based on last person to answer client
+
+* identify most relevant colleauges
+* Save attachments / call rules?
+* identify topics / keywords
+
+
+
+# AIM NEXT ITERATION+1
 
 ** Helpdesk using internal detailled info (like emails)
 ** Detailled financial analysis - 
@@ -36,20 +139,8 @@
 * nth doc at module level for ingest and others
 
 
-## NEEDED DOCS
 
-* note what expected setup elastic
-* note what exepect import financials
-* note how to run ingest pdf, ingest emails
  Tidy setup notes (if external needed)
-
-## NEEDED EMAILS
-
-* update settings for app
-* Import to elastic
-* try search
-* update example against new index
-* (EAR) tweak to get as many emails xtracted as possible
 
 
 ## NEEDED DATA
@@ -86,14 +177,10 @@
 
 
 # NEEDED - HOUSEKEEPING
-* ingest - replace from langchain_elasticsearch import ElasticsearchStore
-	* #from langchain_community.vectorstores.elasticsearch import 
-	* from langchain_elasticsearch import ApproxRetrievalStrategy
-* pull in logging
-* Resolve langchain warning messages
+
 * resolve Pandas warning message
 * Resolve token indices lentgth warning (shorter index)
-* Resolve warning - ElasticVectorSearch will be removed in a future release
+
 
 
 # IDEAS FUTURE ITERATION
@@ -106,13 +193,6 @@
 * how to implmenet filter of data https://python.langchain.com/docs/integrations/vectorstores/elasticsearch
 
 
-
-# TIDY LABS INTO INTO MAIN
-* add/index emails (outlook) - SAMPLE - answer an email
-* add/index financial SEF data - SAMPLE - extract infroamtion
-* add/index sample using grant payments - SAMPLE - answer information on processing
-* add/index SEF text data - SAMPLE -scheme review
-* add/index "companies like this" - SAMPLE - recruitment
 
 
 # ITERATE
