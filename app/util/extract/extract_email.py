@@ -3,20 +3,18 @@ import extract_msg
 
 def extract_text_email(filename: str) -> str:
     '''
-    Catch all method for extracting info using textract
+    extract information from email body
     '''
 
-    f = r'MS_Outlook_file.msg'  # Replace with yours
-    msg = extract_msg.Message(f)
-    msg_sender = msg.sender
-    msg_date = msg.date
-    msg_subj = msg.subject
-    msg_message = msg.body
+    # extract the info
+    msg = extract_msg.Message(filename)
+
+    # build up text - bringing the most useful info through first
+
+    text = msg.subject
+    text +=msg.body
+
+    #close file before return
     msg.close()
 
-    print('Sender: {}'.format(msg_sender))
-    print('Sent On: {}'.format(msg_date))
-    print('Subject: {}'.format(msg_subj))
-    print('Body: {}'.format(msg_message))
-    
-    return msg_message
+    return text
