@@ -35,8 +35,8 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 
     # add to dev notes
     * running tests - go to app folder in terminal
-        * single test python3 -m unittest tests.index_elastic_test
-        * all tests python3 -m unittest tests
+        * single test: _python3 -m unittest tests.index_elastic_test_
+        * all tests: _python3 -m unittest tests_
     
     # Update section ingest
     * running ingest.py

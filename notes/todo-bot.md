@@ -1,9 +1,6 @@
 # NEXT 
 
 
-* run unit tests until they pass - need to sort context
-	* try from command line
-
 * first run via ingest.py
 	* look at stack
 
@@ -20,7 +17,8 @@
 	* add (more) python types / safety (like on injest)
 
 * write better questions
-	* sample
+	* read from silver (add to overwrite.conf)
+	* sample 
 	* real folder (mounted onedrive)
 
 * create excel loop
@@ -76,6 +74,8 @@
 * more filtering based on updated xl
 * categorisation of emails (to person best able to answer them, based on topics
 * loop and see if we can improve (langchain)
+* unit tests running
+
 
 # Improvements - later NTH
 * Llama 3
