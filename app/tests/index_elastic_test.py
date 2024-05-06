@@ -28,14 +28,14 @@ class Test_Index(unittest.TestCase):
         }
 
         #try call
-        index_elastic.index(index_name= "test",filename="file.pdf" ,filecontents="",meta_data=test_meta)
+        index_elastic.index(index_name= "test",filepath="file.pdf" ,filecontents="",meta_data=test_meta)
         # no exception is success - update?
 
 
 
     def test_index_pdf(self):
 
-        index_elastic.index(index_name= "test",filename="file.msg" ,filecontents="XYZ",doc_format="msg")
+        index_elastic.index(index_name= "test",filepath="file.msg" ,filecontents="XYZ")
         # no exception is success - update?
 
 

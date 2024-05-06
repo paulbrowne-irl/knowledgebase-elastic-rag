@@ -1,31 +1,25 @@
 # NEXT 
 
 
-* run unit tests until they pass
-	* pdf / word / msg 
+* run unit tests until they pass - need to sort context
+	* try from command line
 
 * first run via ingest.py
+	* look at stack
 
 * run and review indexed data
 	* ensure we have a link back to source doc
 
-# next session
-
-		
-	* Add from calc_sentiment.py
-		* get topics from emails using injest method
-		* sentiment etc f
-
-* Comopare work and normal example (for config files and sample data)
+* Compare work and normal example (for config files and sample data)
 
 
 # NEXT - BOT SEARCHING AGAINST INDEX
 
 * upgrade and tidy
-* 	* move to unit testable 
+	* 3 documents back	
+	* move to unit testable 
 	* define method
 	* add (more) python types / safety (like on injest)
-
 
 * write better questions
 	* sample
@@ -42,6 +36,12 @@
 	* Get multple copilot keys
 	* save to pickle
 	* randomly use
+
+# SENTIMENT ADD
+	
+	* Add from calc_sentiment.py
+		* get topics from emails using injest method
+		* sentiment etc f
 
 
 # Next - Infrastructure (Silver, daytime)
