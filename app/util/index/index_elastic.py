@@ -80,7 +80,7 @@ def _extract_pdf(filepath: str,metadatas: Optional[dict])-> List[Document]:
         for key, value in metadatas.items():
             doc.metadata[str(key)] = value
 
-        logging.debug(f"Prep-d page {page_counter} text and meta - length"+str(len(doc.text)))
+        logging.debug(f"Prep-d page {page_counter} text and meta") # - length"+str(len(doc.text)))
 
     return pages
 
@@ -112,7 +112,7 @@ def _extract_text(filepath: str,filecontents: str,metadatas: Optional[dict])-> L
         for key, value in metadatas.items():
             doc.metadata[str(key)] = value
 
-        logging.debug(f"Prep-d page {page_counter} text and meta - length"+str(len(doc.text)))
+        logging.debug(f"Prep-d page {page_counter} text and meta - length")#+str(len(doc.text)))
 
     return pages
 

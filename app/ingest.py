@@ -75,7 +75,7 @@ def walk_directory_ingest_files(starting_dir,es_index):
 
             elif filename.lower().endswith(".msg"):
                 logging.info("processing email format: "+filename)
-                document_text = extract_email.extract_text_info_general(full_filepath)
+                document_text = extract_email.extract_text_email(full_filepath)
         
             #########
             # Excel
@@ -121,7 +121,7 @@ if __name__ == '__main__':
 
     #Set the Logging level. Change it to logging.INFO is you want just the important info
     #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.DEBUG)
 
 
     # get config
