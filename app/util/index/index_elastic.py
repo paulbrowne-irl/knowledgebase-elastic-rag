@@ -8,28 +8,48 @@ from langchain.vectorstores import ElasticVectorSearch
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
 
-'''
-Module level setup - should be called only once
-'''
-text_splitter = CharacterTextSplitter(
-    separator="\n\n",
-    chunk_size=1000,
-    chunk_overlap=200,
-    length_function=len,
-    is_separator_regex=False,
-)
+# Module level variables
+text_splitter = None
+model_transformers = None
+hf = None
+es_url= None
 
-# get the model we need to encode the text as vectors (in Elastic)
-model_transformers = config.read("LOCAL_MODEL_MODEL_TRANSFORMERS")
-logging.debug("Prep. Huggingface embedding setup using "+model_transformers)
-hf= HuggingFaceEmbeddings(model_name=model_transformers)
+def _do_setup():
+    '''
+        carry out initial setup if needed
+    '''
 
-# Get the elastic URL from settings
-# If we can to allow for username and password we can update to something like:
-# es_url =  f"https://{username}:{password}@{endpoint}:9200"
-# noting that the username, assword and endpoint should valid
-es_url =  config.read("ES_URL")
-logging.debug ("Using Elastic URL "+es_url)
+    global text_splitter
+    global model_transformers
+    global hf
+    global es_url
+
+    # check if we have been here before and can short circuit
+    if (hf is not None):
+        return
+
+
+
+    text_splitter = CharacterTextSplitter(
+        separator="\n\n",
+        chunk_size=1000,
+        chunk_overlap=200,
+        length_function=len,
+        is_separator_regex=False,
+    )
+
+    # get the model we need to encode the text as vectors (in Elastic)
+    logging.info("=== trying to get key ===")
+    model_transformers = config.read("LOCAL_MODEL_TRANSFORMERS")
+    logging.debug("Prep. Huggingface embedding setup using "+model_transformers)
+    hf= HuggingFaceEmbeddings(model_name=model_transformers)
+
+    # Get the elastic URL from settings
+    # If we can to allow for username and password we can update to something like:
+    # es_url =  f"https://{username}:{password}@{endpoint}:9200"
+    # noting that the username, assword and endpoint should valid
+    es_url =  config.read("ES_URL")
+    logging.debug ("Using Elastic URL "+es_url)
 
 
 
@@ -38,6 +58,8 @@ def index_text_and_meta_data(index_name: str,filename: str,filecontents: str,doc
     '''
     Index the specificed text (and document meta data) into the elastic index
     '''
+
+    _do_setup()
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
     db = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name)

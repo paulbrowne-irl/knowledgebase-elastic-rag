@@ -9,7 +9,7 @@ requests
 accelerate
 
 #pillow
-#pytesseract 
+pytesseract 
 pdf2image
 pypdf2
 pypdf
@@ -30,11 +30,10 @@ langchain_community
 langchain-elasticsearch
 sydney-py
 
-tensorflow==2.16
+tensorflow
 
 #configargparse
-pandas==2.2.2
-
+pandas
 
 
 

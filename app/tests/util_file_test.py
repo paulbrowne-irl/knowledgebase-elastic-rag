@@ -2,11 +2,11 @@ import logging
 import sys
 import unittest
 
-import app.util.extract.extract_email as extract_email
+import util.extract.extract_email as extract_email
 import util.extract.extract_pdf as extract_pdf
 import util.extract.extract_word as extract_word
 
-sys.path.append('..')
+#sys.path.append('..')
 import settings.config as config
 
 
