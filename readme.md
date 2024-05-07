@@ -37,7 +37,12 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). U
 
 
 
-# Running the application
+# Running the application(s)
+
+There are three main parts to the application; while they are linked, you will typically run only one 
+1. Ingest ## update
+1. Bot ## update
+1. App - UI ## update
 
 * Run the ingest scripts
     * Before using a Knowledgebase you obviously need to import knowledge into it. Each dataset is different, some sample scripts that you might wish to use as a starting point are in the **ingest.py** file. ### tidy

@@ -73,6 +73,9 @@
 
 * Get unit tests working agiain
 
+* Index other documents
+	* powerpoint
+
 * Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
 
 * Final Decide folderstruture
