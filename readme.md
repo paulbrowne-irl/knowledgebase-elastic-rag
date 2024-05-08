@@ -67,7 +67,7 @@ To run the ingest script
 * Activate the Python environment with dependencies you installed earelier: _source venv/bin/activate_
 * Run the script using _python ingest.py_
 
-In general, you will only need the ingest script once (or infrequently, if you wise to add more documents). For small datasets, it is probably easier to delete the Knoweldbase index (using Kibana - see link and screenshot above), then run the Ingest script again.
+In general, you will only need the ingest script once (or infrequently, if you wise to add more documents). For small datasets, it is probably easier to delete the Knowledgebase index (using Kibana - see link and screenshot above), then run the Ingest script again.
 
 ### Config
 * The starting folder (and other values) are set in _app/config/config.conf_ - please edit this or see the notes in the _app/config_ folder to customize configuration. This config file is shared for the ingest script, the Bot and the Application.
@@ -78,7 +78,7 @@ The application is a UI, easier to use. The Bot is semi-automatic and does many 
 
 ## Running the Bot
 
-Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be hosted online, this allows Intregation with Office 365 and Power Automate. e.g.
+Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be hosted online, this allows Integration with Office 365 and Power Automate. e.g.
 1. The User can ask a question on Microsoft Forms
 1. Power Automate saves this question in Excel.
 1. The Bot reads the question, saves the answer back in Excel.
@@ -117,8 +117,6 @@ To run the Web Application.
     * _app/tests_ - unit tests for the application
     * _app/unil_ - supporting scripts to implement data extraction, indexing to elastic, language process, reading-writing office files, implemeting RAG. More notes on these in the sub folders.
 
-
-* new folders settings, data sample and output sample ####
 
 ## Running Unit Tests
 To run the Unit tests
