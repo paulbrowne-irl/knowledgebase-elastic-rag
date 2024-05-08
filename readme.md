@@ -83,7 +83,7 @@ Typical flow for the Bot is to read a question from Excel, apply RAG techniques 
 1. Power Automate saves this question in Excel.
 1. The Bot reads the question, saves the answer back in Excel.
 1. Human can review the answer, update the line in Excel if they are happy with it.
-1. Power Automate can send back the answer.
+1. Power Automate can send back the answer to the original person using email.
 
 To run the bot.
 * Open the app folder: _cd app_ in a terminal window
