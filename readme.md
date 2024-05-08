@@ -1,7 +1,12 @@
 An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). Focuses on answering internal corporate queries (i.e. managing sensitive data, but also leveraging on a human-in-the-loop to both filter answers and provide feedback to learn) 
 
+## Three main parts to the application: 
+While they are linked, you will typically run only one 
+1. Ingest - scripts to load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
+1. Bot - scipts to answer questions passed to it (to /from Excel) using RAG techniques
+1. App - UI to answer questions in a back and forward way, focussing on 4 key business use cases.
 
-Underlying technologies are:
+## Underlying technologies:
 * Choice of Large Language Model (LLM) - either local or Microsoft Copilot.
 * Elastic Search as the Vector search engine, but also "Human Friendly" UI for colleagues to fine-tune the retrieval search results.
 * Langchain to integrate the above steps, but also allow for further extensions (choice of more LLMs, more document indexing, varying of steps in the response chain).
@@ -13,43 +18,38 @@ Underlying technologies are:
 # Setup
 
 Instructions for first time setup of the project:
-    * Checkout / download this project as a folder onto the host computer
+1. Checkout / download this project as a folder onto the host computer
 
-    * Docker - standard install (either Docker Desktop, or via WSL-Ubuntu)
-        * You may also need to install the docker-compose plugin 
+1. Install Docker - standard install (either Docker Desktop, or via WSL-Ubuntu).You may also need to install the docker-compose plugin 
 
-    * Python (3.12 or higher), install in the usual way.
-        * Assuming Python pip and virtualenv tools are also installed
+1. Install Python (3.12 or higher) in the usual way. Python pip and virtualenv tools are also needed.
 
-    * Install dependencies - in a terminal window, at the project root
-        * Create environment: _virtualenv venv_
-        * Activate environment: _source venv/bin/activate_
-        * Install Python dependencies for this environment: _pip install -r requirements.txt_
+1. Install Python dependencies - in a terminal window, at the project root
+    * Create environment: _virtualenv venv_
+    * Activate environment: _source venv/bin/activate_
+    * Install Python dependencies for this environment: _pip install -r requirements.txt_
 
-    * Setup index in Elastic (first time only):
-        * start Elastic (using docker compose up - see notes below):
-        * open Kibana (see notes below)
-        * setup indices - open this page http://localhost:5601/app/management/data/index_management/indices
-            * test-can-del - used by unit tests
-            * knowledge_base - the main index used to store documents
+1. Setup index in Elastic (first time only):
+    * Start Elastic (using docker compose up - see notes below):
+    * Open Kibana (see notes below)
+    * Setup indices - open this page  http://localhost:5601/app/management/data/index_management/indices
+        * _test-can-del_ - used by unit tests
+        * _knowledge_base_ - the main index used to store documents
 
-It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed)
+It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed), please refer to the Elastic / Kibana home page for instructions - https://www.elastic.co/
 
 
 # Starting the background instructure
 
-* Start the Docker Infrastructure 
-    * Open terminal window, navigate to home folder containing docker-compose.yml
-    * Start Elastic and Kibana using: _docker compose up_
+A Docker compose file is provided to make it easy to download and run the supporting infrastture (e.g. the Elastic Search engine). To start this Infrastructure using Docker:
+* Open terminal window, navigate to home folder containing docker-compose.yml
+* Start Elastic and Kibana using: _docker compose up_
 
 
 
 # Running the application(s)
 
-There are three main parts to the application; while they are linked, you will typically run only one 
-1. Ingest ## update
-1. Bot ## update
-1. App - UI ## update
+
 
 * Run the ingest scripts
     * Before using a Knowledgebase you obviously need to import knowledge into it. Each dataset is different, some sample scripts that you might wish to use as a starting point are in the **ingest.py** file. ### tidy
