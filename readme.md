@@ -1,32 +1,39 @@
-An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). Underlying technologies are choice of LLM (either local or Copilot), Elastic for Vector search, with a Streamlit UI. Also provides Python Scripts / Notebooks to ingest data into the Knowledgebase.
+An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). Focuses on answering internal corporate queries (i.e. managing sensitive data, but also leveraging on a human-in-the-loop to both filter answers and provide feedback to learn) 
 
-* quick explanation of what RAG is ###
-* quick explanation of tools used and why choosen ###
+
+Underlying technologies are:
+* Choice of Large Language Model (LLM) - either local or Microsoft Copilot.
+* Elastic Search as the Vector search engine, but also "Human Friendly" UI for colleagues to fine-tune the retrieval search results.
+* Langchain to integrate the above steps, but also allow for further extensions (choice of more LLMs, more document indexing, varying of steps in the response chain).
+* Python scripts to implement
+* (Optional) Streamlit for a user friendly UI 
+* (Optional) Read / Writes files to Excel 365 - allows for integration with wider Office 365 and Power Automate workflows.
+
 
 # Setup
 
-* Instructions 
+Instructions for first time setup of the project:
     * Checkout / download this project as a folder onto the host computer
 
     * Docker - standard install (either Docker Desktop, or via WSL-Ubuntu)
         * You may also need to install the docker-compose plugin 
 
-    * Python (3.12 or higher) install in the usual way.
-        * assuming pip and virtualenv tools are also installed
+    * Python (3.12 or higher), install in the usual way.
+        * Assuming Python pip and virtualenv tools are also installed
 
     * Install dependencies - in a terminal window, at the project root
         * Create environment: _virtualenv venv_
         * Activate environment: _source venv/bin/activate_
         * Install Python dependencies for this environment: _pip install -r requirements.txt_
 
-    * Setup index in Elastic (first time only)
-        * start elastic (using docker compose up - see notes below)
+    * Setup index in Elastic (first time only):
+        * start Elastic (using docker compose up - see notes below):
         * open Kibana (see notes below)
         * setup indices - open this page http://localhost:5601/app/management/data/index_management/indices
             * test-can-del - used by unit tests
             * knowledge_base - the main index used to store documents
 
-
+It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed)
 
 
 # Starting the background instructure
