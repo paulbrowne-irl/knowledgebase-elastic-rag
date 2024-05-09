@@ -78,7 +78,7 @@ def _loop_over_file(mail_df):
                 doc.metadata['LastModificationTime']=str(row['LastModificationTime'])
                 doc.metadata['Categories']=str(row['Categories'])
                 
-                doc.metadata["product"] = "UECS"
+                doc.metadata["product"] = "name-of-financial-product"
                 doc.metadata["format"] = "Mail"
                 doc.metadata["type"] = "Inquiry"
 
