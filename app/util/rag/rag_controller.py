@@ -112,11 +112,13 @@ def _get_datastore(index_name):
         logging.debug("Setting up Datastore:"+index_name +" using embeddings:"+str(_embeddings))
 
         
-        if(index_name=='UECS Emails'):
-            index_to_use=config.read("ES_INDEX_EMAILS")
-        else:
+        if(not index_name=='Knowledgebase'):
             index_to_use= config.read("ES_INDEX_KB")
 
+        else:
+             index_to_use=config.read("ES_INDEX_EMAILS")
+
+            
 
         _db [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=config.read("ES_URL"), index_name=index_to_use,strategy=ApproxRetrievalStrategy())
         
