@@ -3,9 +3,9 @@ An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). F
 
 ## Three main parts to the application: 
 While they are linked, you will typically run only one 
-1. Ingest - scripts to load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
-1. Bot - scipts to answer questions passed to it (to /from Excel) using RAG techniques
-1. App - UI to answer questions in a back and forward way, focussing on 4 key business use cases.
+1. Ingest - load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
+1. Bot - Answer questions passed to it (to /from Excel) using RAG techniques. Designed to be used as part of Power Automate or other automatic workflow.
+1. App - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases.
 
 ## Underlying technologies:
 * Choice of Large Language Model (LLM) - either local or Microsoft Copilot.
