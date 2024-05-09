@@ -1,6 +1,6 @@
 import streamlit as st
 
-import util_rag.rag_controller as rag_controller
+import util.rag.rag_controller as rag_controller
 import templates.prompts
 import app_sidebar as app_sidebar
 from importlib import reload
@@ -22,7 +22,7 @@ rag_controller.setup()
 # Main UI
 
 with st.form('my_form'):
-    input_text = st.text_area('Enter text:', 'Where is [company] located?')
+    input_text = st.text_area('Enter text:', 'Can a company apply for ... ?')
     submitted = st.form_submit_button('Submit')
     
 

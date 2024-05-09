@@ -9,7 +9,7 @@ will give us a common sidebar.
 
 try:
     llm_to_use = st.sidebar.selectbox( 'Language Model and Approach', ('Copilot','Local LLM'))
-    document_search = st.sidebar.selectbox( 'Source Information', ('SEF Cases','UECS Emails'))
+    document_search = st.sidebar.selectbox( 'Source Information', ('Knowledgebase','Other Source'))
 
     # POC reminder
     st.sidebar.info("Proof of concept")
