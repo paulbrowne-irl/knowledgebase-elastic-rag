@@ -102,7 +102,7 @@ def _walk_folder(parent_folder,this_folder):
                     doc.metadata['LastModificationTime']=str(mail.LastModificationTime)
                     doc.metadata['Categories']=str(mail.Categories)
                    
-                    doc.metadata["product"] = "UECS"
+                    doc.metadata["product"] = "name-of-financial-product"
                     doc.metadata["format"] = "Mail"
                     doc.metadata["type"] = "Inquiry"
 
