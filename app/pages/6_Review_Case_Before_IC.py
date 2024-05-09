@@ -3,14 +3,14 @@ import app_sidebar as app_sidebar
 
 from importlib import reload
 
-import util_rag.rag_controller as rag_controller
+import util.rag.rag_controller as rag_controller
 
 
 #Window setup
 st.title('Review my Case before IC ...')
 
 #Fields on Sidebar
-reload(app_sidebar)
+#reload(app_sidebar)
 
 #make sure setup gets run at start
 rag_controller.setup()

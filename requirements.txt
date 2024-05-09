@@ -21,7 +21,7 @@ extract-msg
 
 torch
 
-#eland 
+eland 
 elasticsearch
 sentence_transformers 
 huggingface-hub 

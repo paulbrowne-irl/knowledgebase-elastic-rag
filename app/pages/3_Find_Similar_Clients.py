@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-import util_rag.rag_controller as rag_controller
+import util.rag.rag_controller as rag_controller
 
 import app_sidebar as app_sidebar
 from importlib import reload
@@ -19,8 +19,9 @@ rag_controller.setup()
 #############
 # Main UI
 
+# pylint: disable=reportUndefinedVariable
 if 'num_docs' in locals():
-    st.info(f' Showing {num_docs} matches on meaning, not text', icon="ℹ️")
+    st.info(f' Showing {num_docs} matches on meaning, not text', icon="ℹ️")  
 
 
 
