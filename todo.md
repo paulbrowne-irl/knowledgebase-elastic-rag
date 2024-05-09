@@ -8,19 +8,17 @@
 
 
 # NEXT BOT TIDY
-* MAIN Branch
-	* tidy readme.md
-	* combine todo and 
 
 
-* DEV Branch
+* CODE UPDATES ON DEV
 	* find except , add logging.exception() to it
 	* add type safety to bot
+	* sanitze codebase ahead of public push
 
 
 
 
-# NEXT - BOT SEARCHING AGAINST INDEX
+# NEXT - UPGRADE BOT SEARCHING AGAINST INDEX
 * CYA on copilot
 	* Get multple copilot keys
 	* save to pickle
@@ -48,6 +46,7 @@
 	* unit test prope
 
 
+
 # SENTIMENT ADD
 	
 	* Add from calc_sentiment.py
@@ -72,6 +71,9 @@
 	* any other doc types to ingst
 
 * Get unit tests working agiain
+* Integration tests - using excel bot (to examine results to common questions)
+
+* Consider filtering on sentences
 
 * Index other documents
 	* powerpoint
