@@ -6,6 +6,11 @@
 * Can be pushed to public
 * Multiple, clear use cases using basic architecture
 
+# Tidy these into mai
+Add todo.md stopliat read from excel
+Add to todo.md - text injest, FAQ document
+Look at similar projects (send from firefox) - can we migrate to use that?
+
 
 # NEXT BOT TIDY
 
