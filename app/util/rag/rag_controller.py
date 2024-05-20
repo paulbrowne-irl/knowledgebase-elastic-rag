@@ -27,7 +27,6 @@ def setup():
     Initialise the system (if needed)
     Safe to call multiple types as checks if have been called prviously
     '''
-    _setup_copilot_token()
     _setup_vector_embeddings()
     _setup_llm()
 
@@ -69,7 +68,7 @@ def _setup_llm():
         logging.debug(f"Attmpting to setup LLM {MODEL_LLM}")
 
         if (MODEL_LLM =="llama3"):
-            llm = Ollama(model="llama3")
+            _llm_to_use = Ollama(model="llama3")
 
         elif (MODEL_LLM =="google/flan-t5-large"): 
 
@@ -91,6 +90,7 @@ def _setup_llm():
         else :
             logging.debug("Default LLM to copilot")
             _llm_to_use = llm_copilot.CustomLLM(copilot_token=token)
+            _setup_copilot_token()
 
 
     else:
@@ -138,7 +138,7 @@ def get_nearest_match_documents(index_name:str,vector_search_text:str):
     Get the nearest match documents using vector search
     '''
 
-    
+
     logging.debug(f"Nearest Search index {index_name} matching against {vector_search_text}")
 
     vector_search= _get_knowledgebase(index_name)
