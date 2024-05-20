@@ -14,6 +14,8 @@ Look at similar projects (send from firefox) - can we migrate to use that?
 
 # NEXT BOT TIDY
 
+* priory - using llamme3 in langcahing
+
 
 * CODE UPDATES ON DEV
 	* find except , add logging.exception() to it
