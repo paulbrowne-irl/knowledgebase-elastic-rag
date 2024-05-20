@@ -46,7 +46,7 @@ with st.form('my_form'):
    
         ## Ask Local LLM context informed prompt
         informed_context= similar_docs[0].page_content
-        llm_chain = rag_controller.get_llm_chain(app_sidebar.llm_to_use, st.session_state['prompt'])
+        llm_chain = rag_controller.get_llm_chain(st.session_state['prompt'])
         informed_response = llm_chain.run(context=informed_context,question=input_text)
 
         #update the UI with the answer

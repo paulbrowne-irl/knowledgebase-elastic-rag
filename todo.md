@@ -6,15 +6,11 @@
 * Can be pushed to public
 * Multiple, clear use cases using basic architecture
 
-# Tidy these into mai
-Add todo.md stopliat read from excel
-Add to todo.md - text injest, FAQ document
-Look at similar projects (send from firefox) - can we migrate to use that?
-
-
-# NEXT BOT TIDY
-
-* priory - using llamme3 in langcahing
+# Tidy these into maim
+* Add todo.md stopliat read from excel
+* Add to todo.md - text injest, FAQ document
+* Look at similar projects (send from firefox) - can we migrate to use that?
+* Integrate LLAMA3 from lab into RAG (and check settings)
 
 
 * CODE UPDATES ON DEV
