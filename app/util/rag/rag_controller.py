@@ -68,7 +68,7 @@ def _setup_llm():
         logging.debug(f"Attmpting to setup LLM {MODEL_LLM}")
 
         if (MODEL_LLM =="llama3"):
-            _llm_to_use = Ollama(model="llama3")
+            _llm_to_use = Ollama(model="llama3",stop=['<|eot_id|>'])
 
         elif (MODEL_LLM =="google/flan-t5-large"): 
 
@@ -89,8 +89,9 @@ def _setup_llm():
 
         else :
             logging.debug("Default LLM to copilot")
-            _llm_to_use = llm_copilot.CustomLLM(copilot_token=token)
             _setup_copilot_token()
+            _llm_to_use = llm_copilot.CustomLLM(copilot_token=token)
+            
 
 
     else:
