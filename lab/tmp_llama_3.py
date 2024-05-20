@@ -4,10 +4,12 @@ from langchain_community.llms import Ollama
 
 '''
 Based on example: https://medium.com/@vchan444/get-started-with-llama-3-using-ollama-and-langchain-in-a-few-minutes-1e2b84c25f8b
-https://ollama.com/download/linux   
-Can install Olloma using: curl -fsSL https://ollama.com/install.sh | sh
+From site https://ollama.com/download/linux  can install Olloma using: curl -fsSL https://ollama.com/install.sh | sh
 
 then ollama pull llama3
+
+make sure all python libs are installed: pip install -r requirements.txt
+
 '''
 
 

@@ -44,10 +44,8 @@ def answer_questions_in_excel():
     ## Ask Local LLM context informed prompt
     informed_context= similar_docs[0].page_content
 
-    name_of_llm_to_use=config.read("REMOTE_MODEL_LLM")
-    logging.debug("Name of LLM being used:"+name_of_llm_to_use)
 
-    llm_chain = rag_controller.get_llm_chain(name_of_llm_to_use, qa_prompt)
+    llm_chain = rag_controller.get_llm_chain(qa_prompt)
     informed_response = llm_chain.run(context=informed_context,question=str(next_question.get("Question")))
 
     logging.info("Response:"+informed_response)
