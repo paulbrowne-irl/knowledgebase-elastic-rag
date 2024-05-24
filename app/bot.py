@@ -16,13 +16,18 @@ So it relies on the following ...
 
 '''
 
+#get config values
+QUESTION_FILE_NAME=config.read("QUESTION_FILE_XLS")
+COL_TO_READ_QUESTION_IN_FILE=config.read("COL_TO_READ_QUESTION_IN_FILE")
+COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
+COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
+
 def answer_questions_in_excel():
 
     # read excel file (filtered)
-    question_file_name=config.read("QUESTION_FILE_XLS")
 
-    logging.debug("Reading next question needing answered from "+question_file_name)
-    next_question_df = xl_rw.read_next_unanswered_question(question_file_name)
+    logging.debug("Reading next question needing answered from "+QUESTION_FILE_NAME)
+    next_question_df = xl_rw.read_next_unanswered_question(QUESTION_FILE_NAME)
     next_question = next_question_df.to_dict()
 
     logging.debug("Question we are trying to answer:"+str(next_question.get("Question")))
