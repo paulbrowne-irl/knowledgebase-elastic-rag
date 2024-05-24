@@ -12,8 +12,18 @@
 * Look at similar projects (send from firefox) - can we migrate to use that?
 * Integrate LLAMA3 from lab into RAG (and check settings)
 
+# Add to doc
+* Llama3 setup - pull from lab
 
-* CODE UPDATES ON DEV
+
+
+# NEXT
+* first pass read queestions from sample file
+* loop and call llm
+
+
+
+# CODE UPDATES ON DEV
 	* find except , add logging.exception() to it
 	* add type safety to bot
 	* sanitze codebase ahead of public push
@@ -22,10 +32,6 @@
 
 
 # NEXT - UPGRADE BOT SEARCHING AGAINST INDEX
-* CYA on copilot
-	* Get multple copilot keys
-	* save to pickle
-	* randomly use
 
 * run and review indexed data
 	* ensure we have a link back to source doc
