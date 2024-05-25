@@ -4,14 +4,11 @@ import logging
 import settings.config as config
 import settings.pickle_loader
 import util.rag.llm_copilot as llm_copilot
-#from langchain.chains import LLMChain
 from langchain.chains.llm import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms import HuggingFacePipeline
 from langchain_community.llms import Ollama
-from langchain_community.vectorstores import ElasticVectorSearch
-#from langchain_community.vectorstores.elasticsearch import 
 from langchain_elasticsearch import ApproxRetrievalStrategy, ElasticsearchStore
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 
@@ -19,7 +16,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 _embeddings=None
 _kb_dict={}
 _llm_to_use=None
-token=None
+_token=None
 
 
 def setup():
@@ -35,9 +32,9 @@ def setup():
 
 def _setup_copilot_token(): 
    
-    global token
+    global _token
  
-    token = settings.pickle_loader.setup_copilot_token()
+    _token = settings.pickle_loader.setup_copilot_token()
 
 
 
@@ -90,7 +87,7 @@ def _setup_llm():
         else :
             logging.debug("Default LLM to copilot")
             _setup_copilot_token()
-            _llm_to_use = llm_copilot.CustomLLM(copilot_token=token)
+            _llm_to_use = llm_copilot.CustomLLM(copilot_token=_token)
             
 
 
