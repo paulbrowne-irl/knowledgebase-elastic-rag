@@ -6,20 +6,31 @@
 * Can be pushed to public
 * Multiple, clear use cases using basic architecture
 
-# Tidy these into maim
-* Add todo.md stopliat read from excel
-* Add to todo.md - text injest, FAQ document
-* Look at similar projects (send from firefox) - can we migrate to use that?
-* Integrate LLAMA3 from lab into RAG (and check settings)
+# Next sprint
+1. first pass read queestions from sample file
+1. loop and call llm
+1. update back to excel (fwith flag?)
+1. random time in loop
+
+
+* upgrade and tidy
+	* 3 documents back	
+	* ensure we have a link back to source doc
+	* move to unit testable 
+	* define method
+	* add (more) python types / safety (like on injest)
+
+
+* prepare for save back into excel
+	* data gather (response, links, question used)
+	* unit test prope
+
+
+
 
 # Add to doc
 * Llama3 setup - pull from lab
 
-
-
-# NEXT
-* first pass read queestions from sample file
-* loop and call llm
 
 
 
@@ -28,44 +39,23 @@
 	* add type safety to bot
 	* sanitze codebase ahead of public push
 
+# Tidy these into main list
+* Add todo.md stopliat read from excel
+* Add to todo.md - text injest, FAQ document
+* Look at similar projects (send from firefox) - can we migrate to use that?
+
 
 
 
 # NEXT - UPGRADE BOT SEARCHING AGAINST INDEX
 
-* run and review indexed data
-	* ensure we have a link back to source doc
-
-* upgrade and tidy
-	* 3 documents back	
-	* move to unit testable 
-	* define method
-	* add (more) python types / safety (like on injest)
-
-* write better questions
-	* read from silver (add to overwrite.conf)
-	* sample 
-	* real folder (mounted onedrive)
-
-* create excel loop
-	* put in random timer
-
-* prepare for save back into excel
-	* data gather (response, links, question used)
-	* unit test prope
+* run and review indexed data - 	
 
 
 
-# SENTIMENT ADD
-	
-	* Add from calc_sentiment.py
-		* get topics from emails using injest method
-		* sentiment etc f
 
 
-# Next - Infrastructure (Silver, daytime)
-	# link to improvement form
-	# how part of power automate flow
+
 
 
 # Later - Iterate
@@ -80,7 +70,6 @@
 	* any other doc types to ingst
 
 * Get unit tests working agiain
-* Integration tests - using excel bot (to examine results to common questions)
 
 * Consider filtering on sentences
 
@@ -93,6 +82,14 @@
 	* some sort of .ini file
 		* keywords / topics
 		* name of owner ?? or keep that in 
+
+# SENTIMENT ADD
+	
+	* Add from calc_sentiment.py
+		* get topics from emails using injest method
+		* sentiment etc f
+
+
 
 # Improvements - later priority
 * Prompts
