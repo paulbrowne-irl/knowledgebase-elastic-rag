@@ -8,8 +8,12 @@
 
 # Next sprint
 1. multi dir read
+
+	* restore code line 118
+
 1. first pass read queestions from sample file
 1. loop and call llm
+	* restore code
 1. update back to excel (fwith flag?)
 1. random time in loop
 1. add (more) python types / safety (like on injest)
