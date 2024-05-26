@@ -7,24 +7,23 @@
 * Multiple, clear use cases using basic architecture
 
 # Next sprint
+1. multi dir read
 1. first pass read queestions from sample file
 1. loop and call llm
 1. update back to excel (fwith flag?)
 1. random time in loop
+1. add (more) python types / safety (like on injest)
 
 
-* upgrade and tidy
-	* 3 documents back	
-	* ensure we have a link back to source doc
-	* move to unit testable 
-	* define method
-	* add (more) python types / safety (like on injest)
+# 2nd sprint
+1. config two sources on silver
 
-
-* prepare for save back into excel
-	* data gather (response, links, question used)
-	* unit test prope
-
+# 3rd sprint
+* 3 documents back	
+* ensure we have a link back to source doc
+* move to unit testable 
+* find except , add logging.exception() to it
+* sanitze codebase ahead of public push
 
 
 
@@ -33,15 +32,9 @@
 
 
 
-
-# CODE UPDATES ON DEV
-	* find except , add logging.exception() to it
-	* add type safety to bot
-	* sanitze codebase ahead of public push
-
 # Tidy these into main list
-* Add todo.md stopliat read from excel
-* Add to todo.md - text injest, FAQ document
+* stoplist read from excel
+* Atext injest, FAQ document
 * Look at similar projects (send from firefox) - can we migrate to use that?
 
 
