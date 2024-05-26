@@ -1,6 +1,7 @@
 
 import logging
 
+from app.util.rag import llm_echo
 import settings.config as config
 import settings.pickle_loader
 import util.rag.llm_copilot as llm_copilot
@@ -84,7 +85,7 @@ def _setup_llm():
             _llm_to_use = HuggingFacePipeline(pipeline=pipe)
 
         elif (MODEL_LLM =="test"): 
-            _llm_to_use = TestLLM()
+            _llm_to_use = llm_echo.EchoLLM()
 
         else :
             logging.debug("Default LLM to copilot")

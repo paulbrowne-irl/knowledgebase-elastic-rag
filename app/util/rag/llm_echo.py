@@ -15,7 +15,7 @@ import logging
 
 
 
-class TestLLM(LLM):
+class EchoLLM(LLM):
     '''
     Customer Langchain LLM to invote copilot
     '''
