@@ -1,5 +1,6 @@
 import logging
 
+from app.util.rag import llm_echo
 import settings.config as config
 from templates import prompts as prompts
 from util.office import xl_rw as xl_rw
@@ -23,6 +24,9 @@ COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
 COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
 
 def answer_questions_in_excel():
+    '''
+    Loop through the specified question file, attempting to answer the question files
+    '''
 
     # read excel file (filtered)
 
@@ -48,6 +52,9 @@ def answer_questions_in_excel():
 
     ## Ask Local LLM context informed prompt
     informed_context= similar_docs[0].page_content
+
+    #for testing only
+    rag_controller._llm_to_use = llm_echo.EchoLLM()
 
 
     llm_chain = rag_controller.get_llm_chain(qa_prompt)
