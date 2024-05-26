@@ -83,11 +83,13 @@ def _setup_llm():
             
             _llm_to_use = HuggingFacePipeline(pipeline=pipe)
 
+        elif (MODEL_LLM =="test"): 
+            _llm_to_use = TestLLM()
 
         else :
             logging.debug("Default LLM to copilot")
             _setup_copilot_token()
-            _llm_to_use = llm_copilot.CustomLLM(copilot_token=_token)
+            _llm_to_use = llm_copilot.CopilotLLM(copilot_token=_token)
             
 
 

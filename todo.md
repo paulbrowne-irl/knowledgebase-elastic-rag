@@ -1,14 +1,12 @@
 # AIM
-
 * RAG that works standalone
-* Works as business demo
-* allows deep dive 
+* Works as business demo but allows deep dive 
 * Can be pushed to public
 * Multiple, clear use cases using basic architecture
 
 # Next sprint
-
-
+1. setup loop
+1. test llm
 1. first pass read queestions from sample file
 1. loop and call llm
 	* restore code
