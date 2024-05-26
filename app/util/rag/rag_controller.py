@@ -99,7 +99,7 @@ def _setup_llm():
 
 
 
-def _get_knowledgebase(index_name):
+def _get_knowledgebase(index_name:str)->dict:
     '''
     Setup Handle to the external RAG Datastore
     '''
@@ -145,7 +145,7 @@ def get_nearest_match_documents(index_name:str,vector_search_text:str):
 
 
 
-def get_llm_chain(prompt_template):
+def get_llm_chain(prompt_template:str)->LLMChain:
     '''
     Generate the LLM Chain
     '''
