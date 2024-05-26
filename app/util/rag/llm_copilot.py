@@ -27,7 +27,7 @@ from sydney import SydneyClient
 # note use of annotations
 
 
-class CustomLLM(LLM):
+class CopilotLLM(LLM):
     '''
     Customer Langchain LLM to invote copilot
     '''
