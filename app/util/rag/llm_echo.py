@@ -17,9 +17,8 @@ import logging
 
 class EchoLLM(LLM):
     '''
-    Customer Langchain LLM to invote copilot
+    Custom Langchain LLM to echo back input
     '''
-    copilot_token: str
 
     @property
     def _llm_type(self) -> str:
