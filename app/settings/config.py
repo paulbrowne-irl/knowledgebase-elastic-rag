@@ -38,3 +38,14 @@ def read_boolean (ConfigKey):
 
     settings=config['SETTINGS']
     return settings.getboolean(ConfigKey)
+
+
+
+def read_dict (ConfigKey):
+
+    ''''
+    Find the relevant value in settings matching the config key - return a dictionary of values
+    '''
+
+    settings=config[ConfigKey]
+    return settings

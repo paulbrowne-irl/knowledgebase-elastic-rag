@@ -27,6 +27,8 @@ class Test_Config(unittest.TestCase):
         flag = config.read_boolean("CONTINUE_LOOP_AFTER_ERROR")
         self.assertTrue(flag or not(flag))
 
+
+
     def test_all_values(self):
         all_values = dict(config.config.items('SETTINGS'))
         self.assertIsNotNone(all_values)
@@ -34,5 +36,10 @@ class Test_Config(unittest.TestCase):
 
 
 
-        
-        
+    def test_config_boolean(self):
+        dict_values = config.read_dict("SOURCE_DIRECTORIES")
+
+        self.assertIsNotNone(dict_values)
+        self.assertEqual(len(dict_values),2)
+        self.assertEqual("SOURCE_DIR_FILES1","../data-sample/sub_dir_1")
+        self.assertEqual("SOURCE_DIR_FILES2","../data-sample/sub_dir_2")
