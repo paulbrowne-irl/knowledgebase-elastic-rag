@@ -5,21 +5,10 @@
 * Multiple, clear use cases using basic architecture
 
 # NEXT 
-* implement 
-* loop using has_unanswered_question
-
-# Next sprint
-1. Read excel Qs (filter unaswered)
-	* xl_rw - has next?
-1. setup loop
-1. loop and call llm
-	* restore code - remove test llm about line 4
-1. update back to excel (fwith flag?)
-1. random time in loop
-
 
 
 # 2nd sprint
+1. test loop + check restored code
 1. config two sources on silver
 1. doc up overall solution
 

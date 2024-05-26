@@ -27,7 +27,7 @@ class Test_XL(unittest.TestCase):
     
     def test_read_next_xl_question(self):
 
-        next_question = xl_rw.read_next_unanswered_question("../data-sample/question_and_answer/q_and_a_sample.xlsx",
+        next_question = xl_rw.read_unanswered_questions("../data-sample/question_and_answer/q_and_a_sample.xlsx",
                                                             self.COL_TO_READ_QUESTION_IN_FILE,
                                                             self.COL_TO_UPDATE_SUGGESTED_ANSWER)
         logging.debug("next q:"+str(next_question))
