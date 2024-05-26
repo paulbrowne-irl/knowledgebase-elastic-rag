@@ -37,8 +37,6 @@ def answer_questions_in_excel():
     logging.debug("Question we are trying to answer:"+str(next_question.get("Question")))
 
 
-    #make sure setup gets run at start
-    rag_controller.setup()
 
     # read email and prompt templates
     qa_prompt=prompts.TEMPLATE_EMAIL_PROMPT
@@ -56,7 +54,7 @@ def answer_questions_in_excel():
     #for testing only
     rag_controller._llm_to_use = llm_echo.EchoLLM()
 
-
+    #generate the chain using the prompt
     llm_chain = rag_controller.get_llm_chain(qa_prompt)
     informed_response = llm_chain.run(context=informed_context,question=str(next_question.get("Question")))
 
@@ -80,11 +78,16 @@ def answer_questions_in_excel():
 
         # on to next
 
+
+
 # simple code to run from command line
 if __name__ == '__main__':
     #Set the Logging level. Change it to logging.INFO is you want just the important info
     #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
     logging.basicConfig(level=logging.DEBUG)
+
+    #make sure setup gets run at start
+    rag_controller.setup()
 
     #call the main method in this module
     answer_questions_in_excel()
