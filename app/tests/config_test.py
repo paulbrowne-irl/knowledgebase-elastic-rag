@@ -41,5 +41,5 @@ class Test_Config(unittest.TestCase):
 
         self.assertIsNotNone(dict_values)
         self.assertEqual(len(dict_values),2)
-        self.assertEqual("SOURCE_DIR_FILES1","../data-sample/sub_dir_1")
-        self.assertEqual("SOURCE_DIR_FILES2","../data-sample/sub_dir_2")
+        self.assertEqual(dict_values["SOURCE_DIR_FILES1"],"../data-sample/sub_dir_1")
+        self.assertEqual(dict_values["SOURCE_DIR_FILES2"],"../data-sample/sub_dir_2")
