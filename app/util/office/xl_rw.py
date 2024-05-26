@@ -19,6 +19,8 @@ def has_unaswered_question(xl_file_name:str,answer_col:str)->bool:
     # filter based on answered question
     filtered_table = question_table[question_table[answer_col].isnull()]
 
+    #close file
+
     # return 
     return len(filtered_table.index)>0
 

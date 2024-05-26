@@ -1,7 +1,7 @@
 
 import logging
 
-from app.util.rag import llm_echo
+from util.rag import llm_echo
 import settings.config as config
 import settings.pickle_loader
 import util.rag.llm_copilot as llm_copilot
