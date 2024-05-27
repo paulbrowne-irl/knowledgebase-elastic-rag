@@ -8,9 +8,8 @@
 
 
 # 2nd sprint
-1. test loop + check restored code
-	* line 63 - remove echo llm
-	* line 96 - remove break
+1. test loop
+	* config 54 back to copilot
 1. config two sources on silver
 	* two sources
 	* anything else to ingest?
@@ -21,12 +20,11 @@
 	* seperate section
 
 # 3rd sprint
-* 3 documents back	
-* ensure we have a link back to source doc
+* 3 documents back and use langchain llm to summarize
+* more readable links to source doc
 * move to unit testable 
 * find except , add logging.exception() to it
 * sanitze codebase ahead of public push
-* type hints on bot
 * review python docs on bot, app, injest, rag_controller,
 
 
