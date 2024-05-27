@@ -63,10 +63,9 @@ def answer_questions_in_excel():
     output_data = []
 
     #for testing only
-    rag_controller._llm_to_use = llm_echo.EchoLLM()
+    #rag_controller._llm_to_use = llm_echo.EchoLLM()
 
-    #generate the chain using the prompt
-    llm_chain = rag_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
+
 
     # get the questions needing answer
     logging.debug("Reading questions needing answered from "+QUESTION_FILE_NAME)
@@ -74,6 +73,9 @@ def answer_questions_in_excel():
 
     # Loop through questions
     for index,next_question in unanswered_questions_df.iterrows():
+
+        #generate the chain using the prompt
+        llm_chain = rag_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
        
         logging.info("Next question line:"+str(index))
         logging.info(str(next_question))
