@@ -9,10 +9,14 @@
 
 # 2nd sprint
 1. test loop + check restored code
+	* line 63
 1. config two sources on silver
 1. Ingest run
-1. doc up overall solution
-
+1. doc up 
+	* overall solution
+	* how to run
+	* seperate section
+	
 # 3rd sprint
 * 3 documents back	
 * ensure we have a link back to source doc

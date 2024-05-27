@@ -34,13 +34,13 @@ def _get_suggested_anwer(llm_chain:LLMChain,next_question:str)->str:
     find suggested answer using RAG techique
     '''
     # Find nearest match documents
-    similar_docs = rag_controller.get_nearest_match_documents(ELASTIC_INDEX_NAME,str(next_question.get(COL_QUESTION) ))
+    similar_docs = rag_controller.get_nearest_match_documents(ELASTIC_INDEX_NAME,next_question)
     logging.info("relevant docs:"+str(similar_docs))
 
     ## Ask Local LLM context informed prompt
     informed_context= similar_docs[0].page_content
 
-    informed_response = llm_chain.run(context=informed_context,question=str(next_question.get(COL_QUESTION)))
+    informed_response = llm_chain.run(context=informed_context,question=next_question)
 
     return informed_response
 
@@ -60,7 +60,7 @@ def answer_questions_in_excel():
     output_data = []
 
     #for testing only
-    #rag_controller._llm_to_use = llm_echo.EchoLLM()
+    rag_controller._llm_to_use = llm_echo.EchoLLM()
 
     #generate the chain using the prompt
     llm_chain = rag_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
