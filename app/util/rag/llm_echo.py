@@ -36,7 +36,7 @@ class EchoLLM(LLM):
         Call to invoke llm goes here
         '''
 
-        return "Test LLM Response always the same"
+        return "Echo LLM Response always the same"
 
     @property
     def _identifying_params(self) -> Mapping[str, Any]:
