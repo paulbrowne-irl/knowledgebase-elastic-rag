@@ -1,14 +1,17 @@
 import logging
-
-from util.rag import llm_echo
-import settings.config as config
-from templates import prompts as prompts
-from util.office import xl_rw as xl_rw
-import pandas as pd
-from util.rag import rag_controller as rag_controller
 from random import randint
 from time import sleep
+from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
+                    Tuple, Union)
+
+import pandas as pd
+import settings.config as config
 from langchain.chains.llm import LLMChain
+from langchain_core.documents import Document
+from templates import prompts as prompts
+from util.office import xl_rw as xl_rw
+from util.rag import llm_echo
+from util.rag import rag_controller as rag_controller
 
 '''
 Bot that uses Rag to respond to emails. It uses a Sharepoint / excel list to mediate emails (i.e. does not read and write them directly)
@@ -29,7 +32,7 @@ COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
 COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
 RANDOM_DELAY_RANGE=config.read_int("RANDOM_DELAY_RANGE")
 
-def _get_suggested_anwer(llm_chain:LLMChain,next_question:str)->str:
+def _get_suggested_anwer(llm_chain:LLMChain,next_question:str)->Tuple[str,List[Document]]:
     '''
     find suggested answer using RAG techique
     '''
@@ -42,7 +45,7 @@ def _get_suggested_anwer(llm_chain:LLMChain,next_question:str)->str:
 
     informed_response = llm_chain.run(context=informed_context,question=next_question)
 
-    return informed_response
+    return informed_response, similar_docs
 
 
 
@@ -77,14 +80,19 @@ def answer_questions_in_excel():
 
         logging.debug("Question we are trying to answer:"+str(next_question.get(COL_QUESTION)))
 
-        #get the suggested answer
-        informed_response = _get_suggested_anwer(llm_chain,str(next_question.get(COL_QUESTION)))
-        # testing only informed_response="just testing"
+        #get the suggested answer and supporting docs
+        informed_response, supporting_docs = _get_suggested_anwer(llm_chain,str(next_question.get(COL_QUESTION)))
 
         logging.info("Response:"+informed_response)
 
+        # gather meta data into output
+        supporting_doc_text="This answer relies on information from:"
+        for this_supporting_doc in supporting_docs:
+            supporting_doc_text +=str(this_supporting_doc.metadata)
+
         # save into output
         next_question[COL_TO_UPDATE_SUGGESTED_ANSWER]=informed_response
+        next_question[COL_TO_UPDATE_RELEVANT_DOCS]=supporting_doc_text
         output_data.append(next_question)
         
         # wait random amount of time to allow sync, avoid spam copilot
