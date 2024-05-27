@@ -1,17 +1,19 @@
 
 import logging
+from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
+                    Tuple, Union)
 
-from util.rag import llm_echo
 import settings.config as config
 import settings.pickle_loader
 import util.rag.llm_copilot as llm_copilot
 from langchain.chains.llm import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.llms import HuggingFacePipeline
-from langchain_community.llms import Ollama
+from langchain_community.llms import HuggingFacePipeline, Ollama
+from langchain_core.documents import Document
 from langchain_elasticsearch import ApproxRetrievalStrategy, ElasticsearchStore
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
+from util.rag import llm_echo
 
 #Module level constants
 _embeddings=None
@@ -134,7 +136,7 @@ def _get_knowledgebase(index_name:str)->dict:
 
 
 
-def get_nearest_match_documents(index_name:str,vector_search_text:str):
+def get_nearest_match_documents(index_name:str,vector_search_text:str)->List[Document]:
     '''
     Get the nearest match documents using vector search
     '''

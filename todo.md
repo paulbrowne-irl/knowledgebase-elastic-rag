@@ -9,14 +9,17 @@
 
 # 2nd sprint
 1. test loop + check restored code
-	* line 63
+	* line 63 - remove echo llm
+	* line 96 - remove break
 1. config two sources on silver
+	* two sources
+	* anything else to ingest?
 1. Ingest run
 1. doc up 
 	* overall solution
 	* how to run
 	* seperate section
-	
+
 # 3rd sprint
 * 3 documents back	
 * ensure we have a link back to source doc
