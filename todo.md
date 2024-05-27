@@ -10,6 +10,7 @@
 # 2nd sprint
 1. test loop + check restored code
 1. config two sources on silver
+1. Ingest run
 1. doc up overall solution
 
 # 3rd sprint
