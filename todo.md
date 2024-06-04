@@ -48,11 +48,6 @@
 
 
 
-
-
-
-
-
 # Later - Iterate
 * update promot
 	* add topics
