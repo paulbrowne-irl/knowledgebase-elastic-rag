@@ -50,8 +50,11 @@ def _setup_vector_embeddings():
     
     if(_embeddings==None):
         logging.debug("Setting up Embeddings")
+        
+        model_name=config.read("MODEL_TRANSFORMERS")
+        logging.debug("Attempting to use embeddings:"+model_name)
 
-        _embeddings = HuggingFaceEmbeddings(model_name=config.read("MODEL_TRANSFORMERS"))
+        _embeddings = HuggingFaceEmbeddings(model_name=model_name)
     else:
         logging.debug("Embeddings already setup")
 
@@ -112,7 +115,7 @@ def _get_knowledgebase(index_name:str)->dict:
 
     if(index_name not in _kb_dict):
         
-        logging.debug("Setting up Elastistic Knowledgebase:"+index_name +" using embeddings:"+str(_embeddings))
+        logging.debug("Setting up Elastic Knowledgebase:"+index_name +" using embeddings:"+str(_embeddings))
 
         
         if(not index_name=='Knowledgebase'):
