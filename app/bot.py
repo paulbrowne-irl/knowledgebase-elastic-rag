@@ -13,6 +13,9 @@ from util.office import xl_rw as xl_rw
 from util.rag import llm_echo
 from util.rag import rag_controller as rag_controller
 
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from sentence_transformers import SentenceTransformer
+
 '''
 Bot that uses Rag to respond to emails. It uses a Sharepoint / excel list to mediate emails (i.e. does not read and write them directly)
 
@@ -116,6 +119,7 @@ if __name__ == '__main__':
     #Set the Logging level. Change it to logging.INFO is you want just the important info
     #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
     logging.basicConfig(level=logging.DEBUG)
+
 
     #make sure setup gets run at start
     rag_controller.setup()
