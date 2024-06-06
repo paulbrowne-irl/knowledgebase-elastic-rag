@@ -73,6 +73,7 @@ def answer_questions_in_excel():
     # get the questions needing answer
     logging.debug("Reading questions needing answered from "+QUESTION_FILE_NAME)
     unanswered_questions_df = xl_rw.read_unanswered_questions(QUESTION_FILE_NAME,COL_QUESTION,COL_TO_UPDATE_SUGGESTED_ANSWER)
+    logging.debug("Number of unanswered questions:"+str(len(unanswered_questions_df.index)))
 
     # Loop through questions
     for index,next_question in unanswered_questions_df.iterrows():
