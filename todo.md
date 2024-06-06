@@ -8,8 +8,9 @@
 
 
 # 2nd sprint
-1. test loop
+1. bot loop
 	* config 54 back to copilot
+	* export to excel everytime
 
 1. config two sources on silver
 	* two sources
