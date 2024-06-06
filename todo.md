@@ -1,63 +1,57 @@
 # AIM
-
 * RAG that works standalone
-* Works as business demo
-* allows deep dive 
+* Works as business demo but allows deep dive 
 * Can be pushed to public
 * Multiple, clear use cases using basic architecture
 
-
-# NEXT BOT TIDY
-* MAIN Branch
-	* tidy readme.md
-	* combine todo and 
+# NEXT 
 
 
-* DEV Branch
-	* find except , add logging.exception() to it
-	* add type safety to bot
+# 2nd sprint
+1. test loop
+	* config 54 back to copilot
+
+1. config two sources on silver
+	* two sources
+	* anything else to ingest?
+1. Ingest run
+	* other index
+
+1. doc up 
+	* overall solution
+	* how to run
+	* seperate section
+
+1. Doc silver
+	* notes on what needed for silver use
+
+# 3rd sprint
+* 3 documents back and use langchain llm to summarize
+* more readable links to source doc
+* move to unit testable 
+* find except , add logging.exception() to it
+* sanitze codebase ahead of public push
+* review python docs on bot, app, injest, rag_controller,
+
+
+
+# Add to doc
+* Llama3 setup - pull from lab
+
+
+
+# Tidy these into main list
+* stoplist read from excel
+* Atext injest, FAQ document
+* Look at similar projects (send from firefox) - can we migrate to use that?
 
 
 
 
-# NEXT - BOT SEARCHING AGAINST INDEX
-* CYA on copilot
-	* Get multple copilot keys
-	* save to pickle
-	* randomly use
+# NEXT - UPGRADE BOT SEARCHING AGAINST INDEX
 
-* run and review indexed data
-	* ensure we have a link back to source doc
+* run and review indexed data - 	
 
-* upgrade and tidy
-	* 3 documents back	
-	* move to unit testable 
-	* define method
-	* add (more) python types / safety (like on injest)
-
-* write better questions
-	* read from silver (add to overwrite.conf)
-	* sample 
-	* real folder (mounted onedrive)
-
-* create excel loop
-	* put in random timer
-
-* prepare for save back into excel
-	* data gather (response, links, question used)
-	* unit test prope
-
-
-# SENTIMENT ADD
-	
-	* Add from calc_sentiment.py
-		* get topics from emails using injest method
-		* sentiment etc f
-
-
-# Next - Infrastructure (Silver, daytime)
-	# link to improvement form
-	# how part of power automate flow
 
 
 # Later - Iterate
@@ -73,6 +67,8 @@
 
 * Get unit tests working agiain
 
+* Consider filtering on sentences
+
 * Index other documents
 	* powerpoint
 
@@ -82,6 +78,14 @@
 	* some sort of .ini file
 		* keywords / topics
 		* name of owner ?? or keep that in 
+
+# SENTIMENT ADD
+	
+	* Add from calc_sentiment.py
+		* get topics from emails using injest method
+		* sentiment etc f
+
+
 
 # Improvements - later priority
 * Prompts
