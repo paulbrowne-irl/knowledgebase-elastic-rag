@@ -182,3 +182,4 @@ cython_debug/
 #.idea/
 app/settings/settings-overwrite.conf
 app/settings/config-overwrite.conf
+silver-deploy.md
