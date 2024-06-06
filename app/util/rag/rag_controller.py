@@ -89,7 +89,8 @@ def _setup_llm():
             
             _llm_to_use = HuggingFacePipeline(pipeline=pipe)
 
-        elif (MODEL_LLM =="test"): 
+        elif (MODEL_LLM =="echo"): 
+            logging.debug("Using Echo LLM")
             _llm_to_use = llm_echo.EchoLLM()
 
         else :

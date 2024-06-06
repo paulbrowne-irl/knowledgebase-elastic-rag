@@ -35,8 +35,8 @@ class EchoLLM(LLM):
         '''
         Call to invoke llm goes here
         '''
-
-        return "Echo LLM Response always the same"
+        # Since this is for testing we just echo back the original prompt
+        return "Echo:"+prompt[:20]
 
     @property
     def _identifying_params(self) -> Mapping[str, Any]:
