@@ -100,17 +100,18 @@ def answer_questions_in_excel():
         next_question[COL_TO_UPDATE_SUGGESTED_ANSWER]=informed_response
         next_question[COL_TO_UPDATE_RELEVANT_DOCS]=supporting_doc_text
         output_data.append(next_question)
+
+        #save output the dataframe
+        output_df = pd.DataFrame(output_data)
+        output_df.to_excel("output.xlsx")
+        logging.info("Output to overwrite output.xlsx - need to manually update into main sheet")
         
         # wait random amount of time to allow sync, avoid spam copilot
         wait_random = randint(1,RANDOM_DELAY_RANGE)
         logging.info("Waiting random seconds:"+str(wait_random))
         sleep(wait_random)
 
-    #save output the dataframe
-    output_df = pd.DataFrame(output_data)
-    output_df.to_excel("output.xlsx")
 
-    logging.info("Output to output.xlsx - need to manually update into main sheet ")
 
 
 
