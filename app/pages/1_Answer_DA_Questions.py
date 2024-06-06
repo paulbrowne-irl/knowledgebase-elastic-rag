@@ -46,7 +46,7 @@ with st.form('my_form'):
             informed_context= similar_docs[0].page_content
 
             #get the llm chain to handle this
-            llm_chain = rag_controller.get_llm_chain(app_sidebar.llm_to_use, st.session_state['prompt'])
+            llm_chain = rag_controller.get_llm_chain(st.session_state['prompt'])
 
             status.update(label="Getting you an answer",state="running", expanded=False)
             #informed_response = llm_chain.invoke(input={},context=informed_context,question=input_text)

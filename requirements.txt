@@ -8,7 +8,6 @@ requests
 
 accelerate
 
-#pillow
 pytesseract 
 pdf2image
 pypdf2
@@ -16,7 +15,6 @@ pypdf
 pycryptodome
 openpyxl
 docx2txt
-# textract==1.6.1 # removed due to conflicts and will not work on windwos
 extract-msg
 
 torch
@@ -25,8 +23,10 @@ eland
 elasticsearch
 sentence_transformers 
 huggingface-hub 
-langchain 
-langchain_community
+#langchain 
+#tmp fix using version numbers
+langchain-community==0.2.1 
+langchain-core==0.2.1
 langchain-elasticsearch
 sydney-py
 

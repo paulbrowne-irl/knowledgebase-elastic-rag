@@ -8,7 +8,6 @@ will give us a common sidebar.
 #Fields on Sidebar
 
 try:
-    llm_to_use = st.sidebar.selectbox( 'Language Model and Approach', ('Copilot','Local LLM'))
     document_search = st.sidebar.selectbox( 'Source Information', ('Knowledgebase','Other Source'))
 
     # POC reminder

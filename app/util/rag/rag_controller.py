@@ -1,58 +1,48 @@
 
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import ElasticVectorSearch
-
-from langchain.prompts import PromptTemplate
-#from langchain.chains import LLMChain
-from langchain.chains.llm import LLMChain
-
-from langchain_community.llms import HuggingFacePipeline
-from transformers import AutoTokenizer
-from transformers import pipeline
-from transformers import AutoModelForSeq2SeqLM
-
-from langchain_elasticsearch import ElasticsearchStore
-
-
-#from langchain_community.vectorstores.elasticsearch import 
-from langchain_elasticsearch import ApproxRetrievalStrategy
-
-
 import logging
-
+from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
+                    Tuple, Union)
 
 import settings.config as config
 import settings.pickle_loader
-
 import util.rag.llm_copilot as llm_copilot
-
+from langchain.chains.llm import LLMChain
+from langchain.prompts import PromptTemplate
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.llms import HuggingFacePipeline, Ollama
+from langchain_core.documents import Document
+from langchain_elasticsearch import ApproxRetrievalStrategy, ElasticsearchStore
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
+from util.rag import llm_echo
 
 #Module level constants
 _embeddings=None
-_db={}
-_llm=None
-token=None
+_kb_dict={}
+_llm_to_use=None
+_token=None
 
-#Set the Logging level. Change it to logging.INFO is you want just the important info
-#logging.basicConfig(filename=config.read("LOG_FILE, encoding='utf-8', level=logging.DEBUG)
 
 def setup():
     '''
     Initialise the system (if needed)
     Safe to call multiple types as checks if have been called prviously
     '''
-    _setup_copilot_token()
-    _setup_embeddings()
+    _setup_vector_embeddings()
     _setup_llm()
+
+
+
 
 def _setup_copilot_token(): 
    
-    global token
+    global _token
  
-    token = settings.pickle_loader.setup_copilot_token()
+    _token = settings.pickle_loader.setup_copilot_token()
 
 
-def _setup_embeddings(): 
+
+
+def _setup_vector_embeddings(): 
     '''
     Setup the embeddings that we use for vector search
     '''
@@ -60,56 +50,72 @@ def _setup_embeddings():
     
     if(_embeddings==None):
         logging.debug("Setting up Embeddings")
+        
+        model_name=config.read("MODEL_TRANSFORMERS")
+        logging.debug("Attempting to use embeddings:"+model_name)
 
-        _embeddings = HuggingFaceEmbeddings(model_name=config.read("LOCAL_MODEL_TRANSFORMERS"))
+        _embeddings = HuggingFaceEmbeddings(model_name=model_name)
     else:
         logging.debug("Embeddings already setup")
 
 
 def _setup_llm():
     
-    global _llm
+    global _llm_to_use
     global _embeddings
 
-    if(_llm==None):
-        
-        logging.debug("Setting up LLMs - local")
-        _llm={}
+    if(_llm_to_use==None):
 
-        # setup the LLM
-        LOCAL_MODEL_LLM=config.read("LOCAL_MODEL_LLM")
-        logging.debug(f"Setting up model {LOCAL_MODEL_LLM}")
-        tokenizer = AutoTokenizer.from_pretrained(config.read("LOCAL_MODEL_LLM"))
-        model = AutoModelForSeq2SeqLM.from_pretrained(
-            config.read("LOCAL_MODEL_LLM"), cache_dir=config.read("CACHE_DIR"))
+        # we need to set it up accoding to sessings
+        MODEL_LLM=config.read("MODEL_LLM")
+        logging.debug(f"Attmpting to setup LLM {MODEL_LLM}")
 
-        pipe = pipeline(
-            "text2text-generation",
-            model=model,
-            tokenizer=tokenizer,
-            max_length=100
-        )
-        _llm['Local LLM'] = HuggingFacePipeline(pipeline=pipe)
+        if (MODEL_LLM =="llama3"):
+            _llm_to_use = Ollama(model="llama3",stop=['<|eot_id|>'])
 
+        elif (MODEL_LLM =="google/flan-t5-large"): 
 
-        logging.debug("Setting up LLMs - copilot")
-        _llm ['Copilot']= llm_copilot.CustomLLM(copilot_token=token)
+            logging.debug("Setting google/flan-t5-large")
+            tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large")
+            model = AutoModelForSeq2SeqLM.from_pretrained(
+                config.read("google/flan-t5-large"), cache_dir=config.read("CACHE_DIR"))
+
+            pipe = pipeline(
+                "text2text-generation",
+                model=model,
+                tokenizer=tokenizer,
+                max_length=100
+            )
+            
+            _llm_to_use = HuggingFacePipeline(pipeline=pipe)
+
+        elif (MODEL_LLM =="test"): 
+            _llm_to_use = llm_echo.EchoLLM()
+
+        else :
+            logging.debug("Default LLM to copilot")
+            _setup_copilot_token()
+            _llm_to_use = llm_copilot.CopilotLLM(copilot_token=_token)
+            
 
 
     else:
 
-        logging.debug("LLM list already setup")
+        logging.debug("LLM already setup")
 
 
-def _get_datastore(index_name):
+
+
+
+def _get_knowledgebase(index_name:str)->dict:
     '''
     Setup Handle to the external RAG Datastore
     '''
 
 
-    if(index_name not in _db):
+    if(index_name not in _kb_dict):
         
-        logging.debug("Setting up Datastore:"+index_name +" using embeddings:"+str(_embeddings))
+        logging.debug("Setting up Elastic Knowledgebase:"+index_name +" using embeddings:"+str(_embeddings))
 
         
         if(not index_name=='Knowledgebase'):
@@ -120,38 +126,41 @@ def _get_datastore(index_name):
 
             
 
-        _db [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=config.read("ES_URL"), index_name=index_to_use,strategy=ApproxRetrievalStrategy())
+        _kb_dict [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=config.read("ES_URL"), index_name=index_to_use,strategy=ApproxRetrievalStrategy())
         
 
     else:
         logging.debug("Using cached Datastore ")
 
-    return  _db [index_name]
+    return  _kb_dict [index_name]
 
 
-def get_nearest_match_documents(index_name:str,vector_search_text:str):
+
+
+
+
+def get_nearest_match_documents(index_name:str,vector_search_text:str)->List[Document]:
     '''
     Get the nearest match documents using vector search
     '''
+
+
     logging.debug(f"Nearest Search index {index_name} matching against {vector_search_text}")
 
-    vector_search= _get_datastore(index_name)
+    vector_search= _get_knowledgebase(index_name)
 
     return vector_search.similarity_search(vector_search_text)
 
 
 
-def get_llm_chain(llm_choice,prompt_template):
+def get_llm_chain(prompt_template:str)->LLMChain:
     '''
-    Generate the LLM Chaim
+    Generate the LLM Chain
     '''
 
-    global _llm
-
-    print("=======")
-    print(list(_llm.keys()))
+    global _llm_to_use
 
     prompt_informed = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
 
-    return LLMChain(prompt=prompt_informed, llm=_llm[llm_choice])
+    return LLMChain(prompt=prompt_informed, llm=_llm_to_use)
 
