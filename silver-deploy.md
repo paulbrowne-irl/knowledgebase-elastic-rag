@@ -9,3 +9,4 @@
 
 ## Other todo
 * consider delete and recreate virtualevn
+* consider updating requirements snapshot pip freeze > snapshot-requirements.txt
