@@ -10,14 +10,20 @@
 # 2nd sprint
 1. test loop
 	* config 54 back to copilot
+
 1. config two sources on silver
 	* two sources
 	* anything else to ingest?
 1. Ingest run
+	* other index
+
 1. doc up 
 	* overall solution
 	* how to run
 	* seperate section
+
+1. Doc silver
+	* notes on what needed for silver use
 
 # 3rd sprint
 * 3 documents back and use langchain llm to summarize
