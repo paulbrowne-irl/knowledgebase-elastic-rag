@@ -8,7 +8,7 @@ will give us a common sidebar.
 #Fields on Sidebar
 
 try:
-    document_search = st.sidebar.selectbox( 'Source Information', ('Knowledgebase','Other Source'))
+    document_search = st.sidebar.selectbox( 'Source Information', ('knowledge_base','Other Source not yet set'))
 
     # POC reminder
     st.sidebar.info("Proof of concept")

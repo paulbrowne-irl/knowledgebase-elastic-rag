@@ -118,20 +118,12 @@ def _get_knowledgebase(index_name:str)->dict:
         
         logging.debug("Setting up Elastic Knowledgebase:"+index_name +" using embeddings:"+str(_embeddings))
 
-        
-        if(not index_name=='Knowledgebase'):
-            index_to_use= config.read("ES_INDEX_KB")
-
-        else:
-             index_to_use=config.read("ES_INDEX_EMAILS")
-
-            
 
         _kb_dict [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=config.read("ES_URL"), index_name=index_to_use,strategy=ApproxRetrievalStrategy())
         
 
     else:
-        logging.debug("Using cached Datastore ")
+        logging.debug("Using cached Datastore "+index_name )
 
     return  _kb_dict [index_name]
 
@@ -148,6 +140,7 @@ def get_nearest_match_documents(index_name:str,vector_search_text:str)->List[Doc
 
     logging.debug(f"Nearest Search index {index_name} matching against {vector_search_text}")
 
+    # Get the handle to the Elastick Knowledge Base
     vector_search= _get_knowledgebase(index_name)
 
     return vector_search.similarity_search(vector_search_text)
