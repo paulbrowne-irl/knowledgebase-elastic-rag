@@ -6,25 +6,27 @@
 
 # NEXT 
 
+# Revert
+* config line 15 - revert back to knowledge_base
+* config overwrite end line - back to include dir1
+
+# Mode to action
+	* anything else to ingest?
 
 # 2nd sprint
-1. bot loop
-	* config 54 back to copilot
-	* export to excel everytime
 
-1. config two sources on silver
-	* two sources
-	* anything else to ingest?
-1. Ingest run
-	* other index
+1. Test sources
+	* Read logs - all docs ingested
+	* all folders as configed ingested?
+	
 
 1. doc up 
 	* overall solution
 	* how to run
 	* seperate section
 
-1. Doc silver
-	* notes on what needed for silver use
+
+
 
 # 3rd sprint
 * 3 documents back and use langchain llm to summarize
@@ -33,12 +35,23 @@
 * find except , add logging.exception() to it
 * sanitze codebase ahead of public push
 * review python docs on bot, app, injest, rag_controller,
+* try spidering web sources
 
 
 
 # Add to doc
 * Llama3 setup - pull from lab
+* Elastic create index knowledgebase - https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
+	* open elastic console http://localhost:5601/app/dev_tools#/console
+'''
+PUT /knowledge_base_tmp
++
 
+response like {
+  "acknowledged": true,
+  "shards_acknowledged": true,
+  "index": "knowledge_base_tmp"
+}
 
 
 # Tidy these into main list
