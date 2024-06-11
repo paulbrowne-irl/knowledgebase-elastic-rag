@@ -6,10 +6,9 @@ import settings.config as config
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import ElasticVectorSearch
+#from langchain_community.vectorstores import ElasticVectorSearch # replaced by next line
+from langchain_elasticsearch import  ElasticsearchStore
 from langchain_core.documents import Document
-
-#from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
 
 # Module level variables
 character_text_splitter = None
@@ -43,7 +42,7 @@ def _do_setup():
     )
 
     # get the model we need to encode the text as vectors (in Elastic)
-    model_transformers = config.read("LOCAL_MODEL_TRANSFORMERS")
+    model_transformers = config.read("MODEL_TRANSFORMERS")
     logging.debug("Prep. Huggingface embedding setup using "+model_transformers)
     hf= HuggingFaceEmbeddings(model_name=model_transformers)
 
@@ -128,7 +127,10 @@ def index(index_name: str,filepath: str,filecontents: str,meta_data = {}) -> Non
     _do_setup()
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
-    es_index = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name)
+    #es_index = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name) prev
+    es_index= ElasticsearchStore(embedding=hf,es_url=es_url, index_name=index_name)
+
+
 
 
     ## Split our document body into pages using specific methods
@@ -140,7 +142,7 @@ def index(index_name: str,filepath: str,filecontents: str,meta_data = {}) -> Non
       
 
     # save the page-text-metadata into the es index
-    es_index.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=index_name)
+    es_index.from_documents(pages, embedding=hf, es_url=es_url, index_name=index_name)
 
     # was from text
     # es_index.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )

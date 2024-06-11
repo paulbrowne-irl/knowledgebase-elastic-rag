@@ -114,9 +114,9 @@ def walk_directories_ingest_files(starting_dir_list:list,es_index:str):
 
             # add to index if we have text
             if(document_text==""):
-                logging.info("No text extracted to add to KB")
+                logging.info("No text extracted to index")
             else:
-                logging.info("Indexing text in KB")
+                logging.info("Indexing extracted text into Index")
                 index_elastic.index(es_index_name,full_filepath,document_text)
             
         
