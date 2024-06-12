@@ -55,7 +55,7 @@ def _do_setup():
 
 
 
-def _extract_pdf(filepath: str,metadatas: Optional[dict])-> List[Document]:
+def _extract_pdf_and_meta(filepath: str,metadatas: Optional[dict])-> List[Document]:
     '''
     Index the specificed pdf (and document meta data) into the elastic index
     '''
@@ -87,7 +87,7 @@ def _extract_pdf(filepath: str,metadatas: Optional[dict])-> List[Document]:
 
 
 
-def _extract_text(filepath: str,filecontents: str,metadatas: Optional[dict])-> List[Document]:
+def _extract_text_and_meta(filepath: str,filecontents: str,metadatas: Optional[dict])-> List[Document]:
     '''
     Index the specificed pdf (and document meta data) into the elastic index
     '''
@@ -136,20 +136,14 @@ def index(index_name: str,filepath: str,filecontents: str,meta_data = {}) -> Non
     ## Split our document body into pages using specific methods
     if filepath.lower().endswith(".pdf"):
         
-        pages = _extract_pdf(filepath,meta_data)
+        pages = _extract_pdf_and_meta(filepath,meta_data)
     else:
-        pages = _extract_text(filepath,filecontents,meta_data)
+        pages = _extract_text_and_meta(filepath,filecontents,meta_data)
       
 
     # save the page-text-metadata into the es index
     es_index.from_documents(pages, embedding=hf, es_url=es_url, index_name=index_name)
 
-    # was from text
-    # es_index.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
-
-
-
-  
 
 
 # simple code to test from command line

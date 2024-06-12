@@ -11,14 +11,19 @@
 
 
 # NEXT 
-* pull meta from name of folder (in config)
-* pull meta data from file name
+* pull meta from name of folder (in config) and thread through
+* dry run - no index - then revet
+* 
 * test index
 	* Read logs - all docs ingested
 	* all folders as configed ingested?
 * test can pull back into results
 	* bot
 	* app
+
+
+
+
 * note missing file formats - is it just .xlsx?
 
 
