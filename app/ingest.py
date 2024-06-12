@@ -8,6 +8,10 @@ import util.extract.extract_word as extract_word
 
 import util.index.index_elastic as index_elastic
 
+# KEYS FOR STORING METADATA IN DICT
+DATA_SOURCE= "DATA_SOURCE"
+FILE_NAME ="FILE_NAME"
+PARENT_FOLDER="PARENT_FOLDER"
 
 
 def _extract_metadata(configsource: str, fullfilepath: str) -> dict:
@@ -16,8 +20,21 @@ def _extract_metadata(configsource: str, fullfilepath: str) -> dict:
     * parent folder name
     * the generic bucket that the config file came from
     '''
+    meta_data= {}
 
-    return {}
+    # add values to it
+    meta_data[DATA_SOURCE]=configsource
+
+    #split fullfilepath
+    rest_path, file = os.path.split(fullfilepath)
+    meta_data[FILE_NAME]= file
+
+    parent_folder= rest_path.rpartition('/')
+    meta_data[PARENT_FOLDER] = parent_folder[-1]
+
+
+
+    return meta_data
 
 
 '''
@@ -55,6 +72,12 @@ def _walk_directories_ingest_files(starting_dir_list:list,es_index:str):
                 full_filepath = os.path.join(single_dir, filename)
 
                 #########
+                # Extact meta Data
+                #########
+                meta_data=_extract_metadata("SOME_CONFIG_SOURCE",full_filepath)
+
+
+                #########
                 # Check if this is a sub directory
                 #########
                 if(os.path.isdir(full_filepath)):
@@ -62,6 +85,7 @@ def _walk_directories_ingest_files(starting_dir_list:list,es_index:str):
                     #package as list
                     full_filepath_as_list=[full_filepath]
                     _walk_directories_ingest_files(full_filepath_as_list,es_index)
+
 
                 #########
                 # pdf
@@ -128,7 +152,7 @@ def _walk_directories_ingest_files(starting_dir_list:list,es_index:str):
                 logging.info("No text extracted to index")
             else:
                 logging.info("Indexing extracted text into Index")
-                index_elastic.index(es_index_name,full_filepath,document_text)
+                index_elastic.index(es_index_name,full_filepath,document_text,meta_data)
             
         
 
