@@ -13,6 +13,12 @@ DATA_SOURCE= "DATA_SOURCE"
 FILE_NAME ="FILE_NAME"
 PARENT_FOLDER="PARENT_FOLDER"
 
+# read config once
+do_pdf_ocr= config.read_boolean("READ_PDF_USING_OCR")
+es_index_name= config.read("ES_INDEX_KB")
+
+
+
 
 def _extract_metadata(configsource: str, fullfilepath: str) -> dict:
     ''' generate a dictionary of metadat based on the information passed in
@@ -41,21 +47,18 @@ def _extract_metadata(configsource: str, fullfilepath: str) -> dict:
 Simple gateway to the ingestion app
 '''
 
-def _walk_directories_ingest_files(starting_dir_list:list,es_index:str):
+def _walk_directories_ingest_files(starting_dir_dict:dict,es_index:str):
     '''
     Do recursive walk of all files and folders in directory
     '''
-    logging.info("list of directories to index:"+str(starting_dir_list))
     logging.info("Will ingest to elastic index:"+es_index)
 
-    # read config once
-    do_pdf_ocr= config.read_boolean("READ_PDF_USING_OCR")
-    es_index_name= config.read("ES_INDEX_KB")
+
 
     #########
     # iterate over multiple directories
     #########
-    for single_dir in starting_dir_list:
+    for configsource,single_dir in starting_dir_dict:
 
         #########
         # iterate over files in directory
@@ -74,7 +77,7 @@ def _walk_directories_ingest_files(starting_dir_list:list,es_index:str):
                 #########
                 # Extact meta Data
                 #########
-                meta_data=_extract_metadata("SOME_CONFIG_SOURCE",full_filepath)
+                meta_data=_extract_metadata(configsource,full_filepath)
 
 
                 #########
@@ -82,9 +85,10 @@ def _walk_directories_ingest_files(starting_dir_list:list,es_index:str):
                 #########
                 if(os.path.isdir(full_filepath)):
                     logging.info("Recursive call to handle directory:"+full_filepath)
+
                     #package as list
-                    full_filepath_as_list=[full_filepath]
-                    _walk_directories_ingest_files(full_filepath_as_list,es_index)
+                    full_filepath_as_dict={configsource,full_filepath}
+                    _walk_directories_ingest_files(full_filepath_as_dict,es_index)
 
 
                 #########
@@ -168,10 +172,10 @@ if __name__ == '__main__':
 
     # get config
     starting_point_dict = config.read_dict("SOURCE_DIRECTORIES")
-    starting_dir_list = [*starting_point_dict.values()]
+    #starting_dir_list = [*starting_point_dict.values()]
 
     es_index=config.read("ES_INDEX_KB")
    
 
     #call the main method in this module
-    _walk_directories_ingest_files(starting_dir_list, es_index)
+    _walk_directories_ingest_files(starting_point_dict, es_index)
