@@ -2,14 +2,15 @@ import logging
 import os
 
 import settings.config as config
-
 import util.extract.extract_email as extract_email
 import util.extract.extract_pdf as extract_pdf
 import util.extract.extract_word as extract_word
+
 import util.index.index_elastic as index_elastic
 
 
-def _extract_metadata(configsource: str, filepath: str) -> dict:
+
+def _extract_metadata(configsource: str, fullfilepath: str) -> dict:
     ''' generate a dictionary of metadat based on the information passed in
     * current file name
     * parent folder name
@@ -23,7 +24,7 @@ def _extract_metadata(configsource: str, filepath: str) -> dict:
 Simple gateway to the ingestion app
 '''
 
-def walk_directories_ingest_files(starting_dir_list:list,es_index:str):
+def _walk_directories_ingest_files(starting_dir_list:list,es_index:str):
     '''
     Do recursive walk of all files and folders in directory
     '''
@@ -60,7 +61,7 @@ def walk_directories_ingest_files(starting_dir_list:list,es_index:str):
                     logging.info("Recursive call to handle directory:"+full_filepath)
                     #package as list
                     full_filepath_as_list=[full_filepath]
-                    walk_directories_ingest_files(full_filepath_as_list,es_index)
+                    _walk_directories_ingest_files(full_filepath_as_list,es_index)
 
                 #########
                 # pdf
@@ -149,4 +150,4 @@ if __name__ == '__main__':
    
 
     #call the main method in this module
-    walk_directories_ingest_files(starting_dir_list, es_index)
+    _walk_directories_ingest_files(starting_dir_list, es_index)
