@@ -149,26 +149,7 @@ def index(index_name: str,filepath: str,filecontents: str,meta_data = {}) -> Non
 
 
 
-#########
-
-## json method
-'''	
-logging.debug("Name : " + str(eModel))
-
-url = "http://localhost:9200/" + settings.ES_INDEX +"/_doc?pretty"
-data = eModel.toJSON()
-
-response = requests.post(url, data=data,headers={
-                'Content-Type':'application/json',
-                'Accept-Language':'en'
-
-            })
-logging.debug("Url : " + url)
-logging.debug("Data : " + str(data))
-
-logging.debug("Request : " + str(requests))
-logging.debug("Response : " + str(response))
-'''       
+  
 
 
 # simple code to test from command line

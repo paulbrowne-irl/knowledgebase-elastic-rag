@@ -4,26 +4,38 @@
 * Can be pushed to public
 * Multiple, clear use cases using basic architecture
 
-# NEXT 
 
 # Revert
 * config line 15 - revert back to knowledge_base
 * config overwrite end line - back to include dir1
 
-# Mode to action
-	* anything else to ingest?
+
+# NEXT 
+* pull meta from name of folder (in config)
+* pull meta data from file name
+* test index
+	* Read logs - all docs ingested
+	* all folders as configed ingested?
+* test can pull back into results
+	* bot
+	* app
+* note missing file formats - is it just .xlsx?
+
+
+
+
 
 # 2nd sprint
 
 1. Test sources
-	* Read logs - all docs ingested
-	* all folders as configed ingested?
+	
 	
 
 1. doc up 
 	* overall solution
 	* how to run
 	* seperate section
+	* pull in notes from later in this doc
 
 
 
@@ -36,6 +48,7 @@
 * sanitze codebase ahead of public push
 * review python docs on bot, app, injest, rag_controller,
 * try spidering web sources
+* eland query summarise kb or other export
 
 
 

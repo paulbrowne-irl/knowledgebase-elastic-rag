@@ -9,6 +9,16 @@ import util.extract.extract_word as extract_word
 import util.index.index_elastic as index_elastic
 
 
+def _extract_metadata(configsource: str, filepath: str) -> dict:
+    ''' generate a dictionary of metadat based on the information passed in
+    * current file name
+    * parent folder name
+    * the generic bucket that the config file came from
+    '''
+
+    return {}
+
+
 '''
 Simple gateway to the ingestion app
 '''
