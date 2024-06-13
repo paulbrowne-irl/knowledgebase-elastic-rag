@@ -145,23 +145,6 @@ def index(index_name: str,filepath: str,filecontents: str,meta_data = {}) -> Non
     es_index.from_documents(pages, embedding=hf, es_url=es_url, index_name=index_name)
 
 
-
-# simple code to test from command line
-if __name__ == '__main__':
-    
-
-    #Set the Logging level. Change it to logging.INFO is you want just the important info
-    logging.basicConfig(level=logging.DEBUG)
-
-
-    #try call
-    logging.info("About to test index pdf")
-    index(index_name= "test",filename="file.pdf" ,filecontents="XYZ")
-
-    #try call
-    logging.info("About to test index text")
-    index(index_name= "test",filename="file.msg" ,filecontents="XYZ")
-    
     
 
 
