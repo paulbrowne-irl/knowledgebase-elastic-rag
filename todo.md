@@ -5,18 +5,10 @@
 * Multiple, clear use cases using basic architecture
 
 
-# Revert
-* config line 15 - revert back to knowledge_base
-* index_elastic.py final line 145
-
-
 # NEXT 
-* highlight exception
-* test index
-	* Read logs - all docs ingested
-	* all folders as configed ingested?
-	* all meta indext
 * Do index
+	* check docs in index
+	* check all meta data index
 
 * test can pull back sources and other meta into results - app
 
@@ -28,20 +20,19 @@
 	* seperate section
 	* pull in notes from later in this doc
 
+* release to main
+
 
 # Add to doc
 * Llama3 setup - pull from lab
 * Elastic create index knowledgebase - https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
 	* open elastic console http://localhost:5601/app/dev_tools#/console
-'''
-PUT /knowledge_base_tmp
-+
 
-response like {
-  "acknowledged": true,
-  "shards_acknowledged": true,
-  "index": "knowledge_base_tmp"
-}
+In console
+
+DELETE /knowledge_base
+PUT /knowledge_base
+
 
 
 # 2nd Sprint
@@ -90,10 +81,8 @@ response like {
 
 
 # Improvements - later priority
-* Prompts
 * email templates
 * links in email templates
-* langchain
 * more filtering based on updated xl
 * categorisation of emails (to person best able to answer them, based on topics
 * loop and see if we can improve (langchain)
