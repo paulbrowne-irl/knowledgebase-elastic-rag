@@ -35,7 +35,11 @@ COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
 COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
 RANDOM_DELAY_RANGE=config.read_int("RANDOM_DELAY_RANGE")
 
-def _get_suggested_anwer(llm_chain:LLMChain,next_question:str)->Tuple[str,List[Document]]:
+
+
+
+
+def _get_suggested_anwer_using_RAG(llm_chain:LLMChain,next_question:str)->Tuple[str,List[Document]]:
     '''
     find suggested answer using RAG techique
     '''
@@ -54,7 +58,7 @@ def _get_suggested_anwer(llm_chain:LLMChain,next_question:str)->Tuple[str,List[D
 
 
 
-def answer_questions_in_excel():
+def _loop_answer_questions_in_excel():
     
     '''
     Loop through the specified question file, attempting to answer the question files
@@ -64,9 +68,6 @@ def answer_questions_in_excel():
 
     #output data
     output_data = []
-
-    #for testing only
-    #rag_controller._llm_to_use = llm_echo.EchoLLM()
 
 
 
@@ -87,7 +88,7 @@ def answer_questions_in_excel():
         logging.debug("Question we are trying to answer:"+str(next_question.get(COL_QUESTION)))
 
         #get the suggested answer and supporting docs
-        informed_response, supporting_docs = _get_suggested_anwer(llm_chain,str(next_question.get(COL_QUESTION)))
+        informed_response, supporting_docs = _get_suggested_anwer_using_RAG(llm_chain,str(next_question.get(COL_QUESTION)))
 
         logging.info("Response:"+informed_response)
 
@@ -127,6 +128,6 @@ if __name__ == '__main__':
     rag_controller.setup()
 
     #call the main method in this module
-    answer_questions_in_excel()
+    _loop_answer_questions_in_excel()
 
                 
