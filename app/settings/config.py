@@ -47,4 +47,4 @@ def read_dict (ConfigKey:str)->dict:
     '''
 
     settings=config[ConfigKey]
-    return settings
+    return dict(settings)

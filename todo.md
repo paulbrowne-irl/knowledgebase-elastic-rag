@@ -7,54 +7,26 @@
 
 # Revert
 * config line 15 - revert back to knowledge_base
-* config overwrite end line - back to include dir1
+* index_elastic.py final line 145
 
 
 # NEXT 
-* pull meta from name of folder (in config) and thread through
-* dry run - no index - then revet
-* 
+* highlight exception
 * test index
 	* Read logs - all docs ingested
 	* all folders as configed ingested?
-* test can pull back into results
-	* bot
-	* app
+	* all meta indext
+* Do index
 
+* test can pull back sources and other meta into results - app
 
-
-
-* note missing file formats - is it just .xlsx?
-
-
-
-
-
-# 2nd sprint
-
-1. Test sources
-	
-	
+* run all unit tess see if can resolve
 
 1. doc up 
 	* overall solution
 	* how to run
 	* seperate section
 	* pull in notes from later in this doc
-
-
-
-
-# 3rd sprint
-* 3 documents back and use langchain llm to summarize
-* more readable links to source doc
-* move to unit testable 
-* find except , add logging.exception() to it
-* sanitze codebase ahead of public push
-* review python docs on bot, app, injest, rag_controller,
-* try spidering web sources
-* eland query summarise kb or other export
-
 
 
 # Add to doc
@@ -72,46 +44,44 @@ response like {
 }
 
 
-# Tidy these into main list
-* stoplist read from excel
-* Atext injest, FAQ document
+# 2nd Sprint
+* Test Bot working again
+* test meta data coming through to Bot XL
+
+
+
+# 3rd sprint
+* Unit testest bed
+* sanitze codebase (again) ahead of public release
+* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
+* stoplist read from excel - valuable?
+* review python docs on bot, app, injest, rag_controller,
+* update promot
+	* add topics
+	* remove dear sir / signed bot
+
+
+# 4th sprint
+* 3 documents back and use langchain llm to summarize
+* move to unit testable 
+* try spidering web sources
+* eland query summarise kb or other export
+* Additional file format index: .txt and .xlsx and .pptx
 * Look at similar projects (send from firefox) - can we migrate to use that?
+* Consider filtering on sentences
 
 
 
 
-# NEXT - UPGRADE BOT SEARCHING AGAINST INDEX
-
-* run and review indexed data - 	
 
 
 
 # Later - Iterate
-* update promot
-	* add topics
-	* remove dear sir / signed bot
+
 * [later] map topics to emails / areas of interest
 	* decide how to list topics
 	* read info from key excel files (like questions or topics)
-* Other Info
-	* any other meta data on docs
-	* any other doc types to ingst
-
-* Get unit tests working agiain
-
-* Consider filtering on sentences
-
-* Index other documents
-	* powerpoint
-
-* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
-
-* Final Decide folderstruture
-	* some sort of .ini file
-		* keywords / topics
-		* name of owner ?? or keep that in 
-
-# SENTIMENT ADD
+* [later] sentiment add
 	
 	* Add from calc_sentiment.py
 		* get topics from emails using injest method
@@ -131,7 +101,6 @@ response like {
 
 
 # Improvements - later NTH
-* Llama 3
 * named entities
 * Topic analysis
 * ?? Misfiled emails
@@ -153,13 +122,6 @@ response like {
 * Save attachments / call rules?
 * identify topics / keywords
 
-
-
-# AIM NEXT ITERATION+1
-
-** Helpdesk using internal detailled info (like emails)
-** Detailled financial analysis - 
-** Sanitized public / internal sharable version
 
 
 ## NEXT DO
@@ -206,8 +168,6 @@ response like {
 # NEXT 
 * see what documents are indexed
 * UI tweaks to streamlit to accomodate Q&A *on_text* for the moment
-* pull in better docs (from external index)
-* Silver: tweaks to streamlit to accomodate Q&A *on_text* for the moment
 * displaydocs better in similarity search
 * update home page (with RAG model)
 * stub out look and feel of other apps

@@ -53,12 +53,14 @@ def _walk_directories_ingest_files(starting_dir_dict:dict,es_index:str):
     '''
     logging.info("Will ingest to elastic index:"+es_index)
 
+    logging.debug("Starting Dict type:"+str(type(starting_dir_dict)))
+    logging.debug("Starting Dict\n"+str(starting_dir_dict))
 
 
     #########
     # iterate over multiple directories
     #########
-    for configsource,single_dir in starting_dir_dict:
+    for configsource,single_dir in starting_dir_dict.items():
 
         #########
         # iterate over files in directory
@@ -87,7 +89,8 @@ def _walk_directories_ingest_files(starting_dir_dict:dict,es_index:str):
                     logging.info("Recursive call to handle directory:"+full_filepath)
 
                     #package as list
-                    full_filepath_as_dict={configsource,full_filepath}
+                    full_filepath_as_dict={}
+                    full_filepath_as_dict[configsource]=full_filepath
                     _walk_directories_ingest_files(full_filepath_as_dict,es_index)
 
 
@@ -136,15 +139,16 @@ def _walk_directories_ingest_files(starting_dir_dict:dict,es_index:str):
                 #########
 
                 else:
-                    logging.info("Ignoring unknown format  format: "+filename)
+                    logging.info("Ignoring unknown format - format: "+filename)
 
 
             except Exception as problem:
 
                 # decide how to handle it
-                if config.read_boolean("CONTIUE_LOOP_AFTER_ERROR"):
+                if config.read_boolean("CONTINUE_LOOP_AFTER_ERROR"):
                     # Log the error and continue loop
-                    logging.error(problem)
+                    logging.exception(problem)
+                    logging.info("\n Will attempt to continue loop as per config")
 
                 else:
                     # rethrow the error and end
@@ -167,12 +171,11 @@ if __name__ == '__main__':
 
     #Set the Logging level. Change it to logging.INFO is you want just the important info
     #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.DEBUG)
 
 
     # get config
     starting_point_dict = config.read_dict("SOURCE_DIRECTORIES")
-    #starting_dir_list = [*starting_point_dict.values()]
 
     es_index=config.read("ES_INDEX_KB")
    
