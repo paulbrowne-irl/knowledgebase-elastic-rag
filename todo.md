@@ -1,21 +1,18 @@
 # AIM
 * RAG that works standalone
-* Works as business demo but allows deep dive 
-* Can be pushed to public
-* Multiple, clear use cases using basic architecture
+* Works as business demo but allows deep dive    
+* Can be pushed to public   
+* Multiple, clear use cases using basic architecture   
 
 
-# NEXT 
-* Do index
-	* check docs in index
-	* check all meta data index
+# NEXT    
 
-* test can pull back sources and other meta into results - app
+* test can pull back sources and other meta into results - bot   
 
-* run all unit tess see if can resolve
+* run all unit tess see if can resolve   
 
-1. doc up 
-	* overall solution
+1. doc up    
+	* overall solution   
 	* how to run
 	* seperate section
 	* pull in notes from later in this doc
