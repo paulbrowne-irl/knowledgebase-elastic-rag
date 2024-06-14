@@ -119,7 +119,7 @@ def _get_knowledgebase(index_name:str)->dict:
         logging.debug("Setting up Elastic Knowledgebase:"+index_name +" using embeddings:"+str(_embeddings))
 
 
-        _kb_dict [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=config.read("ES_URL"), index_name=index_to_use,strategy=ApproxRetrievalStrategy())
+        _kb_dict [index_name]=  ElasticsearchStore(embedding=_embeddings,es_url=config.read("ES_URL"), index_name=index_name,strategy=ApproxRetrievalStrategy())
         
 
     else:
