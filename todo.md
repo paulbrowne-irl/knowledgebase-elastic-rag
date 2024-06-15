@@ -7,6 +7,14 @@
 
 # NEXT    
 
+* "Good enough" solution for answering questions (lllama or other)
+	* pickle the token
+	* convert pickly to json
+* run bot and test
+
+* Revert
+	* Print statements in pickle_loader.py
+
 * test can pull back sources and other meta into results - bot   
 
 * run all unit tess see if can resolve   
@@ -19,6 +27,7 @@
 
 * release to main
 
+====================
 
 # Add to doc
 * Llama3 setup - pull from lab
@@ -27,9 +36,15 @@
 
 In console
 
+https://copilot.microsoft.com/
+Cookie manager
+
 DELETE /knowledge_base
 PUT /knowledge_base
 
+python settings/pickle_loader.py to save this value
+
+=====
 
 
 # 2nd Sprint
