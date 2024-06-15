@@ -87,6 +87,8 @@ def _setup_llm():
 
             _llm_to_use = HuggingFacePipeline(pipeline=pipe)
 
+
+
         elif (MODEL_LLM == "google"):
             logging.debug("Using Gemini LLM")
 
@@ -94,6 +96,8 @@ def _setup_llm():
 
             _llm_to_use = ChatGoogleGenerativeAI(
                 model="gemini-1.0-pro", api_key=token)  # was gemini-pro
+
+
 
         elif (MODEL_LLM == "claude"):
 
@@ -104,12 +108,14 @@ def _setup_llm():
             _llm_to_use = ChatAnthropic(
                 temperature=0, api_key=token, model_name="claude-3-opus-20240229")
 
+
+
         elif (MODEL_LLM == "openai"):
             logging.debug("Using Open AI LLM")
 
             token = token_loader.setup_token("openai")
-            _llm_to_use = ChatVertexAI(
-                model="gpt-3.5-turbo-0125", temperature=0, api_key=token)
+
+            _llm_to_use = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, api_key=token)
 
         elif (MODEL_LLM == "copilot"):
             logging.debug("Using Copilot LLM")
@@ -149,8 +155,7 @@ def get_nearest_match_documents(index_name: str, vector_search_text: str) -> Lis
     Get the nearest match documents using vector search
     '''
 
-    logging.debug(f"Nearest Search index {
-                  index_name} matching against {vector_search_text}")
+    logging.debug(f"Nearest Search index {index_name} matching against {vector_search_text}")
 
     # Get the handle to the Elastick Knowledge Base
     vector_search = _get_knowledgebase(index_name)
