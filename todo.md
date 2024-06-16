@@ -7,15 +7,9 @@
 
 # NEXT    
 
-* "Good enough" solution for answering questions (lllama or other)
-	* pickle the token
-	* convert pickly to json
 * run bot and test
-
-* Revert
-	* Print statements in pickle_loader.py
-
-* test can pull back sources and other meta into results - bot   
+	* "Good enough" solution for answering questions (lllama or other)
+	* test can pull back sources and other meta into results - bot   
 
 * run all unit tess see if can resolve   
 
@@ -75,12 +69,8 @@ python settings/pickle_loader.py to save this value
 
 
 
-
-
-
-
 # Later - Iterate
-
+* try out microsoft phi instead of llama
 * [later] map topics to emails / areas of interest
 	* decide how to list topics
 	* read info from key excel files (like questions or topics)
