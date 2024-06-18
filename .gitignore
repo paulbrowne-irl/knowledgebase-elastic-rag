@@ -183,3 +183,6 @@ cython_debug/
 app/settings/settings-overwrite.conf
 app/settings/config-overwrite.conf
 
+app/settings/token-copilot.pickle.old
+app/settings/private-key-notes.txt
+app/settings/token-storage-local.json

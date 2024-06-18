@@ -25,13 +25,17 @@ sentence_transformers
 huggingface-hub 
 #langchain 
 #tmp fix using version numbers
-langchain-community==0.2.1 
-langchain-core==0.2.1
+langchain-community ##==0.2.1 
+langchain-core ##==0.2.1
 langchain-elasticsearch
+langchain-google-genai
+langchain_google_vertexai
+langchain-openai
+langchain-anthropic
 sydney-py
 
 tensorflow
-
+pillow
 #configargparse
 pandas
 

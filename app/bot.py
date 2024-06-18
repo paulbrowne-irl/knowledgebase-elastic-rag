@@ -35,18 +35,22 @@ COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
 COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
 RANDOM_DELAY_RANGE=config.read_int("RANDOM_DELAY_RANGE")
 
-def _get_suggested_anwer(llm_chain:LLMChain,next_question:str)->Tuple[str,List[Document]]:
+
+
+
+
+def _get_suggested_anwser_using_RAG(llm_chain:LLMChain,this_question:str)->Tuple[str,List[Document]]:
     '''
     find suggested answer using RAG techique
     '''
     # Find nearest match documents
-    similar_docs = rag_controller.get_nearest_match_documents(ELASTIC_INDEX_NAME,next_question)
+    similar_docs = rag_controller.get_nearest_match_documents(ELASTIC_INDEX_NAME,this_question)
     logging.info("relevant docs:"+str(similar_docs))
 
     ## Ask Local LLM context informed prompt
     informed_context= similar_docs[0].page_content
 
-    informed_response = llm_chain.run(context=informed_context,question=next_question)
+    informed_response = llm_chain.run(context=informed_context,question=this_question)
 
     return informed_response, similar_docs
 
@@ -54,7 +58,7 @@ def _get_suggested_anwer(llm_chain:LLMChain,next_question:str)->Tuple[str,List[D
 
 
 
-def answer_questions_in_excel():
+def _loop_answer_questions_in_excel():
     
     '''
     Loop through the specified question file, attempting to answer the question files
@@ -64,9 +68,6 @@ def answer_questions_in_excel():
 
     #output data
     output_data = []
-
-    #for testing only
-    #rag_controller._llm_to_use = llm_echo.EchoLLM()
 
 
 
@@ -87,30 +88,36 @@ def answer_questions_in_excel():
         logging.debug("Question we are trying to answer:"+str(next_question.get(COL_QUESTION)))
 
         #get the suggested answer and supporting docs
-        informed_response, supporting_docs = _get_suggested_anwer(llm_chain,str(next_question.get(COL_QUESTION)))
+        informed_response, supporting_docs = _get_suggested_anwser_using_RAG(llm_chain,str(next_question.get(COL_QUESTION)))
 
         logging.info("Response:"+informed_response)
 
         # gather meta data into output
-        supporting_doc_text="This answer relies on information from:"
+        supporting_doc_text="This answer relies on information from:\n"
         for this_supporting_doc in supporting_docs:
-            supporting_doc_text +=str(this_supporting_doc.metadata)
+            supporting_doc_text +="DATA_SOURCE:"+str(this_supporting_doc.metadata["DATA_SOURCE"]+ " ")
+            supporting_doc_text +="PARENT_FOLDER:"+str(this_supporting_doc.metadata["PARENT_FOLDER"]+ " ")
+            supporting_doc_text +="FILE_NAME:"+str(this_supporting_doc.metadata["FILE_NAME"]+ " ")
+            supporting_doc_text +="PAGE:"+str(this_supporting_doc.metadata["page"])+ " "
+            supporting_doc_text +="\n"
+
 
         # save into output
         next_question[COL_TO_UPDATE_SUGGESTED_ANSWER]=informed_response
         next_question[COL_TO_UPDATE_RELEVANT_DOCS]=supporting_doc_text
         output_data.append(next_question)
+
+        #save output the dataframe
+        output_df = pd.DataFrame(output_data)
+        output_df.to_excel("output.xlsx")
+        logging.info("Output to overwrite output.xlsx - need to manually update into main sheet")
         
-        # wait random amount of time to allow sync, avoid spam copilot
+        # wait random amount of time to allow sync, avoid spam llm
         wait_random = randint(1,RANDOM_DELAY_RANGE)
         logging.info("Waiting random seconds:"+str(wait_random))
         sleep(wait_random)
 
-    #save output the dataframe
-    output_df = pd.DataFrame(output_data)
-    output_df.to_excel("output.xlsx")
 
-    logging.info("Output to output.xlsx - need to manually update into main sheet ")
 
 
 
@@ -126,6 +133,6 @@ if __name__ == '__main__':
     rag_controller.setup()
 
     #call the main method in this module
-    answer_questions_in_excel()
+    _loop_answer_questions_in_excel()
 
                 

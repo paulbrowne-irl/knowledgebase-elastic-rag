@@ -1,6 +1,6 @@
 import unittest
 import logging
-import settings.pickle_loader as pickle_loader
+import settings.token_loader as token_loader
 
 # allow imports from parent directory
 import sys
@@ -18,5 +18,5 @@ class Test_Pickle_Loader(unittest.TestCase):
         #setup test class
     
     def test_pickle_loader(self):
-        token = pickle_loader.setup_copilot_token()
+        token = token_loader.setup_token("some value")
         self.assertIsNotNone(token)

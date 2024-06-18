@@ -158,7 +158,7 @@ if __name__ == '__main__':
 
 
             #decide how to handle it
-            if(settings.CONTIUE_LOOP_AFTER_ERROR):
+            if(config.read_boolean("CONTINUE_LOOP_AFTER_ERROR")):
                  #Log the error and continue loop
                 logging.error(problem)
                 
