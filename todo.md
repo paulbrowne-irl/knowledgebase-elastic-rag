@@ -6,6 +6,8 @@
 
 
 # NEXT    
+* restore
+	* config to openai
 
 * run bot and test
 	* "Good enough" solution for answering questions (lllama or other)
