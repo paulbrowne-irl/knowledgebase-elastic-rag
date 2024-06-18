@@ -6,10 +6,9 @@ import settings.config as config
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import ElasticVectorSearch
+#from langchain_community.vectorstores import ElasticVectorSearch # replaced by next line
+from langchain_elasticsearch import  ElasticsearchStore
 from langchain_core.documents import Document
-
-#from langchain_community.vectorstores.elasticsearch import ElasticsearchStore
 
 # Module level variables
 character_text_splitter = None
@@ -43,7 +42,7 @@ def _do_setup():
     )
 
     # get the model we need to encode the text as vectors (in Elastic)
-    model_transformers = config.read("LOCAL_MODEL_TRANSFORMERS")
+    model_transformers = config.read("MODEL_TRANSFORMERS")
     logging.debug("Prep. Huggingface embedding setup using "+model_transformers)
     hf= HuggingFaceEmbeddings(model_name=model_transformers)
 
@@ -56,7 +55,7 @@ def _do_setup():
 
 
 
-def _extract_pdf(filepath: str,metadatas: Optional[dict])-> List[Document]:
+def _extract_pdf_and_meta(filepath: str,metadatas: Optional[dict])-> List[Document]:
     '''
     Index the specificed pdf (and document meta data) into the elastic index
     '''
@@ -88,7 +87,7 @@ def _extract_pdf(filepath: str,metadatas: Optional[dict])-> List[Document]:
 
 
 
-def _extract_text(filepath: str,filecontents: str,metadatas: Optional[dict])-> List[Document]:
+def _extract_text_and_meta(filepath: str,filecontents: str,metadatas: Optional[dict])-> List[Document]:
     '''
     Index the specificed pdf (and document meta data) into the elastic index
     '''
@@ -128,63 +127,24 @@ def index(index_name: str,filepath: str,filecontents: str,meta_data = {}) -> Non
     _do_setup()
 
     # Next we'll create our elasticsearch vectorstore in the langchain style:
-    es_index = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name)
+    #es_index = ElasticVectorSearch(embedding=hf,elasticsearch_url=es_url, index_name=index_name) prev
+    es_index= ElasticsearchStore(embedding=hf,es_url=es_url, index_name=index_name)
+
+
 
 
     ## Split our document body into pages using specific methods
     if filepath.lower().endswith(".pdf"):
         
-        pages = _extract_pdf(filepath,meta_data)
+        pages = _extract_pdf_and_meta(filepath,meta_data)
     else:
-        pages = _extract_text(filepath,filecontents,meta_data)
+        pages = _extract_text_and_meta(filepath,filecontents,meta_data)
       
 
     # save the page-text-metadata into the es index
-    es_index.from_documents(pages, embedding=hf, elasticsearch_url=es_url, index_name=index_name)
-
-    # was from text
-    # es_index.from_documents(eModel.toDocument(), embedding=hf, elasticsearch_url=es_url, index_name=settings.ES_INDEX )
+    es_index.from_documents(pages, embedding=hf, es_url=es_url, index_name=index_name)
 
 
-
-#########
-
-## json method
-'''	
-logging.debug("Name : " + str(eModel))
-
-url = "http://localhost:9200/" + settings.ES_INDEX +"/_doc?pretty"
-data = eModel.toJSON()
-
-response = requests.post(url, data=data,headers={
-                'Content-Type':'application/json',
-                'Accept-Language':'en'
-
-            })
-logging.debug("Url : " + url)
-logging.debug("Data : " + str(data))
-
-logging.debug("Request : " + str(requests))
-logging.debug("Response : " + str(response))
-'''       
-
-
-# simple code to test from command line
-if __name__ == '__main__':
-    
-
-    #Set the Logging level. Change it to logging.INFO is you want just the important info
-    logging.basicConfig(level=logging.DEBUG)
-
-
-    #try call
-    logging.info("About to test index pdf")
-    index(index_name= "test",filename="file.pdf" ,filecontents="XYZ")
-
-    #try call
-    logging.info("About to test index text")
-    index(index_name= "test",filename="file.msg" ,filecontents="XYZ")
-    
     
 
 

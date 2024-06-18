@@ -1,85 +1,82 @@
 # AIM
 * RAG that works standalone
-* Works as business demo but allows deep dive 
-* Can be pushed to public
-* Multiple, clear use cases using basic architecture
-
-# NEXT 
+* Works as business demo but allows deep dive    
+* Can be pushed to public   
+* Multiple, clear use cases using basic architecture   
 
 
-# 2nd sprint
-1. test loop
-	* config 54 back to copilot
+# NEXT    
+* restore
+	* config to openai
 
-1. config two sources on silver
-	* two sources
-	* anything else to ingest?
-1. Ingest run
-	* other index
+* run bot and test
+	* "Good enough" solution for answering questions (lllama or other)
+	* test can pull back sources and other meta into results - bot   
 
-1. doc up 
-	* overall solution
+* run all unit tess see if can resolve   
+
+1. doc up    
+	* overall solution   
 	* how to run
 	* seperate section
+	* pull in notes from later in this doc
 
-1. Doc silver
-	* notes on what needed for silver use
+* release to main
 
-# 3rd sprint
-* 3 documents back and use langchain llm to summarize
-* more readable links to source doc
-* move to unit testable 
-* find except , add logging.exception() to it
-* sanitze codebase ahead of public push
-* review python docs on bot, app, injest, rag_controller,
-
-
+====================
 
 # Add to doc
 * Llama3 setup - pull from lab
+* Elastic create index knowledgebase - https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
+	* open elastic console http://localhost:5601/app/dev_tools#/console
+
+In console
+
+https://copilot.microsoft.com/
+Cookie manager
+
+DELETE /knowledge_base
+PUT /knowledge_base
+
+python settings/pickle_loader.py to save this value
+
+=====
+
+
+# 2nd Sprint
+* Test Bot working again
+* test meta data coming through to Bot XL
 
 
 
-# Tidy these into main list
-* stoplist read from excel
-* Atext injest, FAQ document
+# 3rd sprint
+* Unit testest bed
+* sanitze codebase (again) ahead of public release
+* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
+* stoplist read from excel - valuable?
+* review python docs on bot, app, injest, rag_controller,
+* update promot
+	* add topics
+	* remove dear sir / signed bot
+
+
+# 4th sprint
+* 3 documents back and use langchain llm to summarize
+* move to unit testable 
+* try spidering web sources
+* eland query summarise kb or other export
+* Additional file format index: .txt and .xlsx and .pptx
 * Look at similar projects (send from firefox) - can we migrate to use that?
-
-
-
-
-# NEXT - UPGRADE BOT SEARCHING AGAINST INDEX
-
-* run and review indexed data - 	
+* Consider filtering on sentences
 
 
 
 # Later - Iterate
-* update promot
-	* add topics
-	* remove dear sir / signed bot
+* try out microsoft phi instead of llama
 * [later] map topics to emails / areas of interest
 	* decide how to list topics
 	* read info from key excel files (like questions or topics)
-* Other Info
-	* any other meta data on docs
-	* any other doc types to ingst
-
-* Get unit tests working agiain
-
-* Consider filtering on sentences
-
-* Index other documents
-	* powerpoint
-
-* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
-
-* Final Decide folderstruture
-	* some sort of .ini file
-		* keywords / topics
-		* name of owner ?? or keep that in 
-
-# SENTIMENT ADD
+* [later] sentiment add
 	
 	* Add from calc_sentiment.py
 		* get topics from emails using injest method
@@ -88,10 +85,8 @@
 
 
 # Improvements - later priority
-* Prompts
 * email templates
 * links in email templates
-* langchain
 * more filtering based on updated xl
 * categorisation of emails (to person best able to answer them, based on topics
 * loop and see if we can improve (langchain)
@@ -99,7 +94,6 @@
 
 
 # Improvements - later NTH
-* Llama 3
 * named entities
 * Topic analysis
 * ?? Misfiled emails
@@ -121,13 +115,6 @@
 * Save attachments / call rules?
 * identify topics / keywords
 
-
-
-# AIM NEXT ITERATION+1
-
-** Helpdesk using internal detailled info (like emails)
-** Detailled financial analysis - 
-** Sanitized public / internal sharable version
 
 
 ## NEXT DO
@@ -174,8 +161,6 @@
 # NEXT 
 * see what documents are indexed
 * UI tweaks to streamlit to accomodate Q&A *on_text* for the moment
-* pull in better docs (from external index)
-* Silver: tweaks to streamlit to accomodate Q&A *on_text* for the moment
 * displaydocs better in similarity search
 * update home page (with RAG model)
 * stub out look and feel of other apps
