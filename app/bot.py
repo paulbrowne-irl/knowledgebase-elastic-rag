@@ -111,7 +111,7 @@ def _loop_answer_questions_in_excel():
         #save output the dataframe
         output_df = pd.DataFrame(output_data)
         output_df.to_excel(OUTPUT_FILE)
-        logging.info(f"Output to overwrite {OUTPUT_FILE}} - need to manually update into main sheet")
+        logging.info(f"Output to overwrite {OUTPUT_FILE} - need to manually update into main sheet")
         
         # wait random amount of time to allow sync, avoid spam llm
         wait_random = randint(1,RANDOM_DELAY_RANGE)
