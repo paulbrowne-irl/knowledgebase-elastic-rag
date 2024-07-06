@@ -49,6 +49,7 @@ python settings/pickle_loader.py to save this value
 
 # 3rd sprint
 * Unit testest bed
+Try unit test in VSCode of main langchain class with different approaches
 * sanitze codebase (again) ahead of public release
 * Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
 * stoplist read from excel - valuable?
@@ -56,7 +57,7 @@ python settings/pickle_loader.py to save this value
 * update promot
 	* add topics
 	* remove dear sir / signed bot
-
+* try again syndey / copilot
 
 # 4th sprint
 * 3 documents back and use langchain llm to summarize
