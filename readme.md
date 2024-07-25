@@ -1,4 +1,6 @@
 # Allow colleagues to talk to your documents
+
+
 Many organisations/individuals have piles of documents containing valuable documents but are little used after their initial creation.
 
 "RAG" techniques allow you and colleagues to chat with these documents - allowing you to combine the accuracy of the documents and the "chattiness" of AIs like ChatGPT. More backgound to RAG in the links at the end of this page.
@@ -6,6 +8,8 @@ Many organisations/individuals have piles of documents containing valuable docum
 This project is code to implement a pilot RAG Chatbot in a not for profit VC. Given the community nature of the organisation (and the out-of-hours development) it is shared for reuse. It focuses on answering internal corporate queries (i.e. managing sensitive data, but also leveraging on a human-in-the-loop to both filter answers and provide feedback to learn) 
 
 For obvious reasons only generic code and no information / knowledge is shared - this has the benefit of you being able to add your own documents. See instructions below.
+
+<img src="images/screenshot.jpg" width="30%" height="30%" />
 
 ## Three main parts to the application: 
 While they are linked, you will typically run only one 
