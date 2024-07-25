@@ -1,4 +1,4 @@
-# Project Usage Notes
+# All colleagues to talk to your documents
 An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). Focuses on answering internal corporate queries (i.e. managing sensitive data, but also leveraging on a human-in-the-loop to both filter answers and provide feedback to learn) 
 
 ## Three main parts to the application: 
