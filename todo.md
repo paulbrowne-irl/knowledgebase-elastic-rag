@@ -3,6 +3,7 @@
 * Works as business demo but allows deep dive    
 * Can be pushed to public   
 * Multiple, clear use cases using basic architecture   
+* can link to excel or API 
 
 
 # NEXT    
