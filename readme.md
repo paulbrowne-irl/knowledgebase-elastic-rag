@@ -66,6 +66,7 @@ To run the ingest script
 * Open the app folder: _cd app_ in a terminal window
 * Activate the Python environment with dependencies you installed earelier: _source venv/bin/activate_
 * Run the script using _python ingest.py_
+    * (You may need to be more version specific e.g. python3 ingest.py)
 
 In general, you will only need the ingest script once (or infrequently, if you wise to add more documents). For small datasets, it is probably easier to delete the Knowledgebase index (using Kibana - see link and screenshot above), then run the Ingest script again.
 
