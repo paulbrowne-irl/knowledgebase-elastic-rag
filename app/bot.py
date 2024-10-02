@@ -34,6 +34,7 @@ COL_QUESTION=config.read("COL_TO_READ_QUESTION_IN_FILE")
 COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
 COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
 RANDOM_DELAY_RANGE=config.read_int("RANDOM_DELAY_RANGE")
+OUTPUT_FILE = config.read("BOT_OUTPUT_FILE")
 
 
 
@@ -109,8 +110,8 @@ def _loop_answer_questions_in_excel():
 
         #save output the dataframe
         output_df = pd.DataFrame(output_data)
-        output_df.to_excel("output.xlsx")
-        logging.info("Output to overwrite output.xlsx - need to manually update into main sheet")
+        output_df.to_excel(OUTPUT_FILE)
+        logging.info(f"Output to overwrite {OUTPUT_FILE} - need to manually update into main sheet")
         
         # wait random amount of time to allow sync, avoid spam llm
         wait_random = randint(1,RANDOM_DELAY_RANGE)
