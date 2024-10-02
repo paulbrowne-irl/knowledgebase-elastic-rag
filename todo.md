@@ -7,8 +7,9 @@
 
 
 # NEXT    
-* restore
-	* config to openai
+* restore previous
+* try latest docs and test
+l* config to openai
 
 * run bot and test
 	* "Good enough" solution for answering questions (lllama or other)
