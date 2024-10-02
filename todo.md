@@ -3,11 +3,13 @@
 * Works as business demo but allows deep dive    
 * Can be pushed to public   
 * Multiple, clear use cases using basic architecture   
+* can link to excel or API 
 
 
 # NEXT    
-* restore
-	* config to openai
+* restore previous
+* try latest docs and test
+l* config to openai
 
 * run bot and test
 	* "Good enough" solution for answering questions (lllama or other)

@@ -1,5 +1,15 @@
-# Project Usage Notes
-An AI Knowledgebase implementation using RAG (Retrieval Augmented Generation). Focuses on answering internal corporate queries (i.e. managing sensitive data, but also leveraging on a human-in-the-loop to both filter answers and provide feedback to learn) 
+# Allow colleagues to talk to your documents
+
+
+Many organisations/individuals have piles of documents containing valuable documents but are little used after their initial creation.
+
+"RAG" techniques allow you and colleagues to chat with these documents - allowing you to combine the accuracy of the documents and the "chattiness" of AIs like ChatGPT. More backgound to RAG in the links at the end of this page.
+
+This project is code to implement a pilot RAG Chatbot in a not for profit VC. Given the community nature of the organisation (and the out-of-hours development) it is shared for reuse. It focuses on answering internal corporate queries (i.e. managing sensitive data, but also leveraging on a human-in-the-loop to both filter answers and provide feedback to learn) 
+
+For obvious reasons only generic code and no information / knowledge is shared - this has the benefit of you being able to add your own documents. See instructions below.
+
+<img src="images/screenshot.jpg" width="30%" height="30%" />
 
 ## Three main parts to the application: 
 While they are linked, you will typically run only one 
@@ -21,9 +31,11 @@ While they are linked, you will typically run only one
 Instructions for first time setup of the project:
 1. Checkout / download this project as a folder onto the host computer
 
-1. Install Docker - standard install (either Docker Desktop, or via WSL-Ubuntu).You may also need to install the docker-compose plugin 
+1. Install Docker - standard install (either Docker Desktop, or via WSL-Ubuntu).You may also need to install the docker-compose plugin
+    * https://docs.docker.com/engine/install/ubuntu/
 
 1. Install Python (3.12 or higher) in the usual way. Python pip and virtualenv tools are also needed.
+    * check first what version you have installed usign python -V
 
 1. Install Python dependencies - in a terminal window, at the project root
     * Create environment: _virtualenv venv_
@@ -32,6 +44,7 @@ Instructions for first time setup of the project:
 
 1. Setup index in Elastic (first time only):
     * Start Elastic (using docker compose up - see notes below):
+        * you may need to isntall docker - _sudo apt intstall docker.io_ and docker compose _sudo apt-get install docker-compose-plugin_
     * Open Kibana (see notes below)
     * Setup indices - open this page  http://localhost:5601/app/management/data/index_management/indices
         * _test-can-del_ - used by unit tests
@@ -43,7 +56,7 @@ It is possible to install Elastic and Kibana directly on the machine (i.e. no Do
 ## Starting the background infrastructure
 
 A Docker compose file is provided to make it easy to download and run the supporting infrastture (e.g. the Elastic Search engine). To start this Infrastructure using Docker:
-* Open terminal window, navigate to home folder containing docker-compose.yml
+* Open a (new) terminal window, navigate to home folder containing docker-compose.yml
 * Start Elastic and Kibana using: _docker compose up_
 
 You can check if the Elastic Search Service is running using the url http://localhost:9200/. You should see a success message similar to the screenshot below.
