@@ -3,47 +3,27 @@
 * Works as business demo but allows deep dive    
 * Can be pushed to public   
 * Multiple, clear use cases using basic architecture   
-* can link to excel or API 
+* can link to excel or external helpdesk api
 
 
-# NEXT    
-* restore previous
-* try latest docs and test
-l* config to openai
+# NEXT
+* refactor bot
+* refactor api call code
+* update llm models   
+* try link to external api
+* try latest docs and test 
+	- load latest data
+	- chje
+* what other data formats to load
+* config to openai
+* drop / reindex single folder or document
+
 
 * run bot and test
 	* "Good enough" solution for answering questions (lllama or other)
 	* test can pull back sources and other meta into results - bot   
 
 * run all unit tess see if can resolve   
-
-1. doc up    
-	* overall solution   
-	* how to run
-	* seperate section
-	* pull in notes from later in this doc
-
-* release to main
-
-====================
-
-# Add to doc
-* Llama3 setup - pull from lab
-* Elastic create index knowledgebase - https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
-	* open elastic console http://localhost:5601/app/dev_tools#/console
-
-In console
-
-https://copilot.microsoft.com/
-Cookie manager
-
-DELETE /knowledge_base
-PUT /knowledge_base
-
-python settings/pickle_loader.py to save this value
-
-=====
-
 
 # 2nd Sprint
 * Test Bot working again
@@ -104,19 +84,6 @@ Try unit test in VSCode of main langchain class with different approaches
 * POS tagging (counties but other keywords)
 * Postive or negative sentiment
 * LEO / County
-
-
-## next Problems I want to solve
-* get list of attached filenames
-* Emails without a response
-* Emails filed in the wrong folder
-* link email in chain (and recognize text)
-* suggest best email response (to draft?)
-* tag based on last person to answer client
-
-* identify most relevant colleauges
-* Save attachments / call rules?
-* identify topics / keywords
 
 
 

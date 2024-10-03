@@ -49,6 +49,10 @@ Instructions for first time setup of the project:
     * Setup indices - open this page  http://localhost:5601/app/management/data/index_management/indices
         * _test-can-del_ - used by unit tests
         * _knowledge_base_ - the main index used to store documents
+    * Useful commands (in the dev console window of Kibana)
+        * Delete an index  _DELETE /knowledge_base_
+        * Create an index _PUT /knowledge_base_
+
 
 It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed), please refer to the Elastic / Kibana home page for instructions - https://www.elastic.co/
 
