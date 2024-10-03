@@ -94,7 +94,7 @@ In general, you will only need the ingest script once (or infrequently, if you w
 
 The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
 
-## Running the Bot
+## Running the Bot - Excel
 
 Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be hosted online, this allows Integration with Office 365 and Power Automate. e.g.
 1. The User can ask a question on Microsoft Forms
@@ -106,7 +106,11 @@ Typical flow for the Bot is to read a question from Excel, apply RAG techniques 
 To run the bot.
 * Open the app folder: _cd app_ in a terminal window
 * Activate the Python environment with dependencies you installed earelier: _source venv/bin/activate_
-* Run the script using _python bot.py_
+* Run the script using _python bot_excel.py_
+
+## Running the Bot - External Helpdesk API
+
+* TODO8
 
 
 ## Run the Web Application
