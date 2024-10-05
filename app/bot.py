@@ -43,7 +43,7 @@ class Bot(ABC):
 
 
 
-    def _get_suggested_anwser_using_Chain(llm_chain:LLMChain,this_question:str)->Tuple[str,List[Document]]:
+    def _get_suggested_anwser_using_chain(self,llm_chain:LLMChain,this_question:str)->Tuple[str,List[Document]]:
         '''
         Common to all bots - find suggested answer using presetup chain (normally RAG)
         '''
@@ -59,7 +59,7 @@ class Bot(ABC):
         return informed_response, similar_docs
 
     @abstractmethod
-    def loop_answer_questions_from_source():
+    def loop_answer_questions_from_source(self):
         pass
 
 

@@ -169,6 +169,7 @@ def get_llm_chain(prompt_template: str) -> LLMChain:
     '''
 
     global _llm_to_use
+    logging.info(f"Configured to use LLM:{_llm_to_use}")
 
     prompt_informed = PromptTemplate(
         template=prompt_template, input_variables=["context", "question"])
