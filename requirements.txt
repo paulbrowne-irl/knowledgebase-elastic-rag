@@ -23,8 +23,7 @@ eland
 elasticsearch
 sentence_transformers 
 huggingface-hub 
-#langchain 
-#tmp fix using version numbers
+
 langchain-community ##==0.2.1 
 langchain-core ##==0.2.1
 langchain-elasticsearch

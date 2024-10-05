@@ -7,9 +7,9 @@
 
 
 # 1st Sprint (this branch)
-* Test out better answers using langchaing
-* NTH
-	* Tests
+* Lab for better answers using langchaing
+* abstract bot
+* Tests stub as client
 
 * run bot and test
 	* "Good enough" solution for answering questions (lllama or other)
