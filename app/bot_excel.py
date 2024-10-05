@@ -18,7 +18,8 @@ from sentence_transformers import SentenceTransformer
 
 from abc import ABC, abstractmethod
 
-import bot_excel
+import bot
+
 
 
 '''
@@ -31,67 +32,66 @@ So it relies on the following ...
 * power automate flow to email people w
 
 '''
-class Bot(bot_excel):
+class Bot_Excel(bot.Bot):
 
-        def loop_answer_questions_from_source():
-        
-            '''
-            Loop through the specified question file, attempting to answer the question files
-            '''
+    def loop_answer_questions_from_source(self):
+    
+        '''
+        Loop through the specified question file, attempting to answer the question files
+        '''
 
-            #setup the loop
+        #setup the loop
 
-            #output data
-            output_data = []
+        #output data
+        output_data = []
 
 
 
-            # get the questions needing answer
-            logging.debug("Reading questions needing answered from "+Bot.QUESTION_FILE_NAME)
-            unanswered_questions_df = xl_rw.read_unanswered_questions(Bot.QUESTION_FILE_NAME,Bot.COL_QUESTION,Bot.COL_TO_UPDATE_SUGGESTED_ANSWER)
-            logging.debug("Number of unanswered questions:"+str(len(unanswered_questions_df.index)))
+        # get the questions needing answer
+        logging.debug("Reading questions needing answered from "+self.QUESTION_FILE_NAME)
+        unanswered_questions_df = xl_rw.read_unanswered_questions(self.QUESTION_FILE_NAME,self.COL_QUESTION,self.COL_TO_UPDATE_SUGGESTED_ANSWER)
+        logging.debug("Number of unanswered questions:"+str(len(unanswered_questions_df.index)))
+
+        # Loop through questions
+        for index,next_question in unanswered_questions_df.iterrows():
+
+            logging.info("Next question line:"+str(index))
+            logging.info(str(next_question))
 
             #generate the chain using the prompt
             llm_chain = rag_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
 
-            # Loop through questions
-            for index,next_question in unanswered_questions_df.iterrows():
+            logging.debug("Question we are trying to answer:"+str(next_question.get(self.COL_QUESTION)))
 
+            #get the suggested answer and supporting docs
+            informed_response, supporting_docs = self._get_suggested_anwser_using_chain(llm_chain,str(next_question.get(self.COL_QUESTION)))
+
+            logging.info("Response:"+informed_response)
+
+            # gather meta data into output
+            supporting_doc_text="This answer relies on information from:\n"
+            for this_supporting_doc in supporting_docs:
+                supporting_doc_text +="DATA_SOURCE:"+str(this_supporting_doc.metadata["DATA_SOURCE"]+ " ")
+                supporting_doc_text +="PARENT_FOLDER:"+str(this_supporting_doc.metadata["PARENT_FOLDER"]+ " ")
+                supporting_doc_text +="FILE_NAME:"+str(this_supporting_doc.metadata["FILE_NAME"]+ " ")
+                supporting_doc_text +="PAGE:"+str(this_supporting_doc.metadata["page"])+ " "
+                supporting_doc_text +="\n"
+
+
+            # save into output
+            next_question[self.COL_TO_UPDATE_SUGGESTED_ANSWER]=informed_response
+            next_question[self.COL_TO_UPDATE_RELEVANT_DOCS]=supporting_doc_text
+            output_data.append(next_question)
+
+            #save output the dataframe
+            output_df = pd.DataFrame(output_data)
+            output_df.to_excel(self.OUTPUT_FILE)
+            logging.info(f"Output to overwrite {self.OUTPUT_FILE} - need to manually update into main sheet")
             
-                logging.info("Next question line:"+str(index))
-                logging.info(str(next_question))
-
-                logging.debug("Question we are trying to answer:"+str(next_question.get(Bot.COL_QUESTION)))
-
-                #get the suggested answer and supporting docs
-                informed_response, supporting_docs = Bot._get_suggested_anwser_using_Chain(llm_chain,str(next_question.get(Bot.COL_QUESTION)))
-
-                logging.info("Response:"+informed_response)
-
-                # gather meta data into output
-                supporting_doc_text="This answer relies on information from:\n"
-                for this_supporting_doc in supporting_docs:
-                    supporting_doc_text +="DATA_SOURCE:"+str(this_supporting_doc.metadata["DATA_SOURCE"]+ " ")
-                    supporting_doc_text +="PARENT_FOLDER:"+str(this_supporting_doc.metadata["PARENT_FOLDER"]+ " ")
-                    supporting_doc_text +="FILE_NAME:"+str(this_supporting_doc.metadata["FILE_NAME"]+ " ")
-                    supporting_doc_text +="PAGE:"+str(this_supporting_doc.metadata["page"])+ " "
-                    supporting_doc_text +="\n"
-
-
-                # save into output
-                next_question[Bot.COL_TO_UPDATE_SUGGESTED_ANSWER]=informed_response
-                next_question[Bot.COL_TO_UPDATE_RELEVANT_DOCS]=supporting_doc_text
-                output_data.append(next_question)
-
-                #save output the dataframe
-                output_df = pd.DataFrame(output_data)
-                output_df.to_excel(Bot.OUTPUT_FILE)
-                logging.info(f"Output to overwrite {Bot.OUTPUT_FILE} - need to manually update into main sheet")
-                
-                # wait random amount of time to allow sync, avoid spam llm
-                wait_random = randint(1,Bot.RANDOM_DELAY_RANGE)
-                logging.info("Waiting random seconds:"+str(wait_random))
-                sleep(wait_random)
+            # wait random amount of time to allow sync, avoid spam llm
+            wait_random = randint(1,self.RANDOM_DELAY_RANGE)
+            logging.info("Waiting random seconds:"+str(wait_random))
+            sleep(wait_random)
 
 
 
@@ -106,6 +106,6 @@ if __name__ == '__main__':
     rag_controller.setup()
 
     #call the main method in this module
-    myBot = Bot()
+    myBot = Bot_Excel()
     myBot.loop_answer_questions_from_source()
 
