@@ -1,6 +1,6 @@
 import logging
-import os
-import getpass
+import requests
+
 from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
                     Tuple, Union)
 
@@ -13,7 +13,7 @@ from langchain.prompts import PromptTemplate
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms import HuggingFacePipeline, Ollama
 from langchain_core.documents import Document
-from langchain_elasticsearch import ApproxRetrievalStrategy, DenseVectorStrategy, ElasticsearchStore
+from langchain_elasticsearch import DenseVectorStrategy, ElasticsearchStore
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 from util.rag import llm_echo
 
@@ -70,7 +70,14 @@ def _setup_llm():
         logging.debug(f"Attmpting to setup LLM {MODEL_LLM}")
 
         if (MODEL_LLM == "llama3"):
-            _llm_to_use = Ollama(model="llama3", stop=['<|eot_id|>'])
+            _llm_to_use = Ollama(model="llama3.2", stop=['<|eot_id|>'])
+
+            # check local llama instance running
+            # If you get an error from the following line, double check the
+            # install at https://github.com/ollama/ollama
+            requests.get("http://localhost:11434/")
+            
+
 
         elif (MODEL_LLM == "google/flan-t5-large"):
 
@@ -155,17 +162,17 @@ def _get_knowledgebase_retriever(index_name: str) -> BaseRetriever:
     return _kb_dict[index_name]
 
 
-def get_nearest_match_documents(index_name: str, vector_search_text: str) -> List[Document]:
+def get_nearest_match_documents(index_name: str, search_text: str) -> List[Document]:
     '''
     Get the nearest match documents using vector search
     '''
 
-    logging.debug(f"Nearest Search index {index_name} matching against {vector_search_text}")
+    logging.debug(f"Nearest Search index {index_name} matching against {search_text}")
 
     # Get the handle to the Elastick Knowledge Base
     vector_retriever = _get_knowledgebase_retriever(index_name)
 
-    return vector_retriever.invoke(vector_search_text)
+    return vector_retriever.invoke(search_text)
 
 
 def get_llm_chain(prompt_template: str) -> LLMChain:
