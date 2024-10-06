@@ -37,6 +37,7 @@ tensorflow
 pillow
 #configargparse
 pandas
+tf-keras
 
 
 
