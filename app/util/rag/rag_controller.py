@@ -1,4 +1,3 @@
-
 import logging
 import os
 import getpass
@@ -18,10 +17,10 @@ from langchain_elasticsearch import ApproxRetrievalStrategy, ElasticsearchStore
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 from util.rag import llm_echo
 
-from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.prompts import ChatPromptTemplate
+#from langchain_core.messages import HumanMessage, SystemMessage
+#from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
-from langchain_google_vertexai import ChatVertexAI
+#from langchain_google_vertexai import ChatVertexAI
 from langchain_anthropic import ChatAnthropic
 
 
@@ -173,5 +172,7 @@ def get_llm_chain(prompt_template: str) -> LLMChain:
 
     prompt_informed = PromptTemplate(
         template=prompt_template, input_variables=["context", "question"])
+    
+    llm_chain = LLMChain(prompt=prompt_informed, llm=_llm_to_use)
 
-    return LLMChain(prompt=prompt_informed, llm=_llm_to_use)
+    return llm_chain
