@@ -10,10 +10,10 @@ import util.rag.llm_copilot as llm_copilot
 from langchain.chains.llm import LLMChain
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms import HuggingFacePipeline, Ollama
 from langchain_core.documents import Document
-from langchain_elasticsearch import ApproxRetrievalStrategy, ElasticsearchStore
+from langchain_elasticsearch import ApproxRetrievalStrategy, DenseVectorStrategy, ElasticsearchStore
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 from util.rag import llm_echo
 
@@ -143,12 +143,10 @@ def _get_knowledgebase_retriever(index_name: str) -> BaseRetriever:
                       index_name + " using embeddings:"+str(_embeddings))
 
         tmpES_Store = ElasticsearchStore(embedding=_embeddings, es_url=config.read(
-            "ES_URL"), index_name=index_name, strategy=ApproxRetrievalStrategy())
+            "ES_URL"), index_name=index_name, strategy=DenseVectorStrategy()) #was ApproxRetrievalStrategy
         
-        ## testing if we can do this - from https://python.langchain.com/docs/integrations/vectorstores/elasticsearch/
-        print("#### Start test")
+        #convert to standard langchain retriever format
         _kb_dict[index_name] = tmpES_Store.as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.2})
-        print("#### success!!")
 
 
     else:

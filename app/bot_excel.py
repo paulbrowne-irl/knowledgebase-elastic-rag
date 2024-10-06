@@ -34,6 +34,14 @@ So it relies on the following ...
 '''
 class Bot_Excel(bot.Bot):
 
+    #Excel Bot specific confir values
+    QUESTION_FILE_NAME=config.read("QUESTION_FILE_XLS")
+    COL_QUESTION=config.read("COL_TO_READ_QUESTION_IN_FILE")
+    COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
+    COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
+    OUTPUT_FILE = config.read("BOT_OUTPUT_FILE")
+
+
     def loop_answer_questions_from_source(self):
     
         '''
