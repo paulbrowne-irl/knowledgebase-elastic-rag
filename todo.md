@@ -3,46 +3,32 @@
 * Works as business demo but allows deep dive    
 * Can be pushed to public   
 * Multiple, clear use cases using basic architecture   
-* can link to excel or API 
+* Can link to excel or Ticketing System  
 
 
-# NEXT    
-* restore previous
-* try latest docs and test
-l* config to openai
+# 1st Sprint (this branch)
+* finish move to 0.3 langchain / retriever
+* Lab for better answers using langchain
+* abstract bot
+* Tests stub as client
 
 * run bot and test
 	* "Good enough" solution for answering questions (lllama or other)
 	* test can pull back sources and other meta into results - bot   
 
-* run all unit tess see if can resolve   
+* run all unit tests see if can resolve
 
-1. doc up    
-	* overall solution   
-	* how to run
-	* seperate section
-	* pull in notes from later in this doc
+* Organise imports
 
-* release to main
+* new 
 
-====================
+1. doc add    
+	* different bots   
+	* installing llama3 / more on API keys
 
-# Add to doc
-* Llama3 setup - pull from lab
-* Elastic create index knowledgebase - https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
-	* open elastic console http://localhost:5601/app/dev_tools#/console
+1. Release to main
 
-In console
 
-https://copilot.microsoft.com/
-Cookie manager
-
-DELETE /knowledge_base
-PUT /knowledge_base
-
-python settings/pickle_loader.py to save this value
-
-=====
 
 
 # 2nd Sprint
