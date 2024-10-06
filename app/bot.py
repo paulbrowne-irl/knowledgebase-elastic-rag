@@ -34,9 +34,6 @@ class Bot(ABC):
     ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
     RANDOM_DELAY_RANGE=config.read_int("RANDOM_DELAY_RANGE")
 
-    
-
-
 
 
     def _get_suggested_anwser_using_chain(self,llm_chain:LLMChain,this_question:str)->Tuple[str,List[Document]]:
@@ -51,6 +48,7 @@ class Bot(ABC):
         informed_context= similar_docs[0].page_content
 
         informed_response = llm_chain.run(context=informed_context,question=this_question)
+        
 
         return informed_response, similar_docs
 
