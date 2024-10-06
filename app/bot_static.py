@@ -37,8 +37,8 @@ class Bot_Static(bot.Bot):
 
         #setup the loop
         input_questions=[
-            "question1",
-            "question2"
+            "What foods should you eat while in Dublin?",
+            "Should I go to college to study accounting?"
         ]
 
         #output data
