@@ -7,6 +7,7 @@
 
 
 # 1st Sprint (this branch)
+* finish move to 0.3 langchain / retriever
 * Lab for better answers using langchain
 * abstract bot
 * Tests stub as client
@@ -16,6 +17,8 @@
 	* test can pull back sources and other meta into results - bot   
 
 * run all unit tests see if can resolve
+
+* Organise imports
 
 * new 
 
