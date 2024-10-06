@@ -16,8 +16,6 @@ from util.rag import rag_controller as rag_controller
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
 
-from abc import ABC, abstractmethod
-
 import bot
 
 
