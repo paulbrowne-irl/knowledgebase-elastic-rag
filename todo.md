@@ -3,11 +3,11 @@
 * Works as business demo but allows deep dive    
 * Can be pushed to public   
 * Multiple, clear use cases using basic architecture   
-* Can link to excel or Ticketing System sAPI 
+* Can link to excel or Ticketing System  
 
 
 # 1st Sprint (this branch)
-* Lab for better answers using langchaing
+* Lab for better answers using langchain
 * abstract bot
 * Tests stub as client
 
@@ -15,13 +15,14 @@
 	* "Good enough" solution for answering questions (lllama or other)
 	* test can pull back sources and other meta into results - bot   
 
-* run all unit tess see if can resolve   
+* run all unit tests see if can resolve
 
-1. doc up    
-	* overall solution   
-	* how to run
-	* seperate section
-	* pull in notes from later in this doc
+* new 
+
+1. doc add    
+	* different bots   
+	* installing llama3 / more on API keys
+
 1. Release to main
 
 
