@@ -1,7 +1,6 @@
-
 import logging
-import os
-import getpass
+import requests
+
 from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
                     Tuple, Union)
 
@@ -11,17 +10,19 @@ import util.rag.llm_copilot as llm_copilot
 from langchain.chains.llm import LLMChain
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms import HuggingFacePipeline, Ollama
 from langchain_core.documents import Document
-from langchain_elasticsearch import ApproxRetrievalStrategy, ElasticsearchStore
+from langchain_elasticsearch import DenseVectorStrategy, ElasticsearchStore
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 from util.rag import llm_echo
 
-from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.retrievers import BaseRetriever
+
+#from langchain_core.messages import HumanMessage, SystemMessage
+#from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
-from langchain_google_vertexai import ChatVertexAI
+#from langchain_google_vertexai import ChatVertexAI
 from langchain_anthropic import ChatAnthropic
 
 
@@ -69,7 +70,14 @@ def _setup_llm():
         logging.debug(f"Attmpting to setup LLM {MODEL_LLM}")
 
         if (MODEL_LLM == "llama3"):
-            _llm_to_use = Ollama(model="llama3", stop=['<|eot_id|>'])
+            _llm_to_use = Ollama(model="llama3.2", stop=['<|eot_id|>'])
+
+            # check local llama instance running
+            # If you get an error from the following line, double check the
+            # install at https://github.com/ollama/ollama
+            requests.get("http://localhost:11434/")
+            
+
 
         elif (MODEL_LLM == "google/flan-t5-large"):
 
@@ -131,7 +139,7 @@ def _setup_llm():
         logging.debug("LLM already setup")
 
 
-def _get_knowledgebase(index_name: str) -> dict:
+def _get_knowledgebase_retriever(index_name: str) -> BaseRetriever:
     '''
     Setup Handle to the external RAG Datastore
     '''
@@ -141,8 +149,12 @@ def _get_knowledgebase(index_name: str) -> dict:
         logging.debug("Setting up Elastic Knowledgebase:" +
                       index_name + " using embeddings:"+str(_embeddings))
 
-        _kb_dict[index_name] = ElasticsearchStore(embedding=_embeddings, es_url=config.read(
-            "ES_URL"), index_name=index_name, strategy=ApproxRetrievalStrategy())
+        tmpES_Store = ElasticsearchStore(embedding=_embeddings, es_url=config.read(
+            "ES_URL"), index_name=index_name, strategy=DenseVectorStrategy()) #was ApproxRetrievalStrategy
+        
+        #convert to standard langchain retriever format
+        _kb_dict[index_name] = tmpES_Store.as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.2})
+
 
     else:
         logging.debug("Using cached Datastore "+index_name)
@@ -150,17 +162,17 @@ def _get_knowledgebase(index_name: str) -> dict:
     return _kb_dict[index_name]
 
 
-def get_nearest_match_documents(index_name: str, vector_search_text: str) -> List[Document]:
+def get_nearest_match_documents(index_name: str, search_text: str) -> List[Document]:
     '''
     Get the nearest match documents using vector search
     '''
 
-    logging.debug(f"Nearest Search index {index_name} matching against {vector_search_text}")
+    logging.debug(f"Nearest Search index {index_name} matching against {search_text}")
 
     # Get the handle to the Elastick Knowledge Base
-    vector_search = _get_knowledgebase(index_name)
+    vector_retriever = _get_knowledgebase_retriever(index_name)
 
-    return vector_search.similarity_search(vector_search_text)
+    return vector_retriever.invoke(search_text)
 
 
 def get_llm_chain(prompt_template: str) -> LLMChain:
@@ -169,8 +181,11 @@ def get_llm_chain(prompt_template: str) -> LLMChain:
     '''
 
     global _llm_to_use
+    logging.info(f"Configured to use LLM:{_llm_to_use}")
 
     prompt_informed = PromptTemplate(
         template=prompt_template, input_variables=["context", "question"])
+    
+    llm_chain = LLMChain(prompt=prompt_informed, llm=_llm_to_use)
 
-    return LLMChain(prompt=prompt_informed, llm=_llm_to_use)
+    return llm_chain
