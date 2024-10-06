@@ -32,13 +32,9 @@ class Bot(ABC):
 
     #get config values
     ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
-    QUESTION_FILE_NAME=config.read("QUESTION_FILE_XLS")
-    COL_QUESTION=config.read("COL_TO_READ_QUESTION_IN_FILE")
-    COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
-    COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
     RANDOM_DELAY_RANGE=config.read_int("RANDOM_DELAY_RANGE")
-    OUTPUT_FILE = config.read("BOT_OUTPUT_FILE")
 
+    
 
 
 
