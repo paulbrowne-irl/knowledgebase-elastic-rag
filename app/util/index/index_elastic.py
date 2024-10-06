@@ -5,8 +5,7 @@ from typing import List, Optional
 import settings.config as config
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.embeddings import HuggingFaceEmbeddings
-#from langchain_community.vectorstores import ElasticVectorSearch # replaced by next line
+from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from langchain_elasticsearch import  ElasticsearchStore
 from langchain_core.documents import Document
 

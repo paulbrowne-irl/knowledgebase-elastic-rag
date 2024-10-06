@@ -13,7 +13,7 @@ from util.office import xl_rw as xl_rw
 from util.rag import llm_echo
 from util.rag import rag_controller as rag_controller
 
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
 
 from abc import ABC, abstractmethod
