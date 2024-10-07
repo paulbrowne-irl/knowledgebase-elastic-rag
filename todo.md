@@ -18,12 +18,33 @@
 * drop / reindex single folder or document
 
 
+
+# 1st Sprint (this branch)
+* finish move to 0.3 langchain / retriever
+* Lab for better answers using langchain
+* abstract bot
+* Tests stub as client
+
 * run bot and test
 	* "Good enough" solution for answering questions (lllama or other)
 	* test can pull back sources and other meta into results - bot   
 
-* run all unit tess see if can resolve   
+* run all unit tests see if can resolve
 
+* Organise imports
+
+* new 
+
+1. doc add    
+	* different bots   
+	* installing llama3 / more on API keys
+
+1. Release to main
+
+
+
+
+>>>>>>> f213c61d0fa0a239ff88a4ace8657707fe308106
 # 2nd Sprint
 * Test Bot working again
 * test meta data coming through to Bot XL
