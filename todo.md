@@ -7,10 +7,9 @@
 
 
 # NEXT
-* refactor bot
-* refactor api call code
+* stub bot api using code
+	* refactor api call code
 * update llm models   
-* try link to external api
 * try latest docs and test 
 	- load latest data
 	- chje

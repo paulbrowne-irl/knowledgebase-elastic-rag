@@ -74,6 +74,10 @@ The Kibana App runs on top of Elastic and allows you to create indexs to store a
 No screenshot, but also automatically started is the Portainer Web Management for Docker, available at https://localhost:9443 . This can safely be commented out in the docker-compose file if this is not needed.
 
 ## Running the Ingest Script 
+Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file, you may wish to review how has access to it.
+
+
+## Running the Ingest Script 
 
 Before using a Knowledgebase you obviously need to import knowledge into it. 
 * The main script to ingest data is in the _app/ingest.py_ . 
@@ -110,8 +114,8 @@ To run the bot.
 
 ## Running the Bot - External Helpdesk API
 
-* TODO8
-
+* TODO - document
+* API Key - https://[youraccount].eu.teamwork.com/desk/myprofile/apikeys
 
 ## Run the Web Application
 The Web application addresses a wider range of business use cases than the bot - see the tabs on the left hand side of the screenshot below.
