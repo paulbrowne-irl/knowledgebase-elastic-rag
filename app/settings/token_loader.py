@@ -31,7 +31,7 @@ def setup_token(token_name:str)->str:
         logging.debug("Could not find previous token in: "+TOKEN_STORAGE)
         token = input(f"Please enter the {token_name} token. This will be saved locally in token-storage-local.json:   ")
         token_data[token_name]=token
-        return token
+        output_token=token
 
     # make sure we save all our values
     with open(TOKEN_STORAGE,"w") as token_file:
