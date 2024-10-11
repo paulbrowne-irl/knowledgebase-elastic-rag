@@ -21,6 +21,10 @@ app/token-copilot.pickle
 app/token-sharepoint.pickle
 *.pickle
 
+# environment files
+.env
+.env-merged
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

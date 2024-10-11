@@ -5,9 +5,14 @@
 * Multiple, clear use cases using basic architecture   
 * Can link to excel or Ticketing System  
 
+# find home for
+
 
 # 1st Sprint (this branch)
 * finish move to 0.3 langchain / retriever
+	* Next: DEBUG
+	* Next: restore context to patter
+
 * Lab for better answers using langchain
 * abstract bot
 * Tests stub as client
@@ -18,9 +23,22 @@
 
 * run all unit tests see if can resolve
 
-* Organise imports
+* add to docs
+	* installing llama - https://github.com/ollama/ollama
+	* curl -fsSL https://ollama.com/install.sh | sh
+	* ollama run llama3.2 otherwise will hang
+	* ollam serve / ollama run
 
-* new 
+* refacor Lc_controller into 
+	* possible class
+	* more done internally
+	* only invoke one "get results" method - with config
+	* tests
+
+* Organise imports
+* backup snapshot docker container (with sample data)
+
+* new examples
 
 1. doc add    
 	* different bots   
@@ -29,7 +47,12 @@
 1. Release to main
 
 
-
+# move sprint
+* migrate in example https://blog.langchain.dev/introducing-langserve/
+* tmp project local - main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
+* Python client - from clienty.oy
+* refactor project around this
+* resup docker (llama)
 
 # 2nd Sprint
 * Test Bot working again
