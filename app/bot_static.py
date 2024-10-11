@@ -11,10 +11,13 @@ from langchain_core.documents import Document
 from templates import prompts as prompts
 from util.office import xl_rw as xl_rw
 from util.rag import llm_echo
-from util.rag import rag_controller as rag_controller
+from util.rag import lc_controller as lc_controller
 
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
+
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.messages import HumanMessage, SystemMessage
 
 import bot
 
@@ -28,43 +31,77 @@ uses Hardcoded values to do ask questions of the Bot's RAG implementation
 '''
 class Bot_Static(bot.Bot):
 
+    #setup the loop
+    input_questions=[
+        "What foods should you eat while in Dublin?",
+        "Should I go to college to study accounting?"
+    ]
 
+    
+    #output data
+    output_data = []
+
+    '''
+    ######################################
+    '''
+    def _use_new_chain_refactor(self,next_question):
+      
+        messages = [
+            SystemMessage(content=next_question),
+            HumanMessage(content="hi!"),
+        ]
+
+        ## refactor to use later
+        retriever = lc_controller._get_knowledgebase_retriever(self.ELASTIC_INDEX_NAME)
+
+        ##model start
+        model = lc_controller._get_setup_llm() # also returns llm
+
+        ## end
+
+        
+
+        parser = StrOutputParser()
+
+        chain = retriever | model | parser
+
+        logging.info("About to invoke chain - this may take several seconds if local")
+        result = chain.invoke(messages)
+
+        return result
+
+
+    '''
+    ######################################
+    '''
     def loop_answer_questions_from_source(self):
     
         '''
         Loop through the specified question list, attempting to answer the question files
         '''
 
-        #setup the loop
-        input_questions=[
-            "What foods should you eat while in Dublin?",
-            "Should I go to college to study accounting?"
-        ]
-
-        #output data
-        output_data = []
-
-
-
         # Loop through questions
-        for next_question in input_questions:
+        for next_question in self.input_questions:
 
             logging.info("Next question line:"+str(next_question))
 
             #generate the chain using the prompt
-            llm_chain = rag_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
+            llm_chain = lc_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
 
             #get the suggested answer and supporting docs
-            informed_response, supporting_docs = self._get_suggested_anwser_using_chain(llm_chain,next_question)
+            #informed_response, supporting_docs = self._get_suggested_anwser_using_chain(llm_chain,next_question)
+            informed_response = self._use_new_chain_refactor(next_question)
+
 
             logging.info("Response:"+informed_response)
 
-            output_data.append(informed_response)
+            self.output_data.append(informed_response)
 
             # wait random amount of time to allow sync, avoid spam llm
             wait_random = randint(1,self.RANDOM_DELAY_RANGE)
             logging.info("Waiting random seconds:"+str(wait_random))
             sleep(wait_random)
+
 
 
 
@@ -76,7 +113,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
 
     #make sure setup gets run at start
-    rag_controller.setup()
+    lc_controller.setup()
 
     #call the main method in this module
     myBot = Bot_Static()

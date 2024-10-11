@@ -4,7 +4,7 @@ import app_sidebar as app_sidebar
 
 from importlib import reload
 
-import util.rag.rag_controller as rag_controller
+import util.rag.lc_controller as lc_controller
 
 
 #Window setup
@@ -14,7 +14,7 @@ st.title('Benchmark my client against peers ...')
 reload(app_sidebar)
 
 #make sure setup gets run at start
-rag_controller.setup()
+lc_controller.setup()
 
 
 #############
