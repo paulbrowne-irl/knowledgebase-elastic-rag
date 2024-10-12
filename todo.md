@@ -6,28 +6,23 @@
 * Can link to excel or Ticketing System  
 
 # 1 Next Sprint - complete merge
-	* complete transition to poetry
+	* backout poetry to pip
+
 	* complete merge 
 		get langserve working
 		migrate in docs
 
 	* migrate in example https://blog.langchain.dev/introducing-langserve/
 	* tmp project local - main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
-	* Python client - from clienty.oy
+	* Python client - from clienty.py
 	* refactor project around this
-	* resup docker (llama)
+	* resetup docker (llama)
 
 	* add todo 
 		* docker build file
 		* make file
 		* env - document or remove unneded variables
 		* add doc to key python files (especially app)
-	* add to docs
-		* pipx install poetry
-		* Then
-			* poetry export -f requirements.txt > requirements.txt
-			* python -m pip install -r requirements.txt
-			* poetry install
 
 
 	* New structure

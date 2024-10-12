@@ -1,3 +1,9 @@
+# Notes to add to the main readme.md file
+
+[removed poetry]
+
+
+
 # langserve_launch_example
 
 <!--- This is a LangChain project bootstrapped by [LangChain CLI](https://github.com/langchain-ai/langchain). --->
@@ -13,11 +19,6 @@ To customise this project, edit the following files:
 
 ## Install dependencies
 
-If using poetry:
-
-```bash
-poetry install
-```
 
 If using vanilla pip:
 

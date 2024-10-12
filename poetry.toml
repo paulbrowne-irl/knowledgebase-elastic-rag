@@ -1,5 +1,0 @@
-[virtualenvs]
-in-project = true
-
-[tool.poetry.dependencies]
-python = "^3.10.0"

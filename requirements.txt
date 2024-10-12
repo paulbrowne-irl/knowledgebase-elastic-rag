@@ -1,0 +1,58 @@
+
+# Project dependencies
+# pip install -r requirements.txt
+
+streamlit
+beautifulsoup4 
+tqdm 
+requests 
+
+accelerate
+
+#pillow
+#pytesseract 
+pdf2image
+pypdf2
+pypdf
+pycryptodome
+openpyxl
+docx2txt
+extract-msg
+
+torch
+
+elasticsearch
+sentence_transformers 
+huggingface-hub 
+langchain 
+langchain_community
+langchain-elasticsearch
+sydney-py
+
+tensorflow # ==2.16
+
+pandas # ==2.2.2
+
+# from langserve
+langchain #= "^0.0.313"
+langserve #= { version = ">=0.0.6", extras = ["server"] }
+tiktoken #= "^0.4.0"
+openai #= "^0.27.8"
+fastapi #= "^0.96.0"
+uvicorn #= {extras = ["standard"], version = "^0.22.0"}
+pytest #= "^7.4.0"
+pytest-asyncio # = "^0.21.1"
+mypy #= "^1.4.1"
+ruff #= "^0.0.278"
+black #= "^23.7.0"
+syrupy # = "^4.0.2"
+
+
+
+## Older dependencies - remove
+
+# textract==1.6.1 # removed due to conflicts and will not work on windwos
+# Additional Textract install info : https://textract.readthedocs.io/en/stable/
+#configargparse
+
+#eland 
