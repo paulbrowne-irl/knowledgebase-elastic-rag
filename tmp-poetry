@@ -1,3 +1,8 @@
+poetry add streamlit beautifulsoup4 tqdm requests accelerate pytesseract pdf2image pypdf2 pypdf pycryptodome openpyxl docx2txt extract-msg torch elasticsearch sentence_transformers huggingface-hub langchain-community langchain-core langchain-elasticsearch langchain-google-genai langchain_google_vertexai langchain-openai langchain-anthropic langchain-huggingface sydney-py tensorflow pillow pandas tf-keras 
+
+
+
+
 [tool.poetry]
 name = "kb_elastic_rag"
 version = "0.1.0"

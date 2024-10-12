@@ -1,3 +1,6 @@
+# Dockerfile to build the server part of the application as a docker image
+# Optional - the server can be run locally via python
+
 FROM python:3.11-slim
 
 WORKDIR /app

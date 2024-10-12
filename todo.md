@@ -5,8 +5,35 @@
 * Multiple, clear use cases using basic architecture   
 * Can link to excel or Ticketing System  
 
-# find home for
 
+# 0 Next Sprint - complete merge
+	* complete transition to poetry
+	* complete merge 
+		get langserve working
+		migrate in docs
+
+	* migrate in example https://blog.langchain.dev/introducing-langserve/
+	* tmp project local - main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
+	* Python client - from clienty.oy
+	* refactor project around this
+	* resup docker (llama)
+
+	* add todo 
+		* docker build file
+		* make file
+		* env - document or remove unneded variables
+		* add doc to key python files (especially app)
+	* add to docs
+		* pipx install poetry
+		* Then
+			* poetry export -f requirements.txt > requirements.txt
+			* python -m pip install -r requirements.txt
+			* poetry install
+
+
+	* New structure
+		* do we need bot anymore
+		* call langchain directly (or via server)
 
 # 1st Sprint (this branch)
 * finish move to 0.3 langchain / retriever
@@ -47,12 +74,6 @@
 1. Release to main
 
 
-# move sprint
-* migrate in example https://blog.langchain.dev/introducing-langserve/
-* tmp project local - main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
-* Python client - from clienty.oy
-* refactor project around this
-* resup docker (llama)
 
 # 2nd Sprint
 * Test Bot working again
