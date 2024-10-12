@@ -6,7 +6,7 @@ import eland as ed
 from importlib import reload
 
 import settings.config as config
-import app_sidebar as app_sidebar
+import pages.app_sidebaridebar as app_sidebar
 import util.rag.lc_controller as lc_controller
 
 import logging

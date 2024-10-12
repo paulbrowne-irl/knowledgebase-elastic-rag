@@ -52,6 +52,7 @@ mypy #= "^1.4.1"
 ruff #= "^0.0.278"
 black #= "^23.7.0"
 syrupy # = "^4.0.2"
+sse_starlette
 
 
 

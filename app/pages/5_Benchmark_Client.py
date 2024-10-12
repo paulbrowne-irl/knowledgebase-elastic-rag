@@ -1,5 +1,5 @@
 import streamlit as st
-import app_sidebar as app_sidebar
+import pages.app_sidebaridebar as app_sidebar
 
 
 from importlib import reload

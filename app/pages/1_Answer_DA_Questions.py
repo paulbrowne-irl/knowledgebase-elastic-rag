@@ -2,7 +2,7 @@ import streamlit as st
 
 import util.rag.lc_controller as lc_controller
 import templates.prompts
-import app_sidebar as app_sidebar
+import pages.app_sidebaridebar as app_sidebar
 from importlib import reload
 
 if 'prompt' not in st.session_state:

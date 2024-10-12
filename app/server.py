@@ -1,7 +1,12 @@
 from fastapi import FastAPI
 from langserve import add_routes
 
-from chain import get_chain
+from lang_server.chain import get_chain
+
+'''
+Lange Server server which makes chain available via REST API
+When run normally, it is available via http://localhost:8001/docs
+'''
 
 app = FastAPI(title="LangServe Launch Example")
 

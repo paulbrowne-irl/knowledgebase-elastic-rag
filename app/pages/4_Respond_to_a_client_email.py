@@ -2,7 +2,7 @@ import streamlit as st
 
 import util.rag.lc_controller as lc_controller
 import app as app
-import app_sidebar as app_sidebar
+import pages.app_sidebaridebar as app_sidebar
 import templates.prompts
 
 from importlib import reload
