@@ -3,10 +3,14 @@
 Edit this file to implement your chain logic.
 """
 
-from langchain.chat_models.openai import ChatOpenAI
+from langchain_openai import ChatOpenAI
+#from langchain_community.chat_models.openai import ChatOpenAI
 from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain.prompts.chat import ChatPromptTemplate
 from langchain.schema.runnable import Runnable
+import os
+import settings.config as config
+import settings.token_loader as token_loader
 
 joke_func = {
     "name": "joke",
@@ -26,6 +30,12 @@ joke_func = {
 
 
 def get_chain() -> Runnable:
+
+    # Get the open AI key and set as env variable
+    token = token_loader.setup_token("openai")
+    os.environ["OPENAI_API_KEY"] = token
+
+
     """Return a chain."""
     prompt = ChatPromptTemplate.from_template("tell me a joke about {topic}")
     model = ChatOpenAI().bind(functions=[joke_func], function_call={"name": "joke"})
