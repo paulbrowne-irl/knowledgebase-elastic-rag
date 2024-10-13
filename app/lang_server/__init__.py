@@ -1,3 +1,7 @@
+'''
+Files to implement / support backend server
+'''
+
 from importlib import metadata
 
 from lang_server.chain_factory import get_chain
