@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 
-import util.rag.rag_controller as rag_controller
+import util.rag.lc_controller as lc_controller
 
-import app_sidebar as app_sidebar
+import pages.app_sidebaridebar as app_sidebar
 from importlib import reload
 
 #Window setup
@@ -13,7 +13,7 @@ st.title('Find Similar Clients')
 reload(app_sidebar)
 
 #make sure setup gets run at start
-rag_controller.setup()
+lc_controller.setup()
 
 
 #############
@@ -39,7 +39,7 @@ with st.form('my_form'):
     if submitted:
             
         # Find nearest match documents
-        similar_docs = rag_controller.get_nearest_match_documents(app_sidebar.document_search, input_text)
+        similar_docs = lc_controller.get_nearest_match_documents(app_sidebar.document_search, input_text)
 
         #setup empty dataframe for display
         nf= pd.DataFrame.from_dict({})

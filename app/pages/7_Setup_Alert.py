@@ -1,9 +1,10 @@
 import streamlit as st
-import app_sidebar as app_sidebar
+app.pages.app_sidebar
+import pages.app_sidebar as app_sidebar
 
 from importlib import reload
 
-import util.rag.rag_controller as rag_controller
+import util.rag.lc_controller as lc_controller
 
 
 
@@ -15,7 +16,7 @@ st.title('Let me know when ...')
 reload(app_sidebar)
 
 #make sure setup gets run at start
-rag_controller.setup()
+lc_controller.setup()
 
 
 #############

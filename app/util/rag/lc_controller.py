@@ -38,7 +38,7 @@ def setup():
     Safe to call multiple types as checks if have been called prviously
     '''
     _setup_vector_embeddings()
-    _setup_llm()
+    _get_setup_llm()
 
 
 def _setup_vector_embeddings():
@@ -58,7 +58,7 @@ def _setup_vector_embeddings():
         logging.debug("Embeddings already setup")
 
 
-def _setup_llm():
+def _get_setup_llm():
 
     global _llm_to_use
     global _embeddings
@@ -138,6 +138,8 @@ def _setup_llm():
 
         logging.debug("LLM already setup")
 
+    return _llm_to_use
+
 
 def _get_knowledgebase_retriever(index_name: str) -> BaseRetriever:
     '''
@@ -186,6 +188,9 @@ def get_llm_chain(prompt_template: str) -> LLMChain:
     prompt_informed = PromptTemplate(
         template=prompt_template, input_variables=["context", "question"])
     
-    llm_chain = LLMChain(prompt=prompt_informed, llm=_llm_to_use)
+    #llm_chain = LLMChain(prompt=prompt_informed, llm=_llm_to_use)
+
+    #New Langchain 0.3 syntax
+    llm_chain = prompt_informed | _llm_to_use
 
     return llm_chain

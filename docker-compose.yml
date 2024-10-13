@@ -11,6 +11,18 @@ services:
     #        - data:/data
     #        - /var/run/docker.sock:/var/run/docker.sock
     #    restart: unless-stopped
+
+    # if we build our example as docker image, and only to run python client
+    #langserve_docker_image_asserver:
+    #   build:
+    #    context: .
+    #    image: langserve_launch_example:latest
+    #    container_name: langserve_launch_example
+    #    ports:
+    #    - "8001:8001"
+    #    env_file:
+    #    - .env
+
     
     # Core Knowledgement Solution
     elasticsearch:

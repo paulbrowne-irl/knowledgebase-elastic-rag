@@ -1,6 +1,8 @@
-# Additional Textract install info : https://textract.readthedocs.io/en/stable/
 
+# Project dependencies
 # pip install -r requirements.txt
+
+
 streamlit
 beautifulsoup4 
 tqdm 
@@ -8,7 +10,8 @@ requests
 
 accelerate
 
-pytesseract 
+#pillow
+#pytesseract 
 pdf2image
 pypdf2
 pypdf
@@ -19,26 +22,44 @@ extract-msg
 
 torch
 
-eland 
 elasticsearch
 sentence_transformers 
 huggingface-hub 
 
-langchain-community ##==0.2.1 
-langchain-core ##==0.2.1
-langchain-elasticsearch
-langchain-google-genai
-langchain_google_vertexai
+langchain
+langchain_anthropic 
+langchain_community
+langchain_huggingface
+langchain_google_genai
 langchain-openai
-langchain-anthropic
-langchain-huggingface
-sydney-py
+langchain-elasticsearch
 
-tensorflow
-pillow
-#configargparse
-pandas
+tensorflow # ==2.16
 tf-keras
 
+pandas # ==2.2.2
+
+# from langserve
+langchain #= "^0.0.313"
+langserve #= { version = ">=0.0.6", extras = ["server"] }
+tiktoken #= "^0.4.0"
+openai #= "^0.27.8"
+fastapi #= "^0.96.0"
+uvicorn #= {extras = ["standard"], version = "^0.22.0"}
+pytest #= "^7.4.0"
+pytest-asyncio # = "^0.21.1"
+mypy #= "^1.4.1"
+ruff #= "^0.0.278"
+black #= "^23.7.0"
+syrupy # = "^4.0.2"
+sse_starlette
 
 
+
+## Older dependencies - remove
+psydney-py
+# textract==1.6.1 # removed due to conflicts and will not work on windwos
+# Additional Textract install info : https://textract.readthedocs.io/en/stable/
+#configargparse
+
+#eland 

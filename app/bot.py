@@ -11,7 +11,7 @@ from langchain_core.documents import Document
 from templates import prompts as prompts
 from util.office import xl_rw as xl_rw
 from util.rag import llm_echo
-from util.rag import rag_controller as rag_controller
+from util.rag import lc_controller as lc_controller
 
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
@@ -41,13 +41,14 @@ class Bot(ABC):
         Common to all bots - find suggested answer using presetup chain (normally RAG)
         '''
         # Find nearest match documents
-        similar_docs = rag_controller.get_nearest_match_documents(Bot.ELASTIC_INDEX_NAME,this_question)
+        similar_docs = lc_controller.get_nearest_match_documents(Bot.ELASTIC_INDEX_NAME,this_question)
         logging.info("relevant docs:"+str(similar_docs))
 
         ## Ask Local LLM context informed prompt
         informed_context= similar_docs[0].page_content
 
-        informed_response = llm_chain.run(context=informed_context,question=this_question)
+        #informed_response = llm_chain.run(context=informed_context,question=this_question)
+        informed_response = llm_chain.invoke(this_question)
         
 
         return informed_response, similar_docs
