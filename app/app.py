@@ -1,5 +1,5 @@
 import streamlit as st
-import util.rag.rag_controller as rag_controller
+import util.rag.lc_controller as lc_controller
 import logging
 
 #Set the Logging level. Change it to logging.INFO is you want just the important info

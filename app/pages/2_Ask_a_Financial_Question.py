@@ -6,8 +6,8 @@ import eland as ed
 from importlib import reload
 
 import settings.config as config
-import app_sidebar as app_sidebar
-import util.rag.rag_controller as rag_controller
+import pages.app_sidebaridebar as app_sidebar
+import util.rag.lc_controller as lc_controller
 
 import logging
 
@@ -185,7 +185,7 @@ st.title('Show me the numbers')
 reload(app_sidebar)
 
 #make sure setup gets run at start
-rag_controller.setup()
+lc_controller.setup()
 
 
 with st.form('my_form'):
