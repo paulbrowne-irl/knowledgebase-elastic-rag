@@ -1,11 +1,11 @@
-import pickle
 import logging
 import json
 
 TOKEN_STORAGE = "settings/token-storage-local.json"
 
 '''
-Helper class to get / set confidential values in pickle
+Helper class to get / set confidential values in JSON
+Note the token may be set as clear text in the (local) JSON file - be sure to secure
 '''
 
 def setup_token(token_name:str)->str: 
@@ -31,6 +31,7 @@ def setup_token(token_name:str)->str:
         logging.debug("Could not find previous token in: "+TOKEN_STORAGE)
         token = input(f"Please enter the {token_name} token. This will be saved locally in token-storage-local.json:   ")
         token_data[token_name]=token
+        output_token=token
 
     # make sure we save all our values
     with open(TOKEN_STORAGE,"w") as token_file:

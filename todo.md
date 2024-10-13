@@ -3,7 +3,20 @@
 * Works as business demo but allows deep dive    
 * Can be pushed to public   
 * Multiple, clear use cases using basic architecture   
-* Can link to excel or Ticketing System  
+* can link to excel or external helpdesk api
+
+
+# NEXT
+* stub bot api using code
+	* refactor api call code
+* update llm models   
+* try latest docs and test 
+	- load latest data
+	- chje
+* what other data formats to load
+* config to openai
+* drop / reindex single folder or document
+
 
 # 1 Next Sprint - complete merge
 	* Merge in Dev (or discard)
@@ -102,9 +115,15 @@
 	* suggest best email response (to draft?)
 	* tag based on last person to answer client
 
-	* identify most relevant colleauges
-	* Save attachments / call rules?
-	* identify topics / keywords
+
+# Improvements - later NTH
+* named entities
+* Topic analysis
+* ?? Misfiled emails
+* ?? unanswered emails
+* POS tagging (counties but other keywords)
+* Postive or negative sentiment
+* LEO / County
 
 
 

@@ -49,6 +49,10 @@ Instructions for first time setup of the project:
     * Setup indices - open this page  http://localhost:5601/app/management/data/index_management/indices
         * _test-can-del_ - used by unit tests
         * _knowledge_base_ - the main index used to store documents
+    * Useful commands (in the dev console window of Kibana)
+        * Delete an index  _DELETE /knowledge_base_
+        * Create an index _PUT /knowledge_base_
+
 
 It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed), please refer to the Elastic / Kibana home page for instructions - https://www.elastic.co/
 
@@ -68,6 +72,10 @@ The Kibana App runs on top of Elastic and allows you to create indexs to store a
 ![Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase](images/kibana_index_management.png "Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase") 
 
 No screenshot, but also automatically started is the Portainer Web Management for Docker, available at https://localhost:9443 . This can safely be commented out in the docker-compose file if this is not needed.
+
+## Running the Ingest Script 
+Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file, you may wish to review how has access to it.
+
 
 ## Running the Ingest Script 
 
@@ -90,7 +98,7 @@ In general, you will only need the ingest script once (or infrequently, if you w
 
 The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
 
-## Running the Bot
+## Running the Bot - Excel
 
 Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be hosted online, this allows Integration with Office 365 and Power Automate. e.g.
 1. The User can ask a question on Microsoft Forms
@@ -102,8 +110,12 @@ Typical flow for the Bot is to read a question from Excel, apply RAG techniques 
 To run the bot.
 * Open the app folder: _cd app_ in a terminal window
 * Activate the Python environment with dependencies you installed earelier: _source venv/bin/activate_
-* Run the script using _python bot.py_
+* Run the script using _python bot_excel.py_
 
+## Running the Bot - External Helpdesk API
+
+* TODO - document
+* API Key - https://[youraccount].eu.teamwork.com/desk/myprofile/apikeys
 
 ## Run the Web Application
 The Web application addresses a wider range of business use cases than the bot - see the tabs on the left hand side of the screenshot below.
