@@ -13,7 +13,8 @@ from typing import Optional
 
 import logging
 
-from sydney import SydneyClient
+# temp removal of Copilot in favour of LLM
+#from sydney import SydneyClient
 
 
 
@@ -53,7 +54,6 @@ class CopilotLLM(LLM):
             raise ValueError("stop kwargs are not permitted.")
 
         os.environ["BING_COOKIES"]=self.copilot_token
-        #print ("set token to :"+self.copilot_token)
         
 
         # actual code to invoke copilot using Sydney
@@ -70,6 +70,9 @@ class CopilotLLM(LLM):
 
     # Standard sydney call
     async def call_copilot(self,prompt) -> str:
+        return "Please restore code in llm_copilot.py"
+    
+    '''
         async with SydneyClient() as sydney:
             
             #logging.debug("Awaiting response from Sydney / Copilot", end="", flush=True)
@@ -80,6 +83,6 @@ class CopilotLLM(LLM):
 
             logging.debug("response recieved")
             
-            return resp
+            return resp '''
         
 

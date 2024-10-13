@@ -6,16 +6,7 @@
 * can link to excel or external helpdesk api
 
 
-# NEXT
-* stub bot api using code
-	* refactor api call code
-* update llm models   
-* try latest docs and test 
-	- load latest data
-	- chje
-* what other data formats to load
-* config to openai
-* drop / reindex single folder or document
+
 
 
 # 1 Next Sprint - complete merge
@@ -173,3 +164,14 @@
 * Eland - for datascience 
 * NLP via eland https://www.elastic.co/guide/en/machine-learning/current/ml-nlp-ner-example.html
 * Langchain sample
+
+# CLOSE OUT
+* stub bot api using code
+	* refactor api call code
+* update llm models   
+* try latest docs and test 
+	- load latest data
+	- chje
+* what other data formats to load
+* config to openai
+* drop / reindex single folder or document
