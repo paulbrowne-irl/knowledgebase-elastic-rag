@@ -29,14 +29,6 @@
 		* docker (llama) image in docker?
 		* (OR) instructions to run locally
 		* docker build file open build kit
-	
-
-
-
-	* New structure
-		* do we need bot anymore
-		* call langchain directly (or via server)
-
 
 
 	* capture original examples and source
@@ -45,6 +37,9 @@
 		* Python client - from clienty.oy
 		* refactor project around this
 		* resup docker (llama)
+
+	* Merge in Dev (or discard)
+	* merge in main (or discard)
 
 # 1+ Sprint
 
