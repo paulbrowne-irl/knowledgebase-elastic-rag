@@ -7,11 +7,8 @@ streamlit
 beautifulsoup4 
 tqdm 
 requests 
-
 accelerate
 
-#pillow
-#pytesseract 
 pdf2image
 pypdf2
 pypdf
@@ -34,10 +31,10 @@ langchain_google_genai
 langchain-openai
 langchain-elasticsearch
 
-tensorflow # ==2.16
+#tensorflow ==2.17
 tf-keras
 
-pandas # ==2.2.2
+pandas
 
 # from langserve
 langchain 
@@ -63,3 +60,5 @@ sydney-py
 # Additional Textract install info : https://textract.readthedocs.io/en/stable/
 #configargparse
 #eland 
+#pillow
+#pytesseract 

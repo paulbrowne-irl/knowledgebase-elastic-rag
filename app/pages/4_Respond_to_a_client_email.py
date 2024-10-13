@@ -1,8 +1,8 @@
 import streamlit as st
 
-import util.rag.lc_controller as lc_controller
+from lang_server import lc_controller as lc_controller
 import app as app
-import pages.app_sidebaridebar as app_sidebar
+import pages.app_sidebar as app_sidebar
 import templates.prompts
 
 from importlib import reload
@@ -13,9 +13,6 @@ st.title('Draft a client email')
 
 #Fields on Sidebar
 reload(app_sidebar)
-
-#make sure setup gets run at start
-lc_controller.setup()
 
 
 # reload previous prompot

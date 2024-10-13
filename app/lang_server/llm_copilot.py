@@ -13,8 +13,7 @@ from typing import Optional
 
 import logging
 
-# temp removal of Copilot in favour of LLM
-#from sydney import SydneyClient
+from sydney import SydneyClient
 
 
 
@@ -70,9 +69,8 @@ class CopilotLLM(LLM):
 
     # Standard sydney call
     async def call_copilot(self,prompt) -> str:
-        return "Please restore code in llm_copilot.py"
     
-    '''
+    
         async with SydneyClient() as sydney:
             
             #logging.debug("Awaiting response from Sydney / Copilot", end="", flush=True)
@@ -83,6 +81,4 @@ class CopilotLLM(LLM):
 
             logging.debug("response recieved")
             
-            return resp '''
-        
-
+            return resp

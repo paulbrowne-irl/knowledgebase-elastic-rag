@@ -10,8 +10,7 @@ from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document
 from templates import prompts as prompts
 from util.office import xl_rw as xl_rw
-from util.rag import llm_echo
-from util.rag import lc_controller as lc_controller
+from lang_server import lc_controller as lc_controller
 
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer

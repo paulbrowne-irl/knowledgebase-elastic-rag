@@ -1,11 +1,10 @@
 import streamlit as st
-app.pages.app_sidebar
+
 import pages.app_sidebar as app_sidebar
 
 from importlib import reload
 
-import util.rag.lc_controller as lc_controller
-
+from lang_server import lc_controller as lc_controller
 
 
 
@@ -15,8 +14,6 @@ st.title('Let me know when ...')
 #Fields on Sidebar
 reload(app_sidebar)
 
-#make sure setup gets run at start
-lc_controller.setup()
 
 
 #############

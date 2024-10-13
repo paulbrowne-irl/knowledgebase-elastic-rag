@@ -7,12 +7,25 @@
 
 
 
+# 0 Alt streams
+
+	* NTH - Docker build for stability
+		* try looking at python command (can set working direcotry?) - did that work
+		* try copy into local cache folder
+
+	* Ollama in docker file for ease of deployment
+		* https://www.arsturn.com/blog/setting-up-ollama-with-docker-compose-a-complete-guide
+		* anything useful (like devcontainers) to bring over?
+
+	* finish langchain upgrade
+		* add vector retriever - use chain from this article https://python.langchain.com/docs/tutorials/retrievers/
+		* make current change use prompts
 
 
-# 1 Next Sprint - complete merge
-	* Merge in Dev (or discard)
+# 1 Next Sprint - post merge
+	* restore sydney
 
-	* Python client - from proxy.py ### next ##
+	* Python client - from proxy.py / replaces a lot of lc_controller into fatory
 		* use in all bot sampels
 		* refactor project around this
 		* config (from file - which url to check)
@@ -20,32 +33,18 @@
 	* Separate client and server deploy
 		perhaps a requirements clinet
 
-	* finish langchain upgrade
-		* get retriever chain and add
-		* make current change use prompts
-		* add vector retriever - use chain from this article https://python.langchain.com/docs/tutorials/retrievers/
 
 	* Update Docs
 		* migrate in docs
 		* refer to example https://blog.langchain.dev/introducing-langserve/
 		* refer to main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
 		* add doc to key python files (especially app)
+		* docker file instructions / alt run locally 
+			* ollama
+			* langserve (from project)
 
-	* resetup 
-		* docker (llama) image in docker?
-		* (OR) instructions to run locally
-		* docker build file open build kit
-
-
-	* capture original examples and source
-		* migrate in example https://blog.langchain.dev/introducing-langserve/
-		* tmp project local - main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
-		* Python client - from clienty.oy
-		* refactor project around this
-		* resup docker (llama)
-
-
-	* merge in main (or discard)
+	* merge in main
+		* snapshot release
 
 # 1+ Sprint
 

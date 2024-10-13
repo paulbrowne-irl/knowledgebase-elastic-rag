@@ -1,10 +1,10 @@
 import streamlit as st
-import pages.app_sidebaridebar as app_sidebar
+import pages.app_sidebar as app_sidebar
 
 
 from importlib import reload
 
-import util.rag.lc_controller as lc_controller
+from lang_server import lc_controller as lc_controller
 
 
 #Window setup
@@ -13,8 +13,6 @@ st.title('Benchmark my client against peers ...')
 #Fields on Sidebar
 reload(app_sidebar)
 
-#make sure setup gets run at start
-lc_controller.setup()
 
 
 #############

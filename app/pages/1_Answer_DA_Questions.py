@@ -1,8 +1,8 @@
 import streamlit as st
 
-import util.rag.lc_controller as lc_controller
+from lang_server import lc_controller as lc_controller
 import templates.prompts
-import pages.app_sidebaridebar as app_sidebar
+import pages.app_sidebar as app_sidebar
 from importlib import reload
 
 if 'prompt' not in st.session_state:
@@ -14,9 +14,6 @@ st.title('Hello DA! How can I help you?')
 
 #Fields on Sidebar
 reload(app_sidebar)
-
-#make sure setup gets run at start
-lc_controller.setup()
 
 #############
 # Main UI

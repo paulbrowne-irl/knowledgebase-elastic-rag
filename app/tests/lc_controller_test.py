@@ -7,7 +7,7 @@ import sys
 #sys.path.append('../util')
 
 
-class Test_Rag_Controller(unittest.TestCase):
+class Test_LC_Controller(unittest.TestCase):
    
     @classmethod
     def setUpClass(self):

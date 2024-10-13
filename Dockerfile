@@ -23,5 +23,6 @@ RUN --mount=type=cache,target=/root/.cache \
 #old
 #CMD cd app && exec uvicorn app.server:app_build --host 0.0.0.0 --port 8001
 
-# Run app.py when the container launches
-ENTRYPOINT ["python", "app.server.py"]
+# Run server.py from app  when the container launches
+CMD cd app
+ENTRYPOINT ["python", "server.py"]

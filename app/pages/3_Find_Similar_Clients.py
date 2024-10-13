@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 
-import util.rag.lc_controller as lc_controller
+from lang_server import lc_controller as lc_controller
 
-import pages.app_sidebaridebar as app_sidebar
+import pages.app_sidebar as app_sidebar
 from importlib import reload
 
 #Window setup
@@ -12,8 +12,6 @@ st.title('Find Similar Clients')
 #Fields on Sidebar
 reload(app_sidebar)
 
-#make sure setup gets run at start
-lc_controller.setup()
 
 
 #############

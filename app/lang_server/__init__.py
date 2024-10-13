@@ -1,7 +1,6 @@
-"""langserve_launch_example package."""
 from importlib import metadata
 
-from lang_server.chain import get_chain
+from lang_server.chain_factory import get_chain
 
 try:
     __version__ = metadata.version(__package__)
