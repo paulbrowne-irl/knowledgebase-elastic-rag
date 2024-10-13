@@ -6,6 +6,8 @@
 * Can link to excel or Ticketing System  
 
 # 1 Next Sprint - complete merge
+	* Merge in Dev (or discard)
+
 	* Python client - from proxy.py ### next ##
 		* use in all bot sampels
 		* refactor project around this
@@ -38,7 +40,7 @@
 		* refactor project around this
 		* resup docker (llama)
 
-	* Merge in Dev (or discard)
+
 	* merge in main (or discard)
 
 # 1+ Sprint
