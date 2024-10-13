@@ -57,7 +57,7 @@ sse_starlette
 
 
 ## Older dependencies - remove
-#sydney-py
+psydney-py
 # textract==1.6.1 # removed due to conflicts and will not work on windwos
 # Additional Textract install info : https://textract.readthedocs.io/en/stable/
 #configargparse

@@ -3,8 +3,20 @@
 [removed poetry]
 
 
+* note on http://localhost:8001/playground/
+* note on http://localhost:8001/docs
+
+* Notes on Docker Build
+
+# docker build
+apt-get install docker-buildx-plugin
+DOCKER_BUILDKIT=1 docker build .
+
 
 # langserve_launch_example
+
+cd app
+python server.py to launch langserve project
 
 <!--- This is a LangChain project bootstrapped by [LangChain CLI](https://github.com/langchain-ai/langchain). --->
 
@@ -15,7 +27,7 @@ To customise this project, edit the following files:
 - `langserve_launch_example/chain.py` contains an example chain, which you can edit to suit your needs.
 - `langserve_launch_example/server.py` contains a FastAPI app that serves that chain using `langserve`. You can edit this to add more endpoints or customise your server.
 - `tests/test_chain.py` contains tests for the chain. You can edit this to add more tests.
-- `pyproject.toml` contains the project metadata, including the project name, version, and dependencies. You can edit this to add more dependencies or customise your project metadata.
+
 
 ## Install dependencies
 

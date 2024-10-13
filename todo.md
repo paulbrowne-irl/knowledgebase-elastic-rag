@@ -6,30 +6,38 @@
 * Can link to excel or Ticketing System  
 
 # 1 Next Sprint - complete merge
-	* backout poetry to pip
+	* Python client - from proxy.py ### next ##
+		* use in all bot sampels
+		* refactor project around this
+		* config (from file - which url to check)
 
-	* complete merge 
-		get langserve working
-		migrate in docs
+	* Separate client and server deploy
+		perhaps a requirements clinet
 
-	* migrate in example https://blog.langchain.dev/introducing-langserve/
-	* tmp project local - main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
-	* Python client - from clienty.py
-	* refactor project around this
-	* resetup docker (llama)
+	* finish langchain upgrade
+		* get retriever chain and add
+		* make current change use prompts
+		* add vector retriever - use chain from this article https://python.langchain.com/docs/tutorials/retrievers/
 
-	* add todo 
-		* docker build file
-		* make file
-		* env - document or remove unneded variables
+	* Update Docs
+		* migrate in docs
+		* refer to example https://blog.langchain.dev/introducing-langserve/
+		* refer to main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
 		* add doc to key python files (especially app)
+
+	* resetup 
+		* docker (llama) image in docker?
+		* (OR) instructions to run locally
+		* docker build file open build kit
+	
+
 
 
 	* New structure
 		* do we need bot anymore
 		* call langchain directly (or via server)
 
-	* finish move to 0.3 langchain / retriever
+
 
 	* capture original examples and source
 		* migrate in example https://blog.langchain.dev/introducing-langserve/
@@ -37,6 +45,10 @@
 		* Python client - from clienty.oy
 		* refactor project around this
 		* resup docker (llama)
+
+# 1+ Sprint
+
+* Poss outlook bot calling api
 
 # 2nd Sprint
 	* Test Bot working again
