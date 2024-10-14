@@ -9,6 +9,12 @@
 
 # 0 Alt streams
 
+	* finish langchain upgrade
+		* add vector retriever - use chain from this article https://python.langchain.com/docs/tutorials/retrievers/
+		* make current change use prompts
+
+	* simple script to start local server from proxy if not running (will work with multiple examples)
+
 	* NTH - Docker build for stability
 		* try looking at python command (can set working direcotry?) - did that work
 		* try copy into local cache folder
@@ -17,9 +23,7 @@
 		* https://www.arsturn.com/blog/setting-up-ollama-with-docker-compose-a-complete-guide
 		* anything useful (like devcontainers) to bring over?
 
-	* finish langchain upgrade
-		* add vector retriever - use chain from this article https://python.langchain.com/docs/tutorials/retrievers/
-		* make current change use prompts
+
 
 
 # 1 Next Sprint - post merge

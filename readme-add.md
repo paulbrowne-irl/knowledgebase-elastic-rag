@@ -1,17 +1,15 @@
 # Notes to add to the main readme.md file
 
-[removed poetry]
 
 
 * note on http://localhost:8001/playground/
 * note on http://localhost:8001/docs
 
 * Notes on Docker Build
+    apt-get install docker-buildx-plugin
+    DOCKER_BUILDKIT=1 docker build .
 
-# docker build
-apt-get install docker-buildx-plugin
-DOCKER_BUILDKIT=1 docker build .
-
+# pip install "langserve[client]"
 
 # langserve_launch_example
 

@@ -1,7 +1,6 @@
 import logging
 from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
                     Tuple, Union)
-
 import lang_server.llm_copilot as llm_copilot
 import requests
 import settings.config as config
