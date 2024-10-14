@@ -14,7 +14,7 @@ COPY . /app_build
 
 # install the python dependcies, but cache libs between builds
 RUN --mount=type=cache,target=/root/.cache \
-    pip install -r requirements.txt
+    pip --timeout=1000 install -r requirements.txt 
 
 #  poetry config virtualenvs.create false && \
 #  poetry install --no-interaction --no-ansi --only main
