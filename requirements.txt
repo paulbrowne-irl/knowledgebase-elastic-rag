@@ -2,6 +2,9 @@
 # Project dependencies
 # pip install -r requirements.txt
 
+tf-keras
+tensorflow
+    
 
 streamlit
 beautifulsoup4 
@@ -30,15 +33,14 @@ langchain_huggingface
 langchain_google_genai
 langchain-openai
 langchain-elasticsearch
+tensorflow
+langserve 
 
-#tensorflow ==2.17
-tf-keras
 
 pandas
 
 # from langserve
 langchain 
-langserve 
 tiktoken 
 openai 
 fastapi 
