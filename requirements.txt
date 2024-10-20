@@ -3,8 +3,8 @@
 # pip install -r requirements.txt
 
 tf-keras
-tensorflow
-    
+#tensorflow
+#torch
 
 streamlit
 beautifulsoup4 
@@ -19,8 +19,9 @@ pycryptodome
 openpyxl
 docx2txt
 extract-msg
+pytesseract 
 
-torch
+
 
 elasticsearch
 sentence_transformers 
@@ -63,4 +64,3 @@ sydney-py
 #configargparse
 #eland 
 #pillow
-#pytesseract 

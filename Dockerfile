@@ -8,13 +8,21 @@ FROM python:3.10-slim
 #    tool1 \
 #    tool2
 
+EXPOSE 8001
+
+RUN pip install --upgrade pip
+
 WORKDIR /app_build
 
-COPY . /app_build
-
 # install the python dependcies, but cache libs between builds
+COPY requirements.txt ./
+
 RUN --mount=type=cache,target=/root/.cache \
-    pip --timeout=1000 install -r requirements.txt 
+    pip --timeout=1000 --no-cache-dir install -r requirements.txt 
+
+COPY . /app_build
+    
+
 
 #  poetry config virtualenvs.create false && \
 #  poetry install --no-interaction --no-ansi --only main
