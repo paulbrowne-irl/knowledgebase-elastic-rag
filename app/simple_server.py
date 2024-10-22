@@ -1,10 +1,10 @@
-from fastapi import FastAPI
 from langserve import add_routes
-
 from lang_server.chain_factory import get_chain
 
 import uvicorn
 import logging
+
+from fastapi import FastAPI
 
 
 

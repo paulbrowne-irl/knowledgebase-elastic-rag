@@ -1,7 +1,6 @@
 from langserve import RemoteRunnable 
 import requests
 
-import app.lang_server.simple_server as simple_server
 import logging
 ''''
 Proxy help methods to invoke the chain (via proper server)
@@ -21,8 +20,8 @@ def do_server_check():
         logging.info("Langserve server detected")
     except:
         # nothing there
-        logging.info("no server detected - starting local")
-        simple_server.start()
+        logging.info("No server detected - perhaps you need to start simple_server.py?")
+
 
 def get_response() -> str:
     '''
@@ -33,7 +32,7 @@ def get_response() -> str:
 
     chain_endpoint = "http://localhost:8001/"
     chain = RemoteRunnable(chain_endpoint)
-    response = chain.invoke({"topic":"Tell me a joke about Dublin"})
+    response = chain.invoke({"topic":"Tell me a joke about Dublin with a bus and a train"})
 
     return response
 
