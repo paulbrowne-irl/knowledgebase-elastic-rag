@@ -14,18 +14,18 @@ import settings.config as config
 import settings.token_loader as token_loader
 
 prompt_func = {
-    "name": "joke",
-    "description": "A joke",
+    "name": "email_draft",
+    "description": "Draft a aesponse to a client or colleague email",
     "parameters": {
         "type": "object",
         "properties": {
-            "setup": {"type": "string", "description": "The setup for the joke"},
-            "punchline": {
+            "inemail": {"type": "string", "description": "The text of the incoming email"},
+            "outemail": {
                 "type": "string",
-                "description": "The punchline for the joke",
+                "description": "The suggested text to use in the email response",
             },
         },
-        "required": ["setup", "punchline"],
+        "required": ["inemail", "outemail"],
     },
 }
 
@@ -40,8 +40,8 @@ def get_sample_chain() -> Runnable:
 
 
     """Return a chain."""
-    prompt = ChatPromptTemplate.from_template("tell me a joke about {topic}")
-    model = ChatOpenAI().bind(functions=[prompt_func], function_call={"name": "joke"})
+    prompt = ChatPromptTemplate.from_template("respond to an email about {topic}")    
+    model = ChatOpenAI().bind(functions=[prompt_func], function_call={"name": "email_draft"})
     parser = JsonOutputFunctionsParser()
     return prompt | model | parser
 
@@ -60,6 +60,6 @@ def get_chain() -> Runnable:
 
     """Return a chain."""
     prompt = ChatPromptTemplate.from_template("tell me a joke about {topic}")
-    model = ChatOpenAI().bind(functions=[prompt_func], function_call={"name": "joke"})
+    model = ChatOpenAI().bind(functions=[prompt_func], function_call={"name": "email_draft"})
     parser = JsonOutputFunctionsParser()
     return prompt | model | parser
