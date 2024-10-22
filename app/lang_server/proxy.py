@@ -1,7 +1,7 @@
 from langserve import RemoteRunnable 
 import requests
 
-import lang_server.server as server
+import app.lang_server.simple_server as simple_server
 import logging
 ''''
 Proxy help methods to invoke the chain (via proper server)
@@ -22,7 +22,7 @@ def do_server_check():
     except:
         # nothing there
         logging.info("no server detected - starting local")
-        server.start()
+        simple_server.start()
 
 def get_response() -> str:
     '''

@@ -10,6 +10,8 @@
 # 0 Alt streams
 
 	* simple script to start local server from proxy if not running (will work with multiple examples)
+		* rollback to what we had
+		* simple test client
 
 	* finish langchain upgrade
 		* add vector retriever - use chain from this article https://python.langchain.com/docs/tutorials/retrievers/
