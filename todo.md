@@ -9,11 +9,12 @@
 
 # 0 Alt streams
 
+	* simple script to start local server from proxy if not running (will work with multiple examples)
+
 	* finish langchain upgrade
 		* add vector retriever - use chain from this article https://python.langchain.com/docs/tutorials/retrievers/
 		* make current change use prompts
 
-	* simple script to start local server from proxy if not running (will work with multiple examples)
 
 	* NTH - Docker build for stability
 		* try looking at python command (can set working direcotry?) - did that work
