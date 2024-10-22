@@ -1,6 +1,6 @@
 # Notes to add to the main readme.md file
 
-
+* add note on starting simple server
 
 * note on http://localhost:8001/playground/
 * note on http://localhost:8001/docs
