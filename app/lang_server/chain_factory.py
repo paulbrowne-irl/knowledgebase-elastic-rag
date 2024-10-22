@@ -13,9 +13,11 @@ import os
 import settings.config as config
 import settings.token_loader as token_loader
 
+import templates.prompts as prompts
+
 prompt_func = {
     "name": "email_draft",
-    "description": "Draft a aesponse to a client or colleague email",
+    "description": "Draft a response to a client or colleague email",
     "parameters": {
         "type": "object",
         "properties": {
@@ -30,20 +32,20 @@ prompt_func = {
 }
 
 
-def get_sample_chain() -> Runnable:
-    '''
-    Only keeping as reference - can be removed
-    '''
-    # Get the open AI key and set as env variable
-    token = token_loader.setup_token("openai")
-    os.environ["OPENAI_API_KEY"] = token
+# def get_sample_chain() -> Runnable:
+#     '''
+#     Only keeping as reference - can be removed
+#     '''
+#     # Get the open AI key and set as env variable
+#     token = token_loader.setup_token("openai")
+#     os.environ["OPENAI_API_KEY"] = token
 
 
-    """Return a chain."""
-    prompt = ChatPromptTemplate.from_template("respond to an email about {topic}")    
-    model = ChatOpenAI().bind(functions=[prompt_func], function_call={"name": "email_draft"})
-    parser = JsonOutputFunctionsParser()
-    return prompt | model | parser
+#     """Return a chain."""
+#     prompt = ChatPromptTemplate.from_template("respond to an email about {topic}")    
+#     model = ChatOpenAI().bind(functions=[prompt_func], function_call={"name": "email_draft"})
+#     parser = JsonOutputFunctionsParser()
+#     return prompt | model | parser
 
 
 
@@ -59,7 +61,7 @@ def get_chain() -> Runnable:
 
 
     """Return a chain."""
-    prompt = ChatPromptTemplate.from_template("tell me a joke about {topic}")
+    prompt = ChatPromptTemplate.from_template(prompts.TEMPLATE_EMAIL_PROMPT)
     model = ChatOpenAI().bind(functions=[prompt_func], function_call={"name": "email_draft"})
     parser = JsonOutputFunctionsParser()
     return prompt | model | parser

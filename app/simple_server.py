@@ -19,7 +19,7 @@ def start():
     add_routes(app, get_chain())
 
     logging.info("Starting LangServe on http://localhost:8001")
-    uvicorn.run(app, host="0.0.0.0", port=8001,reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=8001)
 
 
 # when called via command line
