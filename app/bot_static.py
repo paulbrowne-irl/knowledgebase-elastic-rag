@@ -4,23 +4,18 @@ from time import sleep
 from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
                     Tuple, Union)
 
+import bot
 import pandas as pd
 import settings.config as config
+from lang_server import lc_controller as lc_controller
 from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document
-from templates import prompts as prompts
-from util.office import xl_rw as xl_rw
-from lang_server import lc_controller as lc_controller
-
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.output_parsers import StrOutputParser
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
-
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.messages import HumanMessage, SystemMessage
-
-import bot
-
-
+from templates import prompts as prompts
+from util.office import xl_rw as xl_rw
 
 '''
 Not really a bot - more of a test bed.

@@ -4,7 +4,6 @@ from time import sleep
 from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
                     Tuple, Union)
 
-import pandas as pd
 import settings.config as config
 from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document

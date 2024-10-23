@@ -1,19 +1,13 @@
-from langserve import add_routes
-from lang_server.chain_factory import get_chain
-from lang_server import lc_controller as lc_controller
-
-
-import uvicorn
 import logging
-
-from fastapi import FastAPI
-
-from templates import prompts as prompts
 
 #refactor
 import settings.config as config
+import uvicorn
+from fastapi import FastAPI
+from lang_server import lc_controller as lc_controller
+from templates import prompts as prompts
 
-
+# setup once
 app = FastAPI(title="LangServe Knowledgebase Example")
 ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
 
@@ -26,9 +20,6 @@ def draft_email(input_email: str):
     similar_docs = lc_controller.get_nearest_match_documents(ELASTIC_INDEX_NAME,input_email)
     logging.info("relevant docs:"+str(similar_docs))
 
-    ## Ask Local LLM context informed prompt
-    informed_context= similar_docs[0].page_content
-
     #generate the chain using the prompt
     llm_chain = lc_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
 
@@ -39,41 +30,12 @@ def draft_email(input_email: str):
         'question': input_email
     }
 
+
     # Now, pass the 'input_data' dictionary to the 'invoke' method
     informed_response = llm_chain.invoke(input=input_data)
 
-    #informed_response = llm_chain.invoke("context": lambda x: informed_context, "question": input_email))
-
-
-    # return {"suggested_text": informed_response,
-    #         "similar_docs":informed_context}
-
     return {"suggested_text": informed_response}
 
-
-
-
-# @app.post("/draft_email")
-# def draft_email(input_email: str):
-
-
-#     # Find nearest match documents
-#     similar_docs = lc_controller.get_nearest_match_documents(ELASTIC_INDEX_NAME,input_email)
-#     logging.info("relevant docs:"+str(similar_docs))
-
-#     ## Ask Local LLM context informed prompt
-#     informed_context= similar_docs[0].page_content
-
-#     #generate the chain using the prompt
-#     llm_chain = lc_controller.get_llm_chain_old(prompts.TEMPLATE_EMAIL_PROMPT)
-
-#     #informed_response = llm_chain.run(context=informed_context,question=this_question)
-#     informed_response = llm_chain.invoke("context": lambda x: informed_context, "question": input_email)
-    
-
-
-#     return {"suggested_text": informed_response,
-#             "similar_docs":informed_context}
 
 
 
@@ -89,9 +51,9 @@ def draft_email(input_email: str):
 #     add_routes(app, get_chain())
 
 #     logging.info("Starting LangServe on http://localhost:8001")
-#     uvicorn.run(app, host="0.0.0.0", port=8001)
+#     
 
 
-# # when called via command line
-# if __name__ == "__main__":
-#     start()    
+# when called via command line
+if __name__ == "__main__":
+    uvicorn.run("simple_server:app", host="0.0.0.0", port=8001)    

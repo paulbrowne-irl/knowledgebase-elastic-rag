@@ -4,18 +4,18 @@ Not really a true implementation of the factory pattern , even if the intent is 
 Manufacture the (Lang)Chains we need in our app
 '''
 
-from langchain_openai import ChatOpenAI
-#from langchain_community.chat_models.openai import ChatOpenAI
-from langchain_core.runnables import RunnablePassthrough
+import os
+
+import settings.config as config
+import settings.token_loader as token_loader
+import templates.prompts as prompts
+from lang_server import lc_controller as lc_controller
 from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain.prompts.chat import ChatPromptTemplate
 from langchain.schema.runnable import Runnable
-import os
-import settings.config as config
-import settings.token_loader as token_loader
-from lang_server import lc_controller as lc_controller
-
-import templates.prompts as prompts
+#from langchain_community.chat_models.openai import ChatOpenAI
+from langchain_core.runnables import RunnablePassthrough
+from langchain_openai import ChatOpenAI
 
 prompt_func = {
     "name": "email_draft",

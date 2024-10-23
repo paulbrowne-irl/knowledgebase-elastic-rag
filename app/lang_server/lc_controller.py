@@ -1,15 +1,18 @@
 import logging
 from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
                     Tuple, Union)
+
 import lang_server.llm_copilot as llm_copilot
 import requests
 import settings.config as config
 import settings.token_loader as token_loader
 from lang_server import llm_echo
 from langchain.chains.llm import LLMChain
+from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain.prompts import PromptTemplate
 from langchain_anthropic import ChatAnthropic
-from langchain_community.llms import HuggingFacePipeline, Ollama
+from langchain_community.llms import HuggingFacePipeline #, Ollama
+from langchain_ollama import OllamaLLM
 from langchain_core.documents import Document
 from langchain_core.retrievers import BaseRetriever
 from langchain_elasticsearch import DenseVectorStrategy, ElasticsearchStore
@@ -46,8 +49,6 @@ def _get_setup_vector_embeddings() -> HuggingFaceEmbeddings:
 def _get_setup_llm():
 
     global _llm_to_use
-    #global _embeddings
-
 
     if (_llm_to_use == None):
 
@@ -64,16 +65,11 @@ def _get_setup_llm():
         if (MODEL_LLM == "llama3"):
 
             try:
-                _llm_to_use = Ollama(model="llama3.2", stop=['<|eot_id|>'])
+                _llm_to_use = OllamaLLM(model="llama3.2", stop=['<|eot_id|>'])
             except ConnectionRefusedError as cre:
 
                 logging.warning("\n\nFailure to setup local Model - check is Ollame running\n\n")
                 raise cre
-
-
-
-
-            
 
 
         elif (MODEL_LLM == "google/flan-t5-large"):
@@ -190,21 +186,9 @@ def get_llm_chain(prompt_template: str) -> LLMChain:
     prompt_informed = PromptTemplate(
         template=prompt_template, input_variables=["context", "question"])
     
-    llm_chain = LLMChain(prompt=prompt_informed, llm=local_llm)
-
+    parser = JsonOutputFunctionsParser()
+    
     #New Langchain 0.3 syntax
-    #llm_chain = prompt_informed | local_llm
+    llm_chain = prompt_informed | local_llm
 
     return llm_chain
-
-def get_llm_chain_old(prompt_template: str) -> LLMChain:
-    '''
-    Generate the LLM Chain
-    '''
-    local_llm = _get_setup_llm()
-    logging.info(f"Configured to use LLM:{local_llm}")
-
-    prompt_informed = PromptTemplate(
-        template=prompt_template, input_variables=["context", "question"]) 
-
-    return LLMChain(prompt=prompt_informed, llm=local_llm)

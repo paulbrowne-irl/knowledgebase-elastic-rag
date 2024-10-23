@@ -7,12 +7,7 @@ my response using only information in the context is: """
 
 TEMPLATE_EMAIL_PROMPT = """
 I am a helpful AI that writes give line emails as best I can in a professional tone.
-I know context: {context}
 when asked: {question}
-my response is 5 lines long and begins with 'Dear Sir' and ends with 'regards, Bot'"""
-
-TEMPLATE_EMAIL_PROMPT_2 = """
-I am a helpful AI that writes give line emails as best I can in a professional tone.
-when asked to answer this email: {inemail}
-my response is 5 lines long and begins with 'Dear Sir' and ends with 'regards, Bot'
+my response is 5 to 10 lines long but to the point and begins with firstname or 'Dear Sir or Madam' and ends with 'regards, Bot'
+I know context: {context}
 """
