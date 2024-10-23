@@ -6,12 +6,14 @@ Manufacture the (Lang)Chains we need in our app
 
 from langchain_openai import ChatOpenAI
 #from langchain_community.chat_models.openai import ChatOpenAI
+from langchain_core.runnables import RunnablePassthrough
 from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain.prompts.chat import ChatPromptTemplate
 from langchain.schema.runnable import Runnable
 import os
 import settings.config as config
 import settings.token_loader as token_loader
+from lang_server import lc_controller as lc_controller
 
 import templates.prompts as prompts
 
@@ -56,12 +58,28 @@ prompt_func = {
 def get_chain() -> Runnable:
 
     # Get the open AI key and set as env variable
+    #TODO refactor
     token = token_loader.setup_token("openai")
     os.environ["OPENAI_API_KEY"] = token
 
 
+    ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
+
+
     """Return a chain."""
-    prompt = ChatPromptTemplate.from_template(prompts.TEMPLATE_EMAIL_PROMPT)
+    prompt = ChatPromptTemplate.from_template(prompts.TEMPLATE_EMAIL_PROMPT_2)
+    retriever = lc_controller._get_setup_knowledgebase_retriever(ELASTIC_INDEX_NAME)
     model = ChatOpenAI().bind(functions=[prompt_func], function_call={"name": "email_draft"})
     parser = JsonOutputFunctionsParser()
-    return prompt | model | parser
+
+    # include all known
+    # DEAD ENDrag_chain =  prompt | {"context": retriever, "question": RunnablePassthrough()} | model | parser
+
+    # next try - https://github.com/elastic/elasticsearch-labs/blob/main/notebooks/langchain/self-query-retriever-examples/chatbot-with-bm25-only-example.ipynb
+
+    # previous simple prompt | retriever| model | parser
+    rag_chain = prompt | model | parser
+
+
+
+    return rag_chain
