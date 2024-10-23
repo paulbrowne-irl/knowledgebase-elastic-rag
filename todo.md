@@ -12,6 +12,7 @@
 
 	* finish langchain upgrade
 		* add vector retriever - use chain from article in chain_factory.py
+		* Fast API - manually code route
 		* work through to call from simple bot
 		* [later] refactor other samples
 

@@ -15,8 +15,6 @@ from lang_server import lc_controller as lc_controller
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
 
-import bot
-
 
 
 '''

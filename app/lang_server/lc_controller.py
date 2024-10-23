@@ -55,13 +55,24 @@ def _get_setup_llm():
         MODEL_LLM = config.read("MODEL_LLM")
         logging.debug(f"Attmpting to setup LLM {MODEL_LLM}")
 
-        if (MODEL_LLM == "llama3"):
-            _llm_to_use = Ollama(model="llama3.2", stop=['<|eot_id|>'])
 
-            # check local llama instance running
-            # If you get an error from the following line, double check the
-            # install at https://github.com/ollama/ollama
-            requests.get("http://localhost:11434/")
+        # check local llama instance running
+        # If you get an error from the following line, double check the
+        # install at https://github.com/ollama/ollama
+        requests.get("http://localhost:11434/")
+
+        if (MODEL_LLM == "llama3"):
+
+            try:
+                _llm_to_use = Ollama(model="llama3.2", stop=['<|eot_id|>'])
+            except ConnectionRefusedError as cre:
+
+                logging.warning("\n\nFailure to setup local Model - check is Ollame running\n\n")
+                raise cre
+
+
+
+
             
 
 
@@ -179,9 +190,21 @@ def get_llm_chain(prompt_template: str) -> LLMChain:
     prompt_informed = PromptTemplate(
         template=prompt_template, input_variables=["context", "question"])
     
-    #llm_chain = LLMChain(prompt=prompt_informed, llm=local_llm)
+    llm_chain = LLMChain(prompt=prompt_informed, llm=local_llm)
 
     #New Langchain 0.3 syntax
-    llm_chain = prompt_informed | local_llm
+    #llm_chain = prompt_informed | local_llm
 
     return llm_chain
+
+def get_llm_chain_old(prompt_template: str) -> LLMChain:
+    '''
+    Generate the LLM Chain
+    '''
+    local_llm = _get_setup_llm()
+    logging.info(f"Configured to use LLM:{local_llm}")
+
+    prompt_informed = PromptTemplate(
+        template=prompt_template, input_variables=["context", "question"]) 
+
+    return LLMChain(prompt=prompt_informed, llm=local_llm)
