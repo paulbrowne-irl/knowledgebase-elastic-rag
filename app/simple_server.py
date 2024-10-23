@@ -19,7 +19,7 @@ ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
 
 
 @app.post("/draft_email")
-def read_root(input_email: str):
+def draft_email(input_email: str):
 
 
     # Find nearest match documents
@@ -30,15 +30,51 @@ def read_root(input_email: str):
     informed_context= similar_docs[0].page_content
 
     #generate the chain using the prompt
-    llm_chain = lc_controller.get_llm_chain_old(prompts.TEMPLATE_EMAIL_PROMPT)
+    llm_chain = lc_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
 
-    #informed_response = llm_chain.run(context=informed_context,question=this_question)
-    informed_response = llm_chain.invoke("context": lambda x: informed_context, "question": input_email)
+    
+    # Adjust your code to include an 'input' dictionary
+    input_data = {
+        'context': similar_docs,
+        'question': input_email
+    }
+
+    # Now, pass the 'input_data' dictionary to the 'invoke' method
+    informed_response = llm_chain.invoke(input=input_data)
+
+    #informed_response = llm_chain.invoke("context": lambda x: informed_context, "question": input_email))
+
+
+    # return {"suggested_text": informed_response,
+    #         "similar_docs":informed_context}
+
+    return {"suggested_text": informed_response}
+
+
+
+
+# @app.post("/draft_email")
+# def draft_email(input_email: str):
+
+
+#     # Find nearest match documents
+#     similar_docs = lc_controller.get_nearest_match_documents(ELASTIC_INDEX_NAME,input_email)
+#     logging.info("relevant docs:"+str(similar_docs))
+
+#     ## Ask Local LLM context informed prompt
+#     informed_context= similar_docs[0].page_content
+
+#     #generate the chain using the prompt
+#     llm_chain = lc_controller.get_llm_chain_old(prompts.TEMPLATE_EMAIL_PROMPT)
+
+#     #informed_response = llm_chain.run(context=informed_context,question=this_question)
+#     informed_response = llm_chain.invoke("context": lambda x: informed_context, "question": input_email)
     
 
-    return informed_response, similar_docs
-    return {"suggested_text": informed_response,
-            "similar_docs":informed_context}
+
+#     return {"suggested_text": informed_response,
+#             "similar_docs":informed_context}
+
 
 
 
