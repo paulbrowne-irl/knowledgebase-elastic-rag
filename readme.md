@@ -15,7 +15,7 @@ For obvious reasons only generic code and no information / knowledge is shared -
 
 ## Key sections in this guide
 * [Setup](#Setup)
-* [Starting the background infrastructure](#Starting the background infrastructure)
+* [Starting the background infrastructure](#Starting-the-background-infrastructure)
 * [Running the Ingest Script](#Running the Ingest Script)
 * [Config](#Config)
 * [Running the Application and Bot](#Running the Application and Bot)
