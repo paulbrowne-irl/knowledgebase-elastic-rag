@@ -1,5 +1,5 @@
 import logging
-from typing import ( ist)
+from typing import (List)
 
 import service.llm_copilot as llm_copilot
 import requests

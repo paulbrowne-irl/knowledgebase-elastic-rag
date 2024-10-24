@@ -29,7 +29,7 @@ So it relies on the following ...
 * power automate flow to email people w
 
 '''
-class Bot_Excel(bot.Bot):
+class Bot_Excel():
 
     #Excel Bot specific confir values
     QUESTION_FILE_NAME=config.read("QUESTION_FILE_XLS")
@@ -37,6 +37,30 @@ class Bot_Excel(bot.Bot):
     COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
     COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
     OUTPUT_FILE = config.read("BOT_OUTPUT_FILE")
+
+
+    #get config values
+    ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
+    RANDOM_DELAY_RANGE=config.read_int("RANDOM_DELAY_RANGE")
+
+
+    def _get_suggested_anwser_using_chain(self,llm_chain:LLMChain,this_question:str)->Tuple[str,List[Document]]:
+        '''
+        Common to all bots - find suggested answer using presetup chain (normally RAG)
+        '''
+        # Find nearest match documents
+        similar_docs = rag_factory.get_nearest_match_documents(Bot.ELASTIC_INDEX_NAME,this_question)
+        logging.info("relevant docs:"+str(similar_docs))
+
+        ## Ask Local LLM context informed prompt
+        informed_context= similar_docs[0].page_content
+
+        #informed_response = llm_chain.run(context=informed_context,question=this_question)
+        informed_response = llm_chain.invoke(this_question)
+        
+
+        return informed_response, similar_docs
+
 
 
     def loop_answer_questions_from_source(self):
