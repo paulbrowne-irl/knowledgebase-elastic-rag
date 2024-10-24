@@ -4,10 +4,10 @@ from time import sleep
 from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
                     Tuple, Union)
 
-import bot
+import util.bot as bot
 import pandas as pd
 import settings.config as config
-from lang_server import rag_factory as rag_factory
+from service import rag_factory as rag_factory
 from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document
 from langchain_core.messages import HumanMessage, SystemMessage
