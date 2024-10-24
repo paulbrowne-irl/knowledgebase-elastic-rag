@@ -10,11 +10,13 @@
 # 0 Alt streams
 
 
-	* finish langchain upgrade
-		* add vector retriever - use chain from article in chain_factory.py
-		* Fast API - manually code route
-		* work through to call from simple bot
+	* tidy codebase, push to email bot , Doc
 		* [later] refactor other samples
+		* code up simple proxy
+			* poss refactor of app - no server
+			* poss remove bot (class)
+		* simple email bot using proxy
+		* Complete Doc	
 
 	* NTH - Docker build for stability
 		* try looking at python command (can set working direcotry?) - did that work
@@ -24,11 +26,13 @@
 		* https://www.arsturn.com/blog/setting-up-ollama-with-docker-compose-a-complete-guide
 		* anything useful (like devcontainers) to bring over?
 
-
+# Holdeovers - move to later spring
+	* true langserve code
+	* read langserve book
 
 
 # 1 Next Sprint - post merge
-	* restore sydney
+	* restore sydney or other copilot
 
 	* Python client - from proxy.py / replaces a lot of lc_controller into fatory
 		* use in all bot sampels

@@ -10,7 +10,7 @@ from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document
 from templates import prompts as prompts
 from util.office import xl_rw as xl_rw
-from lang_server import lc_controller as lc_controller
+from lang_server import rag_factory as rag_factory
 
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
@@ -64,7 +64,7 @@ class Bot_Excel(bot.Bot):
             logging.info(str(next_question))
 
             #generate the chain using the prompt
-            llm_chain = lc_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
+            llm_chain = rag_factory.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
 
             logging.debug("Question we are trying to answer:"+str(next_question.get(self.COL_QUESTION)))
 

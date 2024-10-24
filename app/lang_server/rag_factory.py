@@ -1,6 +1,5 @@
 import logging
-from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
-                    Tuple, Union)
+from typing import ( ist)
 
 import lang_server.llm_copilot as llm_copilot
 import requests
@@ -21,10 +20,16 @@ from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from langchain_openai import ChatOpenAI
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 
+
+'''
+Helper class to support the various elements needed in a Langchain system 
+'''
+
 # Module level constants
 _knowledgebase_retriever_dict = {}
 _embeddings = None
 _llm_to_use = None
+
 
 
 def _get_setup_vector_embeddings() -> HuggingFaceEmbeddings:

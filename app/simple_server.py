@@ -4,7 +4,7 @@ import logging
 import settings.config as config
 import uvicorn
 from fastapi import FastAPI
-from lang_server import lc_controller as lc_controller
+from lang_server import rag_factory as rag_factory
 from templates import prompts as prompts
 
 # setup once
@@ -17,11 +17,11 @@ def draft_email(input_email: str):
 
 
     # Find nearest match documents
-    similar_docs = lc_controller.get_nearest_match_documents(ELASTIC_INDEX_NAME,input_email)
+    similar_docs = rag_factory.get_nearest_match_documents(ELASTIC_INDEX_NAME,input_email)
     logging.info("relevant docs:"+str(similar_docs))
 
     #generate the chain using the prompt
-    llm_chain = lc_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
+    llm_chain = rag_factory.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
 
     
     # Adjust your code to include an 'input' dictionary
@@ -39,7 +39,9 @@ def draft_email(input_email: str):
 
 
 
-
+'''
+Previous Langserve code - possible to restore in future iteration
+'''
 # def start():
 
 #     '''

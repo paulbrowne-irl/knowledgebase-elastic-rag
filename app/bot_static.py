@@ -7,7 +7,7 @@ from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
 import bot
 import pandas as pd
 import settings.config as config
-from lang_server import lc_controller as lc_controller
+from lang_server import rag_factory as rag_factory
 from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -46,10 +46,10 @@ class Bot_Static(bot.Bot):
         ]
 
         ## refactor to use later
-        retriever = lc_controller._get_setup_knowledgebase_retriever(self.ELASTIC_INDEX_NAME)
+        retriever = rag_factory._get_setup_knowledgebase_retriever(self.ELASTIC_INDEX_NAME)
 
         ##model start
-        model = lc_controller._get_setup_llm() # also returns llm
+        model = rag_factory._get_setup_llm() # also returns llm
 
         ## end
 
@@ -80,7 +80,7 @@ class Bot_Static(bot.Bot):
             logging.info("Next question line:"+str(next_question))
 
             #generate the chain using the prompt
-            llm_chain = lc_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
+            llm_chain = rag_factory.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
 
             #get the suggested answer and supporting docs
             #informed_response, supporting_docs = self._get_suggested_anwser_using_chain(llm_chain,next_question)

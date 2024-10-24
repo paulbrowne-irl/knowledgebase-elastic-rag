@@ -7,7 +7,7 @@ from importlib import reload
 
 import settings.config as config
 import pages.app_sidebar as app_sidebar
-from lang_server import lc_controller as lc_controller
+from lang_server import rag_factory as rag_factory
 import logging
 
 

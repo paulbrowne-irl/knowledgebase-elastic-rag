@@ -16,7 +16,7 @@ def do_server_check():
     Checks if the configured server gives a response, else starts local server
     '''
     try:
-        requests.get("http://localhost:8001/")
+        requests.get("http://localhost:8000/")
         logging.info("Langserve server detected")
     except:
         # nothing there
@@ -30,9 +30,9 @@ def get_response() -> str:
 
     do_server_check()
 
-    chain_endpoint = "http://localhost:8001/"
+    chain_endpoint = "http://localhost:8000/"
     chain = RemoteRunnable(chain_endpoint)
-    response = chain.invoke({"topic":"Tell me a joke about Dublin with a bus and a train"})
+    response = chain.invoke({"draft_email":"Tell me a joke about Dublin with a bus and a train"})
 
     return response
 

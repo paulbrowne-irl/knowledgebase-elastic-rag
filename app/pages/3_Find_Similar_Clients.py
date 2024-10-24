@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-from lang_server import lc_controller as lc_controller
+from lang_server import rag_factory as rag_factory
 
 import pages.app_sidebar as app_sidebar
 from importlib import reload
@@ -37,7 +37,7 @@ with st.form('my_form'):
     if submitted:
             
         # Find nearest match documents
-        similar_docs = lc_controller.get_nearest_match_documents(app_sidebar.document_search, input_text)
+        similar_docs = rag_factory.get_nearest_match_documents(app_sidebar.document_search, input_text)
 
         #setup empty dataframe for display
         nf= pd.DataFrame.from_dict({})
