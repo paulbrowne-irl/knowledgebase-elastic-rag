@@ -24,7 +24,8 @@ For obvious reasons only generic code and no information / knowledge is shared -
 ## Three main parts to the application: 
 While they are linked, you will typically run only one 
 1. Ingest - load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
-1. Bot - Answer questions passed to it (to /from Excel) using RAG techniques. Designed to be used as part of Power Automate or other automatic workflow.
+1. Bots - Answer questions passed to it (to /from Excel) using RAG techniques. Designed to be used as part of Power Automate or other automatic workflow.
+    * Sometimes these bots will depending on the REST server - but they will remind you to start it if needed
 1. App - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases.
 
 ## Underlying technologies:
