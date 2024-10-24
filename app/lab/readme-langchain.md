@@ -1,23 +1,4 @@
-# Notes to add to the main readme.md file
-
-* add note on starting simple server
-
-* note on http://localhost:8001/playground/ ***** NO ****
-* note on http://localhost:8001/docs
-
-* to start server
-    * uvicorn simple_server:app --reload
-
-* to start Ollama
-    * https://github.com/ollama/ollama
-    * ollama serve
-
-* Notes on Docker Build
-    apt-get install docker-buildx-plugin
-    DOCKER_BUILDKIT=1 docker build .
-
-
-OLLMA - https://github.com/ollama/ollama
+These notes capture the (in progress) langchain
 
 
 # pip install "langserve[client]"

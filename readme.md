@@ -1,7 +1,9 @@
+
+
 # Allow colleagues to talk to your documents
 
 
-Many organisations/individuals have piles of documents containing valuable documents but are little used after their initial creation.
+Many organisations/individuals have piles of documents containing valuable information but are little used after their initial creation.
 
 "RAG" techniques allow you and colleagues to chat with these documents - allowing you to combine the accuracy of the documents and the "chattiness" of AIs like ChatGPT. More backgound to RAG in the links at the end of this page.
 
@@ -10,6 +12,14 @@ This project is code to implement a pilot RAG Chatbot in a not for profit VC. Gi
 For obvious reasons only generic code and no information / knowledge is shared - this has the benefit of you being able to add your own documents. See instructions below.
 
 <img src="images/screenshot.jpg" width="30%" height="30%" />
+
+## Key sections in this guide
+* [Setup](#Setup)
+* [Starting the background infrastructure](#Starting the background infrastructure)
+* [Running the Ingest Script](#Running the Ingest Script)
+* [Config](#Config)
+* [Running the Application and Bot](#Running the Application and Bot)
+* [Key folders](#Key folders)
 
 ## Three main parts to the application: 
 While they are linked, you will typically run only one 
@@ -73,7 +83,7 @@ The Kibana App runs on top of Elastic and allows you to create indexs to store a
 
 No screenshot, but also automatically started is the Portainer Web Management for Docker, available at https://localhost:9443 . This can safely be commented out in the docker-compose file if this is not needed.
 
-## Running the Ingest Script 
+## Configuring Tokens
 Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file, you may wish to review how has access to it.
 
 
@@ -91,16 +101,30 @@ To run the ingest script
 
 In general, you will only need the ingest script once (or infrequently, if you wise to add more documents). For small datasets, it is probably easier to delete the Knowledgebase index (using Kibana - see link and screenshot above), then run the Ingest script again.
 
-### Config
+## Config
 * The starting folder (and other values) are set in _app/config/config.conf_ - please edit this or see the notes in the _app/config_ folder to customize configuration. This config file is shared for the ingest script, the Bot and the Application.
+
+## Running Local LLMs
+* The config file gives the option or running a *private* local LLM using Ollama. If you configure this option you will need to install Ollama and the appropriate LLM using the following notes 
+    * Install Ollama as per instructions at https://github.com/ollama/ollama
+    * Install LLM using command like _ollama pull llama3.2_
+    * Start the Ollmaa Server using _ollama serve_
+
 
 # Running the Application and Bot
 
 The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
 
+# Running the Server
+The scripts provide a simple server to expose a Rest API. To start the server (_simple_server.py_)from the app folder:
+    * _uvicorn simple_server:app --reload_
+    * Open a web browser to view the REST api on http://localhost:8001/docs
+
+Note that some other examples (some bots) depend on this server - but should remind you to start it if needed.
+
 ## Running the Bot - Excel
 
-Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be hosted online, this allows Integration with Office 365 and Power Automate. e.g.
+Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be h_osted online, this allows Integration with Office 365 and Power Automate. e.g.
 1. The User can ask a question on Microsoft Forms
 1. Power Automate saves this question in Excel.
 1. The Bot reads the question, saves the answer back in Excel.
@@ -111,11 +135,6 @@ To run the bot.
 * Open the app folder: _cd app_ in a terminal window
 * Activate the Python environment with dependencies you installed earelier: _source venv/bin/activate_
 * Run the script using _python bot_excel.py_
-
-## Running the Bot - External Helpdesk API
-
-* TODO - document
-* API Key - https://[youraccount].eu.teamwork.com/desk/myprofile/apikeys
 
 ## Run the Web Application
 The Web application addresses a wider range of business use cases than the bot - see the tabs on the left hand side of the screenshot below.
@@ -129,19 +148,21 @@ To run the Web Application.
 ![Screenshot of Streamlit Web App](images/screenshot.jpg "Screenshot of Web App")
 
 
+
 # Development notes
 
-## Folders 
+## Key folders  
 * High level folders
     * _data-sample_ - sample public documents to get you started with the scripts (e.g. Ingest then ask questions against)
 * Main application is in the _app_ folder    
     * _app/cache_ [local only] - local only backup of information
     * _data_no_share_ [local only] - some of the scripts may look to load information from here
+    * _app/langserve_ - server and backed creating llm chains and executing them
     * _app/pages_ - sub pages in the webapp
     * _app/settings_ - configuration files
     * _app/templates_ template files for prompts and emails
     * _app/tests_ - unit tests for the application
-    * _app/unil_ - supporting scripts to implement data extraction, indexing to elastic, language process, reading-writing office files, implemeting RAG. More notes on these in the sub folders.
+    * _app/util_ - supporting scripts to implement data extraction, indexing to elastic, language process, reading-writing office files, implemeting RAG. More notes on these in the sub folders.
 
 
 ## Running Unit Tests
