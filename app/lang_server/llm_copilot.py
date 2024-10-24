@@ -53,7 +53,6 @@ class CopilotLLM(LLM):
             raise ValueError("stop kwargs are not permitted.")
 
         os.environ["BING_COOKIES"]=self.copilot_token
-        #print ("set token to :"+self.copilot_token)
         
 
         # actual code to invoke copilot using Sydney
@@ -70,6 +69,8 @@ class CopilotLLM(LLM):
 
     # Standard sydney call
     async def call_copilot(self,prompt) -> str:
+    
+    
         async with SydneyClient() as sydney:
             
             #logging.debug("Awaiting response from Sydney / Copilot", end="", flush=True)
@@ -81,5 +82,3 @@ class CopilotLLM(LLM):
             logging.debug("response recieved")
             
             return resp
-        
-

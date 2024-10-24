@@ -10,13 +10,12 @@ from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document
 from templates import prompts as prompts
 from util.office import xl_rw as xl_rw
-from util.rag import llm_echo
-from util.rag import lc_controller as lc_controller
+from lang_server import rag_factory as rag_factory
 
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
 
-import bot
+import bot 
 
 
 
@@ -65,7 +64,7 @@ class Bot_Excel(bot.Bot):
             logging.info(str(next_question))
 
             #generate the chain using the prompt
-            llm_chain = lc_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
+            llm_chain = rag_factory.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
 
             logging.debug("Question we are trying to answer:"+str(next_question.get(self.COL_QUESTION)))
 
@@ -108,8 +107,6 @@ if __name__ == '__main__':
     #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
     logging.basicConfig(level=logging.DEBUG)
 
-    #make sure setup gets run at start
-    lc_controller.setup()
 
     #call the main method in this module
     myBot = Bot_Excel()

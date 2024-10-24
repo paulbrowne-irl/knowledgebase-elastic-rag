@@ -4,14 +4,12 @@ from time import sleep
 from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
                     Tuple, Union)
 
-import pandas as pd
 import settings.config as config
 from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document
 from templates import prompts as prompts
 from util.office import xl_rw as xl_rw
-from util.rag import llm_echo
-from util.rag import lc_controller as lc_controller
+from lang_server import rag_factory as rag_factory
 
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
@@ -41,7 +39,7 @@ class Bot(ABC):
         Common to all bots - find suggested answer using presetup chain (normally RAG)
         '''
         # Find nearest match documents
-        similar_docs = lc_controller.get_nearest_match_documents(Bot.ELASTIC_INDEX_NAME,this_question)
+        similar_docs = rag_factory.get_nearest_match_documents(Bot.ELASTIC_INDEX_NAME,this_question)
         logging.info("relevant docs:"+str(similar_docs))
 
         ## Ask Local LLM context informed prompt

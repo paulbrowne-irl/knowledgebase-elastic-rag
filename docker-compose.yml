@@ -12,8 +12,9 @@ services:
     #        - /var/run/docker.sock:/var/run/docker.sock
     #    restart: unless-stopped
 
-    # if we build our example as docker image, and only to run python client
-    #langserve_docker_image_asserver:
+    # if we built our python server  as docker image,
+    # running via docker compose meanswe deploy only to run python client
+    #langserve_docker_image_as_server:
     #   build:
     #    context: .
     #    image: langserve_launch_example:latest
@@ -22,6 +23,8 @@ services:
     #    - "8001:8001"
     #    env_file:
     #    - .env
+    #   networks:
+    #   - mynetwork
 
     
     # Core Knowledgement Solution
@@ -41,9 +44,7 @@ services:
         environment:
             - discovery.type=single-node
             - xpack.security.enabled=false
-            - xpack.security.http.ssl.enabled=false
-        
-        #image: docker.elastic.co/elasticsearch/elasticsearch:8.11.4
+            - xpack.security.http.ssl.enabled=false       
         image: docker.elastic.co/elasticsearch/elasticsearch:8.15.2
         healthcheck:
           test:
@@ -55,7 +56,7 @@ services:
           timeout: 10s
           retries: 120
           
-    #Elastic Search management tool
+    # #Elastic Search management tool
     kibana:
         container_name: kib01
         networks:
@@ -66,6 +67,8 @@ services:
         depends_on: 
           elasticsearch:
             condition: service_started
+
+
 networks:
     mynetwork:
         name: mynetwork

@@ -4,24 +4,18 @@ from time import sleep
 from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
                     Tuple, Union)
 
+import bot
 import pandas as pd
 import settings.config as config
+from lang_server import rag_factory as rag_factory
 from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document
-from templates import prompts as prompts
-from util.office import xl_rw as xl_rw
-from util.rag import llm_echo
-from util.rag import lc_controller as lc_controller
-
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.output_parsers import StrOutputParser
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
-
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.messages import HumanMessage, SystemMessage
-
-import bot
-
-
+from templates import prompts as prompts
+from util.office import xl_rw as xl_rw
 
 '''
 Not really a bot - more of a test bed.
@@ -52,10 +46,10 @@ class Bot_Static(bot.Bot):
         ]
 
         ## refactor to use later
-        retriever = lc_controller._get_knowledgebase_retriever(self.ELASTIC_INDEX_NAME)
+        retriever = rag_factory._get_setup_knowledgebase_retriever(self.ELASTIC_INDEX_NAME)
 
         ##model start
-        model = lc_controller._get_setup_llm() # also returns llm
+        model = rag_factory._get_setup_llm() # also returns llm
 
         ## end
 
@@ -86,7 +80,7 @@ class Bot_Static(bot.Bot):
             logging.info("Next question line:"+str(next_question))
 
             #generate the chain using the prompt
-            llm_chain = lc_controller.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
+            llm_chain = rag_factory.get_llm_chain(prompts.TEMPLATE_EMAIL_PROMPT)
 
             #get the suggested answer and supporting docs
             #informed_response, supporting_docs = self._get_suggested_anwser_using_chain(llm_chain,next_question)
@@ -111,9 +105,6 @@ if __name__ == '__main__':
     #Set the Logging level. Change it to logging.INFO is you want just the important info
     #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
     logging.basicConfig(level=logging.DEBUG)
-
-    #make sure setup gets run at start
-    lc_controller.setup()
 
     #call the main method in this module
     myBot = Bot_Static()

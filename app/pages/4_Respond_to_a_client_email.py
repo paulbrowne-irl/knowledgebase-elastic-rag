@@ -1,8 +1,8 @@
 import streamlit as st
 
-import util.rag.lc_controller as lc_controller
+from lang_server import rag_factory as rag_factory
 import app as app
-import pages.app_sidebaridebar as app_sidebar
+import pages.app_sidebar as app_sidebar
 import templates.prompts
 
 from importlib import reload
@@ -13,9 +13,6 @@ st.title('Draft a client email')
 
 #Fields on Sidebar
 reload(app_sidebar)
-
-#make sure setup gets run at start
-lc_controller.setup()
 
 
 # reload previous prompot
@@ -42,11 +39,11 @@ with st.form('my_form'):
     if submitted:
 
         # Find nearest match documents
-        similar_docs = lc_controller.get_nearest_match_documents(app_sidebar.document_search, input_text)
+        similar_docs = rag_factory.get_nearest_match_documents(app_sidebar.document_search, input_text)
    
         ## Ask Local LLM context informed prompt
         informed_context= similar_docs[0].page_content
-        llm_chain = lc_controller.get_llm_chain(st.session_state['prompt'])
+        llm_chain = rag_factory.get_llm_chain(st.session_state['prompt'])
         informed_response = llm_chain.run(context=informed_context,question=input_text)
 
         #update the UI with the answer

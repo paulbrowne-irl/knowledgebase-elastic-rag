@@ -1,47 +1,38 @@
 import logging
+from typing import ( ist)
+
+import lang_server.llm_copilot as llm_copilot
 import requests
-
-from typing import (Any, Callable, Dict, Iterable, List, Literal, Optional,
-                    Tuple, Union)
-
 import settings.config as config
 import settings.token_loader as token_loader
-import util.rag.llm_copilot as llm_copilot
+from lang_server import llm_echo
 from langchain.chains.llm import LLMChain
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain.prompts import PromptTemplate
-from langchain_huggingface.embeddings import HuggingFaceEmbeddings
-from langchain_community.llms import HuggingFacePipeline, Ollama
-from langchain_core.documents import Document
-from langchain_elasticsearch import DenseVectorStrategy, ElasticsearchStore
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
-from util.rag import llm_echo
-
-from langchain_core.retrievers import BaseRetriever
-
-#from langchain_core.messages import HumanMessage, SystemMessage
-#from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
-#from langchain_google_vertexai import ChatVertexAI
 from langchain_anthropic import ChatAnthropic
+from langchain_community.llms import HuggingFacePipeline #, Ollama
+from langchain_ollama import OllamaLLM
+from langchain_core.documents import Document
+from langchain_core.retrievers import BaseRetriever
+from langchain_elasticsearch import DenseVectorStrategy, ElasticsearchStore
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_huggingface.embeddings import HuggingFaceEmbeddings
+from langchain_openai import ChatOpenAI
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 
+
+'''
+Helper class to support the various elements needed in a Langchain system 
+'''
 
 # Module level constants
+_knowledgebase_retriever_dict = {}
 _embeddings = None
-_kb_dict = {}
 _llm_to_use = None
 
 
-def setup():
-    '''
-    Initialise the system (if needed)
-    Safe to call multiple types as checks if have been called prviously
-    '''
-    _setup_vector_embeddings()
-    _get_setup_llm()
 
-
-def _setup_vector_embeddings():
+def _get_setup_vector_embeddings() -> HuggingFaceEmbeddings:
     '''
     Setup the embeddings that we use for vector search
     '''
@@ -57,11 +48,12 @@ def _setup_vector_embeddings():
     else:
         logging.debug("Embeddings already setup")
 
+    return _embeddings
+
 
 def _get_setup_llm():
 
     global _llm_to_use
-    global _embeddings
 
     if (_llm_to_use == None):
 
@@ -69,14 +61,20 @@ def _get_setup_llm():
         MODEL_LLM = config.read("MODEL_LLM")
         logging.debug(f"Attmpting to setup LLM {MODEL_LLM}")
 
-        if (MODEL_LLM == "llama3"):
-            _llm_to_use = Ollama(model="llama3.2", stop=['<|eot_id|>'])
 
-            # check local llama instance running
-            # If you get an error from the following line, double check the
-            # install at https://github.com/ollama/ollama
-            requests.get("http://localhost:11434/")
-            
+        # check local llama instance running
+        # If you get an error from the following line, double check the
+        # install at https://github.com/ollama/ollama
+        requests.get("http://localhost:11434/")
+
+        if (MODEL_LLM == "llama3"):
+
+            try:
+                _llm_to_use = OllamaLLM(model="llama3.2", stop=['<|eot_id|>'])
+            except ConnectionRefusedError as cre:
+
+                logging.warning("\n\nFailure to setup local Model - check is Ollame running\n\n")
+                raise cre
 
 
         elif (MODEL_LLM == "google/flan-t5-large"):
@@ -141,27 +139,32 @@ def _get_setup_llm():
     return _llm_to_use
 
 
-def _get_knowledgebase_retriever(index_name: str) -> BaseRetriever:
+def _get_setup_knowledgebase_retriever(index_name: str) -> BaseRetriever:
     '''
     Setup Handle to the external RAG Datastore
     '''
+    global _knowledgebase_retriever_dict
 
-    if (index_name not in _kb_dict):
+    #ensure our embeddings are setup
+    local_embeddings= _get_setup_vector_embeddings()
+
+
+    if (index_name not in _knowledgebase_retriever_dict):
 
         logging.debug("Setting up Elastic Knowledgebase:" +
-                      index_name + " using embeddings:"+str(_embeddings))
+                      index_name + " using embeddings:"+str(local_embeddings))
 
         tmpES_Store = ElasticsearchStore(embedding=_embeddings, es_url=config.read(
             "ES_URL"), index_name=index_name, strategy=DenseVectorStrategy()) #was ApproxRetrievalStrategy
         
         #convert to standard langchain retriever format
-        _kb_dict[index_name] = tmpES_Store.as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.2})
+        _knowledgebase_retriever_dict[index_name] = tmpES_Store.as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.2})
 
 
     else:
         logging.debug("Using cached Datastore "+index_name)
 
-    return _kb_dict[index_name]
+    return _knowledgebase_retriever_dict[index_name]
 
 
 def get_nearest_match_documents(index_name: str, search_text: str) -> List[Document]:
@@ -172,7 +175,7 @@ def get_nearest_match_documents(index_name: str, search_text: str) -> List[Docum
     logging.debug(f"Nearest Search index {index_name} matching against {search_text}")
 
     # Get the handle to the Elastick Knowledge Base
-    vector_retriever = _get_knowledgebase_retriever(index_name)
+    vector_retriever = _get_setup_knowledgebase_retriever(index_name)
 
     return vector_retriever.invoke(search_text)
 
@@ -182,15 +185,15 @@ def get_llm_chain(prompt_template: str) -> LLMChain:
     Generate the LLM Chain
     '''
 
-    global _llm_to_use
-    logging.info(f"Configured to use LLM:{_llm_to_use}")
+    local_llm = _get_setup_llm()
+    logging.info(f"Configured to use LLM:{local_llm}")
 
     prompt_informed = PromptTemplate(
         template=prompt_template, input_variables=["context", "question"])
     
-    #llm_chain = LLMChain(prompt=prompt_informed, llm=_llm_to_use)
-
+    parser = JsonOutputFunctionsParser()
+    
     #New Langchain 0.3 syntax
-    llm_chain = prompt_informed | _llm_to_use
+    llm_chain = prompt_informed | local_llm
 
     return llm_chain
