@@ -52,8 +52,9 @@ pytest-asyncio
 mypy
 ruff
 black
-syrupy 
-sse_starlette
+syrupy
+sse_starlette 
+starlette>=0.40.0
 
 ## Older dependencies - remove after refactor code
 sydney-py
