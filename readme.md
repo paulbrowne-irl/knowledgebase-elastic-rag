@@ -45,7 +45,7 @@ Instructions for first time setup of the project:
     * https://docs.docker.com/engine/install/ubuntu/
 
 1. Install Python (3.12 or higher) in the usual way. Python pip and virtualenv tools are also needed.
-    * check first what version you have installed usign python -V
+    * check first what version you have installed using _python -V_
 
 1. Install Python dependencies - in a terminal window, at the project root
     * Create environment: _virtualenv venv_
