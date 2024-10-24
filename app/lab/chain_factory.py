@@ -9,7 +9,7 @@ import os
 import settings.config as config
 import settings.token_loader as token_loader
 import templates.prompts as prompts
-from lang_server import rag_factory as rag_factory
+from service import rag_factory as rag_factory
 from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain.prompts.chat import ChatPromptTemplate
 from langchain.schema.runnable import Runnable

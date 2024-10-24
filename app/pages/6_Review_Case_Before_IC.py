@@ -3,7 +3,7 @@ import pages.app_sidebar as app_sidebar
 
 from importlib import reload
 
-from lang_server import rag_factory as rag_factory
+from service import rag_factory as rag_factory
 
 #Window setup
 st.title('Review my Case before IC ...')

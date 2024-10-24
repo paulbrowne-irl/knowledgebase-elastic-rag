@@ -9,7 +9,7 @@ from langchain.chains.llm import LLMChain
 from langchain_core.documents import Document
 from templates import prompts as prompts
 from util.office import xl_rw as xl_rw
-from lang_server import rag_factory as rag_factory
+from service import rag_factory as rag_factory
 
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer

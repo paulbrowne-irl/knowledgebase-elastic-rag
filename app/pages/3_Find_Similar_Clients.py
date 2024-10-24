@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-from lang_server import rag_factory as rag_factory
+from service import rag_factory as rag_factory
 
 import pages.app_sidebar as app_sidebar
 from importlib import reload

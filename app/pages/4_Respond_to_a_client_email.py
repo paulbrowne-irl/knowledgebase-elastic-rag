@@ -1,6 +1,6 @@
 import streamlit as st
 
-from lang_server import rag_factory as rag_factory
+from service import rag_factory as rag_factory
 import app as app
 import pages.app_sidebar as app_sidebar
 import templates.prompts

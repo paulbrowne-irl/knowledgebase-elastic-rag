@@ -1,11 +1,11 @@
 import logging
 from typing import ( ist)
 
-import lang_server.llm_copilot as llm_copilot
+import service.llm_copilot as llm_copilot
 import requests
 import settings.config as config
 import settings.token_loader as token_loader
-from lang_server import llm_echo
+from service import llm_echo
 from langchain.chains.llm import LLMChain
 from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain.prompts import PromptTemplate
