@@ -5,10 +5,15 @@
 * Multiple, clear use cases using basic architecture   
 * can link to excel or external helpdesk api
 
-
-
 # 0 Alt streams
 
+	* next try bot static - direct call?
+
+	* Poss outlook bot calling api
+
+
+	* Doc
+		* remove Doc excel
 
 	* tidy codebase, push to email bot , Doc
 		* [later] refactor other samples
@@ -17,6 +22,8 @@
 			* poss remove bot (class)
 		* simple email bot using proxy
 		* Complete Doc	
+			* review in md online
+			* review todo
 
 	* NTH - Docker build for stability
 		* try looking at python command (can set working direcotry?) - did that work
@@ -29,20 +36,16 @@
 # Holdeovers - move to later spring
 	* true langserve code
 	* read langserve book
-
-
-# 1 Next Sprint - post merge
 	* restore sydney or other copilot
 
+# 1 Next Sprint - post merge
+	
 	* Python client - from proxy.py / replaces a lot of lc_controller into fatory
 		* use in all bot sampels
 		* refactor project around this
 		* config (from file - which url to check)
 
-	* Separate client and server deploy
-		perhaps a requirements clinet
-
-
+	
 	* Update Docs
 		* migrate in docs
 		* refer to example https://blog.langchain.dev/introducing-langserve/
@@ -51,13 +54,6 @@
 		* docker file instructions / alt run locally 
 			* ollama
 			* langserve (from project)
-
-	* merge in main
-		* snapshot release
-
-# 1+ Sprint
-
-* Poss outlook bot calling api
 
 # 2nd Sprint
 	* Test Bot working again

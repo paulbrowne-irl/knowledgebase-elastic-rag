@@ -35,38 +35,9 @@ class Bot_Static(bot.Bot):
     #output data
     output_data = []
 
-    '''
-    ######################################
-    '''
-    def _use_new_chain_refactor(self,next_question):
-      
-        messages = [
-            SystemMessage(content=next_question),
-            HumanMessage(content="hi!"),
-        ]
-
-        ## refactor to use later
-        retriever = rag_factory._get_setup_knowledgebase_retriever(self.ELASTIC_INDEX_NAME)
-
-        ##model start
-        model = rag_factory._get_setup_llm() # also returns llm
-
-        ## end
-
-        
-
-        parser = StrOutputParser()
-
-        chain = retriever | model | parser
-
-        logging.info("About to invoke chain - this may take several seconds if local")
-        result = chain.invoke(messages)
-
-        return result
-
 
     '''
-    ######################################
+    Loop and answer quetions from the source
     '''
     def loop_answer_questions_from_source(self):
     
