@@ -7,8 +7,9 @@
 
 # 0 Alt streams
 
-	* next try bot static - direct call?
-		* stub proxy	
+	* simple proxy.py running against server
+	* try bot static - loop using prox
+	* update api to allow filter via local LLM - decide where	
 	* Poss outlook bot calling api
 	* Doc upgrade
 	* simple email bot using proxy
