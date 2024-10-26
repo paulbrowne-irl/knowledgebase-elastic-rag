@@ -37,6 +37,8 @@
 	* refer to example https://blog.langchain.dev/introducing-langserve/
 	* refer to main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
 	* add doc to key python files (especially app)
+
+	* refactor other bots / app to use client-server example (if needed)
 	
 
 
