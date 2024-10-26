@@ -14,23 +14,23 @@ This module provides a server facade
 a) it can be run as a uvicorn fastapi server
 b) it can be called directly by the app and front end bots
 
-# https://github.com/openapi-generators/openapi-python-client to generate client
 '''
 
-@app.get("/test_email")
-def hello():
-    return "world"
+@app.get("/service_check")
+@app.post("/service_check")
+def service_check():
+    return "ok"
 
-@app.post("/test_email")
-def draft_email(email: str):
-    return "world "+email
+# @app.post("/test_email")
+# def test_email(email: str):
+#     return "world "+email
 
-@app.post("/draft_email")
-def draft_email(email: str):
+@app.post("/draft_email_response")
+def draft_email_response(email: str):
 
 
     # Find nearest match documents
-    similar_docs = rag_factory.get_nearest_match_documents(ELASTIC_INDEX_NAME,input_email)
+    similar_docs = rag_factory.get_nearest_match_documents(ELASTIC_INDEX_NAME,email)
     logging.info("relevant docs:"+str(similar_docs))
 
     #generate the chain using the prompt
@@ -40,7 +40,7 @@ def draft_email(email: str):
     # Adjust your code to include an 'input' dictionary
     input_data = {
         'context': similar_docs,
-        'question': input_email
+        'question': email
     }
 
 
@@ -49,24 +49,6 @@ def draft_email(email: str):
 
     return {"suggested_text": informed_response}
 
-
-
-
-'''
-Previous Langserve code - possible to restore in future iteration
-'''
-# def start():
-
-#     '''
-#     Lang Serve server which makes Lang chain available via REST API
-#     When run normally, it is available via http://localhost:8001/docs
-#     '''
-
-#     app = FastAPI(title="LangServe Knowledgebase Example")
-#     add_routes(app, get_chain())
-
-#     logging.info("Starting LangServe on http://localhost:8001")
-#     
 
 
 # start server when called via command line

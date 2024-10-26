@@ -7,12 +7,17 @@
 
 # 0 Alt streams
 
-	* simple proxy.py running against server
-	* try bot static - loop using proxy
-	* update api to allow filter via local LLM - decide where	
-	* Poss outlook bot calling api
+	* NEXT - end to end on static bot via rest API
+
+	* update api to allow filter via local LLM - decide where
+
+	* Outlook bot calling api via porxy
+	 
 	* Doc upgrade
-	* simple email bot using proxy
+		* check for todo
+		* uvicorn service.simple_server:app to start service
+		* remove older references (to labs)
+
 
 
 # 1 Next Sprint - or move to later
