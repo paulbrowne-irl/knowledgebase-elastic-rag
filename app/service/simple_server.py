@@ -6,13 +6,15 @@ from service import rag_factory as rag_factory
 from templates import prompts as prompts
 
 # setup once
-app = FastAPI(title="LangServe Knowledgebase Example")
+app = FastAPI(title="LangServe Knowledgebase Service")
 ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
 
 '''
 This module provides a server facade
 a) it can be run as a uvicorn fastapi server
 b) it can be called directly by the app and front end bots
+
+Auto generated api docs (on running server) - localhost:8000/docs#/
 
 '''
 
