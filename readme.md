@@ -70,7 +70,7 @@ It is possible to install Elastic and Kibana directly on the machine (i.e. no Do
 
 ## Starting the background infrastructure
 
-A Docker compose file is provided to make it easy to download and run the supporting infrastture (e.g. the Elastic Search engine). To start this Infrastructure using Docker:
+A Docker compose file is provided to make it easy to download and run the supporting infrastructure (e.g. the Elastic Search engine). To start this Infrastructure using Docker:
 * Open a (new) terminal window, navigate to home folder containing docker-compose.yml
 * Start Elastic and Kibana using: _docker compose up_
 
@@ -83,6 +83,10 @@ The Kibana App runs on top of Elastic and allows you to create indexs to store a
 ![Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase](images/kibana_index_management.png "Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase") 
 
 No screenshot, but also automatically started is the Portainer Web Management for Docker, available at https://localhost:9443 . This can safely be commented out in the docker-compose file if this is not needed.
+
+## Starting the service infrastructure
+* TODO - what it is
+* TODO - simple-server.py
 
 ## Configuring Tokens
 Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file, you may wish to review how has access to it.

@@ -10,14 +10,23 @@ app = FastAPI(title="LangServe Knowledgebase Example")
 ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
 
 '''
-This module provides a service
+This module provides a server facade
 a) it can be run as a uvicorn fastapi server
 b) it can be called directly by the app and front end bots
+
+# https://github.com/openapi-generators/openapi-python-client to generate client
 '''
 
+@app.get("/test_email")
+def hello():
+    return "world"
+
+@app.post("/test_email")
+def draft_email(email: str):
+    return "world "+email
 
 @app.post("/draft_email")
-def draft_email(input_email: str):
+def draft_email(email: str):
 
 
     # Find nearest match documents
@@ -60,6 +69,6 @@ Previous Langserve code - possible to restore in future iteration
 #     
 
 
-# when called via command line
+# start server when called via command line
 if __name__ == "__main__":
-    uvicorn.run("simple_server:app", host="0.0.0.0", port=8001)    
+    uvicorn.run("simple_server:app", host="0.0.0.0", port=8000)    
