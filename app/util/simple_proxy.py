@@ -1,10 +1,10 @@
-from langserve import RemoteRunnable 
 import requests
 import logging
+import pprint as pprint
 
 
 ''''
-Proxy help methods to invoke the chain (via proper server)
+Proxy help methods to invoke the chain (via simple server)
 '''
 
 #Set the Logging level. Change it to logging.INFO is you want just the important info
@@ -53,4 +53,26 @@ if __name__ == '__main__':
 
     
 
-    print(get_response())
+    # from https://realpython.com/api-integration-in-python/
+    # https://www.datacamp.com/tutorial/making-http-requests-in-python
+    # https://requests.readthedocs.io/en/latest/
+
+
+    #TODO - refactor into config
+    #TODO - refactor into true client
+
+    # The API endpoint
+    url = "http://localhost:8000/test_email"
+
+    new_data = {
+        "email": "this is some sample text that an email would be",
+        "query": "query"
+    }
+
+    # A GET request to the API
+    response = requests.post(url,params=new_data)
+    print(response)
+
+    # Print the response
+    response_json = response.json()
+    print(response_json)
