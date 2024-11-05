@@ -2,6 +2,15 @@
 
 services:
 
+    # Local Granite LLM
+    granite:
+        image: redhat/granite-7b-lab-gguf
+        ports:
+        - 8080:8080
+        networks:
+            - mynetwork
+        command: -s    
+        
     # Portainer is a Web Based Docker Management tool - can be removed
     #portainer:
     #    image: portainer/portainer-ce:latest
