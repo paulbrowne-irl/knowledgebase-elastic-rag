@@ -20,6 +20,7 @@
 		* uvicorn service.simple_server:app to start service
 		* remove older references (to labs)
 
+	* try docker granite (add to langchain)
 
 
 # 1 Next Sprint - or move to later
