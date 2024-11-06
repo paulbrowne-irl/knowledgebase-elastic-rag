@@ -10,6 +10,8 @@
 	* NEXT - end to end on static bot via rest API
 
 	* update api to allow filter via local LLM - decide where
+		* either own
+		* first pass with clean prompt -https://github.com/takashiishida/cleanprompt
 
 	* Outlook bot calling api via porxy
 	 
