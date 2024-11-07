@@ -53,8 +53,17 @@ Instructions for first time setup of the project:
     * Activate environment: `source venv/bin/activate`
     * Install Python dependencies for this environment: `pip install -r requirements.txt`
 
+1. Using a Local LLM - first time setup
+    * The config file gives the option of passing questions a *private* local LLM using Ollama (e.g. Llama 3.2 from Meta). The Docker file can help you run this local LLM.
+        * Check the `docker-compose.yml` file so that the "Ollama" and "OpenWebUI" are not commented out.
+        * OpenWebUI is optional , but provides a useful web interface on http://localhost:3000
+    * Start Docker as normal using `docker compose up`		
+    * Ollama provides the infastructure - you will need to tell it (first time) which LLM to use. While this can be done via the 
+        * open a new console / terminal
+        * pull the relevant llm `docker exec -it ollama ollama run llama3.2`
+
 1. Setup index in Elastic (first time only):
-    * Start Elastic (using docker compose up - see notes below):
+    * Start Elastic (using `docker compose up` - see notes below):
         * you may need to install docker - `sudo apt intstall docker.io` and docker compose `sudo apt-get install docker-compose-plugin`
     * Open Kibana (see notes below)
     * Setup indices - open this page  http://localhost:5601/app/management/data/index`management/indices
@@ -91,15 +100,7 @@ No screenshot, but also automatically started is the Portainer Web Management fo
 ## Configuring Tokens
 Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file, you may wish to review how has access to it.
 
-## Using a Local LLM - first time setup
-* The config file gives the option of passing questions a *private* local LLM using Ollama (e.g. Llama 3.2 from Meta). The Docker file can help you run this local LLM.
-    * Check the `docker-compose.yml` file so that the "Ollama" and "OpenWebUI" are not commented out.
-        * OpenWebUI is optional , but provides a useful web interface on http://localhost:3000
-    * Start Docker as normal using `docker compose up`
-			
-    * Ollama provides the infastructure - you will need to tell it (first time) which LLM to use. While this can be done via the 
-        * open a new console / terminal
-        * pull the relevant llm `docker exec -it ollama ollama run llama3.2`
+
 
 
 ## Config
