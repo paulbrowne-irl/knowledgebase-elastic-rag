@@ -35,7 +35,7 @@ While they are linked, you will typically run only one at a time.
 * (Optional) Read / Writes files to Excel 365 - allows for integration with wider Office 365 and Power Automate workflows.
 
 
-## Setup
+## First time Setup
 
 Instructions for first time setup of the project:
 1. Checkout / download this project as a folder onto the host computer
@@ -101,15 +101,17 @@ Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time th
 
 
 
-## Config
-* The starting folder (and other values) are set in `app/config/config.conf` - please edit this or see the notes in the `app/config` folder to customize configuration. This config file is shared for the ingest script, the Bot and the Application.
+## Configuration
+* The main confirmation file is  in `app/config/config.conf` 
+    * Please edit this or see the notes in the `app/config` folder to customize configuration. 
+    * This config file is shared for the ingest script, the Bot and the Application.
 
 
 # Running the Application and Bot
 
 The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
 
-# Running the Server
+## Running the Server
 The scripts provide a simple server to expose a Rest API. To start the server (`simple`server.py`)from the app folder:
     * `uvicorn service.simple`server:app --reload`
     * Open a web browser to view the REST api on http://localhost:8001/docs
