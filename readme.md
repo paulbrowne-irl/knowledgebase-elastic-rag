@@ -46,23 +46,23 @@ Instructions for first time setup of the project:
     * https://docs.docker.com/engine/install/ubuntu/
 
 1. Install Python (3.12 or higher) in the usual way. Python pip and virtualenv tools are also needed.
-    * check first what version you have installed using _python -V_
+    * check first what version you have installed using 'python -V'
 
 1. Install Python dependencies - in a terminal window, at the project root
-    * Create environment: _virtualenv venv_
-    * Activate environment: _source venv/bin/activate_
-    * Install Python dependencies for this environment: _pip install -r requirements.txt_
+    * Create environment: 'virtualenv venv'
+    * Activate environment: 'source venv/bin/activate'
+    * Install Python dependencies for this environment: 'pip install -r requirements.txt'
 
 1. Setup index in Elastic (first time only):
     * Start Elastic (using docker compose up - see notes below):
-        * you may need to isntall docker - _sudo apt intstall docker.io_ and docker compose _sudo apt-get install docker-compose-plugin_
+        * you may need to isntall docker - 'sudo apt intstall docker.io' and docker compose 'sudo apt-get install docker-compose-plugin'
     * Open Kibana (see notes below)
-    * Setup indices - open this page  http://localhost:5601/app/management/data/index_management/indices
-        * _test-can-del_ - used by unit tests
-        * _knowledge_base_ - the main index used to store documents
+    * Setup indices - open this page  http://localhost:5601/app/management/data/index'management/indices
+        * 'test-can-del' - used by unit tests
+        * 'knowledge'base' - the main index used to store documents
     * Useful commands (in the dev console window of Kibana)
-        * Delete an index  _DELETE /knowledge_base_
-        * Create an index _PUT /knowledge_base_
+        * Delete an index  'DELETE /knowledge'base'
+        * Create an index 'PUT /knowledge'base'
 
 
 It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed), please refer to the Elastic / Kibana home page for instructions - https://www.elastic.co/
@@ -72,7 +72,7 @@ It is possible to install Elastic and Kibana directly on the machine (i.e. no Do
 
 A Docker compose file is provided to make it easy to download and run the supporting infrastructure (e.g. the Elastic Search engine). To start this Infrastructure using Docker:
 * Open a (new) terminal window, navigate to home folder containing docker-compose.yml
-* Start Elastic and Kibana using: _docker compose up_
+* Start Elastic and Kibana using: 'docker compose up'
 
 You can check if the Elastic Search Service is running using the url http://localhost:9200/. You should see a success message similar to the screenshot below.
 
@@ -80,7 +80,7 @@ You can check if the Elastic Search Service is running using the url http://loca
 
 The Kibana App runs on top of Elastic and allows you to create indexs to store and search data. It is also useful in fine-tuning the searches so that we can pass more relevant documents as a prompt to the large language model. Kibana (Elastic Search Management tool) available on http://localhost:5601
 
-![Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase](images/kibana_index_management.png "Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase") 
+![Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase](images/kibana'index'management.png "Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase") 
 
 No screenshot, but also automatically started is the Portainer Web Management for Docker, available at https://localhost:9443 . This can safely be commented out in the docker-compose file if this is not needed.
 
@@ -93,17 +93,17 @@ Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time th
 
 ## Using a Local LLM - first time setup
 * The config file gives the option of passing questions a *private* local LLM using Ollama (e.g. Llama 3.2 from Meta). The Docker file can help you run this local LLM.
-    * Check the _docker-compose.yml_ file so that the "Ollama" and "OpenWebUI" are not commented out.
+    * Check the 'docker-compose.yml' file so that the "Ollama" and "OpenWebUI" are not commented out.
         * OpenWebUI is optional , but provides a useful web interface on http://localhost:3000
-    * Start Docker as normal using _docker compose up_
+    * Start Docker as normal using 'docker compose up'
 			
     * Ollama provides the infastructure - you will need to tell it (first time) which LLM to use. While this can be done via the 
         * open a new console / terminal
-        * pull the relevant llm _docker exec -it ollama ollama run llama3.2_
+        * pull the relevant llm 'docker exec -it ollama ollama run llama3.2'
 
 
 ## Config
-* The starting folder (and other values) are set in _app/config/config.conf_ - please edit this or see the notes in the _app/config_ folder to customize configuration. This config file is shared for the ingest script, the Bot and the Application.
+* The starting folder (and other values) are set in 'app/config/config.conf' - please edit this or see the notes in the 'app/config' folder to customize configuration. This config file is shared for the ingest script, the Bot and the Application.
 
 
 # Running the Application and Bot
@@ -111,8 +111,8 @@ Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time th
 The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
 
 # Running the Server
-The scripts provide a simple server to expose a Rest API. To start the server (_simple_server.py_)from the app folder:
-    * _uvicorn service.simple_server:app --reload_
+The scripts provide a simple server to expose a Rest API. To start the server ('simple'server.py')from the app folder:
+    * 'uvicorn service.simple'server:app --reload'
     * Open a web browser to view the REST api on http://localhost:8001/docs
 
 Note that some other examples (some bots) depend on this server - but should remind you to start it if needed.
@@ -120,13 +120,13 @@ Note that some other examples (some bots) depend on this server - but should rem
 ## Running the Ingest Script 
 
 Before using a Knowledgebase you obviously need to import knowledge into it. 
-* The main script to ingest data is in the _app/ingest.py_ . 
+* The main script to ingest data is in the 'app/ingest.py' . 
 * This script will take a starting folder and index most of the files (pdf, messages , word docs) found in that folder. It will also find sub-folders and index those recursivly.
 
 To run the ingest script
-* Open the app folder: _cd app_ in a terminal window
-* Activate the Python environment with dependencies you installed earelier: _source venv/bin/activate_
-* Run the script using _python ingest.py_
+* Open the app folder: 'cd app' in a terminal window
+* Activate the Python environment with dependencies you installed earelier: 'source venv/bin/activate'
+* Run the script using 'python ingest.py'
     * (You may need to be more version specific e.g. python3 ingest.py)
 
 In general, you will only need the ingest script once (or infrequently, if you wise to add more documents). For small datasets, it is probably easier to delete the Knowledgebase index (using Kibana - see link and screenshot above), then run the Ingest script again.
@@ -134,7 +134,7 @@ In general, you will only need the ingest script once (or infrequently, if you w
 
 ## Running the Bot - Excel
 
-Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be h_osted online, this allows Integration with Office 365 and Power Automate. e.g.
+Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be h'osted online, this allows Integration with Office 365 and Power Automate. e.g.
 1. The User can ask a question on Microsoft Forms
 1. Power Automate saves this question in Excel.
 1. The Bot reads the question, saves the answer back in Excel.
@@ -142,17 +142,17 @@ Typical flow for the Bot is to read a question from Excel, apply RAG techniques 
 1. Power Automate can send back the answer to the original person using email.
 
 To run the bot.
-* Open the app folder: _cd app_ in a terminal window
-* Activate the Python environment with dependencies you installed earelier: _source venv/bin/activate_
-* Run the script using _python bot_excel.py_
+* Open the app folder: 'cd app' in a terminal window
+* Activate the Python environment with dependencies you installed earelier: 'source venv/bin/activate'
+* Run the script using 'python bot'excel.py'
 
 ## Run the Web Application
 The Web application addresses a wider range of business use cases than the bot - see the tabs on the left hand side of the screenshot below.
 
 To run the Web Application.
-* Open the app folder: _cd app_ in a terminal window
-* Activate the Python environment with dependencies you installed earelier: _source venv/bin/activate_
-* Run Streamlit app to interact with documents local llm: _streamlit run app.py_
+* Open the app folder: 'cd app' in a terminal window
+* Activate the Python environment with dependencies you installed earelier: 'source venv/bin/activate'
+* Run Streamlit app to interact with documents local llm: 'streamlit run app.py'
 * App available on http://localhost:8501 
 
 ![Screenshot of Streamlit Web App](images/screenshot.jpg "Screenshot of Web App")
@@ -163,33 +163,33 @@ To run the Web Application.
 
 ## Key folders  
 * High level folders
-    * _data-sample_ - sample public documents to get you started with the scripts (e.g. Ingest then ask questions against)
-* Main application is in the _app_ folder    
-    * _app/cache_ [local only] - local only backup of information
-    * _data_no_share_ [local only] - some of the scripts may look to load information from here
-    * _app/langserve_ - server and backed creating llm chains and executing them
-    * _app/pages_ - sub pages in the webapp
-    * _app/settings_ - configuration files
-    * _app/templates_ template files for prompts and emails
-    * _app/tests_ - unit tests for the application
-    * _app/util_ - supporting scripts to implement data extraction, indexing to elastic, language process, reading-writing office files, implemeting RAG. More notes on these in the sub folders.
+    * 'data-sample' - sample public documents to get you started with the scripts (e.g. Ingest then ask questions against)
+* Main application is in the 'app' folder    
+    * 'app/cache' [local only] - local only backup of information
+    * 'data'no'share' [local only] - some of the scripts may look to load information from here
+    * 'app/langserve' - server and backed creating llm chains and executing them
+    * 'app/pages' - sub pages in the webapp
+    * 'app/settings' - configuration files
+    * 'app/templates' template files for prompts and emails
+    * 'app/tests' - unit tests for the application
+    * 'app/util' - supporting scripts to implement data extraction, indexing to elastic, language process, reading-writing office files, implemeting RAG. More notes on these in the sub folders.
 
 
 ## Running Unit Tests
 To run the Unit tests
-* Open the app folder: _cd app_ in a terminal window
-* Activate the Python environment with dependencies you installed earelier: _source venv/bin/activate_
+* Open the app folder: 'cd app' in a terminal window
+* Activate the Python environment with dependencies you installed earelier: 'source venv/bin/activate'
 * Choose which type of test you want to run
-        * single test: _python3 -m unittest tests.index_elastic_test_
-        * all tests: _python3 -m unittest tests_
+        * single test: 'python3 -m unittest tests.index'elastic'test'
+        * all tests: 'python3 -m unittest tests'
 
 
 ## Background reading and more information
 
 The application draws on many concepts and articles - for example
 * Original source notebook, RAG on Star Wars: 
-    * https://colab.research.google.com/drive/11N01ssHqAXjW5NKJYkwT06V7RXLG4Yin#scrollTo=Sax1r_wW8kec
-    * https://colab.research.google.com/github/elastic/blog-langchain-elasticsearch/blob/main/Notebooks/Privacy_first_AI_search_using_LangChain_and_Elasticsearch.ipynb?utm_source=pocket_saves
+    * https://colab.research.google.com/drive/11N01ssHqAXjW5NKJYkwT06V7RXLG4Yin#scrollTo=Sax1r'wW8kec
+    * https://colab.research.google.com/github/elastic/blog-langchain-elasticsearch/blob/main/Notebooks/Privacy'first'AI'search'using'LangChain'and'Elasticsearch.ipynb?utm'source=pocket'saves
 
 Background information and links when developing this project
 * Elastic search blog article : https://www.elastic.co/search-labs/blog/articles/privacy-first-ai-search-langchain-elasticsearch
