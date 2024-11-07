@@ -8,6 +8,7 @@
 # 0 Alt streams
 
 	* NEXT - end to end on static bot via rest API
+		* simple stub of service testbed
 
 	* update api to allow filter via local LLM - decide where
 		* either own
@@ -15,22 +16,10 @@
 
 	* Outlook bot calling api via porxy
 	 
-	* Doc upgrade
-		* check for todo
-		* uvicorn service.simple_server:app to start service
+	* Doc upgrade = add in readme:add
 		* remove older references (to labs)
 
-	* test docker Olloma
-		* doc - what given in docker compose 
-			* docker compose up
-			* docker exec -it ollama ollama run llama3
-		* doc add about Ollama Web UI / Open web ui
-			* localhost:8080
-		* Additional info
-			* https://www.arsturn.com/blog/setting-up-ollama-with-docker-compose-a-complete-guide
-			* https://hub.docker.com/r/ollama/ollama
-			https://medium.com/@edu.ukulelekim/how-to-locally-deploy-ollama-and-open-webui-with-docker-compose-318f0582e01f
-
+	* test docker Olloma end-to-end
 
 
 # 1 Next Sprint - or move to later
