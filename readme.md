@@ -95,16 +95,12 @@ No screenshot, but also automatically started is the Portainer Web Management fo
 * TODO - what it is
 * TODO - simple-server.py
 
-## Configuring Tokens
-Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file, you may wish to review how has access to it.
-
-
-
 
 ## Configuration
 * The main confirmation file is  in `app/config/config.conf` 
     * Please edit this or see the notes in the `app/config` folder to customize configuration. 
     * This config file is shared for the ingest script, the Bot and the Application.
+* Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file(`token-storage-local.json`). While it is excluded from git, you may wish to review how has access to it.
 
 
 # Running the Application and Bot
