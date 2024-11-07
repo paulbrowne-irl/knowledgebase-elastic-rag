@@ -44,12 +44,12 @@ Instructions for first time setup of the project:
     * https://docs.docker.com/engine/install/ubuntu/
     * For most systems this is `sudo apt install docker.io` and docker compose `sudo apt-get install docker-compose-plugin`
 
-1. Install Python (3.12 or higher) in the usual way. Python pip and virtualenv tools are also needed.
+1. Install Python (3.12 or higher) in the usual way. Python `pip` and `virtualenv` tools are also needed.
     * check first what version you have installed using `python -V`
 
 1. Install Python dependencies - in a terminal window, at the project root
-    * Create environment: `virtualenv venv`
-    * Activate environment: `source venv/bin/activate`
+    * Create virtual environment: `virtualenv venv`
+    * Activate virtual environment: `source venv/bin/activate`
     * Install Python dependencies for this environment: `pip install -r requirements.txt`
 
 1. Using a Local LLM - first time setup
@@ -74,12 +74,19 @@ Instructions for first time setup of the project:
 
 It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed), please refer to the Elastic / Kibana home page for instructions - https://www.elastic.co/
 
+## Configuration
+* The main confirmation file is  in `app/config/config.conf` 
+    * Please edit this or see the notes in the `app/config` folder to customize configuration. 
+    * This config file is shared for the ingest script, the Bot and the Application.
+* Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file(`token-storage-local.json`). While it is excluded from git, you may wish to review how has access to it.
+
+# Running the application
 
 ## Starting the background infrastructure
 
 A Docker compose file is provided to make it easy to download and run the supporting infrastructure (e.g. the Elastic Search engine). To start this Infrastructure using Docker:
 * Open a (new) terminal window, navigate to home folder containing docker-compose.yml
-* Start Elastic and Kibana using: `docker compose up`
+* Start Elastic and Kibana and other services using: `docker compose up`
 
 You can check if the Elastic Search Service is running using the url http://localhost:9200/. You should see a success message similar to the screenshot below.
 
@@ -91,30 +98,19 @@ The Kibana App runs on top of Elastic and allows you to create indexs to store a
 
 No screenshot, but also automatically started is the Portainer Web Management for Docker, available at https://localhost:9443 . This can safely be commented out in the docker-compose file if this is not needed.
 
-## Starting the service infrastructure
-* TODO - what it is
-* TODO - simple-server.py
 
-
-## Configuration
-* The main confirmation file is  in `app/config/config.conf` 
-    * Please edit this or see the notes in the `app/config` folder to customize configuration. 
-    * This config file is shared for the ingest script, the Bot and the Application.
-* Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file(`token-storage-local.json`). While it is excluded from git, you may wish to review how has access to it.
-
-
-# Running the Application and Bot
+## Running the Application and Bot
 
 The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
 
-## Running the Server
-The scripts provide a simple server to expose a Rest API. To start the server (`simple`server.py`)from the app folder:
-    * `uvicorn service.simple`server:app --reload`
+### Running the Service 
+The scripts provide a simple service to expose a Rest API. To start the server (`simple_server.py`)from the app folder:
+    * `uvicorn service.simple_server:app --reload`
     * Open a web browser to view the REST api on http://localhost:8001/docs
 
 Note that some other examples (some bots) depend on this server - but should remind you to start it if needed.
 
-## Running the Ingest Script 
+### Running the Ingest Script 
 
 Before using a Knowledgebase you obviously need to import knowledge into it. 
 * The main script to ingest data is in the `app/ingest.py` . 
@@ -129,7 +125,7 @@ To run the ingest script
 In general, you will only need the ingest script once (or infrequently, if you wise to add more documents). For small datasets, it is probably easier to delete the Knowledgebase index (using Kibana - see link and screenshot above), then run the Ingest script again.
 
 
-## Running the Bot - Excel
+### Running the Bot - Excel
 
 Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be h`osted online, this allows Integration with Office 365 and Power Automate. e.g.
 1. The User can ask a question on Microsoft Forms
@@ -143,7 +139,7 @@ To run the bot.
 * Activate the Python environment with dependencies you installed earelier: `source venv/bin/activate`
 * Run the script using `python bot`excel.py`
 
-## Run the Web Application
+### Running the Web Application
 The Web application addresses a wider range of business use cases than the bot - see the tabs on the left hand side of the screenshot below.
 
 To run the Web Application.
@@ -197,8 +193,10 @@ Background information and links when developing this project
 * Elastic Search Getting started - https://www.elastic.co/guide/en/workplace-search/8.7/workplace-search-getting-started.html
 * Search UI with elastic search - 	• https://docs.elastic.co/search-ui/tutorials/elasticsearch
 
-
-
+More information on Open Web UI and Ollama
+* https://www.arsturn.com/blog/setting-up-ollama-with-docker-compose-a-complete-guide
+* https://hub.docker.com/r/ollama/ollama
+* https://medium.com/@edu.ukulelekim/how-to-locally-deploy-ollama-and-open-webui-with-docker-compose-318f0582e01f
 
 
 
