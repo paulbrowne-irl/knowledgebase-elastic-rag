@@ -42,6 +42,7 @@ Instructions for first time setup of the project:
 
 1. Install Docker - standard install (either Docker Desktop, or via WSL-Ubuntu).You may also need to install the docker-compose plugin
     * https://docs.docker.com/engine/install/ubuntu/
+    * For most systems this is `sudo apt install docker.io` and docker compose `sudo apt-get install docker-compose-plugin`
 
 1. Install Python (3.12 or higher) in the usual way. Python pip and virtualenv tools are also needed.
     * check first what version you have installed using `python -V`
@@ -61,8 +62,7 @@ Instructions for first time setup of the project:
         * Pull the relevant llm `docker exec -it ollama ollama run llama3.2`
 
 1. Setup index in Elastic (first time only):
-    * Start Elastic (using `docker compose up` - see notes below):
-        * you may need to install docker - `sudo apt intstall docker.io` and docker compose `sudo apt-get install docker-compose-plugin`
+    * Start Elastic (using `docker compose up` from the root folder of the project.
     * Open Kibana (see notes below)
     * Setup indices - open this page  http://localhost:5601/app/management/data/index`management/indices
         * `test-can-del` - used by unit tests
