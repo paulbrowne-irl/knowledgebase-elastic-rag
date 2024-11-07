@@ -20,11 +20,11 @@ For obvious reasons only generic code and no information / knowledge is shared -
 * [Key folders](#Key-folders)
 
 ## Three main parts to the application: 
-While they are linked, you will typically run only one 
-1. Ingest - load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
-1. Bots - Answer questions passed to it (to /from Excel) using RAG techniques. Designed to be used as part of Power Automate or other automatic workflow.
+While they are linked, you will typically run only one at a time.
+1. **Ingest** - load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
+1. **Bots** - Answer questions passed to it (to /from Excel) using RAG techniques. Designed to be used as part of Power Automate or other automatic workflow.
     * Sometimes these bots will depending on the REST server - but they will remind you to start it if needed
-1. App - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases.
+1. **App** - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases.
 
 ## Underlying technologies:
 * Choice of Large Language Model (LLM) - either local or Microsoft Copilot.
@@ -56,9 +56,9 @@ Instructions for first time setup of the project:
         * Check the `docker-compose.yml` file so that the "Ollama" and "OpenWebUI" are not commented out.
         * OpenWebUI is optional , but provides a useful web interface on http://localhost:3000
     * Start Docker as normal using `docker compose up`		
-    * Ollama provides the infastructure - you will need to tell it (first time) which LLM to use. While this can be done via the 
-        * open a new console / terminal
-        * pull the relevant llm `docker exec -it ollama ollama run llama3.2`
+    * Ollama provides the infastructure - you will need to tell it (first time) which LLM to use.
+        * Open a new console / terminal
+        * Pull the relevant llm `docker exec -it ollama ollama run llama3.2`
 
 1. Setup index in Elastic (first time only):
     * Start Elastic (using `docker compose up` - see notes below):
