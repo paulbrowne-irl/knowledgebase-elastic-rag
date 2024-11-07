@@ -91,6 +91,31 @@ No screenshot, but also automatically started is the Portainer Web Management fo
 ## Configuring Tokens
 Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file, you may wish to review how has access to it.
 
+## Using a Local LLM - first time setup
+* The config file gives the option of passing questions a *private* local LLM using Ollama (e.g. Llama 3.2 from Meta). The Docker file can help you run this local LLM.
+    * Check the _docker-compose.yml_ file so that the "Ollama" and "OpenWebUI" are not commented out.
+        * OpenWebUI is optional , but provides a useful web interface on http://localhost:3000
+    * Start Docker as normal using _docker compose up_
+			
+    * Ollama provides the infastructure - you will need to tell it (first time) which LLM to use. While this can be done via the 
+        * open a new console / terminal
+        * pull the relevant llm _docker exec -it ollama ollama run llama3.2_
+
+
+## Config
+* The starting folder (and other values) are set in _app/config/config.conf_ - please edit this or see the notes in the _app/config_ folder to customize configuration. This config file is shared for the ingest script, the Bot and the Application.
+
+
+# Running the Application and Bot
+
+The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
+
+# Running the Server
+The scripts provide a simple server to expose a Rest API. To start the server (_simple_server.py_)from the app folder:
+    * _uvicorn service.simple_server:app --reload_
+    * Open a web browser to view the REST api on http://localhost:8001/docs
+
+Note that some other examples (some bots) depend on this server - but should remind you to start it if needed.
 
 ## Running the Ingest Script 
 
@@ -106,26 +131,6 @@ To run the ingest script
 
 In general, you will only need the ingest script once (or infrequently, if you wise to add more documents). For small datasets, it is probably easier to delete the Knowledgebase index (using Kibana - see link and screenshot above), then run the Ingest script again.
 
-## Config
-* The starting folder (and other values) are set in _app/config/config.conf_ - please edit this or see the notes in the _app/config_ folder to customize configuration. This config file is shared for the ingest script, the Bot and the Application.
-
-## Running Local LLMs
-* The config file gives the option or running a *private* local LLM using Ollama. If you configure this option you will need to install Ollama and the appropriate LLM using the following notes 
-    * Install Ollama as per instructions at https://github.com/ollama/ollama
-    * Install LLM using command like _ollama pull llama3.2_
-    * Start the Ollmaa Server using _ollama serve_
-
-
-# Running the Application and Bot
-
-The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
-
-# Running the Server
-The scripts provide a simple server to expose a Rest API. To start the server (_simple_server.py_)from the app folder:
-    * _uvicorn simple_server:app --reload_
-    * Open a web browser to view the REST api on http://localhost:8001/docs
-
-Note that some other examples (some bots) depend on this server - but should remind you to start it if needed.
 
 ## Running the Bot - Excel
 

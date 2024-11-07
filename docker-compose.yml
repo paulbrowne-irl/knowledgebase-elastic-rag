@@ -3,7 +3,7 @@
 services:
  
     
-    #Web UI for Ollma
+    #(Optional) Web UI for Ollma- and local LLMS
     openWebUI:
         image: ghcr.io/open-webui/open-webui:main
         restart: always
