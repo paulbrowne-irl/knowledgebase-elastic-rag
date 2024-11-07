@@ -1,15 +1,7 @@
 #version: "3" #was 2.2
 
 services:
-
-    # # Local Granite LLM
-    # granite:
-    #     image: redhat/granite-7b-lab-gguf
-    #     ports:
-    #     - 8080:8080
-    #     networks:
-    #         - mynetwork
-    #     command: -s    
+ 
     
     #Web UI for Ollma
     openWebUI:
