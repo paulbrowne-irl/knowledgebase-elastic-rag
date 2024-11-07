@@ -1,6 +1,4 @@
-
-
-# Allow colleagues to talk to your documents
+# Respond to Emails using Local Knowledge
 
 
 Many organisations/individuals have piles of documents containing valuable information but are little used after their initial creation.
