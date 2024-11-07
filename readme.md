@@ -64,9 +64,9 @@ Instructions for first time setup of the project:
 1. Setup index in Elastic (first time only):
     * Start Elastic (using `docker compose up` from the root folder of the project.
     * Open Kibana (see notes below)
-    * Setup indices - open this page  http://localhost:5601/app/management/data/index`management/indices
+    * Setup indices - open this page  http://localhost:5601/app/management/data/index_management/indices
         * `test-can-del` - used by unit tests
-        * `knowledge`base` - the main index used to store documents
+        * `knowledge_base` - the main index used to store documents
     * Useful commands (in the dev console window of Kibana)
         * Delete an index  `DELETE /knowledge_base`
         * Create an index `PUT /knowledge_base`
@@ -127,7 +127,7 @@ In general, you will only need the ingest script once (or infrequently, if you w
 
 ### Running the Bot - Excel
 
-Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be h`osted online, this allows Integration with Office 365 and Power Automate. e.g.
+Typical flow for the Bot is to read a question from Excel, apply RAG techniques to answer the question, then save the answer back in Excel. Since the Excel file can be hosted online, this allows Integration with Office 365 and Power Automate. e.g.
 1. The User can ask a question on Microsoft Forms
 1. Power Automate saves this question in Excel.
 1. The Bot reads the question, saves the answer back in Excel.
@@ -137,7 +137,7 @@ Typical flow for the Bot is to read a question from Excel, apply RAG techniques 
 To run the bot.
 * Open the app folder: `cd app` in a terminal window
 * Activate the Python environment with dependencies you installed earelier: `source venv/bin/activate`
-* Run the script using `python bot`excel.py`
+* Run the script using `python bot_excel.py`
 
 ### Running the Web Application
 The Web application addresses a wider range of business use cases than the bot - see the tabs on the left hand side of the screenshot below.
@@ -173,7 +173,7 @@ To run the Unit tests
 * Open the app folder: `cd app` in a terminal window
 * Activate the Python environment with dependencies you installed earelier: `source venv/bin/activate`
 * Choose which type of test you want to run
-        * single test: `python3 -m unittest tests.index`elastic`test`
+        * single test: `python3 -m unittest tests.index_elastic_test`
         * all tests: `python3 -m unittest tests`
 
 
@@ -181,8 +181,8 @@ To run the Unit tests
 
 The application draws on many concepts and articles - for example
 * Original source notebook, RAG on Star Wars: 
-    * https://colab.research.google.com/drive/11N01ssHqAXjW5NKJYkwT06V7RXLG4Yin#scrollTo=Sax1r`wW8kec
-    * https://colab.research.google.com/github/elastic/blog-langchain-elasticsearch/blob/main/Notebooks/Privacy`first`AI`search`using`LangChain`and`Elasticsearch.ipynb?utm`source=pocket`saves
+    * https://colab.research.google.com/drive/11N01ssHqAXjW5NKJYkwT06V7RXLG4Yin#scrollTo=Sax1r_wW8kec
+    * https://colab.research.google.com/github/elastic/blog-langchain-elasticsearch/blob/main/Notebooks/Privacy_first_AI_search_using_LangChain_and_Elasticsearch.ipynb
 
 Background information and links when developing this project
 * Elastic search blog article : https://www.elastic.co/search-labs/blog/articles/privacy-first-ai-search-langchain-elasticsearch
