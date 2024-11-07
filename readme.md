@@ -55,14 +55,14 @@ Instructions for first time setup of the project:
 
 1. Setup index in Elastic (first time only):
     * Start Elastic (using docker compose up - see notes below):
-        * you may need to isntall docker - `sudo apt intstall docker.io` and docker compose `sudo apt-get install docker-compose-plugin`
+        * you may need to install docker - `sudo apt intstall docker.io` and docker compose `sudo apt-get install docker-compose-plugin`
     * Open Kibana (see notes below)
     * Setup indices - open this page  http://localhost:5601/app/management/data/index`management/indices
         * `test-can-del` - used by unit tests
         * `knowledge`base` - the main index used to store documents
     * Useful commands (in the dev console window of Kibana)
-        * Delete an index  `DELETE /knowledge`base`
-        * Create an index `PUT /knowledge`base`
+        * Delete an index  `DELETE /knowledge_base`
+        * Create an index `PUT /knowledge_base`
 
 
 It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed), please refer to the Elastic / Kibana home page for instructions - https://www.elastic.co/
@@ -166,7 +166,7 @@ To run the Web Application.
     * `data-sample` - sample public documents to get you started with the scripts (e.g. Ingest then ask questions against)
 * Main application is in the `app` folder    
     * `app/cache` [local only] - local only backup of information
-    * `data`no`share` [local only] - some of the scripts may look to load information from here
+    * `data_share` [local only] - some of the scripts may look to load information from here
     * `app/langserve` - server and backed creating llm chains and executing them
     * `app/pages` - sub pages in the webapp
     * `app/settings` - configuration files
