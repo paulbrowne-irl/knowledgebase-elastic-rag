@@ -22,22 +22,23 @@
 	* Doc upgrade = add in readme:add
 		* remove older references (to labs)
 
-	* test docker Olloma end-to-end
+
+	* test end-to-end (using local Ollama under docker)
+
+	* Doc upgrade
+		* anyting in in readme-add
+		* tidy overall strcuture
+	
+	* Push to main, releast
+)
 
 
 # 1 Next Sprint - or move to later
 
-	* NTH - Docker build for stability
-		* try looking at python command (can set working direcotry?) - did that work
-		* try copy into local cache folder
 	
 	* NTH - check if Index is there, create automatically if not in ingest.py
 		* https://sarahleejane.github.io/learning/python/2015/10/14/creating-an-elastic-search-index-with-python.html
 		* https://towardsdatascience.com/creating-and-managing-elasticsearch-indices-with-python-f676ff1c8113
-
-	* NTH Ollama in docker file for ease of deployment
-		* https://www.arsturn.com/blog/setting-up-ollama-with-docker-compose-a-complete-guide
-		* anything useful (like devcontainers) to bring over?
 
 	* true langserve code
 		* Read Background https://www.datacamp.com/tutorial/deploying-llm-applications-with-langserve
