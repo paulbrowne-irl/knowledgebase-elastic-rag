@@ -7,12 +7,15 @@
 
 # 0 Alt streams
 
+	* REDACT
+		* pull into Github
+		* test call direct
+		* stub out static
+		* test call config
+
+	
 	* NEXT - end to end on static bot via rest API
 		* simple stub of service testbed
-
-	* update api to allow filter via local LLM - decide where
-		* either own
-		* first pass with clean prompt -https://github.com/takashiishida/cleanprompt
 
 	* Outlook bot calling api via porxy
 	 
