@@ -2,6 +2,8 @@
 # Project dependencies
 # pip install -r requirements.txt
 
+pandas
+
 tf-keras
 #tensorflow
 #torch
@@ -19,7 +21,7 @@ accelerate
 #openpyxl
 #docx2txt
 extract-msg
-pytesseract 
+#pytesseract 
 elasticsearch
 sentence_transformers 
 huggingface-hub 
@@ -36,7 +38,6 @@ tensorflow
 langserve 
 
 
-#pandas
 
 # from langserve
 # langchain 
