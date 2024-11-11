@@ -7,22 +7,19 @@ tf-keras
 #torch
 
 streamlit
-beautifulsoup4 
+#beautifulsoup4 
 tqdm 
 requests 
 accelerate
 
-pdf2image
-pypdf2
-pypdf
-pycryptodome
-openpyxl
-docx2txt
+#pdf2image
+#pypdf2
+#pypdf
+#pycryptodome
+#openpyxl
+#docx2txt
 extract-msg
 pytesseract 
-
-
-
 elasticsearch
 sentence_transformers 
 huggingface-hub 
@@ -39,22 +36,22 @@ tensorflow
 langserve 
 
 
-pandas
+#pandas
 
 # from langserve
-langchain 
-tiktoken 
-openai 
-fastapi 
-uvicorn 
-pytest 
-pytest-asyncio 
-mypy
-ruff
-black
-syrupy
-sse_starlette 
-starlette>=0.40.0
+# langchain 
+# tiktoken 
+# openai 
+# fastapi 
+# uvicorn 
+# pytest 
+# pytest-asyncio 
+# mypy
+# ruff
+# black
+# syrupy
+# sse_starlette 
+# starlette>=0.40.0
 
 spacy
 

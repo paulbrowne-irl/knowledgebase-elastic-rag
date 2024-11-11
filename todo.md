@@ -8,8 +8,9 @@
 # 0 Alt streams
 
 	* REDACT
-		* pull into Github
-		* test call direct
+		* requirements download
+		* requirements freeze
+		* test call direct via main
 		* stub out static
 		* test call config
 
@@ -30,7 +31,7 @@
 		* tidy overall strcuture
 	
 	* Push to main, releast
-)
+
 
 
 # 1 Next Sprint - or move to later
