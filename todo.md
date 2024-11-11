@@ -8,10 +8,8 @@
 # 0 Alt streams
 
 	* REDACT
-		* requirements download
-		* requirements freeze
-		* test call direct via main
-		* stub out static
+		* stub out service in folder based on main from cleanprompt.py
+		* stub out static 
 		* test call config
 
 	
