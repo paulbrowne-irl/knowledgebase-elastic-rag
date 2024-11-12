@@ -43,8 +43,8 @@ langserve
 # langchain 
 # tiktoken 
 # openai 
-# fastapi 
-# uvicorn 
+fastapi 
+uvicorn 
 # pytest 
 # pytest-asyncio 
 # mypy

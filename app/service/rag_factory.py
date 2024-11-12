@@ -1,11 +1,12 @@
 import logging
 from typing import (List)
 
-import service.llm_copilot as llm_copilot
+import util.llm.llm_copilot as llm_copilot
+import util.llm.llm_echo as llm_echo
 import requests
 import settings.config as config
 import settings.token_loader as token_loader
-from service import llm_echo
+
 from langchain.chains.llm import LLMChain
 from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain.prompts import PromptTemplate
