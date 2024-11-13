@@ -8,9 +8,10 @@
 # 0 Alt streams
 
 	* REDACT
-		* stub out service in folder based on main from cleanprompt.py
-		* stub out static 
-		* test call config
+		* redaction document test and code
+			* NEXT -  python3 -m service.service_redact and get restore function working
+		* plumb in redaction (with or without confirg) to email
+		* stub out static call to call
 
 	
 	* NEXT - end to end on static bot via rest API
@@ -58,14 +59,12 @@
 
 
 
-# 2nd Sprint
+# Backlog
 	* Test Bot working again
 	* Unit testable
 	* Try unit test in VSCode of main langchain class with different approaches
 	* review python docs on bot, app, ingest, rag_controller,
 	* update promot
-	
-# 3rd sprint (triage)
 	* move to unit testable 
 	* try spidering web sources
 	* Additional file format index: .txt and .xlsx and .pptx
@@ -78,7 +77,4 @@
 	* nth doc at module level for ingest and others
 	* try out email generation - can I improve the prompt
 	* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
-
-# relevant documents to read again
-	* Ollama 
 	
