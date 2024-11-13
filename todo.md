@@ -8,10 +8,9 @@
 # 0 Alt streams
 
 	* REDACT
-		* redaction document test and code
-			* NEXT -  python3 -m service.service_redact and get restore function working
 		* plumb in redaction (with or without confirg) to email
-		* stub out static call to call
+		* spin up service
+		* stub out static call to test
 
 	
 	* NEXT - end to end on static bot via rest API
