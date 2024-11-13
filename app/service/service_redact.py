@@ -23,8 +23,7 @@ def redact_doc(docToRedact:Document)->Document:
     '''
     "overloaded" method - takes and returns langchain doc
     '''
-    text_to_redact = str(docToRedact)
-    redacted_text = redact_text(text_to_redact)
+    redacted_text = redact_text(docToRedact.page_content)
     docToRedact.page_content=redacted_text
 
     return docToRedact
@@ -43,9 +42,6 @@ def redact_text(textToRedact:str)->str:
     replaced_text, regex_mapping = cleaner.replace_regex(textToRedact)
     replaced_text, entity_mapping = cleaner.replace_ner(replaced_text)
     redacted_mappings = {**regex_mapping, **entity_mapping}
-
-
-    
     colored_anonymized_text = cleaner.add_color(replaced_text, redacted_mappings)
     
     
@@ -57,8 +53,7 @@ def deanonymize_doc(redacted_doc:Document)->Document:
     '''
     "overloaded" method - takes and returns langchain doc
     '''
-    text_to_deanon = str(redacted_doc)
-    clear_text = redact_text(text_to_deanon)
+    clear_text = deanonymize_text(redacted_doc.page_content)
     redacted_doc.page_content=clear_text
 
     return redacted_doc
@@ -71,7 +66,7 @@ def deanonymize_text(redacted_text:str)->str:
     '''
 
     global redacted_mappings
-    
+
     #instruction_final = "Enter/paste the response from your LLM. Type 'END' on a new line and press enter to submit:"
     #LLM_text = get_multiline_input(instruction_final)
     deanonymized_text = cleaner.revert_text(redacted_text, redacted_mappings, color=True)
@@ -89,6 +84,8 @@ if __name__ == "__main__":
         page_content="Peter Parker works as the CEO of a company called ACME engineering. He lives in Dublin and his phone number is 01-234567",
         metadata={"source": "local_est"}
     )
+    print("Original:"+str(text_document))
+
 
     #test redact
     redacted_doc = redact_doc(text_document)
