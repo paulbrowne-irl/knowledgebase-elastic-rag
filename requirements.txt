@@ -54,7 +54,12 @@ uvicorn
 # sse_starlette 
 # starlette>=0.40.0
 
-spacy
+#spacy
+spacy>=2.1.9,<3.8.0
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz#egg=en_core_web_sm
+
+spacy>=2.1.9,<3.8.0
+https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.2.0/en_core_web_lg-2.2.0.tar.gz#egg=en_core_web_lg
 
 ## Older dependencies - remove after refactor code
 sydney-py
