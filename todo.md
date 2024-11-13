@@ -8,9 +8,9 @@
 # 0 Alt streams
 
 	* REDACT
-		* stub out service in folder based on main from cleanprompt.py
-		* stub out static 
-		* test call config
+		* redaction document test and code
+		* plumb in redaction (with or without confirg) to email
+		* stub out static call to call
 
 	
 	* NEXT - end to end on static bot via rest API
