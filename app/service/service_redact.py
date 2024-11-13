@@ -5,6 +5,8 @@ from fastapi import FastAPI#
 from service import rag_factory as rag_factory
 from templates import prompts as prompts
 
+from langchain_core.documents import Document
+
 from util.redact.cleanprompt import PromptCleaner
 from util.redact.cleanprompt import Colors
 
@@ -15,6 +17,18 @@ cleaner = PromptCleaner()
 
 #handle to the most recent redactino
 redacted_mappings = {}
+
+@app.post("/redact_doc")
+def redact_doc(docToRedact:Document)->Document:
+    '''
+    "overloaded" method - takes and returns langchain doc
+    '''
+    text_to_redact = str(docToRedact)
+    redacted_text = redact_text(text_to_redact)
+    docToRedact.page_content=redacted_text
+
+    return docToRedact
+
 
 @app.post("/redact_text")
 def redact_text(textToRedact:str)->str:
@@ -37,6 +51,18 @@ def redact_text(textToRedact:str)->str:
     
     return colored_anonymized_text
 
+@app.post("/deanonymize_doc")
+def deanonymize_doc(redacted_doc:Document)->Document:
+    
+    '''
+    "overloaded" method - takes and returns langchain doc
+    '''
+    text_to_deanon = str(redacted_doc)
+    clear_text = redact_text(text_to_deanon)
+    redacted_doc.page_content=clear_text
+
+    return redacted_doc
+
 
 @app.post("/deanonymize_text")
 def deanonymize_text(redacted_text:str)->str:
@@ -57,20 +83,22 @@ def deanonymize_text(redacted_text:str)->str:
 
 if __name__ == "__main__":
 
-    #text
-    text="Peter Parker works as the CEO of a company called ACME engineering. He lives in Dublin and his phone number is 01-234567"
-    print("\n\nOriginal:"+text)
 
+    #create document
+    text_document = Document(
+        page_content="Peter Parker works as the CEO of a company called ACME engineering. He lives in Dublin and his phone number is 01-234567",
+        metadata={"source": "local_est"}
+    )
 
     #test redact
-    redacted_text = redact_text(text)
+    redacted_doc = redact_doc(text_document)
 
-    print(f"{Colors.BOLD}{Colors.OKCYAN}\nUse the following anonymized text:\n{Colors.ENDC}{redacted_text}")
+    print(f"{Colors.BOLD}{Colors.OKCYAN}\nUse the following anonymized text:\n{Colors.ENDC}{redacted_doc}")
 
     removed_info_summary = ', '.join(list(redacted_mappings.keys()))
     print(f"{Colors.BOLD}{Colors.PURPLE}\nRemoved sensitive information: {removed_info_summary}{Colors.ENDC}")
 
     #test restore
-    deanonymized_text = deanonymize_text(redacted_text)
+    deanonymized_doc = deanonymize_doc(redacted_doc)
 
-    print(f"{Colors.BOLD}{Colors.OKCYAN}\nPrivate information restored:{Colors.ENDC}\n{deanonymized_text}\n")
+    print(f"{Colors.BOLD}{Colors.OKCYAN}\nPrivate information restored:{Colors.ENDC}\n{deanonymized_doc}\n")
