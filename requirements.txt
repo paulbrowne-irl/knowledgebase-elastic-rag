@@ -5,23 +5,15 @@
 pandas
 
 tf-keras
-#tensorflow
-#torch
+
 
 streamlit
-#beautifulsoup4 
+
 tqdm 
 requests 
 accelerate
 
-#pdf2image
-#pypdf2
-#pypdf
-#pycryptodome
-#openpyxl
-#docx2txt
 extract-msg
-#pytesseract 
 elasticsearch
 sentence_transformers 
 huggingface-hub 
@@ -38,13 +30,42 @@ tensorflow
 langserve 
 
 
+fastapi 
+uvicorn 
 
-# from langserve
+
+
+#spacy and langauge modules
+spacy>=2.1.9,<3.8.0
+#https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz#egg=en_core_web_sm
+#spacy>=2.1.9,<3.8.0
+#https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.2.0/en_core_web_lg-2.2.0.tar.gz#egg=en_core_web_lg
+
+# If above is commented out , install spacy language modules manually
+# python -m spacy download en_core_web_sm
+# python -m spacy download en_core_web_lg
+
+
+## Older dependencies - remove after refactor code
+sydney-py
+
+#tensorflow
+#torch
+#beautifulsoup4 
+
+#pdf2image
+#pypdf2
+#pypdf
+#pycryptodome
+#openpyxl
+#docx2txt
+#pytesseract 
+
+
+# from langserve - remove?
 # langchain 
 # tiktoken 
 # openai 
-fastapi 
-uvicorn 
 # pytest 
 # pytest-asyncio 
 # mypy
@@ -53,21 +74,3 @@ uvicorn
 # syrupy
 # sse_starlette 
 # starlette>=0.40.0
-
-#spacy
-spacy>=2.1.9,<3.8.0
-https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz#egg=en_core_web_sm
-
-spacy>=2.1.9,<3.8.0
-https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.2.0/en_core_web_lg-2.2.0.tar.gz#egg=en_core_web_lg
-
-## Older dependencies - remove after refactor code
-sydney-py
-
-
-## Older dependencies - remove
-# textract==1.6.1 # removed due to conflicts and will not work on windwos
-# Additional Textract install info : https://textract.readthedocs.io/en/stable/
-#configargparse
-#eland 
-#pillow
