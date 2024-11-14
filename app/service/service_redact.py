@@ -1,4 +1,5 @@
 import logging
+from pprint import pprint
 import settings.config as config
 import uvicorn
 from fastapi import FastAPI#
@@ -15,7 +16,7 @@ app = FastAPI(title="Prompt Redaction Service")
 #handle to our PromptCleaner
 cleaner = PromptCleaner()
 
-#handle to the most recent redactino
+#handle to the most recent redaction
 redacted_mappings = {}
 
 @app.post("/redact_doc")
@@ -37,13 +38,13 @@ def redact_text(textToRedact:str)->str:
 
     global redacted_mappings
 
-    #instruction_initial = "Welcome to CleanPrompt! Enter/paste your text. Type 'END' on a new line and press enter to submit:"
-    #text = get_multiline_input(instruction_initial) # get text from user which potentially includes sensitive info
     replaced_text, regex_mapping = cleaner.replace_regex(textToRedact)
     replaced_text, entity_mapping = cleaner.replace_ner(replaced_text)
-    redacted_mappings = {**regex_mapping, **entity_mapping}
-    colored_anonymized_text = cleaner.add_color(replaced_text, redacted_mappings)
-    
+    new_redacted_mappings = {**regex_mapping, **entity_mapping}
+    colored_anonymized_text = cleaner.add_color(replaced_text, new_redacted_mappings)
+
+    #add to our previous redactions
+    redacted_mappings = redacted_mappings | new_redacted_mappings
     
     return colored_anonymized_text
 
@@ -81,7 +82,9 @@ if __name__ == "__main__":
 
     #create document
     text_document = Document(
-        page_content="Peter Parker works as the CEO of a company called ACME engineering. He lives in Dublin and his phone number is 01-234567",
+        page_content='''Peter Parker works as the CEO of a company called ACME engineering. He lives in Dublin and his phone number is 01-234567
+        Diana Prince is the co-founder of a company called BionMedical . She lives in Galway and her phone number is 01-234567
+        ''',
         metadata={"source": "local_est"}
     )
     print("Original:"+str(text_document))
@@ -99,3 +102,15 @@ if __name__ == "__main__":
     deanonymized_doc = deanonymize_doc(redacted_doc)
 
     print(f"{Colors.BOLD}{Colors.OKCYAN}\nPrivate information restored:{Colors.ENDC}\n{deanonymized_doc}\n")
+
+    #repeat redact to check we get increment
+    # text_document2 = Document(
+    #     page_content="Diana Prince is the co-founder of a company called BionMedical . She lives in Galway and her phone number is 01-234567",
+    #     metadata={"source": "local_est"}
+    # )
+
+    # redacted_doc = redact_doc(text_document2)
+
+
+    print("\n\n\n")
+    pprint(redacted_mappings)

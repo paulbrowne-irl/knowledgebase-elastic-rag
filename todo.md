@@ -8,6 +8,10 @@
 # 0 Alt streams
 
 	* REDACT
+		* counters 
+			* check test strucure	
+			* setup test bed
+			* add prefix to imported script
 		* plumb in redaction (with or without confirg) to email
 		* spin up service
 		* stub out static call to test
@@ -21,6 +25,7 @@
 	* Doc upgrade = add in readme:add
 		* remove older references (to labs)
 
+	* API - create one server with all services
 
 	* test end-to-end (using local Ollama under docker)
 
@@ -28,7 +33,7 @@
 		* anyting in in readme-add
 		* tidy overall strcuture
 	
-	* Push to main, releast
+	* Push to main, release
 
 
 
