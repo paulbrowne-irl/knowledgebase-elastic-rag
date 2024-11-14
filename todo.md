@@ -20,7 +20,7 @@
 	* NEXT - end to end on static bot via rest API
 		* simple stub of service testbed
 
-	* Outlook bot calling api via porxy
+	* Outlook bot calling api via proxy
 	 
 	* Doc upgrade = add in readme:add
 		* remove older references (to labs)
