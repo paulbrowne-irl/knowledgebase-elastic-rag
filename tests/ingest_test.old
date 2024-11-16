@@ -8,7 +8,7 @@ import settings.config as config
 class Test_Injest(unittest.TestCase):
    
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
        
         #setup logging
         logger = logging.getLogger("..")

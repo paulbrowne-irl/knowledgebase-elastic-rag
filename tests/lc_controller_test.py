@@ -7,7 +7,7 @@ import os
 class Test_LC_Controller(unittest.TestCase):
    
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
        
         #setup logging
         logger = logging.getLogger("..")
