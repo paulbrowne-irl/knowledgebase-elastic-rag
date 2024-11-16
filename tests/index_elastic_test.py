@@ -2,10 +2,10 @@ import logging
 import sys
 import unittest
 
-import app.util.index.index_elastic as index_elastic
+import util.index.index_elastic as index_elastic
 
 sys.path.append('..')
-import app.settings.config as config
+import settings.config as config
 
 
 class Test_Index(unittest.TestCase):

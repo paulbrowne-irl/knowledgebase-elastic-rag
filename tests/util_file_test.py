@@ -2,12 +2,12 @@ import logging
 import sys
 import unittest
 
-import app.util.index.extract_email as extract_email
-import app.index.extract_pdf as extract_pdf
-import app.index.extract_word as extract_word
+import util.index.extract_email as extract_email
+import index.extract_pdf as extract_pdf
+import index.extract_word as extract_word
 
 #sys.path.append('..')
-import app.settings.config as config
+import settings.config as config
 
 
 class Test_File(unittest.TestCase):
