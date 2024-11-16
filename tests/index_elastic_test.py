@@ -1,10 +1,7 @@
 import logging
-import sys
 import unittest
 
 import util.index.index_elastic as index_elastic
-
-sys.path.append('..')
 import settings.config as config
 
 

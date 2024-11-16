@@ -1,6 +1,5 @@
 import multiprocessing
 import os
-import sys
 import random
 import pytest
 from datetime import datetime

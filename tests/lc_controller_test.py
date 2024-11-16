@@ -2,9 +2,6 @@ import unittest
 import logging
 import os
 
-# allow imports from parent directory
-import sys
-#sys.path.append('../util')
 
 
 class Test_LC_Controller(unittest.TestCase):

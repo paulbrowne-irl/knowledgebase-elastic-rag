@@ -8,8 +8,8 @@
 # 0 Alt streams
 
 	* TESTS
-		* Setup project for tests
-		* tests remove / pass
+		* tests "compile"
+		* tests remove or to pass
 		* Basics import from pytest workshop (link below)
 		* Later - more tests and other project best practice from https://pytest-cookbook.com/
 

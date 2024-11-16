@@ -3,9 +3,7 @@ import logging
 
 import service.service_redact as service_redact
 
-#to operate nroammly
-import sys
-sys.path.append('..')
+
 
 
 

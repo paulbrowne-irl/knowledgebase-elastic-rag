@@ -1,10 +1,7 @@
 import logging
-import sys
 import unittest
 
 import ingest as ingest
-
-sys.path.append('..')
 import settings.config as config
 
 
@@ -28,7 +25,6 @@ class Test_Injest(unittest.TestCase):
         self.assertEqual(outputDict.get(ingest.FILE_NAME),"companyprofile.pdf")
         self.assertEqual(outputDict.get(ingest.PARENT_FOLDER),"ingest")
         
-
 
 
 

@@ -1,5 +1,4 @@
 import logging
-import sys
 import unittest
 
 import util.index.extract_email as extract_email

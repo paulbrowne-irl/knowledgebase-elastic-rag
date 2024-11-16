@@ -1,9 +1,6 @@
 import unittest
 import logging
-import ssettings.token_loader as token_loader
-
-# allow imports from parent directory
-import sys
+import settings.token_loader as token_loader
 
 
 class Test_Pickle_Loader(unittest.TestCase):
