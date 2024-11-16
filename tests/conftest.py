@@ -1,3 +1,5 @@
+# code originally from https://pytest-cookbook.com/learn/ and evolved further
+
 import multiprocessing
 import os
 import random
