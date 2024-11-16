@@ -20,6 +20,7 @@ def global_value():
     num_cores = multiprocessing.cpu_count()
     #version = get_version()
     #output = f"\n🖥️  VERSION: {version} - pytest.fixture in root conftest.py️"
+    output =""
     output += f"\nYou have {multiprocessing.cpu_count()} cores 🖥️"
     return output
 

@@ -8,6 +8,7 @@
 # 0 Alt streams
 
 	* TESTS
+		* VSCode setup two folders
 		* tests "compile"
 		* tests remove or to pass
 		* Basics import from pytest workshop (link below)
