@@ -5,3 +5,4 @@ Additional spacy:
 #TODO - how to download
 
 pytest - from root 
+python -m pytest

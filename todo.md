@@ -7,12 +7,14 @@
 
 # 0 Alt streams
 
+	*TMP
+		* try build as listed in dockerfile
+
 	* TESTS
 		* VSCode setup two folders
-		* tests "compile"
 		* tests remove or to pass
 		* Basics import from pytest workshop (link below)
-		* Later - more tests and other project best practice from https://pytest-cookbook.com/
+		* move counter to test and red	action
 
 	* REDACT
 		* counters 
@@ -76,7 +78,7 @@
 	* Try unit test in VSCode of main langchain class with different approaches
 	* review python docs on bot, app, ingest, rag_controller,
 	* update promot
-	* move to unit testable 
+	* Later - more tests and other project best practice from https://pytest-cookbook.com/
 	* try spidering web sources
 	* Additional file format index: .txt and .xlsx and .pptx
 	* Look at similar projects (send from firefox) - can we migrate to use that?
