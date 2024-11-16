@@ -1,7 +1,7 @@
 import unittest
 import logging
 
-import service.service_redact as service_redact
+import app.service.service_redact as service_redact
 
 #to operate nroammly
 import sys

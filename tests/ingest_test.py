@@ -2,10 +2,10 @@ import logging
 import sys
 import unittest
 
-import ingest as ingest
+import app.ingest as ingest
 
 sys.path.append('..')
-import settings.config as config
+import app.settings.config as config
 
 
 class Test_Injest(unittest.TestCase):

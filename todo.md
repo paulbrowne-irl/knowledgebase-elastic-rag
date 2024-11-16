@@ -7,12 +7,18 @@
 
 # 0 Alt streams
 
+	* TESTS
+		* Setup project for tests
+		* tests remove / pass
+		* Basics import from pytest workshop (link below)
+		* Later - more tests and other project best practice from https://pytest-cookbook.com/
+
 	* REDACT
 		* counters 
 			* check test strucure	
 			* setup test bed
 			* add prefix to imported script
-		* plumb in redaction (with or without confirg) to email
+		* plumb in redaction (with or without config) to email
 		* spin up service
 		* stub out static call to test
 

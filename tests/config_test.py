@@ -3,7 +3,7 @@ import logging
 
 import sys
 sys.path.append('..')
-import settings.config as config
+import app.settings.config as config
 
 class Test_Config(unittest.TestCase):
    

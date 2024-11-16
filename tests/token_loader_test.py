@@ -1,6 +1,6 @@
 import unittest
 import logging
-import settings.token_loader as token_loader
+import app.settings.token_loader as token_loader
 
 # allow imports from parent directory
 import sys
