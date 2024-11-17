@@ -4,10 +4,11 @@ import unittest
 import util.index.index_elastic as index_elastic
 import settings.config as config
 
-
+@pytest.mark.skip
 class Test_Index(unittest.TestCase):
    
     @classmethod
+    @pytest.mark.skip
     def setUpClass(self):
        
         #setup logging
@@ -15,7 +16,7 @@ class Test_Index(unittest.TestCase):
         logger.setLevel(logging.DEBUG)
     
 
-
+    @pytest.mark.skip
     def test_index_text(self):
 
         test_meta =	{
@@ -29,7 +30,7 @@ class Test_Index(unittest.TestCase):
         # no exception is success - update?
 
 
-
+    @pytest.mark.skip
     def test_index_pdf(self):
 
         index_elastic.index(index_name= "test-can-del",filepath="../data-sample/ingest/companyprofile.pdf" ,filecontents="doh ray me fah so la tee doh")

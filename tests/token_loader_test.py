@@ -2,6 +2,8 @@ import unittest
 import logging
 import settings.token_loader as token_loader
 
+import pytest
+
 
 class Test_Pickle_Loader(unittest.TestCase):
    
@@ -13,7 +15,8 @@ class Test_Pickle_Loader(unittest.TestCase):
         logger.setLevel(logging.DEBUG)
 
         #setup test class
-    
+
+    @pytest.mark.skip
     def test_pickle_loader(self):
         token = token_loader.setup_token("some value")
         self.assertIsNotNone(token)

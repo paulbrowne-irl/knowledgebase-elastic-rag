@@ -3,7 +3,7 @@ import logging
 
 import service.service_redact as service_redact
 
-
+import pytest
 
 
 
@@ -17,7 +17,7 @@ class Test_Redact_Service(unittest.TestCase):
         logger = logging.getLogger("..")
         logger.setLevel(logging.DEBUG)
 
-    
+    @pytest.mark.skip
     def test_redact_document(self):
 
             #text

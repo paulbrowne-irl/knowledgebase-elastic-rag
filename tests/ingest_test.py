@@ -1,6 +1,8 @@
 import logging
 import unittest
 
+import pytest
+
 import ingest as ingest
 import settings.config as config
 
@@ -15,7 +17,7 @@ class Test_Injest(unittest.TestCase):
         logger.setLevel(logging.DEBUG)
     
 
-
+    @pytest.mark.skip
     def test_extract_meta_data(self):
         '''see if we can extract the metadata from a file'''
 

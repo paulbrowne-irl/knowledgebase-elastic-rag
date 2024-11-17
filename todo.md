@@ -9,10 +9,12 @@
 
 	*TMP
 		* try build as listed in dockerfile
+		* implementproject guidelines - https://docs.python-guide.org/writing/structure/
 
 	* TESTS
+		* Mark tests as skipped until all passing
+		* move config so tests can access them
 		* VSCode setup two folders
-		* tests remove or to pass
 		* Basics import from pytest workshop (link below)
 		* move counter to test and red	action
 

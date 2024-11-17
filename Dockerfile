@@ -2,7 +2,7 @@
 # Optional - the server can be run locally via python
 
 # to run this file
-#docker build -t ragservice .
+#docker build -t ragservice . --progress=plain 
 
 FROM python:3.10-slim
 

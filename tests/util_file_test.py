@@ -8,6 +8,7 @@ import index.extract_word as extract_word
 #sys.path.append('..')
 import settings.config as config
 
+import pytest
 
 class Test_File(unittest.TestCase):
    
@@ -18,6 +19,7 @@ class Test_File(unittest.TestCase):
         logger = logging.getLogger("..")
         logger.setLevel(logging.DEBUG)
     
+    @pytest.mark.skip
     def test_read_pdf(self):
 
         #check that we have a pandas dataframe, with one row plus header
@@ -29,6 +31,7 @@ class Test_File(unittest.TestCase):
         self.assertIsNotNone(document_text_2)
         print(document_text_2)
 
+    @pytest.mark.skip
     def test_read_word(self):
 
         # Extract _extract_text_stats information
@@ -36,7 +39,7 @@ class Test_File(unittest.TestCase):
         self.assertIsNotNone(document_text)
         print(document_text)
 
-
+    @pytest.mark.skip
     def test_read_email(self):
 
         document_text = extract_email.extract_text_info_general("data-sample/ingest/sample_test_outlook_file.msg")

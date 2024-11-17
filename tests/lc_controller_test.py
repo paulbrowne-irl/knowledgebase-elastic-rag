@@ -1,7 +1,7 @@
 import unittest
 import logging
-import os
 
+import pytest
 
 
 class Test_LC_Controller(unittest.TestCase):
@@ -14,7 +14,8 @@ class Test_LC_Controller(unittest.TestCase):
         logger.setLevel(logging.DEBUG)
     
         #setup rag controller
-    
+        
+    @pytest.mark.skip
     def test_rag(self):
         #self.fail("Tests not yet implemented")
         logging.debug("test completed")

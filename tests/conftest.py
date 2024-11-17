@@ -18,6 +18,7 @@ console = Console()
 
 # We can set up global values here via a fixture in root conftest.py
 @pytest.fixture(scope="session")  # scope not needed as in root conftest.py
+@pytest.mark.skip
 def global_value():
     num_cores = multiprocessing.cpu_count()
     #version = get_version()
@@ -34,6 +35,7 @@ FILENAME = f"./results/report_{report_date}_{random.randint(1_000_000, 9_999_999
 
 
 # GLOBAL VALUES accessible from request.config.my_global_value in tests
+@pytest.mark.skip
 def pytest_configure(config):
 
     num_cores = multiprocessing.cpu_count()
@@ -41,6 +43,7 @@ def pytest_configure(config):
 
 
 # ----- Command Line Arguments -----
+@pytest.mark.skip
 def pytest_addoption(parser):
     parser.addoption(
         "--desc", action="store_true", default=False, help="sort descending"

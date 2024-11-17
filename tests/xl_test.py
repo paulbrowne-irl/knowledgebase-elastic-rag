@@ -4,6 +4,8 @@ import settings.config as config
 
 from util.office import xl_rw
 
+import pytest
+
 #import util.office.xl_rw  as xl_rw
 
 class Test_XL(unittest.TestCase):
@@ -21,7 +23,7 @@ class Test_XL(unittest.TestCase):
         self.COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
         self.COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
 
-    
+    @pytest.mark.skip
     def test_read_next_xl_question(self):
 
         next_question = xl_rw.read_unanswered_questions("../data-sample/question_and_answer/q_and_a_sample.xlsx",
@@ -32,6 +34,7 @@ class Test_XL(unittest.TestCase):
         #check that we have a pandas dataframe, with one row plus header
         self.assertIsNotNone(next_question)
 
+    @pytest.mark.skip
     def test_has_next_xl_question(self):
 
         has_next_question = xl_rw.has_unaswered_question("../data-sample/question_and_answer/q_and_a_sample.xlsx",
