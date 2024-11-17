@@ -7,17 +7,14 @@
 
 # 0 Alt streams
 
-	*TMP
-		* try build as listed in dockerfile
-		* implementproject guidelines - https://docs.python-guide.org/writing/structure/
-		* refactor remove chain factory
 
-	* TESTS
-		* Mark tests as skipped until all passing
-		* move config so tests can access them
-		* VSCode setup two folders
-		* Basics import from pytest workshop (link below)
+	* next on service
+		* NEXT: setup service test
+		* NEXT : add counter to this this
 		* move counter to test and red	action
+		end to end on static bot via rest API
+		* simple stub of service testbed
+
 
 	* REDACT
 		* counters 
@@ -29,9 +26,6 @@
 		* stub out static call to test
 
 	
-	* NEXT - end to end on static bot via rest API
-		* simple stub of service testbed
-
 	* Outlook bot calling api via proxy
 	 
 	* Doc upgrade = add in readme:add
@@ -47,6 +41,11 @@
 	
 	* Push to main, release
 
+
+	*NTH -or move to next
+		* try build as listed in dockerfile
+		* implementproject guidelines - https://docs.python-guide.org/writing/structure/
+		* refactor remove chain factory
 
 
 # 1 Next Sprint - or move to later

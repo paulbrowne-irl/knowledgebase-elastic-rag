@@ -191,3 +191,6 @@ app/settings/token-copilot.pickle.old
 app/settings/private-key-notes.txt
 app/settings/token-storage-local.json
 .env-merge
+
+#pytest reports
+results/report*.csv
