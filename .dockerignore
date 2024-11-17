@@ -16,7 +16,7 @@ __pycache__
 # CI
 .codeclimate.yml
 .travis.yml
-.taskcluster.yml
+.taskcluster.yml    
 
 # Docker
 docker-compose.yml

@@ -1,6 +1,8 @@
 import logging
 import unittest
 
+import pytest
+
 import util.index.index_elastic as index_elastic
 import settings.config as config
 

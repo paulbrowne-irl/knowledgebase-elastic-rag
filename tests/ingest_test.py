@@ -3,8 +3,6 @@ import unittest
 
 import pytest
 
-import ingest as ingest
-import settings.config as config
 
 
 class Test_Injest(unittest.TestCase):
@@ -20,6 +18,9 @@ class Test_Injest(unittest.TestCase):
     @pytest.mark.skip
     def test_extract_meta_data(self):
         '''see if we can extract the metadata from a file'''
+
+        
+        import ingest as ingest
 
         outputDict= ingest._extract_metadata("SOME_CONFIG_SOURCE","../data-sample/ingest/companyprofile.pdf")
         

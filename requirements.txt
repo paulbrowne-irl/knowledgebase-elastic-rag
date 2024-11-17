@@ -56,13 +56,13 @@ sydney-py
 #torch
 #beautifulsoup4 
 
-#pdf2image
-#pypdf2
-#pypdf
+pdf2image
+pypdf2
+pypdf
 #pycryptodome
-#openpyxl
-#docx2txt
-#pytesseract 
+openpyxl
+docx2txt
+pytesseract 
 
 
 # from langserve - remove?
