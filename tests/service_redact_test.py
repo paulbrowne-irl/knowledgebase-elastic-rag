@@ -11,7 +11,7 @@ import pytest
 class Test_Redact_Service(unittest.TestCase):
    
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
        
         #setup logging
         logger = logging.getLogger("..")

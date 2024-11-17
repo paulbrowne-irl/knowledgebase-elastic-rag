@@ -67,7 +67,7 @@ def get_chain() -> Runnable:
 
 
     """Return a chain."""
-    prompt = ChatPromptTemplate.from_template(prompts.TEMPLATE_EMAIL_PROMPT_2)
+    prompt = ChatPromptTemplate.from_template(prompts.TEMPLATE_EMAIL_PROMPT)
     retriever = rag_factory._get_setup_knowledgebase_retriever(ELASTIC_INDEX_NAME)
     model = ChatOpenAI().bind(functions=[prompt_func], function_call={"name": "email_draft"})
     parser = JsonOutputFunctionsParser()

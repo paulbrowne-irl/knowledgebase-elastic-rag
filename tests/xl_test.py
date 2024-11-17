@@ -11,17 +11,17 @@ import pytest
 class Test_XL(unittest.TestCase):
    
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
        
         #setup logging
         logger = logging.getLogger("..")
         logger.setLevel(logging.DEBUG)
 
         # read standard values
-        self.QUESTION_FILE_NAME=config.read("QUESTION_FILE_XLS")
-        self.COL_TO_READ_QUESTION_IN_FILE=config.read("COL_TO_READ_QUESTION_IN_FILE")
-        self.COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
-        self.COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
+        cls.QUESTION_FILE_NAME=config.read("QUESTION_FILE_XLS")
+        cls.COL_TO_READ_QUESTION_IN_FILE=config.read("COL_TO_READ_QUESTION_IN_FILE")
+        cls.COL_TO_UPDATE_RELEVANT_DOCS=config.read("COL_TO_UPDATE_RELEVANT_DOCS")
+        cls.COL_TO_UPDATE_SUGGESTED_ANSWER=config.read("COL_TO_UPDATE_SUGGESTED_ANSWER")
 
     @pytest.mark.skip
     def test_read_next_xl_question(self):

@@ -8,7 +8,7 @@ import pytest
 class Test_Pickle_Loader(unittest.TestCase):
    
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
        
         #setup logging
         logger = logging.getLogger("..")

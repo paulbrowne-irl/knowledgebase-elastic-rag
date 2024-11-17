@@ -10,6 +10,7 @@
 	*TMP
 		* try build as listed in dockerfile
 		* implementproject guidelines - https://docs.python-guide.org/writing/structure/
+		* refactor remove chain factory
 
 	* TESTS
 		* Mark tests as skipped until all passing

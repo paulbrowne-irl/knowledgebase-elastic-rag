@@ -11,7 +11,7 @@ class Test_Index(unittest.TestCase):
    
     @classmethod
     @pytest.mark.skip
-    def setUpClass(self):
+    def setUpClass(cls):
        
         #setup logging
         logger = logging.getLogger("..")
