@@ -12,7 +12,7 @@ class PromptCleaner:
         self.counters = {"EMAIL": 1, "PHONE": 1, "URL": 1, "ADDITIONAL": 1}
         self.found_items = {"EMAIL": {}, "PHONE": {}, "URL": {}, "ADDITIONAL": {}}
 
-    def find_and_tag(self, pattern, tag, text):
+    def find_and_tag(self, pattern, tag, text,prefix:str=""):
         '''
         Find and tag all occurrences of a pattern in the entire text.
         Returns a dictionary of original matched string to unique tags.
@@ -21,7 +21,7 @@ class PromptCleaner:
         for match in re.finditer(pattern, text):
             original = match.group()
             if original not in self.found_items[tag]:
-                self.found_items[tag][original] = f"[{tag}-{self.counters[tag]}]"
+                self.found_items[tag][original] = f"[{prefix}-{tag}-{self.counters[tag]}]"
                 self.counters[tag] += 1
             replacements[original] = self.found_items[tag][original][1:-1]  # Store without brackets for replacement map
         return replacements
@@ -41,15 +41,15 @@ class PromptCleaner:
         return replacements
 
 
-    def replace_regex(self, text):
+    def replace_regex(self, text,prefix:str=""):
         '''
         Find emails, phones, urls, and additional_texts in the text and replaces them with unique tags.
         Returns the whole text with replaced tags and a mapping of original strings to unique tags.
         '''
         replacements = {}
-        replacements.update(self.find_and_tag(self.email_pattern, "EMAIL", text))
-        replacements.update(self.find_and_tag(self.phone_pattern, "PHONE", text))
-        replacements.update(self.find_and_tag(self.url_pattern, "URL", text))
+        replacements.update(self.find_and_tag(self.email_pattern, "EMAIL", text,prefix))
+        replacements.update(self.find_and_tag(self.phone_pattern, "PHONE", text,prefix))
+        replacements.update(self.find_and_tag(self.url_pattern, "URL", text,prefix))
 
         # Replace all found items with their tags
         for original_string, unique_tag in replacements.items():
@@ -57,7 +57,7 @@ class PromptCleaner:
 
         return text, replacements
 
-    def replace_ner(self, text):
+    def replace_ner(self, text,prefix:str=""):
         doc = self.nlp(text)
         replacements = {}
         unique_entities = {}
@@ -69,11 +69,11 @@ class PromptCleaner:
                 if ent.label_ not in entity_counts:
                     entity_counts[ent.label_] = 0
                 entity_counts[ent.label_] += 1
-                unique_tag = f'{ent.label_}-{entity_counts[ent.label_]}'
+                unique_tag = f'{prefix}-{ent.label_}-{entity_counts[ent.label_]}'
                 unique_entities[ent.text] = unique_tag
                 replacements[(ent.start_char, ent.end_char)] = unique_tag
             else:
-                unique_tag = unique_entities[ent.text]
+                unique_tag = prefix+"-"+unique_entities[ent.text]
                 replacements[(ent.start_char, ent.end_char)] = unique_tag
 
         # Apply replacements in reverse order to avoid offset issues

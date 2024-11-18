@@ -20,26 +20,26 @@ cleaner = PromptCleaner()
 redacted_mappings = {}
 
 @app.post("/redact_doc")
-def redact_doc(docToRedact:Document)->Document:
+def redact_doc(docToRedact:Document,prefix:str="")->Document:
     '''
     "overloaded" method - takes and returns langchain doc
     '''
-    redacted_text = redact_text(docToRedact.page_content)
+    redacted_text = redact_text(docToRedact.page_content,prefix)
     docToRedact.page_content=redacted_text
 
     return docToRedact
 
 
 @app.post("/redact_text")
-def redact_text(textToRedact:str)->str:
+def redact_text(textToRedact:str,prefix:str="")->str:
     '''
     Redact text using Spacy rules - removing people, company names, telephone numbers
     '''
 
     global redacted_mappings
 
-    replaced_text, regex_mapping = cleaner.replace_regex(textToRedact)
-    replaced_text, entity_mapping = cleaner.replace_ner(replaced_text)
+    replaced_text, regex_mapping = cleaner.replace_regex(textToRedact,prefix)
+    replaced_text, entity_mapping = cleaner.replace_ner(replaced_text,prefix)
     new_redacted_mappings = {**regex_mapping, **entity_mapping}
     colored_anonymized_text = cleaner.add_color(replaced_text, new_redacted_mappings)
 

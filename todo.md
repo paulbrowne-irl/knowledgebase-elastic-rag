@@ -9,7 +9,7 @@
 
 
 	* next on service
-		* NEXT: setup service test
+		* NEXT: setup service test and add assertions
 		* NEXT : add counter to this this
 		* move counter to test and red	action
 		end to end on static bot via rest API
@@ -46,6 +46,8 @@
 		* try build as listed in dockerfile
 		* implementproject guidelines - https://docs.python-guide.org/writing/structure/
 		* refactor remove chain factory
+		* debug newly built ragservice
+
 
 
 # 1 Next Sprint - or move to later
