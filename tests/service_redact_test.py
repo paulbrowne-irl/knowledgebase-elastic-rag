@@ -21,8 +21,6 @@ class Test_Redact_Service(unittest.TestCase):
 
     def test_redact_document(self):
 
-       
-           
         #create document
         text_document = Document(
             page_content='''Peter Parker works as the CEO of a company called ACME engineering. He lives in Dublin and his phone number is 01-234567

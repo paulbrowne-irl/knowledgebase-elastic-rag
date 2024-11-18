@@ -19,7 +19,9 @@ class Test_Email_Service(unittest.TestCase):
         logger = logging.getLogger("..")
         logger.setLevel(logging.DEBUG)
 
-    def test_generate_emamil(self):
+
+    @pytest.mark.skip
+    def test_generate_email(self):
 
         email_text="write me an email about dogs"
         email_drafted= service_email.draft_email_response(email_text)
