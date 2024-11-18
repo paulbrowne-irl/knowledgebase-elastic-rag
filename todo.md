@@ -10,17 +10,6 @@
 
 	* next on service
 		* NEXT: setup service test and add assertions
-		* NEXT : add counter to this this
-		* move counter to test and red	action
-		end to end on static bot via rest API
-		* simple stub of service testbed
-
-
-	* REDACT
-		* counters 
-			* check test strucure	
-			* setup test bed
-			* add prefix to imported script
 		* plumb in redaction (with or without config) to email
 		* spin up service
 		* stub out static call to test
