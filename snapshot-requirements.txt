@@ -189,7 +189,7 @@ tokenizers==0.20.1
 toml==0.10.2
 tomli==2.0.2
 torch==2.4.1
-tornado==6.4.1
+tornado==6.4.2
 tqdm==4.66.5
 transformers==4.45.2
 triton==3.0.0
