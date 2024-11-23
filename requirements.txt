@@ -77,3 +77,6 @@ pytesseract
 # syrupy
 # sse_starlette 
 # starlette>=0.40.0
+
+# to address security issue in library
+tornado>=6.4.2
