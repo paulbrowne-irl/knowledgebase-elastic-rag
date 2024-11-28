@@ -11,6 +11,9 @@ console = Console()
 
 
 class Test_Email_Service(unittest.TestCase):
+    '''
+     pytest -k Test_Email_Service
+    '''
    
     @classmethod
     def setUpClass(cls):
@@ -20,7 +23,6 @@ class Test_Email_Service(unittest.TestCase):
         logger.setLevel(logging.DEBUG)
 
 
-    @pytest.mark.skip
     def test_generate_email(self):
 
         email_text="write me an email about dogs"

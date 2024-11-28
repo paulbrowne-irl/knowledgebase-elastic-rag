@@ -9,7 +9,8 @@
 
 
 	* next on service
-		* NEXT: setup service test and add assertions
+		* NEXT:  pytest -k Test_Email_Service running 
+		* setup service test and add assertions
 		* plumb in redaction (with or without config) to email
 		* spin up service
 		* stub out static call to test

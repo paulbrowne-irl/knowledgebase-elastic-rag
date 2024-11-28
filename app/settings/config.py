@@ -6,15 +6,28 @@ Loads the config in a way that it can be overwritten
 see settings-overwrite.note
 '''
 
-config = configparser.ConfigParser()
-config.read(['settings/config.conf', 'settings/config-overwrite.conf'])
+def _get_conf_file():
+    '''
+    Get handle to config file, allowing for running fron project root, or within app folder
+    '''
+    config = configparser.ConfigParser()
+    try:
+        config.read(['settings/config.conf', 'settings/config-overwrite.conf'])
+        settings=config['SETTINGS']
+    except: 
+        config.read(['app/settings/config.conf', 'app/settings/config-overwrite.conf'])
+        settings=config['SETTINGS']
+
+    return settings
+
+
 
 
 def read (ConfigKey:str)->str:
     ''''
     Find the relevant value in settings matching the config key - return a string
     '''
-    settings=config['SETTINGS']
+    settings=_get_conf_file()
     returnObj= settings.get(ConfigKey)
 
 
@@ -26,7 +39,7 @@ def read_int (ConfigKey:str)->int:
     Find the relevant value in settings matching the config key - return an int
     '''
 
-    settings=config['SETTINGS']
+    settings=_get_conf_file()
     return settings.getint(ConfigKey)
 
 def read_boolean (ConfigKey:str)->bool:
@@ -35,7 +48,7 @@ def read_boolean (ConfigKey:str)->bool:
     Find the relevant value in settings matching the config key - return a boolean
     '''
 
-    settings=config['SETTINGS']
+    settings=_get_conf_file()
     return settings.getboolean(ConfigKey)
 
 
@@ -46,5 +59,5 @@ def read_dict (ConfigKey:str)->dict:
     Find the relevant value in settings matching the config key - return a dictionary of values
     '''
 
-    settings=config[ConfigKey]
+    settings=_get_conf_file()
     return dict(settings)
