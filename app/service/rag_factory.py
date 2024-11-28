@@ -7,6 +7,7 @@ import requests
 import settings.config as config
 import settings.token_loader as token_loader
 
+from langchain_core import utils as langchain_core_utils
 from langchain.chains.llm import LLMChain
 from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain.prompts import PromptTemplate
@@ -97,23 +98,42 @@ def _get_setup_llm():
 
 
         elif (MODEL_LLM == "google"):
-            logging.debug("Using Gemini LLM")
+            logging.debug("Using Google Gemini LLM")
+
 
             token = token_loader.setup_token("google")
+            secret_token = langchain_core_utils.convert_to_secret_str(token)
 
-            _llm_to_use = ChatGoogleGenerativeAI(
-                model="gemini-1.0-pro", api_key=token)  # was gemini-pro
+ 
+            _llm_to_use  = ChatGoogleGenerativeAI(
+                model="gemini-1.5-pro",
+                temperature=0,
+                max_tokens=None,
+                timeout=None,
+                max_retries=2,
+                api_key=secret_token
+                # other params...
+            )
 
 
 
         elif (MODEL_LLM == "claude"):
 
-            logging.debug("Using Anthropic LLM")
+            logging.debug("Using Claude Anthropic LLM")
 
             token = token_loader.setup_token("claude")
+            secret_token = langchain_core_utils.convert_to_secret_str(token)
+
 
             _llm_to_use = ChatAnthropic(
-                temperature=0, api_key=token, model_name="claude-3-opus-20240229")
+                model_name="claude-3-5-sonnet-20240620",
+                api_key=secret_token,
+                temperature=0,
+                timeout=None,
+                stop=None,
+                max_retries=2,
+                # other params...
+            )
 
 
 
@@ -121,8 +141,10 @@ def _get_setup_llm():
             logging.debug("Using Open AI LLM")
 
             token = token_loader.setup_token("openai")
+            secret_token = langchain_core_utils.convert_to_secret_str(token)
 
-            _llm_to_use = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, api_key=token)
+
+            _llm_to_use = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, api_key=secret_token)
 
         elif (MODEL_LLM == "copilot"):
             logging.debug("Using Copilot LLM")
@@ -175,26 +197,26 @@ def get_nearest_match_documents(index_name: str, search_text: str) -> List[Docum
 
     logging.debug(f"Nearest Search index {index_name} matching against {search_text}")
 
-    # Get the handle to the Elastick Knowledge Base
+    # Get the handle to the Elastic Knowledge Base
     vector_retriever = _get_setup_knowledgebase_retriever(index_name)
 
     return vector_retriever.invoke(search_text)
 
 
-def get_llm_chain(prompt_template: str) -> LLMChain:
-    '''
-    Generate the LLM Chain
-    '''
+# def get_llm_chain(prompt_template: str) -> LLMChain:
+#     '''
+#     Generate the LLM Chain
+#     '''
 
-    local_llm = _get_setup_llm()
-    logging.info(f"Configured to use LLM:{local_llm}")
+#     local_llm = _get_setup_llm()
+#     logging.info(f"Configured to use LLM:{local_llm}")
 
-    prompt_informed = PromptTemplate(
-        template=prompt_template, input_variables=["context", "question"])
+#     prompt_informed = PromptTemplate(
+#         template=prompt_template, input_variables=["context", "question"])
     
-    parser = JsonOutputFunctionsParser()
+#     parser = JsonOutputFunctionsParser()
     
-    #New Langchain 0.3 syntax
-    llm_chain = prompt_informed | local_llm
+#     #New Langchain 0.3 syntax
+#     llm_chain = prompt_informed | local_llm
 
-    return llm_chain
+#     return llm_chain

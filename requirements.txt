@@ -19,6 +19,7 @@ sentence_transformers
 huggingface-hub 
 
 langchain
+langchain-core
 langchain_anthropic 
 langchain_community
 langchain_huggingface

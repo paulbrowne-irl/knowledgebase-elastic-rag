@@ -15,7 +15,6 @@ from service import rag_factory as rag_factory
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
 
-import util.bot as bot 
 
 
 
@@ -49,7 +48,7 @@ class Bot_Excel():
         Common to all bots - find suggested answer using presetup chain (normally RAG)
         '''
         # Find nearest match documents
-        similar_docs = rag_factory.get_nearest_match_documents(Bot.ELASTIC_INDEX_NAME,this_question)
+        similar_docs = rag_factory.get_nearest_match_documents(self.ELASTIC_INDEX_NAME,this_question)
         logging.info("relevant docs:"+str(similar_docs))
 
         ## Ask Local LLM context informed prompt
