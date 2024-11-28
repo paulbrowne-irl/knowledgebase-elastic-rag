@@ -7,7 +7,7 @@ from templates import prompts as prompts
 
 # setup once
 app = FastAPI(title="LangServe Knowledgebase Service")
-ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
+
 
 '''
 This module provides a server facade
@@ -30,6 +30,8 @@ def service_check():
 @app.post("/draft_email_response")
 def draft_email_response(email: str):
 
+
+    ELASTIC_INDEX_NAME= config.read("ES_INDEX_KB")
 
     # Find nearest match documents
     similar_docs = rag_factory.get_nearest_match_documents(ELASTIC_INDEX_NAME,email)

@@ -203,20 +203,20 @@ def get_nearest_match_documents(index_name: str, search_text: str) -> List[Docum
     return vector_retriever.invoke(search_text)
 
 
-# def get_llm_chain(prompt_template: str) -> LLMChain:
-#     '''
-#     Generate the LLM Chain
-#     '''
+def get_llm_chain(prompt_template: str) :
+    '''
+    Generate the LLM Chain
+    '''
 
-#     local_llm = _get_setup_llm()
-#     logging.info(f"Configured to use LLM:{local_llm}")
+    local_llm = _get_setup_llm()
+    logging.info(f"Configured to use LLM:{local_llm}")
 
-#     prompt_informed = PromptTemplate(
-#         template=prompt_template, input_variables=["context", "question"])
+    prompt_informed = PromptTemplate(
+        template=prompt_template, input_variables=["context", "question"])
     
-#     parser = JsonOutputFunctionsParser()
+    parser = JsonOutputFunctionsParser()
     
-#     #New Langchain 0.3 syntax
-#     llm_chain = prompt_informed | local_llm
+    #New Langchain 0.3 syntax
+    llm_chain = prompt_informed | local_llm
 
-#     return llm_chain
+    return llm_chain
