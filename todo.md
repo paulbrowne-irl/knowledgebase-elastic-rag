@@ -7,16 +7,17 @@
 
 # 0 Alt streams
 
+	try to find token-storage local (add app)
+
+	* clear kb, update with latest dataset
+		* tune on chunks generates
+
 	* loop and show the vlaues being pulled back
-
-	* redact the information we find back 
-
-	* next on service
-		* pytest -k Test_Email_Service running 
-		* setup service test and add assertions
-		* plumb in redaction (with or without config) to email
-		* spin up service
-		* stub out static call to tes
+		* fine tune results
+		* fine tune prompt
+		* fine tune llm
+		* check redeaction
+		* (pytest -k Test_Email_Service running )
 
 
 	* Outlook bot calling api via proxy

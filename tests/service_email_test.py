@@ -25,7 +25,7 @@ class Test_Email_Service(unittest.TestCase):
 
     def test_generate_email(self):
 
-        email_text="I am inquirying about the new grant. How much can I claim and how it will it help me develop my business in international markets?"
+        email_text="I am curious about the new grant. How much can I claim and how it will it help me develop my business in international markets?"
         email_drafted= service_email.draft_email_response(email_text)
 
         print(email_drafted)
