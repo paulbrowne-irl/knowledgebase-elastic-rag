@@ -7,15 +7,19 @@
 
 # 0 Alt streams
 
+	* add confirg notes (from black) to readme add to resolve app/ other import
+	* read and run injest
+		* Next Small Test on Config running (assertions, check proper setting back) -  pytest -k Test_Config_Read
 
 	* next on service
-		* NEXT:  pytest -k Test_Email_Service running 
+		* pytest -k Test_Email_Service running 
 		* setup service test and add assertions
 		* plumb in redaction (with or without config) to email
 		* spin up service
 		* stub out static call to test
 
-	
+
+
 	* Outlook bot calling api via proxy
 	 
 	* Doc upgrade = add in readme:add

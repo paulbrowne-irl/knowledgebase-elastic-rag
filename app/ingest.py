@@ -176,6 +176,7 @@ if __name__ == '__main__':
 
     # get config
     starting_point_dict = config.read_dict("SOURCE_DIRECTORIES")
+    logging.info("Injesting files from root dir(s):"+str(starting_point_dict)+"\n")
 
     es_index=config.read("ES_INDEX_KB")
    

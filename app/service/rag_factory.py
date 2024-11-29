@@ -67,7 +67,7 @@ def _get_setup_llm():
         # check local llama instance running
         # If you get an error from the following line, double check the
         # install at https://github.com/ollama/ollama
-        requests.get("http://localhost:11434/")
+        requests.get("http://localhost:11435/")
 
         if (MODEL_LLM == "llama3"):
 

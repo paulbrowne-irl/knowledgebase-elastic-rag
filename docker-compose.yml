@@ -20,20 +20,20 @@ services:
         container_name: ollama #so the above command runs
         image: ollama/ollama
         ports:
-        - "11434:11434"
+        - "11435:11434"
         volumes:
         - ollama-local:/root/.ollama
         #command: ollama run llama3.2
 
     # Portainer is a Web Based Docker Management tool - can be removed
-    #portainer:
-    #    image: portainer/portainer-ce:latest
-    #    ports:
-    #    - 9443:9443
-    #    volumes:
-    #        - data:/data
-    #        - /var/run/docker.sock:/var/run/docker.sock
-    #    restart: unless-stopped
+    portainer:
+       image: portainer/portainer-ce:latest
+       ports:
+       - 9444:9443
+       volumes:
+           - data:/data
+           - /var/run/docker.sock:/var/run/docker.sock
+       restart: unless-stopped
 
     # if we built our python server  as docker image,
     # running via docker compose meanswe deploy only to run python client
@@ -79,7 +79,7 @@ services:
           timeout: 10s
           retries: 120
           
-    # #Elastic Search management tool
+    # Kibana - Elastic Search management tool
     kibana:
         container_name: kib01
         networks:
@@ -99,6 +99,7 @@ volumes:
     data:
     es-config:
             name: es-config
+            external: true
     ollama-local:
         external: false
     open-webui-local:
