@@ -7,16 +7,14 @@
 
 # 0 Alt streams
 
-	try to find token-storage local (add app)
-
-	* clear kb, update with latest dataset
+	* NEXTl clear kb, update with latest dataset
 		* tune on chunks generates
 
 	* loop and show the vlaues being pulled back
 		* fine tune results
 		* fine tune prompt
 		* fine tune llm
-		* check redeaction
+		* check redeaction / restore and what local service is storing in "db"
 		* (pytest -k Test_Email_Service running )
 
 
@@ -40,7 +38,6 @@
 		* try build as listed in dockerfile
 		* implementproject guidelines - https://docs.python-guide.org/writing/structure/
 		* refactor remove chain factory
-		* 
 
 
 
