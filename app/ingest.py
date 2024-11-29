@@ -18,8 +18,6 @@ do_pdf_ocr= config.read_boolean("READ_PDF_USING_OCR")
 es_index_name= config.read("ES_INDEX_KB")
 
 
-
-
 def _extract_metadata(configsource: str, fullfilepath: str) -> dict:
     ''' generate a dictionary of metadat based on the information passed in
     * current file name

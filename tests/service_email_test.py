@@ -12,7 +12,7 @@ console = Console()
 
 class Test_Email_Service(unittest.TestCase):
     '''
-     pytest -k Test_Email_Service
+    pytest -k Test_Email_Service
     '''
    
     @classmethod
@@ -25,10 +25,15 @@ class Test_Email_Service(unittest.TestCase):
 
     def test_generate_email(self):
 
-        email_text="I am inquirying about the new grant. How much can I claim?5"
+        email_text="I am inquirying about the new grant. How much can I claim and how it will it help me develop my business in international markets?"
         email_drafted= service_email.draft_email_response(email_text)
 
         print(email_drafted)
+
+        #basic tests
+        assert email_drafted != ""
+        assert email_drafted is not None
+        
 
 
 if __name__ == '__main__':

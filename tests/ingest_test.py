@@ -5,7 +5,7 @@ import pytest
 
 
 
-class Test_Injest(unittest.TestCase):
+class Test_Ingest(unittest.TestCase):
    
     @classmethod
     def setUpClass(cls):

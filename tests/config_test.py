@@ -32,7 +32,7 @@ class Test_Config_Read(unittest.TestCase):
 
     def test_read_single_value(self):
 
-        working_dir = config.read("WORKING_DIRECTORY")
+        working_dir = config.read("ES_INDEX_KB")
         assert working_dir==".", "Unexpected value for working dir - have you changed it"
 
 

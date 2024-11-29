@@ -69,7 +69,7 @@ def _get_setup_llm():
         # install at https://github.com/ollama/ollama
         requests.get("http://localhost:11435/")
 
-        if (MODEL_LLM == "llama3"):
+        if (MODEL_LLM == "llama3.2"):
 
             try:
                 _llm_to_use = OllamaLLM(model="llama3.2", stop=['<|eot_id|>'])

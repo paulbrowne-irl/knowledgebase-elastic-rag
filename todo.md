@@ -7,13 +7,16 @@
 
 # 0 Alt streams
 
+	* loop and show the vlaues being pulled back
+
+	* redact the information we find back 
+
 	* next on service
 		* pytest -k Test_Email_Service running 
 		* setup service test and add assertions
 		* plumb in redaction (with or without config) to email
 		* spin up service
-		* stub out static call to test
-
+		* stub out static call to tes
 
 
 	* Outlook bot calling api via proxy
@@ -36,7 +39,7 @@
 		* try build as listed in dockerfile
 		* implementproject guidelines - https://docs.python-guide.org/writing/structure/
 		* refactor remove chain factory
-		* debug newly built ragservice
+		* 
 
 
 
