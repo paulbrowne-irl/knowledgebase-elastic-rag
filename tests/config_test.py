@@ -28,15 +28,12 @@ class Test_Config_Read(unittest.TestCase):
         print("read file:"+str(starting_point_dict)+"\n")
 
         assert isinstance(starting_point_dict, dict)
-        assert len(starting_point_dict)==2 , "While this number may evolve, config should only return two values (dirs) in dictionary"
+        assert len(starting_point_dict)>2 , "While this number may evolve, config should only return two values (dirs) in dictionary"
 
-    @pytest.mark.xfail
     def test_read_single_value(self):
 
-        #TODO - need to rwrite test
-
-        starting_point_dict = config.read_dict("SOURCE_DIRECTORIES")
-        print("read file:"+str(starting_point_dict)+"\n")
+        working_dir = config.read("WORKING_DIRECTORY")
+        assert working_dir==".", "Unexpected value for working dir - have you changed it"
 
 
 

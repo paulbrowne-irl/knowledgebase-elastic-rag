@@ -14,3 +14,6 @@ Additional spacy:
 pytest - from root 
 python -m pytest
 run individula test - update pytest section
+
+VSCODE
+Note on extra settings from settings.json
