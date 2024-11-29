@@ -31,7 +31,7 @@ def global_value():
 # ----- OUTPUT FILE AND LOCATION -----
 report_date = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 # practically a GUID...
-FILENAME = f"./results/report_{report_date}_{random.randint(1_000_000, 9_999_999)}.csv"
+FILENAME = f"./tests/results/report_{report_date}_{random.randint(1_000_000, 9_999_999)}.csv"
 
 
 # GLOBAL VALUES accessible from request.config.my_global_value in tests

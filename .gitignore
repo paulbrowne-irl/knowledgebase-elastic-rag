@@ -194,3 +194,4 @@ app/settings/token-storage-local.json
 
 #pytest reports
 results/report*.csv
+tests/results/*.csv

@@ -3,17 +3,6 @@
 services:
  
     
-    #(Optional) Web UI for Ollma- and local LLMS
-    openWebUI:
-        image: ghcr.io/open-webui/open-webui:main
-        restart: always
-        ports:
-        - "3000:8080"
-        extra_hosts:
-        - "host.docker.internal:host-gateway"
-        volumes:
-        - open-webui-local:/app/backend/data
-
     #Ollma itself for hosting
     #still need to run from the command line:   docker exec -it ollama ollama run llama3
     ollama:
@@ -25,15 +14,27 @@ services:
         - ollama-local:/root/.ollama
         #command: ollama run llama3.2
 
-    # Portainer is a Web Based Docker Management tool - can be removed
-    portainer:
-       image: portainer/portainer-ce:latest
-       ports:
-       - 9444:9443
-       volumes:
-           - data:/data
-           - /var/run/docker.sock:/var/run/docker.sock
-       restart: unless-stopped
+    # (Optional) Portainer is a Web Based Docker Management tool - can be removed
+    # portainer:
+    #    image: portainer/portainer-ce:latest
+    #    ports:
+    #    - 9444:9443
+    #    volumes:
+    #        - data:/data
+    #        - /var/run/docker.sock:/var/run/docker.sock
+    #    restart: unless-stopped
+
+    #(Optional) Web UI for Ollma- and local LLMS
+    # openWebUI:
+    #     image: ghcr.io/open-webui/open-webui:main
+    #     restart: always
+    #     ports:
+    #     - "3000:8080"
+    #     extra_hosts:
+    #     - "host.docker.internal:host-gateway"
+    #     volumes:
+    #     - open-webui-local:/app/backend/data
+
 
     # if we built our python server  as docker image,
     # running via docker compose meanswe deploy only to run python client

@@ -11,7 +11,7 @@ console = Console()
 
 class Test_Config_Read(unittest.TestCase):
     '''
-     pytest -k Test_Config_Read
+    pytest -k Test_Config_Read
     '''
    
     @classmethod
@@ -25,7 +25,19 @@ class Test_Config_Read(unittest.TestCase):
     def test_read_config(self):
 
         starting_point_dict = config.read_dict("SOURCE_DIRECTORIES")
-        logging.info("Injesting files from root dir(s):"+str(starting_point_dict)+"\n")
+        print("read file:"+str(starting_point_dict)+"\n")
+
+        assert isinstance(starting_point_dict, dict)
+        assert len(starting_point_dict)==2 , "While this number may evolve, config should only return two values (dirs) in dictionary"
+
+    @pytest.mark.xfail
+    def test_read_single_value(self):
+
+        #TODO - need to rwrite test
+
+        starting_point_dict = config.read_dict("SOURCE_DIRECTORIES")
+        print("read file:"+str(starting_point_dict)+"\n")
+
 
 
 if __name__ == '__main__':
