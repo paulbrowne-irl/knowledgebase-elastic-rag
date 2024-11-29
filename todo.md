@@ -8,7 +8,8 @@
 # 0 Alt streams
 
 	* add config notes (from black) to readme add to resolve app/ other import
-	* read and run injest
+
+	* read and run Ingest
 		* Next Small Test on Config running (assertions, check proper setting back) -  pytest -k Test_Config_Read
 
 	* next on service
