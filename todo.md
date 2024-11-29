@@ -8,7 +8,6 @@
 # 0 Alt streams
 
 	* read and run Ingest
-		* Next Small Test on Config running (assertions, check proper setting back) -  pytest -k Test_Config_Read
 
 	* next on service
 		* pytest -k Test_Email_Service running 

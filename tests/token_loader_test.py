@@ -5,7 +5,7 @@ import settings.token_loader as token_loader
 import pytest
 
 
-class Test_Pickle_Loader(unittest.TestCase):
+class Test_Secret_Value_Loader(unittest.TestCase):
    
     @classmethod
     def setUpClass(cls):
@@ -16,7 +16,6 @@ class Test_Pickle_Loader(unittest.TestCase):
 
         #setup test class
 
-    @pytest.mark.skip
     def test_pickle_loader(self):
         token = token_loader.setup_token("some value")
         self.assertIsNotNone(token)
