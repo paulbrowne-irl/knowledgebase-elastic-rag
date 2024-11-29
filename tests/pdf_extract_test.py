@@ -26,11 +26,11 @@ class Test_PDF_File_read(unittest.TestCase):
     def test_read_pdf(self):
 
         #check that we have a pandas dataframe, with one row plus header
-        document_text_1 = extract_pdf.extract_text_info_no_ocr("data-sample/ingest/ie-a-brief-guide-to-forming-a-company.pdf")
+        document_text_1 = extract_pdf.extract_text_info_no_ocr("./data-sample/ingest/sub_dir_1/ie-a-brief-guide-to-forming-a-company.pdf")
         self.assertIsNotNone(document_text_1)
         print(document_text_1)
 
-        document_text_2= extract_pdf.extract_text_info_with_ocr("data-sample/ingest/companyprofile.pdf")
+        document_text_2= extract_pdf.extract_text_info_with_ocr("./data-sample/ingest/sub_dir_1/Pro-Forma-Limited-Company-Constitution.pdf")
         self.assertIsNotNone(document_text_2)
         print(document_text_2)
 

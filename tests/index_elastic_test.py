@@ -19,6 +19,32 @@ class Test_Index_Into_Elastic(unittest.TestCase):
         #setup logging
         logger = logging.getLogger("..")
         logger.setLevel(logging.DEBUG)
+
+    def test_index_word(self):
+
+        test_meta =	{
+            "key1": "value1",
+            "key2": "value2",
+            "key3": 1964
+        }
+
+   
+        #try call
+        index_elastic.index(index_name= "test-can-del",filepath="./data-sample/ingest/sub_dir_2/word_file_sample.docx" ,filecontents="blah blah blah",meta_data=test_meta)
+        # no exception is success - update?
+
+    def test_index_message(self):
+
+        test_meta =	{
+            "key1": "value1",
+            "key2": "value2",
+            "key3": 1964
+        }
+
+   
+        #try call
+        index_elastic.index(index_name= "test-can-del",filepath="./data-sample/ingest/sub_dir_2/sample_test_outlook_email.msg" ,filecontents="blah blah blah",meta_data=test_meta)
+        # no exception is success - update?
     
 
     def test_index_text(self):
