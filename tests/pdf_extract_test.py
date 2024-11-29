@@ -10,7 +10,10 @@ import settings.config as config
 
 import pytest
 
-class Test_File(unittest.TestCase):
+class Test_PDF_File_read(unittest.TestCase):
+    '''
+    pytest -k Test_PDF_File_read
+    '''
    
     @classmethod
     def setUpClass(cls):
@@ -19,19 +22,19 @@ class Test_File(unittest.TestCase):
         logger = logging.getLogger("..")
         logger.setLevel(logging.DEBUG)
     
-    @pytest.mark.skip
+    #@pytest.mark.skip
     def test_read_pdf(self):
 
         #check that we have a pandas dataframe, with one row plus header
-        document_text_1 = extract_pdf.loop_extract_text_info_no_ocr("data-sample/ingest/ie-a-brief-guide-to-forming-a-company.pdf")
+        document_text_1 = extract_pdf.extract_text_info_no_ocr("data-sample/ingest/ie-a-brief-guide-to-forming-a-company.pdf")
         self.assertIsNotNone(document_text_1)
         print(document_text_1)
 
-        document_text_2= extract_pdf.loop_extract_text_info_with_ocr("data-sample/ingest/companyprofile.pdf")
+        document_text_2= extract_pdf.extract_text_info_with_ocr("data-sample/ingest/companyprofile.pdf")
         self.assertIsNotNone(document_text_2)
         print(document_text_2)
 
-    @pytest.mark.skip
+    #@pytest.mark.skip
     def test_read_word(self):
 
         # Extract _extract_text_stats information
@@ -39,14 +42,6 @@ class Test_File(unittest.TestCase):
         self.assertIsNotNone(document_text)
         print(document_text)
 
-    @pytest.mark.skip
-    def test_read_email(self):
-
-        document_text = extract_email.extract_text_info_general("data-sample/ingest/sample_test_outlook_file.msg")
-        self.assertIsNotNone(document_text)
-
-        #check that we have a pandas dataframe, with one row plus header
-        self.fail("Not implemented yet")
 
 if __name__ == '__main__':
     unittest.main()
