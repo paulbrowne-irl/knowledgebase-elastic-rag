@@ -25,7 +25,7 @@ class Test_Email_Service(unittest.TestCase):
 
     def test_generate_email(self):
 
-        email_text="write me an email about dogs"
+        email_text="I am inquirying about the new grant. How much can I claim?5"
         email_drafted= service_email.draft_email_response(email_text)
 
         print(email_drafted)

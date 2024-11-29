@@ -7,8 +7,6 @@
 
 # 0 Alt streams
 
-	* read and run Ingest
-
 	* next on service
 		* pytest -k Test_Email_Service running 
 		* setup service test and add assertions
