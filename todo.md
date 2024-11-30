@@ -5,9 +5,11 @@
 * Multiple, clear use cases using basic architecture   
 * can link to excel or external helpdesk api
 
-# 0 Alt streams
+# 0 Next sprint
 
-	* NEXTl clear kb, update with latest dataset
+	* AIM : simple working day-to-day bot for video and base for iteration
+
+	* NEXT clear kb, update with latest dataset
 		* tune on chunks generates
 
 	* loop and show the vlaues being pulled back
@@ -15,33 +17,38 @@
 		* fine tune prompt
 		* fine tune llm
 		* check redeaction / restore and what local service is storing in "db"
-		* (pytest -k Test_Email_Service running )
 
+	* Outlook bot 
+		* updgrade simple one in pyton
+		* calling api via proxy - test
 
-	* Outlook bot calling api via proxy
-	 
-	* Doc upgrade = add in readme:add
-		* remove older references (to labs)
-
-	* API - create one server with all services
-
-	* test end-to-end (using local Ollama under docker)
 
 	* Doc upgrade
 		* anyting in in readme-add
 		* tidy overall strcuture
+		* screenshot screenlit and make note of use cases
+		* screenshot new api 
+		* remove older references (to labs)
+		* Outlook plugin?
+			* screenshot
+
+	* try build as listed in dockerfile
+		* push to docker hub
+		* list in docker compose for "stable release"
 	
 	* Push to main, release
+		* tag dev candidate
+		* 
 
-
-	*NTH -or move to next
-		* try build as listed in dockerfile
-		* implementproject guidelines - https://docs.python-guide.org/writing/structure/
-		* refactor remove chain factory
-
+	* NTH
+		* script to bring up all servers (streamlist and api)
+			* update to doc
 
 
 # 1 Next Sprint - or move to later
+
+	* refactor remove chain factory
+	* API - create one server with all services
 
 	
 	* NTH - check if Index is there, create automatically if not in ingest.py
