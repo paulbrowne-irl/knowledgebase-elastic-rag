@@ -54,7 +54,7 @@ def proxy_draft_email() -> str:
     print(response_json)
 
     
-    return response
+    return response_json
 
 
 

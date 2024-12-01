@@ -5,23 +5,17 @@
 * Multiple, clear use cases using basic architecture   
 * can link to excel or external helpdesk api
 
-# 0 Next sprint
+# 0 Next sprint - simple working day-to-day bot for video and base for iteration
 
-	* AIM : simple working day-to-day bot for video and base for iteration
-
-	* NEXT clear kb, update with latest dataset
-		* tune on chunks generates
-
-	* loop and show the vlaues being pulled back
-		* fine tune results
-		* fine tune prompt
-		* fine tune llm
-		* check redeaction / restore and what local service is storing in "db"
 
 	* Outlook bot 
-		* updgrade simple one in pyton
-		* calling api via proxy - test
+		* updgrade simple one in python
 
+	* Outlook bot - Scriptlab
+		* calling api via proxy - test
+		* save to gist
+		* doc
+			* reference gist in doc
 
 	* Doc upgrade
 		* anyting in in readme-add
@@ -31,6 +25,18 @@
 		* remove older references (to labs)
 		* Outlook plugin?
 			* screenshot
+		* what in Doc can I move to HOWTO.md
+
+	* Clear Elastic, run ingest with latest dataset
+		* tune on chunks generates
+
+	* loop and show the values being pulled back
+		* fine tune results
+		* fine tune prompt
+		* fine tune llm
+		* check redeaction / restore and what local service is storing in "db"
+
+
 
 	* try build as listed in dockerfile
 		* push to docker hub
@@ -43,12 +49,14 @@
 	* NTH
 		* script to bring up all servers (streamlist and api)
 			* update to doc
+		
 
 
 # 1 Next Sprint - or move to later
 
 	* refactor remove chain factory
 	* API - create one server with all services
+	* tidy vscode - make available as devcontainer
 
 	
 	* NTH - check if Index is there, create automatically if not in ingest.py

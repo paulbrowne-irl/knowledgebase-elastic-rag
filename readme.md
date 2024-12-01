@@ -1,4 +1,4 @@
-# Respond to Emails using Local Knowledge
+# (Almost) Automatic responses to emails Emails using pre-collected Business Knowledge
 
 
 Many organisations/individuals have piles of documents containing valuable information but are little used after their initial creation.
@@ -17,7 +17,6 @@ For obvious reasons only generic code and no information / knowledge is shared -
 * [Running the Ingest Script](#Running-the-Ingest-Script)
 * [Config](#Config)
 * [Running the Application and Bot](#Running-the-Application-and-Bot)
-* [Key folders](#Key-folders)
 
 ## Three main parts to the application: 
 While they are linked, you will typically run only one at a time.
@@ -27,13 +26,13 @@ While they are linked, you will typically run only one at a time.
 1. **App** - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases.
 
 ## Underlying technologies:
-* Choice of Large Language Model (LLM) - either local or Microsoft Copilot.
-* Elastic Search as the Vector search engine, but also "Human Friendly" UI for colleagues to fine-tune the retrieval search results.
+* Choice of Large Language Model (LLM) - either local such as LLAMA or remote (e.g. Microsoft Copilot, OpenAI or Gemini).
+* Elastic Search as the Vector search engine. Docker file gives "Human Friendly" UI (Kibana) for colleagues to fine-tune the retrieval search results.
 * Langchain to integrate the above steps, but also allow for further extensions (choice of more LLMs, more document indexing, varying of steps in the response chain).
 * Python scripts to implement
 * (Optional) Streamlit for a user friendly UI 
 * (Optional) Read / Writes files to Excel 365 - allows for integration with wider Office 365 and Power Automate workflows.
-
+* (Optional) Outlook extension to auto-draft emails.
 
 ## First time Setup
 
@@ -149,54 +148,6 @@ To run the Web Application.
 * App available on http://localhost:8501 
 
 ![Screenshot of Streamlit Web App](images/screenshot.jpg "Screenshot of Web App")
-
-
-
-# Development notes
-
-## Key folders  
-* High level folders
-    * `data-sample` - sample public documents to get you started with the scripts (e.g. Ingest then ask questions against)
-* Main application is in the `app` folder    
-    * `app/cache` [local only] - local only backup of information
-    * `data_share` [local only] - some of the scripts may look to load information from here
-    * `app/langserve` - server and backed creating llm chains and executing them
-    * `app/pages` - sub pages in the webapp
-    * `app/settings` - configuration files
-    * `app/templates` template files for prompts and emails
-    * `app/tests` - unit tests for the application
-    * `app/util` - supporting scripts to implement data extraction, indexing to elastic, language process, reading-writing office files, implemeting RAG. More notes on these in the sub folders.
-
-
-## Running Unit Tests
-To run the Unit tests
-* Open the app folder: `cd app` in a terminal window
-* Activate the Python environment with dependencies you installed earelier: `source venv/bin/activate`
-* Choose which type of test you want to run
-        * single test: `python3 -m unittest tests.index_elastic_test`
-        * all tests: `python3 -m unittest tests`
-
-
-## Background reading and more information
-
-The application draws on many concepts and articles - for example
-* Original source notebook, RAG on Star Wars: 
-    * https://colab.research.google.com/drive/11N01ssHqAXjW5NKJYkwT06V7RXLG4Yin#scrollTo=Sax1r_wW8kec
-    * https://colab.research.google.com/github/elastic/blog-langchain-elasticsearch/blob/main/Notebooks/Privacy_first_AI_search_using_LangChain_and_Elasticsearch.ipynb
-
-Background information and links when developing this project
-* Elastic search blog article : https://www.elastic.co/search-labs/blog/articles/privacy-first-ai-search-langchain-elasticsearch
-* More info (On Langchain) https://python.langchain.com/docs/integrations/vectorstores/elasticsearch
-* https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose (Part 1 of 2)
-* Setup Elasticsearch UI -https://docs.elastic.co/search-ui/tutorials/elasticsearch
-* Kibana API requests - https://www.elastic.co/guide/en/kibana/current/console-kibana.html
-* Elastic Search Getting started - https://www.elastic.co/guide/en/workplace-search/8.7/workplace-search-getting-started.html
-* Search UI with elastic search - 	• https://docs.elastic.co/search-ui/tutorials/elasticsearch
-
-More information on Open Web UI and Ollama
-* https://www.arsturn.com/blog/setting-up-ollama-with-docker-compose-a-complete-guide
-* https://hub.docker.com/r/ollama/ollama
-* https://medium.com/@edu.ukulelekim/how-to-locally-deploy-ollama-and-open-webui-with-docker-compose-318f0582e01f
 
 
 
