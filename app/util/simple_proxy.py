@@ -20,7 +20,7 @@ def do_server_check(url:str=SERVICE_CHECK_URL):
         logging.info("Local server detected")
     except:
         # nothing there
-        logging.warning("\n\nNo server detected - perhaps you need to start the server    uvicorn service.simple_server:app --reload?\n\n")
+        logging.warning("\n\nNo server detected - perhaps you need to start the server    uvicorn service.service_email:app --reload?\n\n")
 
 
 def proxy_draft_email() -> str:

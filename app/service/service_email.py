@@ -8,15 +8,16 @@ from service import rag_factory as rag_factory
 from templates import prompts as prompts
 
 # setup once
-app = FastAPI(title="LangServe Knowledgebase Service")
+app = FastAPI(title="Email Response  Service")
 
 
 '''
 This module provides a server facade
 a) it can be run as a uvicorn fastapi server
 b) it can be called directly by the app and front end bots
+c) Tools (like the Outlook plugin) can access it
 
-Auto generated api docs (on running server) - localhost:8000/docs#/
+Auto generated api docs (on running server) - localhost:8000/docs
 
 '''
 
@@ -29,6 +30,7 @@ def service_check():
 # def test_email(email: str):
 #     return "world "+email
 
+@app.get("/draft_email_response")
 @app.post("/draft_email_response")
 def draft_email_response(email: str):
 
@@ -77,4 +79,4 @@ def draft_email_response(email: str):
 
 # start server when called via command line
 if __name__ == "__main__":
-    uvicorn.run("simple_server:app", host="0.0.0.0", port=8000)    
+    uvicorn.run("service_email:app", host="0.0.0.0", port=8000)    

@@ -8,17 +8,55 @@
 # 0 Next sprint - simple working day-to-day bot for video and base for iteration
 
 
-	* Outlook bot 
-		* updgrade simple one in python
+	* Email bot 
+		* Stub outline based on tmp-Outlook
+			* bring in
+			* delete folder
+		* setup streamlit page with loop
+			* tidy existing
+			* new page
+			* setup PyTest
+				* Google way of pytest stream lit
+			* setup loop on page
+				* Read Config and present on page
+					* starting folder (email box / sub folder)
+					* reply as?
+					* start and end portion of text to send to LLM
+					* Go button
+				* start in config (folders) - for each email
+					* get text from email
+					* do call to llm using text
+					* mark as "done" using category
+					* reply 
+					* do call using text
+					* add text to email
+				* Streamlit logging on screen (to show activity)
+				* Make strealit page screenshot friendly
+				
 
-	* Outlook bot - Scriptlab
-		* calling api via proxy - test
-		* save to gist
-		* doc
-			* reference gist in doc
+
+		* outlook add in wiht streamlit page
+			* Break out instrucionts in tmp-appendix2.docx -> Readme-add (will need new screenshot)
+
+
+
+		* updrade simple one in python - as test client (or just note test in howto?)
+			* PyTest on Uvicorn - https://stackoverflow.com/questions/57412825/how-to-start-a-uvicorn-fastapi-in-background-when-testing-with-pytest/57829525
+
+		* Streamlit
+			* make sure streamlit app is working
+			* make notes of refactor into try standalong client
+				* API "ask a DA question" etc
+			* Stub streamlit "read emails" page
+				* run on start up?
+				* read config
+				* logging to screen?
+
+
 
 	* Doc upgrade
-		* anyting in in readme-add
+		* move folder notes in howto.md into __init__ in each / readme.txt
+		* anything in in readme-add
 		* tidy overall strcuture
 		* screenshot screenlit and make note of use cases
 		* screenshot new api 
@@ -26,6 +64,7 @@
 		* Outlook plugin?
 			* screenshot
 		* what in Doc can I move to HOWTO.md
+			* tidy howto.md
 
 	* Clear Elastic, run ingest with latest dataset
 		* tune on chunks generates
@@ -82,22 +121,27 @@
 
 
 
-# Backlog
-	* Test Bot working again
-	* Unit testable
-	* Try unit test in VSCode of main langchain class with different approaches
+# Backlog 
+
 	* review python docs on bot, app, ingest, rag_controller,
-	* update promot
 	* Later - more tests and other project best practice from https://pytest-cookbook.com/
 	* try spidering web sources
 	* Additional file format index: .txt and .xlsx and .pptx
 	* Look at similar projects (send from firefox) - can we migrate to use that?
-	* Consider filtering on sentences
-	* try out microsoft phi instead of llama
 	* similar client search
 	* decide how to list topics
 	* read info from key excel files (like questions or topics)
 	* nth doc at module level for ingest and others
-	* try out email generation - can I improve the prompt
+
+
+
+# Backlog - Langchain and LLMs
+	* Try unit test in VSCode of main langchain class with different approaches
+	* update prompts - improve email generation
+	* try out microsoft phi instead of llama [search for docker image]	
 	* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
 	
+
+# Future Features
+	* setup code so that it can be called from Power Automate
+	* Chain local and remote LLMs
