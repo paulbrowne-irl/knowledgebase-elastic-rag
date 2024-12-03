@@ -45,7 +45,7 @@ def extract_text_info_with_ocr(filename: str) -> str:
 			# enumerate() "counts" the pages for us.
 
 			# Create a file name to store the image
-            filename = f"{tempdir}\page_{page_enumeration:03}.jpg"
+            filename = f"{tempdir}\\page_{page_enumeration:03}.jpg"
             logging.info("Storing tmp image:"+filename)
 
 			# Declaring filename for each page of PDF as JPG

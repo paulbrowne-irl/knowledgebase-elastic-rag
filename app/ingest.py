@@ -18,8 +18,6 @@ do_pdf_ocr= config.read_boolean("READ_PDF_USING_OCR")
 es_index_name= config.read("ES_INDEX_KB")
 
 
-
-
 def _extract_metadata(configsource: str, fullfilepath: str) -> dict:
     ''' generate a dictionary of metadat based on the information passed in
     * current file name
@@ -176,6 +174,7 @@ if __name__ == '__main__':
 
     # get config
     starting_point_dict = config.read_dict("SOURCE_DIRECTORIES")
+    logging.info("Injesting files from root dir(s):"+str(starting_point_dict)+"\n")
 
     es_index=config.read("ES_INDEX_KB")
    

@@ -1,16 +1,40 @@
 #version: "3" #was 2.2
 
 services:
+ 
+    
+    #Ollma itself for hosting
+    #still need to run from the command line:   docker exec -it ollama ollama run llama3
+    ollama:
+        container_name: ollama #so the above command runs
+        image: ollama/ollama
+        ports:
+        - "11435:11434"
+        volumes:
+        - ollama-local:/root/.ollama
+        #command: ollama run llama3.2
 
-    # Portainer is a Web Based Docker Management tool - can be removed
-    #portainer:
+    # (Optional) Portainer is a Web Based Docker Management tool - can be removed
+    # portainer:
     #    image: portainer/portainer-ce:latest
     #    ports:
-    #    - 9443:9443
+    #    - 9444:9443
     #    volumes:
     #        - data:/data
     #        - /var/run/docker.sock:/var/run/docker.sock
     #    restart: unless-stopped
+
+    #(Optional) Web UI for Ollma- and local LLMS
+    # openWebUI:
+    #     image: ghcr.io/open-webui/open-webui:main
+    #     restart: always
+    #     ports:
+    #     - "3000:8080"
+    #     extra_hosts:
+    #     - "host.docker.internal:host-gateway"
+    #     volumes:
+    #     - open-webui-local:/app/backend/data
+
 
     # if we built our python server  as docker image,
     # running via docker compose meanswe deploy only to run python client
@@ -56,7 +80,7 @@ services:
           timeout: 10s
           retries: 120
           
-    # #Elastic Search management tool
+    # Kibana - Elastic Search management tool
     kibana:
         container_name: kib01
         networks:
@@ -76,3 +100,8 @@ volumes:
     data:
     es-config:
             name: es-config
+            external: true
+    ollama-local:
+        external: false
+    open-webui-local:
+        external: false

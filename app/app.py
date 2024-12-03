@@ -1,5 +1,5 @@
 import streamlit as st
-from lang_server import rag_factory as rag_factory
+from service import rag_factory as rag_factory
 import logging
 
 #Set the Logging level. Change it to logging.INFO is you want just the important info
@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 
-st.header("DA support tools")
+st.header("Email support tools")
 st.caption("for Product and Portfolio Management")
 
 st.markdown(

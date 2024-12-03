@@ -1,6 +1,9 @@
 # Dockerfile to build the server part of the application as a docker image
 # Optional - the server can be run locally via python
 
+# to run this file
+#docker build -t ragservice . --progress=plain 
+
 FROM python:3.10-slim
 
 # Install system-level dependencies for grpcio
@@ -15,10 +18,10 @@ RUN pip install --upgrade pip
 WORKDIR /app_build
 
 # install the python dependcies, but cache libs between builds
-COPY requirements.txt ./
+COPY snapshot-requirements.txt ./
 
 RUN --mount=type=cache,target=/root/.cache \
-    pip --timeout=1000 --no-cache-dir install -r requirements.txt 
+    pip --timeout=1000 --no-cache-dir install -r snapshot-requirements.txt 
 
 COPY . /app_build
     

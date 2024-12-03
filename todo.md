@@ -5,181 +5,128 @@
 * Multiple, clear use cases using basic architecture   
 * can link to excel or external helpdesk api
 
+# 0 Next sprint - simple working day-to-day bot for video and base for iteration
+Tidy Service Outlook -> service
+
+	* Email bot 
+		* Stub outline based on tmp-Outlook -> service with server
+			* bring in to 
+			* delete folder
+
+		* updrade simple one in python - as test client (or just note test in howto?)
+			* PyTest on Uvicorn - https://stackoverflow.com/questions/57412825/how-to-start-a-uvicorn-fastapi-in-background-when-testing-with-pytest/57829525
+
+		* setup streamlit page to call service
+			* setup PyTest
+				* Google way of pytest stream lit
+			# Make strealit page screenshot friendly
+				
+		* delete outlook examples folder
+
+		* stub out more pytests
 
 
-# 0 Alt streams
+		* Streamlit
+			* make sure streamlit app is working (or move to lab)
+			* make notes of refactor into try standalong client
+				* API "ask a DA question" etc
+			* Stub streamlit "read emails" page
+				* run on start up?
+				* read config
+				* logging to screen?
 
 
-	* tidy codebase, push to email bot , Doc
-		* [later] refactor other samples
-		* code up simple proxy
-			* poss refactor of app - no server
-			* poss remove bot (class)
-		* simple email bot using proxy
-		* Complete Doc	
 
-	* NTH - Docker build for stability
-		* try looking at python command (can set working direcotry?) - did that work
-		* try copy into local cache folder
+	* Doc upgrade
+		* move folder notes in howto.md into __init__ in each / readme.txt
+		* anything in in readme-add
+		* tidy overall strcuture
+		* screenshot screenlit and make note of use cases
+		* screenshot new api 
+		* remove older references (to labs)
+		* Outlook plugin?
+			* screenshot
+		* what in Doc can I move to HOWTO.md
+			* tidy howto.md
 
-	* Ollama in docker file for ease of deployment
-		* https://www.arsturn.com/blog/setting-up-ollama-with-docker-compose-a-complete-guide
-		* anything useful (like devcontainers) to bring over?
+	* Clear Elastic, run ingest with latest dataset
+		* tune on chunks generates
 
-# Holdeovers - move to later spring
+	* loop and show the values being pulled back
+		* fine tune results
+		* fine tune prompt
+		* fine tune llm
+		* check redeaction / restore and what local service is storing in "db"
+
+
+
+	* try build as listed in dockerfile
+		* push to docker hub
+		* list in docker compose for "stable release"
+	
+	* Push to main, release
+		* tag dev candidate
+		* 
+
+	* NTH
+		* script to bring up all servers (streamlist and api)
+			* update to doc
+		
+
+
+# 1 Next Sprint - or move to later
+
+	* Automate tests in Github - https://docs.streamlit.io/develop/concepts/app-testing/automate-tests
+
+	* refactor remove chain factory
+	* API - create one server with all services
+	* tidy vscode - make available as devcontainer
+
+	
+	* NTH - check if Index is there, create automatically if not in ingest.py
+		* https://sarahleejane.github.io/learning/python/2015/10/14/creating-an-elastic-search-index-with-python.html
+		* https://towardsdatascience.com/creating-and-managing-elasticsearch-indices-with-python-f676ff1c8113
+
 	* true langserve code
+		* Read Background https://www.datacamp.com/tutorial/deploying-llm-applications-with-langserve
+		* Read 	Blog post - https://blog.langchain.dev/introducing-langserve/
+
+	* extract key terms from document (based on MTU)
+		* https://python.langchain.com/docs/tutorials/classification/
+
 	* read langserve book
-
-
-# 1 Next Sprint - post merge
 	* restore sydney or other copilot
 
-	* Python client - from proxy.py / replaces a lot of lc_controller into fatory
-		* use in all bot sampels
-		* refactor project around this
-		* config (from file - which url to check)
+	* refer to example https://blog.langchain.dev/introducing-langserve/
+	* refer to main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
+	* add doc to key python files (especially app)
 
-	* Separate client and server deploy
-		perhaps a requirements clinet
+	* refactor other bots / app to use client-server example (if needed)
+	
 
 
-	* Update Docs
-		* migrate in docs
-		* refer to example https://blog.langchain.dev/introducing-langserve/
-		* refer to main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
-		* add doc to key python files (especially app)
-		* docker file instructions / alt run locally 
-			* ollama
-			* langserve (from project)
 
-	* merge in main
-		* snapshot release
+# Backlog 
 
-# 1+ Sprint
-
-* Poss outlook bot calling api
-
-# 2nd Sprint
-	* Test Bot working again
-	* Unit testest bed
-	* Try unit test in VSCode of main langchain class with different approaches
-	* sanitze codebase (again) ahead of public release
-	* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
-	* stoplist read from excel - valuable?
-	* review python docs on bot, app, injest, rag_controller,
-	* update promot
-	* add topics
-	* remove dear sir / signed bot
-	* try again syndey / copilot
-
-# 3rd sprint
-	* 3 documents back and use langchain llm to summarize
-	* move to unit testable 
+	* review python docs on bot, app, ingest, rag_controller,
+	* Later - more tests and other project best practice from https://pytest-cookbook.com/
 	* try spidering web sources
-	* eland query summarise kb or other export
 	* Additional file format index: .txt and .xlsx and .pptx
 	* Look at similar projects (send from firefox) - can we migrate to use that?
-	* Consider filtering on sentences
-
-# Later - Iterate
-	* try out microsoft phi instead of llama
-	* [later] map topics to emails / areas of interest
+	* similar client search
 	* decide how to list topics
 	* read info from key excel files (like questions or topics)
-	* [later] sentiment add
-
-* Add from calc_sentiment.py
-	* get topics from emails using injest method
-	* sentiment etc f
-
-* General Improvements
-	* email templates
-	* links in email templates
-	* more filtering based on updated xl
-	* categorisation of emails (to person best able to answer them, based on topics
-	* loop and see if we can improve (langchain)
-	* unit tests running
-
-* Improvements - later NTH
-	* named entities
-	* Topic analysis
-	* ?? Misfiled emails
-	* ?? unanswered emails
-	* POS tagging (counties but other keywords)
-	* Postive or negative sentiment
-	* get list of attached filenames
-	* Emails without a response
-	* Emails filed in the wrong folder
-	* link email in chain (and recognize text)
-	* suggest best email response (to draft?)
-	* tag based on last person to answer client
-
-
-# Improvements - later NTH
-* named entities
-* Topic analysis
-* ?? Misfiled emails
-* ?? unanswered emails
-* POS tagging (counties but other keywords)
-* Postive or negative sentiment
-* LEO / County
+	* nth doc at module level for ingest and others
 
 
 
-## NEXT DO
-* try out email generation - can I improve the prompt
-* similar client search
-* use / demo script and video
-* tidy setup docs
-* nth doc at module level for ingest and others
+# Backlog - Langchain and LLMs
+	* Try unit test in VSCode of main langchain class with different approaches
+	* update prompts - improve email generation
+	* try out microsoft phi instead of llama [search for docker image]	
+	* Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
+	
 
-
-## NEEDED DATA
-* Power BI Datagrab
-* Reindex main docs
-* Index Excel data (wdier)
-* SEF Data:  By Sector / Mediam / Normal discribution / company as outlier
-* run email extract again
-* convert xls to elastic
-
-
-# HOLD SAMPLE - FOR FUTURE INTERATIONS 
-* DA QA - test with questions
-* Setup Alert - create but blanck
-* Similar companies - list out, 
-* OK for now
-* Financials - bring through sample	
-* Email - update prompt
-* Better prompt for generating email
-* some sort of graph of key terms
-* XL streamlit
-* XL indeox - using Eland (find article - C:\Users\pbrowne\projects\local analysis data)
-* sample charts?
-* embed xl 
-* pull in SMART keywords to index
-* how to implmenet filter of data https://python.langchain.com/docs/integrations/vectorstores/elasticsearch
-
-# ITERATE
-* Better Search (by Keywords)
-* NER on incoming datat
-* Better LLM models
-* better table info
-* being load of more relevant info (find)
-* bring in NER and other processing from other project
-* Add Public / Private Switch
-
-# EXPLORE LOOK AT
-* Eland - for datascience 
-* NLP via eland https://www.elastic.co/guide/en/machine-learning/current/ml-nlp-ner-example.html
-* Langchain sample
-
-# CLOSE OUT
-* stub bot api using code
-	* refactor api call code
-* update llm models   
-* try latest docs and test 
-	- load latest data
-	- chje
-* what other data formats to load
-* config to openai
-* drop / reindex single folder or document
+# Future Features
+	* setup code so that it can be called from Power Automate
+	* Chain local and remote LLMs
