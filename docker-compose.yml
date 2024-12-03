@@ -1,0 +1,78 @@
+#version: "3" #was 2.2
+
+services:
+
+    # Portainer is a Web Based Docker Management tool - can be removed
+    #portainer:
+    #    image: portainer/portainer-ce:latest
+    #    ports:
+    #    - 9443:9443
+    #    volumes:
+    #        - data:/data
+    #        - /var/run/docker.sock:/var/run/docker.sock
+    #    restart: unless-stopped
+
+    # if we built our python server  as docker image,
+    # running via docker compose meanswe deploy only to run python client
+    #langserve_docker_image_as_server:
+    #   build:
+    #    context: .
+    #    image: langserve_launch_example:latest
+    #    container_name: langserve_launch_example
+    #    ports:
+    #    - "8001:8001"
+    #    env_file:
+    #    - .env
+    #   networks:
+    #   - mynetwork
+
+    
+    # Core Knowledgement Solution
+    elasticsearch:
+        ports:
+            - 9200:9200
+        stdin_open: true
+        tty: true
+        deploy:
+            resources:
+                limits:
+                    memory: 1GB
+        volumes:
+            - es-config:/usr/share/elasticsearch/config:rw
+        networks:
+            - mynetwork
+        environment:
+            - discovery.type=single-node
+            - xpack.security.enabled=false
+            - xpack.security.http.ssl.enabled=false       
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.15.2
+        healthcheck:
+          test:
+            [
+            "CMD-SHELL",
+            "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'adding index template [logs] for index patterns [logs-*-*]'",
+            ]
+          interval: 10s
+          timeout: 10s
+          retries: 120
+          
+    # #Elastic Search management tool
+    kibana:
+        container_name: kib01
+        networks:
+            - mynetwork
+        ports:
+            - 5601:5601
+        image: docker.elastic.co/kibana/kibana:8.11.4
+        depends_on: 
+          elasticsearch:
+            condition: service_started
+
+
+networks:
+    mynetwork:
+        name: mynetwork
+volumes:
+    data:
+    es-config:
+            name: es-config

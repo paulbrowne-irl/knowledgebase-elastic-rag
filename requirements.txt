@@ -1,0 +1,68 @@
+
+# Project dependencies
+# pip install -r requirements.txt
+
+tf-keras
+#tensorflow
+#torch
+
+streamlit
+beautifulsoup4 
+tqdm 
+requests 
+accelerate
+
+pdf2image
+pypdf2
+pypdf
+pycryptodome
+openpyxl
+docx2txt
+extract-msg
+pytesseract 
+
+
+
+elasticsearch
+sentence_transformers 
+huggingface-hub 
+
+langchain
+langchain_anthropic 
+langchain_community
+langchain_huggingface
+langchain_google_genai
+langchain_ollama
+langchain-openai
+langchain-elasticsearch
+tensorflow
+langserve 
+
+
+pandas
+
+# from langserve
+langchain 
+tiktoken 
+openai 
+fastapi 
+uvicorn 
+pytest 
+pytest-asyncio 
+mypy
+ruff
+black
+syrupy
+sse_starlette 
+starlette>=0.40.0
+
+## Older dependencies - remove after refactor code
+sydney-py
+
+
+## Older dependencies - remove
+# textract==1.6.1 # removed due to conflicts and will not work on windwos
+# Additional Textract install info : https://textract.readthedocs.io/en/stable/
+#configargparse
+#eland 
+#pillow
