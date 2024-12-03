@@ -10,29 +10,14 @@
 
 	* Email bot 
 		* Stub outline based on tmp-Outlook
-			* bring in
+			* bring in to 
 			* delete folder
 		* setup streamlit page with loop
-			* tidy existing
-			* new page
 			* setup PyTest
 				* Google way of pytest stream lit
-			* setup loop on page
-				* Read Config and present on page
-					* starting folder (email box / sub folder)
-					* reply as?
-					* start and end portion of text to send to LLM
-					* Go button
-				* start in config (folders) - for each email
-					* get text from email
-					* do call to llm using text
-					* mark as "done" using category
-					* reply 
-					* do call using text
-					* add text to email
-				* Streamlit logging on screen (to show activity)
-				* Make strealit page screenshot friendly
+			# Make strealit page screenshot friendly
 				
+
 
 
 		* outlook add in wiht streamlit page

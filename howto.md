@@ -13,13 +13,12 @@ This are tasks commonly carried out by Dev and Project Admin.
 * Create Stable Branch
 * Bugfixes
 
-
-
 ## Docker Build
 
 How to create a new docker build
 
 * run build  ## notes in docker file
+* Update these notes ## TODO
 
 
 # Development notes
