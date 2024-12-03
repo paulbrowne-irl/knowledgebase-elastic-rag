@@ -1,3 +1,0 @@
-'''
-Utilities and support files
-'''

@@ -1,3 +1,0 @@
-Sample documents for testing - should be GitHub safe (i.e. no internal docs)
-
-The sample documents are in sub_dir_1 and sub_dir_2 to enable unit testing of ingesting from multiple sources
