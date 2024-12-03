@@ -12,10 +12,11 @@ app = FastAPI(title="Email Response  Service")
 
 
 '''
-This module provides a server facade
-a) it can be run as a uvicorn fastapi server
+This module provides a server facade to auto draft emails
+a) it can be run as a uvicorn fastapi server 
+     uvicorn service.service_email:app 
+
 b) it can be called directly by the app and front end bots
-c) Tools (like the Outlook plugin) can access it
 
 Auto generated api docs (on running server) - localhost:8000/docs
 

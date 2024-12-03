@@ -6,30 +6,28 @@
 * can link to excel or external helpdesk api
 
 # 0 Next sprint - simple working day-to-day bot for video and base for iteration
-
+Tidy Service Outlook -> service
 
 	* Email bot 
-		* Stub outline based on tmp-Outlook
+		* Stub outline based on tmp-Outlook -> service with server
 			* bring in to 
 			* delete folder
-		* setup streamlit page with loop
-			* setup PyTest
-				* Google way of pytest stream lit
-			# Make strealit page screenshot friendly
-				
-
-
-
-		* outlook add in wiht streamlit page
-			* Break out instrucionts in tmp-appendix2.docx -> Readme-add (will need new screenshot)
-
-
 
 		* updrade simple one in python - as test client (or just note test in howto?)
 			* PyTest on Uvicorn - https://stackoverflow.com/questions/57412825/how-to-start-a-uvicorn-fastapi-in-background-when-testing-with-pytest/57829525
 
+		* setup streamlit page to call service
+			* setup PyTest
+				* Google way of pytest stream lit
+			# Make strealit page screenshot friendly
+				
+		* delete outlook examples folder
+
+		* stub out more pytests
+
+
 		* Streamlit
-			* make sure streamlit app is working
+			* make sure streamlit app is working (or move to lab)
 			* make notes of refactor into try standalong client
 				* API "ask a DA question" etc
 			* Stub streamlit "read emails" page
@@ -77,6 +75,8 @@
 
 
 # 1 Next Sprint - or move to later
+
+	* Automate tests in Github - https://docs.streamlit.io/develop/concepts/app-testing/automate-tests
 
 	* refactor remove chain factory
 	* API - create one server with all services

@@ -48,8 +48,8 @@ Note on extra settings from settings.json
 * https://dev.to/rajshirolkar/fastapi-over-https-for-development-on-windows-2p7d
 
 ## update start wtih ssl
-$ uvicorn main:app --port 5000 --ssl-keyfile=./key.pem --ssl-certfile=./cert.pem
-OR uvicorn service.service_email:app --ssl-keyfile=/home/paul/key.pem --ssl-certfile=/home/paul/cert.pem
+
+OR uvicorn service.service_email:app 
 
 ## Older todo - remove
 

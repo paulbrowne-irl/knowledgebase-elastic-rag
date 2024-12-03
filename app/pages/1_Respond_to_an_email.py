@@ -1,6 +1,6 @@
 import streamlit as st
 
-from service import rag_factory as rag_factory
+#from service import rag_factory as rag_factory
 import app as app
 import pages.app_sidebar as app_sidebar
 import templates.prompts
@@ -24,8 +24,8 @@ if 'prompt' not in st.session_state:
 # Main UI
 
 with st.form('my_form'):
-    input_text = st.text_area('Enter text:', 'Dear Sir / Madam, please tell me about the supports you offer engineering companies, sincerely, Ms J Client')
-    submitted = st.form_submit_button('Submit')
+    #input_text = st.text_area('Enter text:', 'Dear Sir / Madam, please tell me about the supports you offer engineering companies, sincerely, Ms J Client')
+    #submitted = st.form_submit_button('Submit')
     
 
     # check we have a link
@@ -36,26 +36,36 @@ with st.form('my_form'):
     tab_answer, tab_context, tab_prompt = st.tabs(["Draft Email", "Context", "Prompt Template"])
 
     #check we need to generate check
-    if submitted:
+    if True: #submitted:
+        
 
-        # Find nearest match documents
-        similar_docs = rag_factory.get_nearest_match_documents(app_sidebar.document_search, input_text)
-   
-        ## Ask Local LLM context informed prompt
-        informed_context= similar_docs[0].page_content
-        llm_chain = rag_factory.get_llm_chain(st.session_state['prompt'])
-        informed_response = llm_chain.run(context=informed_context,question=input_text)
+       	#setup loop on page
+			
+            # Read Config and present on page
+				
+                #starting folder (email box / sub folder)
+					
+                    #reply as?
+					
+                    #start and end portion of text to send to LLM
+					
+                    #Go button
+				
+                # start in config (folders) - for each email
+					
+                    #get text from email
+					# do call to llm using text
+					# mark as "done" using category
+					# reply 
+					# do call using text
+					# add text to email
+				# Streamlit logging on screen (to show activity)
 
-        #update the UI with the answer
-        with tab_answer:
-           st.header('Answer')
-           st.info(informed_response)
-            
-        with tab_context:
-            st.header('Relevant Documents for this answer')
-            st.info(similar_docs)
-            
-        with tab_prompt:
-            st.header('Prompt to the LLM')
-            st.info(st.session_state['prompt'])
+
+
+
+
+
+
+				
                 

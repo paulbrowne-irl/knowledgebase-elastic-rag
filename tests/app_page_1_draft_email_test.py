@@ -19,9 +19,9 @@ class Test_app_page_1(unittest.TestCase):
         logger.setLevel(logging.DEBUG)
     
 
-    def test_page_load(self):
+    def test_page_load_emails(self):
         '''see if we can extract the metadata from a file'''
-        at = AppTest.from_file("../app/app.py").run()
+        at = AppTest.from_file("../app/pages/1_Respond_to_an_email.py").run()
         at.number_input[0].increment().run()
         at.button[0].click().run()
         assert at.markdown[0].value == "Beans counted: 1"
