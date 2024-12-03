@@ -1,9 +1,7 @@
 import streamlit as st
-from service import rag_factory as rag_factory
 import logging
 
 #Set the Logging level. Change it to logging.INFO is you want just the important info
-#logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
 logging.basicConfig(level=logging.INFO)
 
 st.set_page_config(

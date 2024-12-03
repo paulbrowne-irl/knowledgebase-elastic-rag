@@ -5,6 +5,8 @@ import app as app
 import pages.app_sidebar as app_sidebar
 import templates.prompts
 
+import pages.support.page_support_outlook as page_support_outlook
+
 from importlib import reload
 
 
@@ -15,7 +17,7 @@ st.title('Draft a client email')
 reload(app_sidebar)
 
 
-# reload previous prompot
+# reload previous prompt
 if 'prompt' not in st.session_state:
     st.session_state['prompt'] = templates.prompts.TEMPLATE_EMAIL_PROMPT
 
@@ -25,7 +27,7 @@ if 'prompt' not in st.session_state:
 
 with st.form('my_form'):
     #input_text = st.text_area('Enter text:', 'Dear Sir / Madam, please tell me about the supports you offer engineering companies, sincerely, Ms J Client')
-    #submitted = st.form_submit_button('Submit')
+    submitted = st.form_submit_button('Submit')
     
 
     # check we have a link
@@ -36,8 +38,8 @@ with st.form('my_form'):
     tab_answer, tab_context, tab_prompt = st.tabs(["Draft Email", "Context", "Prompt Template"])
 
     #check we need to generate check
-    if True: #submitted:
-        
+    if submitted:
+        page_support_outlook.pseudomain()
 
        	#setup loop on page
 			
@@ -60,12 +62,3 @@ with st.form('my_form'):
 					# do call using text
 					# add text to email
 				# Streamlit logging on screen (to show activity)
-
-
-
-
-
-
-
-				
-                

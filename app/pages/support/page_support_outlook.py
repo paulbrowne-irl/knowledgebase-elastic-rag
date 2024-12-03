@@ -5,39 +5,42 @@ from pandas.core.frame import DataFrame
 import pandas as pd
 
 import win32com.client
+import pythoncom
 import os.path
 
-from openpyxl import Workbook
-from openpyxl import load_workbook
-from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
-
 import settings
+import settings.config as config
 
 counter=0
 
-
+BREAK_AFTER_X_MAILS= config.read_int("BREAK_AFTER_X_MAILS")
+INBOX_NAME=config.read("INBOX_NAME")
 
 
 '''
-Save Dataframe to disk
-'''
-def _save_email(data_frame):
+Supporting Outlook functionality for pages in Streamlit
 
-    print("Saving Dataframe size:"+str(data_frame.size))
-    try:
-        with pd.ExcelWriter(settings.EMAIL_DATA_DUMP,mode='a',if_sheet_exists="replace") as writer:  
-            data_frame.to_excel(writer, sheet_name='Sheet1')
-            print("Flushed Cache to disk")
+Done this way as support helper (and not service) as it needs to run on Windows clinet to access Outlook
+'''
+
+
+# def _save_email(data_frame):
+
+#     print("Saving Dataframe size:"+str(data_frame.size))
+#     try:
+#         with pd.ExcelWriter(settings.EMAIL_DATA_DUMP,mode='a',if_sheet_exists="replace") as writer:  
+#             data_frame.to_excel(writer, sheet_name='Sheet1')
+#             print("Flushed Cache to disk")
         
             
-    except Exception as err:
+#     except Exception as err:
         
-        print ("Error when saving data")
-        print (print(traceback.format_exc()))
-        print ("\n Was attempting to save")
-        print(data_frame.tail(settings.FLUSH_AFTER_X_MAILS))
+#         print ("Error when saving data")
+#         print (print(traceback.format_exc()))
+#         print ("\n Was attempting to save")
+#         print(data_frame.tail(settings.FLUSH_AFTER_X_MAILS))
 
-    return data_frame
+#     return data_frame
 
 
 '''
@@ -64,13 +67,13 @@ def _walk_folder(data_frame,parent_folder,this_folder):
             counter+=1
 
             print("Counter:"+str(counter))
-            if(settings.BREAK_AFTER_X_MAILS>0 and counter>settings.BREAK_AFTER_X_MAILS):
+            if(BREAK_AFTER_X_MAILS>0 and counter>BREAK_AFTER_X_MAILS):
                 print("Breaking ...")
                 return data_frame
             
             #do we need to flush cache to disk?
-            if(counter%settings.FLUSH_AFTER_X_MAILS==0):
-                data_frame = _save_email(data_frame)
+            # if(counter%settings.FLUSH_AFTER_X_MAILS==0):
+            #     data_frame = _save_email(data_frame)
 
             #Filter on mail items only
             if(mail.Class!=43):
@@ -101,7 +104,7 @@ def _walk_folder(data_frame,parent_folder,this_folder):
                         'ReceivedTime':[""+str(mail.ReceivedTime)],
                         'LastModificationTime':[""+str(mail.LastModificationTime)],
                         'Categories':[""+str(mail.Categories)],
-                        'Body':[""+ILLEGAL_CHARACTERS_RE.sub(r'',str(mail.Body))]       #try to resolve erros
+                        'Body':[""+str(mail.Body)]       #try to resolve erros
 
                         })
                 
@@ -125,17 +128,17 @@ def _walk_folder(data_frame,parent_folder,this_folder):
 '''
 Output from Outlook Into Excel
 '''
-def export_email_to_excel(OUTLOOK):
+def save_email_in_table(OUTLOOK):
     
     
     #debugging
     #root_folder = .Folders.Item(1)
     print("Getting handle to outlook");
-    root_folder = OUTLOOK.Folders.Item(settings.INBOX_NAME)
+    root_folder = OUTLOOK.Folders.Item(INBOX_NAME)
 
     #Create data frame and save to disk to wipe any previous values
     df = pd.DataFrame()
-    df.to_excel(settings.EMAIL_DATA_DUMP)
+    #df.to_excel(settings.EMAIL_DATA_DUMP)
 
 
     #Walk folders
@@ -143,7 +146,7 @@ def export_email_to_excel(OUTLOOK):
     new_data = _walk_folder(df,"",root_folder)
 
     #Save the final batch of new data
-    _save_email(new_data)
+    # _save_email(new_data)
 
     #Print a sample of the data
     print("complete - sample data")
@@ -152,24 +155,24 @@ def export_email_to_excel(OUTLOOK):
 
 
 # simple code to run from command line
-if __name__ == '__main__':
+def pseudomain():
     
     ## Module level variables
     counter=0
 
     #Handle TO Outlook, Logs and other objects we will need later
-    OUTLOOK = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+    OUTLOOK = win32com.client.Dispatch("Outlook.Application",pythoncom.CoInitialize())c.GetNamespace("MAPI")
 
     #Set the Logging level. Change it to logging.INFO is you want just the important info
-    logging.basicConfig(filename=settings.LOG_FILE, encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 
     #Set the working directory
-    os.chdir(settings.WORKING_DIRECTORY)
-    print ("\nSet working directory to: "+os.getcwd())
+    #os.chdir("settings.WORKING_DIRECTORY")
+    #print ("\nSet working directory to: "+os.getcwd())
 
     # Carry out the steps to sync excel adn outlook
     # ear_excel.clear_excel_output_file()
-    export_email_to_excel(OUTLOOK)
+    save_email_in_table(OUTLOOK)
     
 
 
