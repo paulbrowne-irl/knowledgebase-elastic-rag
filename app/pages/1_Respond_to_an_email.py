@@ -1,49 +1,61 @@
-import streamlit as st
-
-#from service import rag_factory as rag_factory
 import app as app
-import pages.support.app_sidebar as app_sidebar
-import templates.prompts
-
-import pages.support.page_support_outlook as page_support_outlook
 
 from importlib import reload
 
+import settings.config as config
+import streamlit as st
+
+import pages.support.app_sidebar as app_sidebar
+import pages.support.page_support_outlook as page_support_outlook
+
+
+import templates.prompts
+
+
+
 
 #Window setup
-st.title('Auto Draft a client email :email:')
+st.title('Auto draft email responses :email:')
 
 #Fields on Sidebar
 reload(app_sidebar)
 
+# Config Info we want to echo to the user
+BREAK_AFTER_X_MAILS = config.read_int("BREAK_AFTER_X_MAILS")
+MAILBOX_NAME = config.read("MAILBOX_NAME")
+FOLDER_NAME = config.read("FOLDER_NAME")
 
-# reload previous prompt
-if 'prompt' not in st.session_state:
-    st.session_state['prompt'] = templates.prompts.TEMPLATE_EMAIL_PROMPT
-
-
-email_df = page_support_outlook.loop_through_outlook_emails()
-st.dataframe(data=email_df, width=3600)
+st.markdown(f"Using mailbox account **{MAILBOX_NAME}**, subfolder **{FOLDER_NAME}**. Will pause after **{BREAK_AFTER_X_MAILS}** emails")
 
 
 #############
 # Main UI
 
 with st.form('my_form'):
-    #input_text = st.text_area('Enter text:', 'Dear Sir / Madam, please tell me about the supports you offer engineering companies, sincerely, Ms J Client')
-    submitted = st.form_submit_button('Submit')
-    
+   
 
-    # check we have a link
-    #if not document_search.startswith('All'):
-    #    st.warning('Elastic filtering not implented yet!', icon='⚠')
 
     # Tabs setup
-    tab_answer, tab_context, tab_prompt = st.tabs(["Draft Email", "Context", "Prompt Template"])
+    tab_mails, tab_test, tab_generate_draft = st.tabs([":email: Mails in Inbox", ":test_tube: Test run", ":checkered_flag: Generate Drafts"])
 
-    #check we need to generate check
-    if submitted:
-        pass
+
+    with tab_mails:
+        email_df = page_support_outlook.loop_through_outlook_emails(False)
+        st.dataframe(data=email_df, width=3600)
+
+    with tab_test:
+        email_df = page_support_outlook.loop_through_outlook_emails(True)
+        st.dataframe(data=email_df, width=3600)
+
+    with tab_generate_draft:
+        email_df = page_support_outlook.loop_through_outlook_emails(True, True)
+        st.dataframe(data=email_df, width=3600)
+
+
+
+    #cend of form
+    submitted = st.form_submit_button('Refresh')
+
 
        	#setup loop on page
 			

@@ -16,16 +16,18 @@ BREAK_AFTER_X_MAILS = config.read_int("BREAK_AFTER_X_MAILS")
 MAILBOX_NAME = config.read("MAILBOX_NAME")
 FOLDER_NAME = config.read("FOLDER_NAME")
 
+#Other constants
+DEFAULT_EMAIL_RESPONSE = "This is a default email response while we generate a more appropriate answer"
+
 # Module level variables
 counter = 0
 
 
 '''
 Gather email information from Outlook Into Data frame
+
 '''
-
-
-def loop_through_outlook_emails()->pd.DataFrame:
+def loop_through_outlook_emails(call_llm=True,draft_email=False)->pd.DataFrame:
 
     # Create data frame and save to disk to wipe any previous values
     df = pd.DataFrame()
@@ -42,10 +44,6 @@ def loop_through_outlook_emails()->pd.DataFrame:
     logging.debug("About to walk folder")
     new_data = _walk_folder_gather_email_values(df, "", root_folder)
     
-    # Print a sample of the data
-    #logging.debug("complete - sample data")
-    #logging.debug(new_data)
-
     # release COM Object
     OUTLOOK = None
 
@@ -133,3 +131,23 @@ def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd
     print(f"Data_frame size before return: {data_frame.size}")    
 
     return data_frame
+
+def _draft_response_to_single_email():
+    pass
+
+
+'''
+ simple code to run from command line
+
+ We include this since we *don't* have unit test (it would fail on non Windows non Outlook PC)
+
+'''
+if __name__ == '__main__':
+    #Set the Logging level. Change it to logging.INFO is you want just the important info
+    #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(level=logging.DEBUG)
+
+    #call the main method in this module
+    myBot = Bot_Static()
+    myBot.loop_answer_questions_from_source()
+

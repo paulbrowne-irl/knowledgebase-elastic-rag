@@ -51,16 +51,7 @@ Note on extra settings from settings.json
 
 OR uvicorn service.service_email:app 
 
-## Older todo - remove
+## installing client only
 
-	* Outlook bot - Scriptlab
-		* NEXT: remind myself what python API looks like
-			* notes for doc along the way
-		* calling api via proxy - test
+* requirements-client.txt
 
-		* tidy in scriptlab
-			* doc and notes
-			* error handing
-			* console logging
-			* script
-			* html
