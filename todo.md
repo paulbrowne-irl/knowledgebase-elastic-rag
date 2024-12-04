@@ -10,14 +10,17 @@
 
 * Streamlit clients for email
 
-  * NEXT
-    * resolve issue with named args
-    * Filter list of columns coming back to screen
-
-  * check can respond to email
+  * NEXT - upgrade generated email
+    * Use passed in text
+    * email signature set
+    * reply from (csr email)
 
   * Config and display
     * categories that will be marked as processed
+
+  * Wire in call to LLM
+    * simple clinet for service (and test via main)
+    * call via outlook
 
 
   * Make streamlit page screenshot friendly

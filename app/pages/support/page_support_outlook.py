@@ -162,13 +162,16 @@ def _draft_response_to_single_email(currnet_email_text:str)->str:
 
 def _generate_outlook_draft(OUTLOOK_HANDLE,mail,suggested_new_email_text)->bool:
     logging.info("Would generate email in outlook")
-    reply_draft= mail.Reply()
-    reply_draft.Body = "shortly will be processed!!!"+ reply_draft.Body
+    reply_draft= mail.ReplyAll() # was reply
+    reply_draft.HTMLBody = "shortly will be processed!!!"+ reply_draft.HTMLBody #was bodycls
+    reply_draft.From ="someotheremail@destiny.com"
 
 
     #move to drafts
     OUTLOOK_ROOT_FOLDER = OUTLOOK_HANDLE.Folders.Item(MAILBOX_NAME)
     drafts = OUTLOOK_ROOT_FOLDER.folders("Drafts") #if necessary
+
+    
     reply_draft.Move(drafts)
 
     return True
