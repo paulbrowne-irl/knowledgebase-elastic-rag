@@ -39,7 +39,7 @@ with st.form('my_form'):
 
     #check we need to generate check
     if submitted:
-        page_support_outlook.pseudomain()
+        page_support_outlook.loop_through_outlook_emails()
 
        	#setup loop on page
 			

@@ -6,7 +6,7 @@
 * can link to excel or external helpdesk api
 
 # 0 Next sprint - simple working day-to-day bot for video and base for iteration
-Tidy Service Outlook -> Page support and work through loop on widnwos
+Next - page 1 loop and debug
 
 	* Email bot 
 		* Stub outline based on tmp-Outlook -> service with server

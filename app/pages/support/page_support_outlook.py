@@ -11,11 +11,6 @@ import os.path
 import settings
 import settings.config as config
 
-counter=0
-
-BREAK_AFTER_X_MAILS= config.read_int("BREAK_AFTER_X_MAILS")
-INBOX_NAME=config.read("INBOX_NAME")
-
 
 '''
 Supporting Outlook functionality for pages in Streamlit
@@ -23,161 +18,123 @@ Supporting Outlook functionality for pages in Streamlit
 Done this way as support helper (and not service) as it needs to run on Windows clinet to access Outlook
 '''
 
+# Load config on startup
+BREAK_AFTER_X_MAILS = config.read_int("BREAK_AFTER_X_MAILS")
+MAILBOX_NAME = config.read("MAILBOX_NAME")
 
-# def _save_email(data_frame):
+# Module level variables
+counter = 0
 
-#     print("Saving Dataframe size:"+str(data_frame.size))
-#     try:
-#         with pd.ExcelWriter(settings.EMAIL_DATA_DUMP,mode='a',if_sheet_exists="replace") as writer:  
-#             data_frame.to_excel(writer, sheet_name='Sheet1')
-#             print("Flushed Cache to disk")
-        
-            
-#     except Exception as err:
-        
-#         print ("Error when saving data")
-#         print (print(traceback.format_exc()))
-#         print ("\n Was attempting to save")
-#         print(data_frame.tail(settings.FLUSH_AFTER_X_MAILS))
-
-#     return data_frame
+# Set the Logging level. Change it to logging.INFO is you want just the important info
+logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 
 
 '''
-Walk folder recursively
+Gather email information from Outlook Into Data frame
 '''
-def _walk_folder(data_frame,parent_folder,this_folder):
-    
+
+
+def loop_through_outlook_emails()->pd.DataFrame:
+
+    # Create data frame and save to disk to wipe any previous values
+    df = pd.DataFrame()
+
+    # Get Handle To Outlook
+    logging.debug("Getting handle to outlook")
+    OUTLOOK = win32com.client.Dispatch(
+        "Outlook.Application", pythoncom.CoInitialize()).GetNamespace("MAPI")
+    root_folder = OUTLOOK.Folders.Item(MAILBOX_NAME)
+
+    # Walk folders
+    logging.debug("About to walk folder")
+    new_data = _walk_folder_gather_email_values(df, "", root_folder)
+
+    # Print a sample of the data
+    logging.debug("complete - sample data")
+    logging.debug(new_data)
+
+    # release COM Object
+    OUTLOOK = None
+
+    logging.info("\nComplete\n")
+
+    return new_data
+
+
+'''
+Walk Outlook  folder recursively and extract information into a dataframe
+'''
+def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd.DataFrame:
+
     global counter
-    
+
     # Walk and print folders
     for folder in this_folder.Folders:
-        print (folder.Name)
-        
-        #Do recursive call to walk sub folder
-        data_frame = _walk_folder(data_frame,parent_folder+"::"+folder.Name,folder)
+        logging.debug(folder.Name)
 
-    #Print folder items
+        # Do recursive call to walk sub folder
+        data_frame = _walk_folder_gather_email_values(
+            data_frame, parent_folder+"::"+folder.Name, folder)
+
+    # Print folder items
     folderItems = this_folder.Items
- 
+
     for mail in folderItems:
 
-        try:
-            #Increment the counter and test if we need to break
-            counter+=1
+        # try:
+            # Increment the counter and test if we need to break
+            counter += 1
 
-            print("Counter:"+str(counter))
-            if(BREAK_AFTER_X_MAILS>0 and counter>BREAK_AFTER_X_MAILS):
-                print("Breaking ...")
+            logging.debug("Counter:"+str(counter))
+            if (BREAK_AFTER_X_MAILS > 0 and counter > BREAK_AFTER_X_MAILS):
+                logging.info(f"Breaking after {counter} emails ...")
                 return data_frame
-            
-            #do we need to flush cache to disk?
+
+            # do we need to flush cache to disk?
             # if(counter%settings.FLUSH_AFTER_X_MAILS==0):
             #     data_frame = _save_email(data_frame)
 
-            #Filter on mail items only
-            if(mail.Class!=43):
-                print("Skipping item type:"+str(mail.Class))
+            # Filter on mail items only
+            if (mail.Class != 43):
+                logging.debug("Skipping item type:"+str(mail.Class))
 
             else:
-            
-                ## get multiple values
 
+                # get multiple values
 
-                new_row = pd.DataFrame( {'Parent':[parent_folder],
-                        'Subject':[""+str(mail.Subject)],
-                        'To':[""+str(mail.To)],
-                        'CC':[""+str(mail.CC)],
-                        'Recipients':[""+str(mail.Recipients)],
-                        'RecievedByName':[""+str(mail.ReceivedByName)],
-                        'ConversationTopic':[""+str(mail.ConversationTopic)],
-                        'ConversationID':[""+str(mail.ConversationID)],
-                        'Sender':[""+str(mail.Sender)],
-                        'SenderName':[""+str(mail.SenderName)],
-                        'SenderEmailAddress':[""+str(mail.SenderEmailAddress)],
-                        'attachments.Count':[""+str(mail.attachments.Count)],
-                        'Size':[""+str(mail.Size)],
-                        'ConversationIndex':[""+str(mail.ConversationIndex)],
-                        'EntryID':[""+str(mail.EntryID)],
-                        'Parent':[""+str(mail.Parent)],
-                        'CreationTime':[""+str(mail.CreationTime)],
-                        'ReceivedTime':[""+str(mail.ReceivedTime)],
-                        'LastModificationTime':[""+str(mail.LastModificationTime)],
-                        'Categories':[""+str(mail.Categories)],
-                        'Body':[""+str(mail.Body)]       #try to resolve erros
+                new_row = pd.DataFrame({'Parent': [parent_folder],
+                                        'Subject': [""+str(mail.Subject)],
+                                        'To': [""+str(mail.To)],
+                                        'CC': [""+str(mail.CC)],
+                                        'Recipients': [""+str(mail.Recipients)],
+                                        'RecievedByName': [""+str(mail.ReceivedByName)],
+                                        'ConversationTopic': [""+str(mail.ConversationTopic)],
+                                        'ConversationID': [""+str(mail.ConversationID)],
+                                        'Sender': [""+str(mail.Sender)],
+                                        'SenderName': [""+str(mail.SenderName)],
+                                        'SenderEmailAddress': [""+str(mail.SenderEmailAddress)],
+                                        'attachments.Count': [""+str(mail.attachments.Count)],
+                                        'Size': [""+str(mail.Size)],
+                                        'ConversationIndex': [""+str(mail.ConversationIndex)],
+                                        'EntryID': [""+str(mail.EntryID)],
+                                        'Parent': [""+str(mail.Parent)],
+                                        'CreationTime': [""+str(mail.CreationTime)],
+                                        'ReceivedTime': [""+str(mail.ReceivedTime)],
+                                        'LastModificationTime': [""+str(mail.LastModificationTime)],
+                                        'Categories': [""+str(mail.Categories)],
+                                        # try to resolve erros
+                                        'Body': [""+str(mail.Body)]
 
-                        })
-                
-               
-                data_frame= data_frame.append(new_row,ignore_index=True)
-                #data_frame = pd.merge([data_frame,new_row])
+                                        })
 
-        except Exception as e:
-            print("error when processing item - will continue")
-            print(e)
+                print(new_row)
 
-            
-            #HTMLBody
-            #RTFBody
+                data_frame = pd.concat([data_frame, new_row], ignore_index=True)
+                # data_frame = data_frame.append(new_row, ignore_index=True)
+                # data_frame = pd.merge([data_frame,new_row])
 
+        # except Exception as e:
+        #     logging.error("error when processing item - will continue")
+        #     logging.error(e)
 
     return data_frame
-           
-        
-
-'''
-Output from Outlook Into Excel
-'''
-def save_email_in_table(OUTLOOK):
-    
-    
-    #debugging
-    #root_folder = .Folders.Item(1)
-    print("Getting handle to outlook");
-    root_folder = OUTLOOK.Folders.Item(INBOX_NAME)
-
-    #Create data frame and save to disk to wipe any previous values
-    df = pd.DataFrame()
-    #df.to_excel(settings.EMAIL_DATA_DUMP)
-
-
-    #Walk folders
-    print("About to walk folder");
-    new_data = _walk_folder(df,"",root_folder)
-
-    #Save the final batch of new data
-    # _save_email(new_data)
-
-    #Print a sample of the data
-    print("complete - sample data")
-    print(new_data)
-
-
-
-# simple code to run from command line
-def pseudomain():
-    
-    ## Module level variables
-    counter=0
-
-    #Handle TO Outlook, Logs and other objects we will need later
-    OUTLOOK = win32com.client.Dispatch("Outlook.Application",pythoncom.CoInitialize()).GetNamespace("MAPI")
-
-    #Set the Logging level. Change it to logging.INFO is you want just the important info
-    logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
-
-    #Set the working directory
-    #os.chdir("settings.WORKING_DIRECTORY")
-    #print ("\nSet working directory to: "+os.getcwd())
-
-    # Carry out the steps to sync excel adn outlook
-    # ear_excel.clear_excel_output_file()
-    save_email_in_table(OUTLOOK)
-
-    print("Complete")
-    
-
-
-
-
-
