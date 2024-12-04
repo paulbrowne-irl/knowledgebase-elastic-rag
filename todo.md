@@ -6,123 +6,115 @@
 * Multiple, clear use cases using basic architecture
 * can link to excel or external helpdesk api
 
-# 0 Next sprint - simple working day-to-day bot for video and base for iteration
+## 0 Next sprint - simple working day-to-day bot for video and base for iteration
 
- * Email bot and test
-	* Stub out pyTest on Helper 
-	* basic test of 
-	* 
+* Streamlit clients for email
 
-  * updrade simple one in python - as test client (or just note test in howto?)
-   * PyTest on Uvicorn - https://stackoverflow.com/questions/57412825/how-to-start-a-uvicorn-fastapi-in-background-when-testing-with-pytest/57829525
+  * Config and display
+    * specific folder to read - read from config
+    * categories that will be processed
+  * Check emails being display correctly
+  * check can respond to email
+  * in Dataframe add (with icon - would be processed Y/N)
+  * Add Tabs List emails / respond to emails
+  * Add button "Draft Response to emails"
+  * Make streamlit page screenshot friendly
+    * check other UI Elements
+    * remove other pages (?) or inital tidy
 
-  * setup streamlit page to call service
-   * setup PyTest
+  * PyTest
+    * updrade simple one in python - as test client (or just note test in howto?)
+    * PyTest on Uvicorn - <https://stackoverflow.com/questions/57412825/how-to-start-a-uvicorn-fastapi-in-background-when-testing-with-pytest/57829525>
     * Google way of pytest stream lit
-   * Make strealit page screenshot friendly
-		* 
-    
-  * stub out more pytests on streamlit
-
+    * Stub out pyTest on Helper (??)
+    * stub out more pytests on streamlit
+    * stub out more pytests on helper
 
   * Streamlit
-   * make sure streamlit app is working (or move to lab)
-   * make notes of refactor into try standalong client
-    * API "ask a DA question" etc
-   * Stub streamlit "read emails" page
-    * run on start up?
-    * read config
-    * logging to screen?
+    * make notes of refactor into try standalong client
+    * API "ask a DA question" on other pages
 
-
-
- * Doc upgrade
+* Doc upgrade
   * move folder notes in howto.md into __init__ in each / readme.txt
   * anything in in readme-add
   * tidy overall strcuture
   * screenshot screenlit and make note of use cases
-  * screenshot new api 
+  * screenshot new api
   * remove older references (to labs)
   * Outlook plugin?
-   * screenshot
+  * screenshot
   * what in Doc can I move to HOWTO.md
-   * tidy howto.md
+  * tidy howto.md
 
- * Clear Elastic, run ingest with latest dataset
+* Clear Elastic
+  * run ingest with latest dataset
   * tune on chunks generates
 
- * loop and show the values being pulled back
+* loop and show the values being pulled back
   * fine tune results
   * fine tune prompt
   * fine tune llm
   * check redeaction / restore and what local service is storing in "db"
 
-
-
- * try build as listed in dockerfile
+* try build as listed in dockerfile
   * push to docker hub
   * list in docker compose for "stable release"
- 
- * Push to main, release
+
+* Push to main, release
   * tag dev candidate
-  * 
 
- * NTH
+* NTH
   * script to bring up all servers (streamlist and api)
-   * update to doc
+  * update to doc
   
+## 1 Next Sprint - or move to later
 
-# 1 Next Sprint - or move to later
+* Automate tests in Github - <https://docs.streamlit.io/develop/concepts/app-testing/automate-tests>
 
- * Automate tests in Github - https://docs.streamlit.io/develop/concepts/app-testing/automate-tests
+* refactor remove chain factory
+* API - create one server with all services
+* tidy vscode - make available as devcontainer
 
- * refactor remove chain factory
- * API - create one server with all services
- * tidy vscode - make available as devcontainer
+* NTH - check if Index is there, create automatically if not in ingest.py
+* <https://sarahleejane.github.io/learning/python/2015/10/14/creating-an-elastic-search-index-with-python.html>
+* <https://towardsdatascience.com/creating-and-managing-elasticsearch-indices-with-python-f676ff1c8113>
 
- 
- * NTH - check if Index is there, create automatically if not in ingest.py
-  * https://sarahleejane.github.io/learning/python/2015/10/14/creating-an-elastic-search-index-with-python.html
-  * https://towardsdatascience.com/creating-and-managing-elasticsearch-indices-with-python-f676ff1c8113
+* true langserve code
+* Read Background <https://www.datacamp.com/tutorial/deploying-llm-applications-with-langserve>
+* Read  Blog post - <https://blog.langchain.dev/introducing-langserve/>
 
- * true langserve code
-  * Read Background https://www.datacamp.com/tutorial/deploying-llm-applications-with-langserve
-  * Read  Blog post - https://blog.langchain.dev/introducing-langserve/
+* extract key terms from document (based on MTU)
+* <https://python.langchain.com/docs/tutorials/classification/>
 
- * extract key terms from document (based on MTU)
-  * https://python.langchain.com/docs/tutorials/classification/
+* read langserve book
+* restore sydney or other copilot
 
- * read langserve book
- * restore sydney or other copilot
+* refer to example <https://blog.langchain.dev/introducing-langserve/>
+* refer to main source <https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev>
+* add doc to key python files (especially app)
 
- * refer to example https://blog.langchain.dev/introducing-langserve/
- * refer to main source https://github.com/langchain-ai/langserve-launch-example?ref=blog.langchain.dev
- * add doc to key python files (especially app)
+* refactor other bots / app to use client-server example (if needed)
 
- * refactor other bots / app to use client-server example (if needed)
- 
+## Backlog
 
-# Backlog
+* review python docs on bot, app, ingest, rag_controller,
+* Later - more tests and other project best practice from <https://pytest-cookbook.com/>
+* try spidering web sources
+* Additional file format index: .txt and .xlsx and .pptx
+* Look at similar projects (send from firefox) - can we migrate to use that?
+* similar client search
+* decide how to list topics
+* read info from key excel files (like questions or topics)
+* nth doc at module level for ingest and others
 
- * review python docs on bot, app, ingest, rag_controller,
- * Later - more tests and other project best practice from https://pytest-cookbook.com/
- * try spidering web sources
- * Additional file format index: .txt and .xlsx and .pptx
- * Look at similar projects (send from firefox) - can we migrate to use that?
- * similar client search
- * decide how to list topics
- * read info from key excel files (like questions or topics)
- * nth doc at module level for ingest and others
+## Backlog - Langchain and LLMs
 
-# Backlog - Langchain and LLMs
+* Try unit test in VSCode of main langchain class with different approaches
+* update prompts - improve email generation
+* try out microsoft phi instead of llama [search for docker image]
+* Read and Tweak loading based on this langchain options -<https://python.langchain.com/docs/modules/data_connection/document_transformers/>
 
-	* Try unit test in VSCode of main langchain class with different approaches
- * update prompts - improve email generation
- * try out microsoft phi instead of llama [search for docker image] 
- * Read and Tweak loading based on this langchain options -https://python.langchain.com/docs/modules/data_connection/document_transformers/
- 
+## Future Features
 
-# Future Features
-
-	* setup code so that it can be called from Power Automate
- * Chain local and remote LLMs
+* setup code so that it can be called from Power Automate
+* Chain local and remote LLMs

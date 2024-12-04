@@ -14,6 +14,7 @@ Done this way as support helper (and not service) as it needs to run on Windows 
 # Load config on startup
 BREAK_AFTER_X_MAILS = config.read_int("BREAK_AFTER_X_MAILS")
 MAILBOX_NAME = config.read("MAILBOX_NAME")
+FOLDER_NAME = config.read("FOLDER_NAME")
 
 # Module level variables
 counter = 0
@@ -59,24 +60,26 @@ Walk Outlook  folder recursively and extract information into a dataframe
 '''
 def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd.DataFrame:
 
-    print(f"Data_frame size on entry: {data_frame.size}")
-
     global counter
 
     # Walk and print folders
     for folder in this_folder.Folders:
         logging.debug(folder.Name)
 
-        # Do recursive call to walk sub folder
-        data_frame = _walk_folder_gather_email_values(
-            data_frame, parent_folder+"::"+folder.Name, folder)
+        # Do recursive call to walk sub folder if matches
+        if (folder.Name == FOLDER_NAME):
+            logging.debug(f"Processing folder {folder.Name}")
+            data_frame = _walk_folder_gather_email_values(
+                data_frame, parent_folder+"::"+folder.Name, folder)
+        else:
+            logging.debug(f"Skipping folder {folder.Name}")
 
     # Print folder items
     folderItems = this_folder.Items
 
     for mail in folderItems:
 
-        # try:
+        try:
             # Increment the counter and test if we need to break
             counter += 1
 
@@ -85,9 +88,6 @@ def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd
                 logging.info(f"Breaking after {counter} emails ...")
                 return data_frame
 
-            # do we need to flush cache to disk?
-            # if(counter%settings.FLUSH_AFTER_X_MAILS==0):
-            #     data_frame = _save_email(data_frame)
 
             # Filter on mail items only
             if (mail.Class != 43):
@@ -125,13 +125,11 @@ def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd
                 
 
                 data_frame = pd.concat([data_frame, new_row], ignore_index=True)
-                print(f"Data_frame size: {data_frame.size}")
-                # data_frame = data_frame.append(new_row, ignore_index=True)
-                # data_frame = pd.merge([data_frame,new_row])
 
-        # except Exception as e:
-        #     logging.error("error when processing item - will continue")
-        #     logging.error(e)
+
+        except Exception as e:
+             logging.error("error when processing item - will continue")
+             logging.error(e)
 
     print(f"Data_frame size before return: {data_frame.size}")    
 
