@@ -11,9 +11,9 @@
 * Streamlit clients for email
 
   * Config and display
-    * specific folder to read - read from config
+    * DISPLAY folder to read - read from config
     * categories that will be processed
-  * Check emails being display correctly
+  * NEXT Filter list of columns coming back to screen
   * check can respond to email
   * in Dataframe add (with icon - would be processed Y/N)
   * Add Tabs List emails / respond to emails

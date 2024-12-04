@@ -23,7 +23,7 @@ if 'prompt' not in st.session_state:
 
 
 email_df = page_support_outlook.loop_through_outlook_emails()
-st.dataframe(data=email_df)
+st.dataframe(data=email_df, width=3600)
 
 
 #############

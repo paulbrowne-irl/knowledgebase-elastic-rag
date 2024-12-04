@@ -41,11 +41,10 @@ def loop_through_outlook_emails()->pd.DataFrame:
     # Walk folders
     logging.debug("About to walk folder")
     new_data = _walk_folder_gather_email_values(df, "", root_folder)
-    print(f"Data_frame size after walk: {new_data.size}")
-
+    
     # Print a sample of the data
-    logging.debug("complete - sample data")
-    logging.debug(new_data)
+    #logging.debug("complete - sample data")
+    #logging.debug(new_data)
 
     # release COM Object
     OUTLOOK = None
