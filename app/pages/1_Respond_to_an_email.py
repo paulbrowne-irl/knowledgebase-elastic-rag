@@ -22,6 +22,10 @@ if 'prompt' not in st.session_state:
     st.session_state['prompt'] = templates.prompts.TEMPLATE_EMAIL_PROMPT
 
 
+email_df = page_support_outlook.loop_through_outlook_emails()
+st.dataframe(data=email_df)
+
+
 #############
 # Main UI
 
@@ -39,7 +43,7 @@ with st.form('my_form'):
 
     #check we need to generate check
     if submitted:
-        page_support_outlook.loop_through_outlook_emails()
+        pass
 
        	#setup loop on page
 			

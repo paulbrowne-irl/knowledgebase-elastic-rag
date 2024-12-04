@@ -1,16 +1,9 @@
 import logging
-import traceback
-from pandas.core.frame import DataFrame
 
 import pandas as pd
-
-import win32com.client
 import pythoncom
-import os.path
-
-import settings
 import settings.config as config
-
+import win32com.client
 
 '''
 Supporting Outlook functionality for pages in Streamlit
@@ -25,9 +18,6 @@ MAILBOX_NAME = config.read("MAILBOX_NAME")
 # Module level variables
 counter = 0
 
-# Set the Logging level. Change it to logging.INFO is you want just the important info
-logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
-
 
 '''
 Gather email information from Outlook Into Data frame
@@ -40,7 +30,9 @@ def loop_through_outlook_emails()->pd.DataFrame:
     df = pd.DataFrame()
 
     # Get Handle To Outlook
-    logging.debug("Getting handle to outlook")
+    logging.info(f"Getting handle to Outlook, will try to open Mailbox {MAILBOX_NAME}")
+    logging.info(f"Will Break after email number {BREAK_AFTER_X_MAILS}")
+    
     OUTLOOK = win32com.client.Dispatch(
         "Outlook.Application", pythoncom.CoInitialize()).GetNamespace("MAPI")
     root_folder = OUTLOOK.Folders.Item(MAILBOX_NAME)
@@ -48,6 +40,7 @@ def loop_through_outlook_emails()->pd.DataFrame:
     # Walk folders
     logging.debug("About to walk folder")
     new_data = _walk_folder_gather_email_values(df, "", root_folder)
+    print(f"Data_frame size after walk: {new_data.size}")
 
     # Print a sample of the data
     logging.debug("complete - sample data")
@@ -65,6 +58,8 @@ def loop_through_outlook_emails()->pd.DataFrame:
 Walk Outlook  folder recursively and extract information into a dataframe
 '''
 def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd.DataFrame:
+
+    print(f"Data_frame size on entry: {data_frame.size}")
 
     global counter
 
@@ -127,14 +122,17 @@ def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd
 
                                         })
 
-                print(new_row)
+                
 
                 data_frame = pd.concat([data_frame, new_row], ignore_index=True)
+                print(f"Data_frame size: {data_frame.size}")
                 # data_frame = data_frame.append(new_row, ignore_index=True)
                 # data_frame = pd.merge([data_frame,new_row])
 
         # except Exception as e:
         #     logging.error("error when processing item - will continue")
         #     logging.error(e)
+
+    print(f"Data_frame size before return: {data_frame.size}")    
 
     return data_frame
