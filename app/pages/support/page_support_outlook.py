@@ -17,17 +17,16 @@ MAILBOX_NAME = config.read("MAILBOX_NAME")
 FOLDER_NAME = config.read("FOLDER_NAME")
 
 #Other constants
-DEFAULT_EMAIL_RESPONSE = "This is a default email response while we generate a more appropriate answer"
+DEFAULT_EMAIL_RESPONSE = "Default - email not generated yet"
 
 # Module level variables
 counter = 0
-
 
 '''
 Gather email information from Outlook Into Data frame
 
 '''
-def loop_through_outlook_emails(call_llm=True,draft_email=False)->pd.DataFrame:
+def loop_through_outlook_emails(call_llm=True,outlook_draft_email=False)->pd.DataFrame:
 
     # Create data frame and save to disk to wipe any previous values
     df = pd.DataFrame()
@@ -36,26 +35,31 @@ def loop_through_outlook_emails(call_llm=True,draft_email=False)->pd.DataFrame:
     logging.info(f"Getting handle to Outlook, will try to open Mailbox {MAILBOX_NAME}")
     logging.info(f"Will Break after email number {BREAK_AFTER_X_MAILS}")
     
-    OUTLOOK = win32com.client.Dispatch(
+    OUTLOOK_HANDLE = win32com.client.Dispatch(
         "Outlook.Application", pythoncom.CoInitialize()).GetNamespace("MAPI")
-    root_folder = OUTLOOK.Folders.Item(MAILBOX_NAME)
+    OUTLOOK_ROOT_FOLDER = OUTLOOK_HANDLE.Folders.Item(MAILBOX_NAME)
 
     # Walk folders
     logging.debug("About to walk folder")
-    new_data = _walk_folder_gather_email_values(df, "", root_folder)
+    email_data = _walk_folder_gather_email_values(OUTLOOK_HANDLE,df, "", OUTLOOK_ROOT_FOLDER,call_llm,outlook_draft_email)
     
-    # release COM Object
-    OUTLOOK = None
+    # release COM Objects
+    OUTLOOK_ROOT_FOLDER = None
+    OUTLOOK_HANDLE = None
+
+    # filter the acutal columns we want to display
+    filtered_frame = email_data[['Subject', 'Sender','To','CC','Categories','Body','New Email Text','Outlook Generated Email']]
+
 
     logging.info("\nComplete\n")
 
-    return new_data
+    return filtered_frame
 
 
 '''
 Walk Outlook  folder recursively and extract information into a dataframe
 '''
-def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd.DataFrame:
+def _walk_folder_gather_email_values(OUTLOOK_HANDLE,data_frame:pd.DataFrame, parent_folder:str, this_folder:str,call_llm:bool,outlook_draft_email:bool)->pd.DataFrame:
 
     global counter
 
@@ -66,8 +70,7 @@ def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd
         # Do recursive call to walk sub folder if matches
         if (folder.Name == FOLDER_NAME):
             logging.debug(f"Processing folder {folder.Name}")
-            data_frame = _walk_folder_gather_email_values(
-                data_frame, parent_folder+"::"+folder.Name, folder)
+            data_frame = _walk_folder_gather_email_values(OUTLOOK_HANDLE,data_frame, parent_folder+"::"+folder.Name, folder,call_llm,outlook_draft_email)
         else:
             logging.debug(f"Skipping folder {folder.Name}")
 
@@ -76,7 +79,7 @@ def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd
 
     for mail in folderItems:
 
-        try:
+        # try:
             # Increment the counter and test if we need to break
             counter += 1
 
@@ -92,7 +95,22 @@ def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd
 
             else:
 
-                # get multiple values
+                # generate email response if requested
+                if call_llm==True:
+                    new_email_text=_draft_response_to_single_email(str(mail.Body))
+                else:
+                    new_email_text=DEFAULT_EMAIL_RESPONSE
+
+                # request outlook drafts email if requested
+                if outlook_draft_email==True:
+                    outlook_success= _generate_outlook_draft(OUTLOOK_HANDLE,mail,new_email_text)
+                else:
+                    outlook_success = False
+
+
+
+
+                # get list of emails
 
                 new_row = pd.DataFrame({'Parent': [parent_folder],
                                         'Subject': [""+str(mail.Subject)],
@@ -114,40 +132,48 @@ def _walk_folder_gather_email_values(data_frame, parent_folder, this_folder)->pd
                                         'ReceivedTime': [""+str(mail.ReceivedTime)],
                                         'LastModificationTime': [""+str(mail.LastModificationTime)],
                                         'Categories': [""+str(mail.Categories)],
-                                        # try to resolve erros
-                                        'Body': [""+str(mail.Body)]
+                                        'Body': [""+str(mail.Body)],
+                                        'New Email Text': [new_email_text],
+                                        'Outlook Generated Email':[outlook_success]
 
                                         })
+
+
 
                 
 
                 data_frame = pd.concat([data_frame, new_row], ignore_index=True)
 
 
-        except Exception as e:
-             logging.error("error when processing item - will continue")
-             logging.error(e)
+        # except Exception as e:
+        #      logging.error("error when processing item - will continue")
+        #      logging.error(e)
 
     print(f"Data_frame size before return: {data_frame.size}")    
 
     return data_frame
 
-def _draft_response_to_single_email():
-    pass
 
 
-'''
- simple code to run from command line
+def _draft_response_to_single_email(currnet_email_text:str)->str:
+    logging.info("Would call LLM to generate email response")
 
- We include this since we *don't* have unit test (it would fail on non Windows non Outlook PC)
+    return DEFAULT_EMAIL_RESPONSE
 
-'''
-if __name__ == '__main__':
-    #Set the Logging level. Change it to logging.INFO is you want just the important info
-    #logging.basicConfig(filename=config.read("LOG_FILE"), encoding='utf-8', level=logging.DEBUG)
-    logging.basicConfig(level=logging.DEBUG)
+def _generate_outlook_draft(OUTLOOK_HANDLE,mail,suggested_new_email_text)->bool:
+    logging.info("Would generate email in outlook")
+    reply_draft= mail.Reply()
+    reply_draft.Body = "shortly will be processed!!!"+ reply_draft.Body
 
-    #call the main method in this module
-    myBot = Bot_Static()
-    myBot.loop_answer_questions_from_source()
+
+    #move to drafts
+    OUTLOOK_ROOT_FOLDER = OUTLOOK_HANDLE.Folders.Item(MAILBOX_NAME)
+    drafts = OUTLOOK_ROOT_FOLDER.folders("Drafts") #if necessary
+    reply_draft.Move(drafts)
+
+    return True
+
+
+
+
 

@@ -42,39 +42,23 @@ with st.form('my_form'):
     with tab_mails:
         email_df = page_support_outlook.loop_through_outlook_emails(False)
         st.dataframe(data=email_df, width=3600)
+        submitted_view = st.form_submit_button('Refresh View')
+
 
     with tab_test:
         email_df = page_support_outlook.loop_through_outlook_emails(True)
         st.dataframe(data=email_df, width=3600)
+        submitted_teset = st.form_submit_button('Test Response')
 
     with tab_generate_draft:
         email_df = page_support_outlook.loop_through_outlook_emails(True, True)
         st.dataframe(data=email_df, width=3600)
+        submitted_teset = st.form_submit_button('Generate Draft Emails')
 
 
 
-    #cend of form
-    submitted = st.form_submit_button('Refresh')
+    #send of form
+   
 
 
-       	#setup loop on page
-			
-            # Read Config and present on page
-				
-                #starting folder (email box / sub folder)
-					
-                    #reply as?
-					
-                    #start and end portion of text to send to LLM
-					
-                    #Go button
-				
-                # start in config (folders) - for each email
-					
-                    #get text from email
-					# do call to llm using text
-					# mark as "done" using category
-					# reply 
-					# do call using text
-					# add text to email
-				# Streamlit logging on screen (to show activity)
+  
