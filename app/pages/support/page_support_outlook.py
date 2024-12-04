@@ -161,7 +161,7 @@ def pseudomain():
     counter=0
 
     #Handle TO Outlook, Logs and other objects we will need later
-    OUTLOOK = win32com.client.Dispatch("Outlook.Application",pythoncom.CoInitialize())c.GetNamespace("MAPI")
+    OUTLOOK = win32com.client.Dispatch("Outlook.Application",pythoncom.CoInitialize()).GetNamespace("MAPI")
 
     #Set the Logging level. Change it to logging.INFO is you want just the important info
     logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
