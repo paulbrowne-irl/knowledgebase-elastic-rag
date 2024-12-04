@@ -2,7 +2,7 @@ import streamlit as st
 
 #from service import rag_factory as rag_factory
 import app as app
-import pages.app_sidebar as app_sidebar
+import pages.support.app_sidebar as app_sidebar
 import templates.prompts
 
 import pages.support.page_support_outlook as page_support_outlook
@@ -11,7 +11,7 @@ from importlib import reload
 
 
 #Window setup
-st.title('Draft a client email')
+st.title('Auto Draft a client email :email:')
 
 #Fields on Sidebar
 reload(app_sidebar)

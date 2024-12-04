@@ -6,12 +6,12 @@ logging.basicConfig(level=logging.INFO)
 
 st.set_page_config(
     page_title="Proof of concept",
-    page_icon=":bar_chart:",
+    page_icon=":email:",
 )
 
 
-st.header("Email support tools")
-st.caption("for Product and Portfolio Management")
+st.header("AI Support tools")
+st.caption("for Enterprise Email and Knowledge Management")
 
 st.markdown(
     """

@@ -173,6 +173,8 @@ def pseudomain():
     # Carry out the steps to sync excel adn outlook
     # ear_excel.clear_excel_output_file()
     save_email_in_table(OUTLOOK)
+
+    print("Complete")
     
 
 
