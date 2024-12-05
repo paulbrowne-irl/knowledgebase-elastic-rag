@@ -1,4 +1,13 @@
 
+
+## update day to day run instrauciotns
+* project root # in main
+* docker compose up # background infranstucure
+* cd app
+* uvicorn service.service_email:app
+* check running at
+* open windows client
+
 Notes that need moved into the mainbd readme.md
 
 * Edit / move Bot piece of docs to labs
