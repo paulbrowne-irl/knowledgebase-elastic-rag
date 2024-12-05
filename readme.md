@@ -103,8 +103,8 @@ No screenshot, but also automatically started is the Portainer Web Management fo
 The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
 
 ### Running the Service 
-The scripts provide a simple service to expose a Rest API. To start the server (`simple_server.py`)from the app folder:
-    * `uvicorn service.simple_server:app --reload`
+The scripts provide a simple service to expose a Rest API. To start the server (`service_email.py`)from the app folder:
+    * `uvicorn service.service_email:app --reload`
     * Open a web browser to view the REST api on http://localhost:8001/docs
 
 Note that some other examples (some bots) depend on this server - but should remind you to start it if needed.
