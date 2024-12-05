@@ -1,4 +1,13 @@
 
+
+## update day to day run instrauciotns
+* project root # in main
+* docker compose up # background infranstucure
+* cd app
+* uvicorn service.service_email:app
+* check running at
+* open windows client
+
 Notes that need moved into the mainbd readme.md
 
 * Edit / move Bot piece of docs to labs
@@ -51,16 +60,7 @@ Note on extra settings from settings.json
 
 OR uvicorn service.service_email:app 
 
-## Older todo - remove
+## installing client only
 
-	* Outlook bot - Scriptlab
-		* NEXT: remind myself what python API looks like
-			* notes for doc along the way
-		* calling api via proxy - test
+* requirements-client.txt
 
-		* tidy in scriptlab
-			* doc and notes
-			* error handing
-			* console logging
-			* script
-			* html

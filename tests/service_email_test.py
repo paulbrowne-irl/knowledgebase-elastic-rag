@@ -3,16 +3,15 @@ import unittest
 from pprint import pprint
 
 import pytest
-import service.service_email as service_email
-from langchain_core.documents import Document
+import pages.support.page_support_outlook as page_support_outloo
 from rich.console import Console
 
 console = Console()
 
 
-class Test_Email_Service(unittest.TestCase):
+class Test_Email_Page_support(unittest.TestCase):
     '''
-    pytest -k Test_Email_Service
+    pytest -k Test_Email_Page_support
     '''
    
     @classmethod

@@ -2,7 +2,7 @@ import streamlit as st
 
 from service import rag_factory as rag_factory
 import templates.prompts
-import pages.app_sidebar as app_sidebar
+import pages.support.app_sidebar as app_sidebar
 from importlib import reload
 
 if 'prompt' not in st.session_state:
