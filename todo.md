@@ -8,20 +8,15 @@
 
 ## 0 Next sprint - simple working day-to-day bot for video and base for iteration
 
-* Streamlit clients for email
+* NEXT - Link LLM
 
-  * NEXT - upgrade generated email
-    * Use passed in text
-    * email signature set
-    * reply from (csr email)
-
-  * Config and display
-    * categories that will be marked as processed
+* Clear Elastic
+  * run ingest with latest dataset
+  * tune on chunks generates
 
   * Wire in call to LLM
     * simple clinet for service (and test via main)
-    * call via outlook
-
+    * Outemail gen email Use passed in text
 
   * Make streamlit page screenshot friendly
     * check other UI Elements
@@ -35,10 +30,6 @@
     * stub out more pytests on streamlit
     * stub out more pytests on helper
 
-  * Streamlit
-    * make notes of refactor into try standalong client
-    * API "ask a DA question" on other pages
-
 * Doc upgrade
   * move folder notes in howto.md into __init__ in each / readme.txt
   * anything in in readme-add
@@ -51,9 +42,19 @@
   * what in Doc can I move to HOWTO.md
   * tidy howto.md
 
-* Clear Elastic
-  * run ingest with latest dataset
-  * tune on chunks generates
+* Milestone - "good enough" version for right now
+  * Push to main
+  * Focus on last improvements before 'release'
+  * tag release candidate
+  * branch
+  * setup 'main' vscode project ready to use day-to-day
+
+
+## 1 Hold back from current push as not strictly needed
+
+* NTH ---------------------------
+  * script to bring up all servers (streamlist and api)
+  * update to doc
 
 * loop and show the values being pulled back
   * fine tune results
@@ -65,14 +66,15 @@
   * push to docker hub
   * list in docker compose for "stable release"
 
-* Push to main, release
-  * tag dev candidate
+* Streamlit
+  * make notes of refactor into true standalone client
+  * API "ask a DA question" on other pages
 
-* NTH
-  * script to bring up all servers (streamlist and api)
-  * update to doc
-  
-## 1 Next Sprint - or move to later
+* UI 
+  * Email categories that will be marked as processed
+
+
+## 2 Next Sprint - or move to later
 
 * Automate tests in Github - <https://docs.streamlit.io/develop/concepts/app-testing/automate-tests>
 
