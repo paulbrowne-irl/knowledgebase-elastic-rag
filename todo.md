@@ -10,13 +10,23 @@
 
 * NEXT - Link LLM
 
-* Clear Elastic
-  * run ingest with latest dataset
-  * tune on chunks generates
 
   * Wire in call to LLM
-    * simple clinet for service (and test via main)
-    * Outemail gen email Use passed in text
+	* Python clinet
+		* ## spin up infrasttucutre
+		* ## sping up unicorn
+
+    * NEXT: Outemail gen email Use passed in text
+		* call rest_clinet.py from page_support_outlook.py
+
+  * Basic Outlook tuning - sort
+	* run on multinbox (NTH)
+	* exclude mails from [list]
+	* always cc [list]
+
+  * Update OpenAI to Azure
+	* investigate account
+	* add to config
 
   * Make streamlit page screenshot friendly
     * check other UI Elements

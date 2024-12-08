@@ -7,8 +7,12 @@ from fastapi import FastAPI
 from service import rag_factory as rag_factory
 from templates import prompts as prompts
 
+#setup logging
+logger = logging.getLogger("")
+logger.setLevel(logging.DEBUG)
+
 # setup once
-app = FastAPI(title="Email Response  Service")
+app = FastAPI(title="Email Response Service")
 
 
 '''

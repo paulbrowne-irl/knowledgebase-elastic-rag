@@ -34,7 +34,7 @@ def setup_token(token_name:str)->str:
 
     except Exception:
         
-        logging.debug("Could not find previous token in: "+json_storage_file)
+        logging.warn("Could not find previous token in: "+json_storage_file)
         token = input(f"Please enter the {token_name} token. This will be saved locally in token-storage-local.json:   ")
         token_data[token_name]=token
         output_token=token
