@@ -4,7 +4,7 @@ import pandas as pd
 import pythoncom
 import settings.config as config
 import win32com.client
-import rest_client as rest_client
+import pages.support.rest_client as rest_client
 
 '''
 Supporting Outlook functionality for pages in Streamlit
@@ -49,8 +49,8 @@ def loop_through_outlook_emails(call_llm=True,outlook_draft_email=False)->pd.Dat
     OUTLOOK_HANDLE = None
 
     # filter the acutal columns we want to display
-    filtered_frame = email_data[['Subject', 'Sender','To','CC','Categories','Body','New Email Text','Outlook Generated Email']]
-
+    #filtered_frame = email_data[['Subject', 'Sender','To','CC','Categories','Body','New Email Text','Outlook Generated Email']]
+    filtered_frame = email_data
 
     logging.info("\nComplete\n")
 
@@ -58,7 +58,7 @@ def loop_through_outlook_emails(call_llm=True,outlook_draft_email=False)->pd.Dat
 
 
 '''
-Walk Outlook  folder recursively and extract information into a dataframe
+Walk Outlook folder recursively and extract information into a dataframe
 '''
 def _walk_folder_gather_email_values(OUTLOOK_HANDLE,data_frame:pd.DataFrame, parent_folder:str, this_folder:str,call_llm:bool,outlook_draft_email:bool)->pd.DataFrame:
 

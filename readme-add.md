@@ -4,9 +4,10 @@
 * project root # in main
 * docker compose up # background infranstucure
 * cd app
-* uvicorn service.service_email:app
+* uvicorn service.service_email:app (from app folder)
 * check running at
-* open windows client
+* open windows client - streamlit run app.py (from app folder on windows)
+
 
 Notes that need moved into the mainbd readme.md
 
