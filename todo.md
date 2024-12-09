@@ -17,6 +17,7 @@
     * -- spin up unicorn
 
     * NEXT: Test run
+      * try rest client test (and explore more about json response)
       * fix json response (in RestClient)
       * fix Reply all
 
