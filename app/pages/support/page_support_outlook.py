@@ -32,6 +32,10 @@ def loop_through_outlook_emails(call_llm=True,outlook_draft_email=False)->pd.Dat
     # Create data frame and save to disk to wipe any previous values
     df = pd.DataFrame()
 
+    # reset counter to 0 for this loop
+    global counter
+    counter =0
+
     # Get Handle To Outlook
     logging.info(f"Getting handle to Outlook, will try to open Mailbox {MAILBOX_NAME}")
     logging.info(f"Will Break after email number {BREAK_AFTER_X_MAILS}")
@@ -159,8 +163,8 @@ def _walk_folder_gather_email_values(OUTLOOK_HANDLE,data_frame:pd.DataFrame, par
 def _generate_outlook_draft(OUTLOOK_HANDLE,mail,suggested_new_email_text)->bool:
     logging.info("Would generate email in outlook")
     reply_draft= mail.ReplyAll() # was reply
-    reply_draft.HTMLBody = "shortly will be processed!!!"+ reply_draft.HTMLBody #was bodycls
-    reply_draft.From ="someotheremail@destiny.com"
+    reply_draft.HTMLBody = suggested_new_email_text+ reply_draft.HTMLBody #was bodycls
+    #reply_draft.From ="someotheremail@destiny.com"
 
 
     #move to drafts

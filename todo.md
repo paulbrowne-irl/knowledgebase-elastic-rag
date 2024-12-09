@@ -12,11 +12,14 @@
 
 
   * Wire in call to LLM
-	* Python clinet
-		* ## spin up infrastructure
-		* ## spin up unicorn
+	* Python client
+    * -- spin up infrastructure
+    * -- spin up unicorn
 
     * NEXT: Test run
+      * fix json response (in RestClient)
+      * fix Reply all
+
 
   * Basic Outlook tuning - sort
 	* run on multinbox (NTH)

@@ -14,11 +14,11 @@ def call_rest_to_get_email_draft(prompt_email:str) -> str:
     payload = {'email': prompt_email}
 
     resp = requests.get(END_POINT, params=payload)
-    resp_json= resp.json()
+    #resp_json= resp.json()
+    #returnvalue = resp_json["suggested_text"]
+    returnvalue = resp.text
 
-    #logging.debug(resp.text)
-
-    return resp_json["suggested_text"]
+    return returnvalue
 
 
 '''
