@@ -6,7 +6,7 @@ import requests
 import settings.config as config
 
 
-def call_rest_to_get_email_start(prompt_email:str) -> str:
+def call_rest_to_get_email_draft(prompt_email:str) -> str:
 
     END_POINT = config.read("DRAFT_EMAIL_END_POINT")
     logging.info(f"Using Endpoint {END_POINT}")
@@ -40,4 +40,4 @@ if __name__ == '__main__':
 
 
 
-    logging.info(call_rest_to_get_email_start("Is it getting better, or do you feel the same?"))
+    logging.info(call_rest_to_get_email_draft("Is it getting better, or do you feel the same?"))

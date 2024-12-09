@@ -8,6 +8,9 @@ This are tasks commonly carried out by Dev and Project Admin.
 * run automatic tests
 * manual tests - see anything
 * pip freeze requirements.txt
+* check configuraiton 
+  * (using right LLM)
+  * running x mails at a time?
 * Update Docker file
 * Tag on Github
 * Create Stable Branch

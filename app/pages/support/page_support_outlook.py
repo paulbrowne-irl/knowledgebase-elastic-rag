@@ -4,6 +4,7 @@ import pandas as pd
 import pythoncom
 import settings.config as config
 import win32com.client
+import rest_client as rest_client
 
 '''
 Supporting Outlook functionality for pages in Streamlit
@@ -97,7 +98,8 @@ def _walk_folder_gather_email_values(OUTLOOK_HANDLE,data_frame:pd.DataFrame, par
 
                 # generate email response if requested
                 if call_llm==True:
-                    new_email_text=_draft_response_to_single_email(str(mail.Body))
+                    new_email_text=rest_client.call_rest_to_get_email_draft(str(mail.Body))
+                    
                 else:
                     new_email_text=DEFAULT_EMAIL_RESPONSE
 
@@ -153,12 +155,6 @@ def _walk_folder_gather_email_values(OUTLOOK_HANDLE,data_frame:pd.DataFrame, par
 
     return data_frame
 
-
-
-def _draft_response_to_single_email(currnet_email_text:str)->str:
-    logging.info("Would call LLM to generate email response")
-
-    return DEFAULT_EMAIL_RESPONSE
 
 def _generate_outlook_draft(OUTLOOK_HANDLE,mail,suggested_new_email_text)->bool:
     logging.info("Would generate email in outlook")
