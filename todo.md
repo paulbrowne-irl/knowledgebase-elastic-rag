@@ -13,11 +13,10 @@
 
   * Wire in call to LLM
 	* Python clinet
-		* ## spin up infrasttucutre
-		* ## sping up unicorn
+		* ## spin up infrastructure
+		* ## spin up unicorn
 
-    * NEXT: Outemail gen email Use passed in text
-		* call rest_clinet.py from page_support_outlook.py
+    * NEXT: Test run
 
   * Basic Outlook tuning - sort
 	* run on multinbox (NTH)
