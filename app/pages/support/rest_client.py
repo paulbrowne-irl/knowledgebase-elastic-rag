@@ -16,7 +16,7 @@ def call_rest_to_get_email_draft(prompt_email:str) -> str:
     resp = requests.get(END_POINT, params=payload)
     #resp_json= resp.json()
     #returnvalue = resp_json["suggested_text"]
-    returnvalue = resp.text
+    returnvalue = resp.text()
 
     return returnvalue
 
