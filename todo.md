@@ -10,30 +10,40 @@
 
 * NEXT - Link LLM
 
-
+  * First pass at release
+  
   * Wire in call to LLM
-	* Python client
-    * -- spin up infrastructure
-    * -- spin up unicorn
+    * Python services
+    * -- spin up infrastructure (Docker compose)
+    * -- spin up unicorn (Python on Bash)
 
-    * NEXT: Test run
-      * try rest client test (and explore more about json response)
-      * fix json response (in RestClient)
-      * fix Reply all
-
+    * NEXT: Test run Windows / Outlook client
+      * try rest client test 
+        * try move to POST format
+      * New Class to parse format
+        * Unit test
+        * copy existing format  
+        * url decode
+      
+      * test each different llm
+        * see if can get format back - hardcode to pickle
+        * use pickle to test if can handle
+        * remove test code
 
   * Basic Outlook tuning - sort
-	* run on multinbox (NTH)
-	* exclude mails from [list]
-	* always cc [list]
+  * fix Reply all (possible to set from?)
+    * run on multinbox (NTH)
+    * exclude mails from [list]
+    * always cc [list]
 
   * Update OpenAI to Azure
-	* investigate account
-	* add to config
+   	* investigate account
+   	* add to config
 
   * Make streamlit page screenshot friendly
     * check other UI Elements
     * remove other pages (?) or inital tidy
+    * video demo
 
   * PyTest
     * updrade simple one in python - as test client (or just note test in howto?)
@@ -62,7 +72,6 @@
   * branch
   * setup 'main' vscode project ready to use day-to-day
 
-
 ## 1 Hold back from current push as not strictly needed
 
 * NTH ---------------------------
@@ -83,9 +92,8 @@
   * make notes of refactor into true standalone client
   * API "ask a DA question" on other pages
 
-* UI 
+* UI
   * Email categories that will be marked as processed
-
 
 ## 2 Next Sprint - or move to later
 
