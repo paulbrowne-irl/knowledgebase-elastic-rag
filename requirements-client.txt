@@ -1,0 +1,7 @@
+
+# Project dependencies - a more minimal version if you are looking to run the clinet only
+# pip install -r requirements-client.txt
+
+streamlit
+pytest
+pywin32c

@@ -11,7 +11,7 @@ try:
     document_search = st.sidebar.selectbox( 'Source Information', ('knowledge_base','Other Source not yet set'))
 
     # POC reminder
-    st.sidebar.info("Proof of concept")
+    st.sidebar.info("Initial Deployment")
 
 except st.errors.DuplicateWidgetID:
-    print ("Ignoring intial duplicate error")
+    print ("Sidebar - Ignoring initial duplicate error")

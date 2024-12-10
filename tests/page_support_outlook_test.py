@@ -3,16 +3,15 @@ import unittest
 from pprint import pprint
 
 import pytest
-import service.service_email as service_email
-from langchain_core.documents import Document
+import pages.support.page_support_outlook as page_support_outlook
 from rich.console import Console
 
 console = Console()
 
 
-class Test_Email_Service(unittest.TestCase):
+class Test_Email_Page_support(unittest.TestCase):
     '''
-    pytest -k Test_Email_Service
+    pytest -k Test_Email_Page_support
     '''
    
     @classmethod
@@ -26,7 +25,7 @@ class Test_Email_Service(unittest.TestCase):
     def test_generate_email(self):
 
         email_text="I am curious about the new grant. How much can I claim and how it will it help me develop my business in international markets?"
-        email_drafted= service_email.draft_email_response(email_text)
+        email_drafted= page_support_outlook.draft_email_response(email_text)
 
         print(email_drafted)
 
