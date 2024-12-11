@@ -10,8 +10,15 @@
 
 * NEXT - Link LLM
 
+
   * First pass at release
     * Mark and integrate ???
+	* read and edit
+	* tidy of howto.md
+	* tidy of todo.md
+	  * another read through
+	  * update outlook section with screenshots
+	* Pull in video
   
   * Wire in call to LLM
     * Python services

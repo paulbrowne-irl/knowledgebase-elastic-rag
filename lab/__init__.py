@@ -1,5 +1,4 @@
 '''
-Scripts to ingest from other sources - not fully integrated (yet) into app
-
-
+Previous experiements that might be useful again in the future.
+Not fully integrated (yet) into app
 '''

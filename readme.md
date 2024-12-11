@@ -1,125 +1,80 @@
 #  Automatic answer emails using pre-collected Business Knowledge (keeping Human-in-loop)
 
-
 Many organisations/individuals have piles of documents containing valuable information but are little used after their initial creation.
 
-"RAG" techniques allow you and colleagues to have conversations with these documents - allowing you to combine the accuracy of the documents and the "chattiness" of AIs like ChatGPT. More backgound to RAG in the links at the end of this page.
+*RAG* techniques allow you and colleagues to have conversations with these documents - allowing you to combine the accuracy of the documents and the "chattiness" of AIs like ChatGPT. More backgound to RAG in the links at the end of this page.
 
-This project is code to implement a pilot RAG Chatbot in a not for profit VC. Given the community nature of the organisation (and the out-of-hours development) it is shared for reuse. It focuses on answering internal corporate queries (i.e. managing sensitive data, but also leveraging on a human-in-the-loop to both filter answers and provide feedback to learn) 
+This project is code to implement a pilot RAG Chatbot in a not for profit VC. Given the community nature of the organisation (and the out-of-hours development) it is shared for reuse. It focuses on answering internal corporate queries (i.e. managing sensitive data, but also leveraging on a human-in-the-loop to both filter answers and provide feedback to learn).
 
-For obvious reasons only generic code and no information / knowledge is shared - this has the benefit of you being able to add your own documents. See instructions below.
+It is our experience that 90% of business and public sector knowledge sharing environments will have similar requirements; this code is being shared as a starter pack to share best practice.
 
-<img src="images/screenshot.jpg" width="40%" />
 
-## Key sections in this guide ???
-* [Setup](#Setup)
-* [Starting the background infrastructure](#Starting-the-background-infrastructure)
-* [Running the Ingest Script](#Running-the-Ingest-Script)
+<img src="images/screenshot.jpg" width="50%" />
+
+### Keeping information Confidential by default
+
+For obvious reasons only generic code and no information / knowledge is shared in this GitHub project. This has the benefit of you being able to add only your own documents when you run your secure local copy. Other key project features with confidentiality in mind:
+
+* Information is stored locally by default in Elastic Search
+* LLM (Lllama) runs locally (with options to use other remote LLMs)
+* Confidential information redacted before sending to LLM (see setting in config file is you wish to turn this off)
+
+To further limit exposure, we recommend care in ingesting *only* emails and documents that have already been sent externally. Since the project is open source, you can fully audit the code before use.
+
+## Key sections in this guide 
+* [First Time Setup](#First-Time-Setup)
 * [Config](#Config)
-* [Running the Application and Bot](#Running-the-Application-and-Bot)
-
-## Work these into main body ???
-
-
-
-## update day to day run instructions ???
-* project root # in main
-* docker compose up # background infranstucure
-* cd app
-* uvicorn service.service_email:app (from app folder)
-* check running at
-* open windows client - streamlit run app.py (from app folder on windows)
+* [Starting the background layers](#Starting-the-background-layers)
+* [Ingesting key knowledge into the system](#Running-the-Ingest-Script)
+* [Asking / Answering key questions using the Web App, Email response, and Bot](#Running-the-Application-and-Bot)
 
 
-Notes that need moved into the mainbd readme.md
-
-* Edit / move Bot piece of docs to labs
-
-* service API docs addd
-    http://localhost:8000/docs
-    include image screenshot-api.png
-
-
-## Confidentiality of info ???
-
-* Info stored locally
-* LLM (Lllama) runs locally
-* information redacted (see setting in config file is you wish to turn this off)
-* Even with these precautions, probably better to injest *only* emails that ahve gone externally - since these have some exposure to the internet
-
-
-## troubleshooting ???
-Additional spacy:
-* python -m spacy download en_core_web_sm
-* python -m spacy download en_core_web_sm
-
-#TODO - how to download
-
-pytest - from root 
-python -m pytest
-run individula test - update pytest section
-
-
-
-
-
-# OLDER BRANCH - POSSIBLE REMOVE to lab
-
-* Note current snapshot of outlook plugin saved in GIST
-
-## Outlook Extension - script lab
-
-* Where to get from (link to Gist) - currently https://gist.github.com/paulbrowne-irl/dfe5e10bfe46182cf273217ae001b0de
-* how to install scriptlab
-* how to pin
-* how to save (copy to clipboard - update Gitst)
-
-## SSL Certs
-* https://github.com/FiloSottile/mkcert
-* https://dev.to/rajshirolkar/fastapi-over-https-for-development-on-windows-2p7d
-
-## update start wtih ssl
-
-OR uvicorn service.service_email:app 
-
-## installing client only ???
-
-* requirements-client.txt
-
-## Three main parts to the application: 
-While they are linked, you will typically run only one at a time.
+## Three main functions of the the application: 
+While they are linked, you will typically run only one function at a time.
 1. **Ingest** - load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
 1. **Bots** - Answer questions passed to it (to /from Excel) using RAG techniques. Designed to be used as part of Power Automate or other automatic workflow.
-    * Sometimes these bots will depending on the REST server - but they will remind you to start it if needed
 1. **App** - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases.
 
 ## Underlying technologies:
-* Choice of Large Language Model (LLM) - either local such as LLAMA or remote (e.g. Microsoft Copilot, OpenAI or Gemini).
-* Elastic Search as the Vector search engine. Docker file gives "Human Friendly" UI (Kibana) for colleagues to fine-tune the retrieval search results.
-* Langchain to integrate the above steps, but also allow for further extensions (choice of more LLMs, more document indexing, varying of steps in the response chain).
-* Python scripts to implement
-* (Optional) Streamlit for a user friendly UI 
-* (Optional) Read / Writes files to Excel 365 - allows for integration with wider Office 365 and Power Automate workflows.
-* (Optional) Outlook extension to auto-draft emails.
+* Choice of Large Language Model (LLM) - either local such as LLAMA or remote (e.g. Microsoft Copilot, OpenAI or Gemini from Google).
+* Elastic Search as the Vector search engine. 
+* Docker file gives "Human Friendly" UI (Kibana) for colleagues to fine-tune the Elastic search results.
+* Langchain to integrate the above steps. Langhchain also allows for further extensions (choice of more LLMs, more document indexing, varying of steps in the response chain).
+* Python scripts to implement, allowing for easy modificiation.
+* Streamlit for a user friendly UI 
+* Optional
+  * Read / Writes files to Excel 365 - allows for integration with wider Office 365 and Power Automate workflows.
+  * Outlook extension to auto-draft emails.
+
+## Configuration
+* The main confirmation file is  in `app/config/config.conf` . This config file is shared for the ingest script, the Bot and the Application. Please edit this using the notes in the `app/config` folder to customize configuration. 
+* Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation of these tools to retrieve these. 
+* The script will ask you for these tokens and store them locally. This is a plain text json file(`token-storage-local.json`). While it is excluded from git, you may wish to review who has access to it locally as it will store sensitive information.
+
 
 ## First time Setup
 
-Instructions for first time setup of the project:
-1. Checkout / download this project as a folder onto the host computer
+To setup the project on your local machine, then run for the first time:
+1. Checkout / download the project as a folder onto the host computer from the source https://github.com/paulbrowne-irl/knowledgebase-elastic-rag
 
-1. Install Docker - standard install (either Docker Desktop, or via WSL-Ubuntu).You may also need to install the docker-compose plugin
-    * https://docs.docker.com/engine/install/ubuntu/
-    * For most systems this is `sudo apt install docker.io` and docker compose `sudo apt-get install docker-compose-plugin`
+1. Install Docker - standard install (either Docker Desktop, or via WSL-Ubuntu) from https://docs.docker.com/engine/install/ubuntu/
+    * You will also need to install the docker-compose plugin
+    * For most systems this is `sudo apt install docker.io` , then install docker compose `sudo apt-get install docker-compose-plugin`
 
 1. Install Python (3.12 or higher) in the usual way. Python `pip` and `virtualenv` tools are also needed.
-    * check first what version you have installed using `python -V`
 
 1. Install Python dependencies - in a terminal window, at the project root
     * Create virtual environment: `virtualenv venv`
     * Activate virtual environment: `source venv/bin/activate`
     * Install Python dependencies for this environment: `pip install -r requirements.txt`
 
-1. Using a Local LLM - first time setup
+1.  Install Python dependencies - Client Only (Optional) 
+    * The project is split into a REST Server, and a minimal client (e.g. for creating outlook emails locally using Win32 calls on Windows)
+    * It is sometimes easier to install *only* the minimum Python Dependencies on windows
+    * In this case, follow the above instructions on the Windows machine, usng the `requirements-client.txt` file instead. 
+    * The specifc commans to install the Python Virtual Environment will differ slightly on windows.
+
+1. Setting up the Local LLM - if needed
     * The config file gives the option of passing questions a *private* local LLM using Ollama (e.g. Llama 3.2 from Meta). The Docker file can help you run this local LLM.
         * Check the `docker-compose.yml` file so that the "Ollama" and "OpenWebUI" are not commented out.
         * OpenWebUI is optional , but provides a useful web interface on http://localhost:3000
@@ -130,26 +85,18 @@ Instructions for first time setup of the project:
 
 1. Setup index in Elastic (first time only):
     * Start Elastic (using `docker compose up` from the root folder of the project.
-    * Open Kibana (see notes below)
-    * Setup indices - open this page  http://localhost:5601/app/management/data/index_management/indices
+    * Open Kibana to manage the Elastic Index - http://localhost:5601/app/management/data/index_management/indices
+    * Setup indices 
         * `test-can-del` - used by unit tests
         * `knowledge_base` - the main index used to store documents
-    * Useful commands (in the dev console window of Kibana)
-        * Delete an index  `DELETE /knowledge_base`
-        * Create an index `PUT /knowledge_base`
 
 
 It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed), please refer to the Elastic / Kibana home page for instructions - https://www.elastic.co/
 
-## Configuration
-* The main confirmation file is  in `app/config/config.conf` 
-    * Please edit this or see the notes in the `app/config` folder to customize configuration. 
-    * This config file is shared for the ingest script, the Bot and the Application.
-* Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation to retrieve these. The script will ask you for these and store locally. This is a plain text json file(`token-storage-local.json`). While it is excluded from git, you may wish to review how has access to it.
 
 # Running the application
 
-## Starting the background infrastructure
+## Starting the background layers
 
 A Docker compose file is provided to make it easy to download and run the supporting infrastructure (e.g. the Elastic Search engine). To start this Infrastructure using Docker:
 * Open a (new) terminal window, navigate to home folder containing docker-compose.yml
@@ -157,31 +104,39 @@ A Docker compose file is provided to make it easy to download and run the suppor
 
 You can check if the Elastic Search Service is running using the url http://localhost:9200/. You should see a success message similar to the screenshot below.
 
-![Screenshot of ElasticSearch API - use to check if service is working](images/es-screenshot-port-9200.png "Screenshot of ElasticSearch API - use to check if service is working")
+<img src="images/es-screenshot-port-9200.png " width="50%" />
 
 The Kibana App runs on top of Elastic and allows you to create indexs to store and search data. It is also useful in fine-tuning the searches so that we can pass more relevant documents as a prompt to the large language model. Kibana (Elastic Search Management tool) available on http://localhost:5601
 
-![Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase](images/kibana`index`management.png "Screenshot of Kibana Tools - used to create, manage, tune searches in the Knowledgebase") 
+<img src="images/kibana_index_management.png" width="70%" />
+
 
 No screenshot, but also automatically started is the Portainer Web Management for Docker, available at https://localhost:9443 . This can safely be commented out in the docker-compose file if this is not needed.
 
 
-## Running the Application and Bot
 
-The application is a UI, easier to use. The Bot is semi-automatic and does many of the same things, but as part of a process flow
+## Running the Application
+
+The application is a UI, easier to use. Bots are semi-automatic and does many of the same things, but as part of a process flow. Both rely on the REST API exposed by the service.
 
 ### Running the Service 
 The scripts provide a simple service to expose a Rest API. To start the server (`service_email.py`)from the app folder:
-    * `uvicorn service.service_email:app --reload`
-    * Open a web browser to view the REST api on http://localhost:8001/docs
+* `uvicorn service.service_email:app --reload`
+* Open a web browser to view the REST api on http://localhost:8001/docs . In some configurations this may run on port 8000 instead,
 
-Note that some other examples (some bots) depend on this server - but should remind you to start it if needed.
+Note that some other examples (some bots) depend on this server - but should remind you to start it if needed (either a friendly reminder, or an error message that it cannot connect to server)
+
+
+<img src="images/screenshot-api.png" width="70%" />
+
+
+
 
 ### Running the Ingest Script 
 
 Before using a Knowledgebase you obviously need to import knowledge into it. 
 * The main script to ingest data is in the `app/ingest.py` . 
-* This script will take a starting folder and index most of the files (pdf, messages , word docs) found in that folder. It will also find sub-folders and index those recursivly.
+* This script will take a starting folder (as set in `config.conf`)and index most of the files (pdf, messages , word docs) found in that folder. It will also find sub-folders and index those recursivly.
 
 To run the ingest script
 * Open the app folder: `cd app` in a terminal window
@@ -190,6 +145,20 @@ To run the ingest script
     * (You may need to be more version specific e.g. python3 ingest.py)
 
 In general, you will only need the ingest script once (or infrequently, if you wise to add more documents). For small datasets, it is probably easier to delete the Knowledgebase index (using Kibana - see link and screenshot above), then run the Ingest script again.
+
+### Running the Windows client to answer Outlook emails
+* open windows client - streamlit run app.py (from app folder on windows)
+
+The Web application addresses a wider range of business use cases than the bot - see the tabs on the left hand side of the screenshot below.
+
+To run the Web Application.
+* Open the app folder: `cd app` in a terminal window
+* Activate the Python environment with dependencies you installed earelier: `source venv/bin/activate`
+* Run Streamlit app to interact with documents local llm: `streamlit run app.py`
+* App available on http://localhost:8501 
+
+
+<img src="images/screenshot.jpg " width="50%" />
 
 
 ### Running the Bot - Excel
@@ -207,15 +176,8 @@ To run the bot.
 * Run the script using `python bot_excel.py`
 
 ### Running the Web Application
-The Web application addresses a wider range of business use cases than the bot - see the tabs on the left hand side of the screenshot below.
 
-To run the Web Application.
-* Open the app folder: `cd app` in a terminal window
-* Activate the Python environment with dependencies you installed earelier: `source venv/bin/activate`
-* Run Streamlit app to interact with documents local llm: `streamlit run app.py`
-* App available on http://localhost:8501 
 
-![Screenshot of Streamlit Web App](images/screenshot.jpg "Screenshot of Web App")
 
 
 
