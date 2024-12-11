@@ -11,7 +11,7 @@ It is our experience that 90% of business and public sector knowledge sharing en
 
 <img src="images/screenshot.jpg" width="50%" />
 
-### Keeping information Confidential by default
+### Keeping information confidential by default
 
 For obvious reasons only generic code and no information / knowledge is shared in this GitHub project. This has the benefit of you being able to add only your own documents when you run your secure local copy. Other key project features with confidentiality in mind:
 
@@ -22,20 +22,20 @@ For obvious reasons only generic code and no information / knowledge is shared i
 To further limit exposure, we recommend care in ingesting *only* emails and documents that have already been sent externally. Since the project is open source, you can fully audit the code before use.
 
 ## Key sections in this guide 
+* [Project Configuration](#Config)
 * [First Time Setup](#First-Time-Setup)
-* [Config](#Config)
 * [Starting the background layers](#Starting-the-background-layers)
 * [Ingesting key knowledge into the system](#Running-the-Ingest-Script)
 * [Asking / Answering key questions using the Web App, Email response, and Bot](#Running-the-Application-and-Bot)
 
 
-## Three main functions of the the application: 
+### Three main functions of the the application: 
 While they are linked, you will typically run only one function at a time.
 1. **Ingest** - load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
 1. **Bots** - Answer questions passed to it (to /from Excel) using RAG techniques. Designed to be used as part of Power Automate or other automatic workflow.
 1. **App** - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases.
 
-## Underlying technologies:
+### Underlying technologies:
 * Choice of Large Language Model (LLM) - either local such as LLAMA or remote (e.g. Microsoft Copilot, OpenAI or Gemini from Google).
 * Elastic Search as the Vector search engine. 
 * Docker file gives "Human Friendly" UI (Kibana) for colleagues to fine-tune the Elastic search results.
