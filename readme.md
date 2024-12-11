@@ -111,7 +111,7 @@ The Kibana App runs on top of Elastic and allows you to create indexs to store a
 <img src="images/kibana_index_management.png" width="70%" />
 
 
-No screenshot, but also automatically started is the Portainer Web Management for Docker, available at https://localhost:9443 . This can safely be commented out in the docker-compose file if this is not needed.
+No screenshot, but also automatically started is the Portainer Web Management for Docker, available at https://localhost:9443 . This is useful for managing all the Docker containers, but can safely be commented out in the docker-compose file if this is not needed.
 
 
 
@@ -146,7 +146,7 @@ To run the ingest script
 
 In general, you will only need the ingest script once (or infrequently, if you wise to add more documents). For small datasets, it is probably easier to delete the Knowledgebase index (using Kibana - see link and screenshot above), then run the Ingest script again.
 
-### Running the Windows client to answer Outlook emails
+### Running the Web Application / Windows client to answer Outlook emails
 * open windows client - streamlit run app.py (from app folder on windows)
 
 The Web application addresses a wider range of business use cases than the bot - see the tabs on the left hand side of the screenshot below.
@@ -174,9 +174,6 @@ To run the bot.
 * Open the app folder: `cd app` in a terminal window
 * Activate the Python environment with dependencies you installed earelier: `source venv/bin/activate`
 * Run the script using `python bot_excel.py`
-
-### Running the Web Application
-
 
 
 

@@ -10,16 +10,14 @@
 
 * NEXT - Link LLM
 
-
-  * First pass at release
-    * Mark and integrate ???
 	* read and edit
 	* tidy of howto.md
 	* tidy of todo.md
 	  * another read through
-	  * update outlook section with screenshots
-	* Pull in video
-  
+	* Better Readme.md landing experience
+    * Pull in video
+    * Move up "using the application"
+     
   * Wire in call to LLM
     * Python services
     * -- spin up infrastructure (Docker compose)
