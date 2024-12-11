@@ -74,8 +74,6 @@ To setup the project on your local machine, then run for the first time:
     * You will also need to install the docker-compose plugin
     * For most systems this is `sudo apt install docker.io` , then install docker compose `sudo apt-get install docker-compose-plugin`
 
-
-
 1. Setting up the Local LLM - if needed
     * The config file gives the option of passing questions a *private* local LLM using Ollama (e.g. Llama 3.2 from Meta). The Docker file can help you run this local LLM.
         * Check the `docker-compose.yml` file so that the "Ollama" and "OpenWebUI" are not commented out.
@@ -86,14 +84,14 @@ To setup the project on your local machine, then run for the first time:
         * Pull the relevant llm `docker exec -it ollama ollama run llama3.2`
 
 1. Setup index in Elastic (first time only):
-    * Start Elastic (using `docker compose up` from the root folder of the project.
+    * Start Elastic using `docker compose up` from the root folder of the project.
     * Open Kibana to manage the Elastic Index - http://localhost:5601/app/management/data/index_management/indices
     * Setup indices 
         * `test-can-del` - used by unit tests
         * `knowledge_base` - the main index used to store documents
 
 
-It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed), please refer to the Elastic / Kibana home page for instructions - https://www.elastic.co/
+It is possible to install Elastic and Kibana directly on the machine (i.e. no Docker needed). Please refer to the Elastic / Kibana project docs page for instructions.
 
 
 # Running the application
@@ -101,7 +99,7 @@ It is possible to install Elastic and Kibana directly on the machine (i.e. no Do
 ## Starting the background layers
 
 A Docker compose file is provided to make it easy to download and run the supporting infrastructure (e.g. the Elastic Search engine). To start this Infrastructure using Docker:
-* Open a (new) terminal window, navigate to home folder containing docker-compose.yml
+* Open a (new) terminal window, navigate to home folder containing `docker-compose.yml`
 * Start Elastic and Kibana and other services using: `docker compose up`
 
 You can check if the Elastic Search Service is running using the url http://localhost:9200/. You should see a success message similar to the screenshot below.
