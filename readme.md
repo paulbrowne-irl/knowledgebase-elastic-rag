@@ -39,27 +39,23 @@ While they are linked, you will typically run only one function at a time.
 * Choice of Large Language Model (LLM) - either local such as LLAMA or remote (e.g. Microsoft Copilot, OpenAI or Gemini from Google).
 * Elastic Search as the Vector search engine. 
 * Docker file gives "Human Friendly" UI (Kibana) for colleagues to fine-tune the Elastic search results.
-* Langchain to integrate the above steps. Langhchain also allows for further extensions (choice of more LLMs, more document indexing, varying of steps in the response chain).
-* Python scripts to implement, allowing for easy modificiation.
-* Streamlit for a user friendly UI 
+* Langchain to integrate the above steps. Langchain also allows for further extensions such as a choice of more LLMs, more document indexing, varying of steps in the response chain depending on the question asked.
+* Built using Python scripts allowing for easy modificiation.
+* Streamlit for a user friendly User Interface.
 * Optional
   * Read / Writes files to Excel 365 - allows for integration with wider Office 365 and Power Automate workflows.
   * Outlook extension to auto-draft emails.
 
 ## Configuration
-* The main confirmation file is  in `app/config/config.conf` . This config file is shared for the ingest script, the Bot and the Application. Please edit this using the notes in the `app/config` folder to customize configuration. 
-* Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time the are run. Please consult the documentation of these tools to retrieve these. 
-* The script will ask you for these tokens and store them locally. This is a plain text json file(`token-storage-local.json`). While it is excluded from git, you may wish to review who has access to it locally as it will store sensitive information.
+* The main confirmation file is  in `app/config/config.conf` . This config file is shared for the ingest script, the Bot and the Application. Please edit this using the notes in the `app/config` folder.
+* Some APIs (Copilot, OpenAI, Teamworks helpdesk) require tokens the first time they are run. Please consult the documentation of these tools to retrieve these. 
+* The script will ask you for these tokens and store them locally. This is a plain text json file(`token-storage-local.json`). While it is excluded from storage in git, you may wish to review who has access to it locally as it will store sensitive information.
 
 
 ## First time Setup
 
 To setup the project on your local machine, then run for the first time:
 1. Checkout / download the project as a folder onto the host computer from the source https://github.com/paulbrowne-irl/knowledgebase-elastic-rag
-
-1. Install Docker - standard install (either Docker Desktop, or via WSL-Ubuntu) from https://docs.docker.com/engine/install/ubuntu/
-    * You will also need to install the docker-compose plugin
-    * For most systems this is `sudo apt install docker.io` , then install docker compose `sudo apt-get install docker-compose-plugin`
 
 1. Install Python (3.12 or higher) in the usual way. Python `pip` and `virtualenv` tools are also needed.
 
@@ -73,6 +69,12 @@ To setup the project on your local machine, then run for the first time:
     * It is sometimes easier to install *only* the minimum Python Dependencies on windows
     * In this case, follow the above instructions on the Windows machine, usng the `requirements-client.txt` file instead. 
     * The specifc commans to install the Python Virtual Environment will differ slightly on windows.
+
+1. Install Docker - standard install (either Docker Desktop, or via WSL-Ubuntu) from https://docs.docker.com/engine/install/ubuntu/
+    * You will also need to install the docker-compose plugin
+    * For most systems this is `sudo apt install docker.io` , then install docker compose `sudo apt-get install docker-compose-plugin`
+
+
 
 1. Setting up the Local LLM - if needed
     * The config file gives the option of passing questions a *private* local LLM using Ollama (e.g. Llama 3.2 from Meta). The Docker file can help you run this local LLM.
