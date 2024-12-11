@@ -11,7 +11,13 @@ It is our experience that 90% of business and public sector knowledge sharing en
 
 <img src="images/screenshot.jpg" width="50%" />
 
-### Keeping information confidential by default
+### What can you do with this project? 
+
+1. **Ingest Key Business Information** - load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
+1. **Answer Key Business Questions** - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases e.g. automatically answering Outlook emails
+1. **Automatically Answer questions as part of a flow**. These Bots are Designed to be used as part of Power Automate or other automatic workflow.
+
+### Keeping confidential information confidential by default
 
 For obvious reasons only generic code and no information / knowledge is shared in this GitHub project. This has the benefit of you being able to add only your own documents when you run your secure local copy. Other key project features with confidentiality in mind:
 
@@ -29,11 +35,7 @@ To further limit exposure, we recommend care in ingesting *only* emails and docu
 * [Asking / Answering key questions using the Web App, Email response, and Bot](#Running-the-Application-and-Bot)
 
 
-### Three main functions of the the application: 
-While they are linked, you will typically run only one function at a time.
-1. **Ingest** - load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
-1. **Bots** - Answer questions passed to it (to /from Excel) using RAG techniques. Designed to be used as part of Power Automate or other automatic workflow.
-1. **App** - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases.
+
 
 ### Underlying technologies:
 * Choice of Large Language Model (LLM) - either local such as LLAMA or remote (e.g. Microsoft Copilot, OpenAI or Gemini from Google).
