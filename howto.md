@@ -88,5 +88,20 @@ How to deploy in a corporate environment i.e. specific settings that you don't w
 * consider updating requirements snapshot pip freeze > snapshot-requirements.txt
 
 
+## Vscode Setup ???
+Note on extra settings from settings.json
+{
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.terminal.activateEnvironment":true,
+    "python.analysis.typeCheckingMode":"basic",
+    "python.analysis.include":["app","tests"],
+    "python.analysis.extraPaths": ["${workspaceFolder}/app"],
+}
+
+
 
 

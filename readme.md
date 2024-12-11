@@ -1,28 +1,28 @@
-# (Almost) Automatic responses to emails Emails using pre-collected Business Knowledge
+#  Automatic answer emails using pre-collected Business Knowledge (keeping Human-in-loop)
 
 
 Many organisations/individuals have piles of documents containing valuable information but are little used after their initial creation.
 
-"RAG" techniques allow you and colleagues to chat with these documents - allowing you to combine the accuracy of the documents and the "chattiness" of AIs like ChatGPT. More backgound to RAG in the links at the end of this page.
+"RAG" techniques allow you and colleagues to have conversations with these documents - allowing you to combine the accuracy of the documents and the "chattiness" of AIs like ChatGPT. More backgound to RAG in the links at the end of this page.
 
 This project is code to implement a pilot RAG Chatbot in a not for profit VC. Given the community nature of the organisation (and the out-of-hours development) it is shared for reuse. It focuses on answering internal corporate queries (i.e. managing sensitive data, but also leveraging on a human-in-the-loop to both filter answers and provide feedback to learn) 
 
 For obvious reasons only generic code and no information / knowledge is shared - this has the benefit of you being able to add your own documents. See instructions below.
 
-<img src="images/screenshot.jpg" width="30%" height="30%" />
+<img src="images/screenshot.jpg" width="40%" />
 
-## Key sections in this guide
+## Key sections in this guide ???
 * [Setup](#Setup)
 * [Starting the background infrastructure](#Starting-the-background-infrastructure)
 * [Running the Ingest Script](#Running-the-Ingest-Script)
 * [Config](#Config)
 * [Running the Application and Bot](#Running-the-Application-and-Bot)
 
-## Work these into main body
+## Work these into main body ???
 
 
 
-## update day to day run instrauciotns
+## update day to day run instructions ???
 * project root # in main
 * docker compose up # background infranstucure
 * cd app
@@ -40,7 +40,7 @@ Notes that need moved into the mainbd readme.md
     include image screenshot-api.png
 
 
-## Confidentiality of info
+## Confidentiality of info ???
 
 * Info stored locally
 * LLM (Lllama) runs locally
@@ -48,7 +48,7 @@ Notes that need moved into the mainbd readme.md
 * Even with these precautions, probably better to injest *only* emails that ahve gone externally - since these have some exposure to the internet
 
 
-## troubleshooting
+## troubleshooting ???
 Additional spacy:
 * python -m spacy download en_core_web_sm
 * python -m spacy download en_core_web_sm
@@ -59,8 +59,7 @@ pytest - from root
 python -m pytest
 run individula test - update pytest section
 
-## Vscode Setup
-Note on extra settings from settings.json
+
 
 
 
@@ -83,11 +82,9 @@ Note on extra settings from settings.json
 
 OR uvicorn service.service_email:app 
 
-## installing client only
+## installing client only ???
 
 * requirements-client.txt
-
-## end Work these into main body
 
 ## Three main parts to the application: 
 While they are linked, you will typically run only one at a time.
