@@ -9,9 +9,16 @@ This project is code to implement a pilot RAG Chatbot in a not for profit VC. Gi
 It is our experience that 90% of business and public sector knowledge sharing environments will have similar requirements; this code is being shared as a starter pack to share best practice.
 
 
-<img src="images/screenshot.jpg" width="50%" />
-
 ### What can you do with this project? 
+
+The video presentation gives background, and demo of one of parts of the project in action:
+
+| **AI and Product Management- Bio an Intro**  | **Product Demo**  | 
+|---|---|
+| [![Watch the video - part 1](https://github.com/paulbrowne-irl/paulbrowne-irl/raw/main/video_thumbnails/Thumbnail_TUDublin_Product_Management_1_AI_Intro_Bio_small.png)](https://github.com/paulbrowne-irl/paulbrowne-irl) | [![Watch the Demo](https://github.com/paulbrowne-irl/paulbrowne-irl/raw/main/video_thumbnails/Thumbnail_TUDublin_Product_Management_4_Practical_Example_Demo_small.png)](https://drive.google.com/file/d/114Y0z8BkjQbEb9GeKOkBH_OLWkzKvsv2)  |
+
+
+Other key features:
 
 1. **Ingest Key Business Information** - load information (e.g. pdf or email) into the KnowledgeBase (Elastic)
 1. **Answer Key Business Questions** - Friendly User Interface to answer questions in a back and forward way, focussing on 4 key business use cases e.g. automatically answering Outlook emails
