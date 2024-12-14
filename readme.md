@@ -15,7 +15,7 @@ The video presentation gives background, and demo of one of parts of the project
 
 | **AI and Product Management- Bio an Intro**  | **Product Demo**  | 
 |---|---|
-| [![Watch the video - part 1](https://github.com/paulbrowne-irl/paulbrowne-irl/raw/main/video_thumbnails/Thumbnail_TUDublin_Product_Management_1_AI_Intro_Bio_small.png)](https://github.com/paulbrowne-irl/paulbrowne-irl) | [![Watch the Demo](https://github.com/paulbrowne-irl/paulbrowne-irl/raw/main/video_thumbnails/Thumbnail_TUDublin_Product_Management_4_Practical_Example_Demo_small.png)](https://drive.google.com/file/d/114Y0z8BkjQbEb9GeKOkBH_OLWkzKvsv2)  |
+| [![Watch the video - part 1](https://github.com/paulbrowne-irl/paulbrowne-irl/raw/main/video_thumbnails/Thumbnail_TUDublin_Product_Management_1_AI_Intro_Bio_small.png)](https://github.com/paulbrowne-irl/paulbrowne-irl) | [![Watch the Demo](https://github.com/paulbrowne-irl/paulbrowne-irl/raw/main/video_thumbnails/Thumbnail_TUDublin_Product_Management_4_Practical_Example_Demo_small.png)](https://drive.google.com/file/d/1i1zsJefnFjDS75lf-RO51ENZb41C0GlT)  |
 
 
 Other key features:
